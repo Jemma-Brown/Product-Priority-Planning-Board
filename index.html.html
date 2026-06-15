@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Priority Planning Board</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0} :root{ --bg:#f7f6f3;--surface:#fff;--surface2:#f1f0ec; --border:rgba(0,0,0,0.12);--border-strong:rgba(0,0,0,0.22); --text:#1a1a18;--text2:#5f5e5a;--text3:#888780; --radius:8px;--radius-sm:5px;--owner-w:100px; --george-color:#378add;--george-bg:#e6f1fb;--george-bg2:#dae9f8;--george-text:#042c53;--george-head:#b5d4f4; --jemma-color:#7f77dd;--jemma-bg:#eeedfe;--jemma-bg2:#e4e2fc;--jemma-text:#26215c;--jemma-head:#cecbf6; --sam-color:#1d9e75;--sam-bg:#e1f5ee;--sam-bg2:#d2eee3;--sam-text:#04342c;--sam-head:#9fe1cb; --chris-color:#e07a2f;--chris-bg:#fef0e3;--chris-bg2:#fde5cc;--chris-text:#4a1f04;--chris-head:#f9c896; --cat-data:#854f0b;--cat-data-bg:#faeeda;--cat-data-bg2:#f5e4c5; --cat-webi:#185fa5;--cat-webi-bg:#e6f1fb;--cat-webi-bg2:#d4e6f7; --cat-dash:#534ab7;--cat-dash-bg:#eeedfe;--cat-dash-bg2:#e0dffb; } @media(prefers-color-scheme:dark){:root{ --bg:#1c1c1a;--surface:#252523;--surface2:#2e2e2b; --border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.22); --text:#f1efe8;--text2:#b4b2a9;--text3:#888780; --george-bg:#0c3a5e;--george-bg2:#0e4670;--george-text:#e6f1fb;--george-head:#0c447c; --jemma-bg:#2d2868;--jemma-bg2:#362f7a;--jemma-text:#eeedfe;--jemma-head:#3c3489; --sam-bg:#073d2e;--sam-bg2:#094a37;--sam-text:#e1f5ee;--sam-head:#085041; --chris-bg:#5a2c08;--chris-bg2:#6e3a0c;--chris-text:#fef0e3;--chris-head:#8c4e18; --cat-data-bg:#412402;--cat-data-bg2:#523005;--cat-webi-bg:#042c53;--cat-webi-bg2:#0a3a68;--cat-dash-bg:#26215c;--cat-dash-bg2:#332d75; }} body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:18px} header{background:var(--surface);border-bottom:1px solid var(--border-strong);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100} header h1{font-size:20px;font-weight:500;display:flex;align-items:center;gap:8px} .header-actions{display:flex;gap:8px;align-items:center} .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--radius-sm);border:0.5px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:18px;font-weight:500;cursor:pointer;transition:background .15s} .btn:hover{background:var(--surface2)} .btn.primary{background:#2c2c2a;color:#f1efe8;border-color:transparent} .btn.primary:hover{background:#444441} @media(prefers-color-scheme:dark){.btn.primary{background:#f1efe8;color:#1c1c1a}.btn.primary:hover{background:#d3d1c7}} .btn.sm{padding:4px 8px;font-size:19px} .tabs{display:flex;align-items:center;background:var(--surface);border-bottom:1px solid var(--border-strong);padding:0 20px} .tab-btn{padding:10px 16px;font-size:18px;font-weight:500;color:var(--text3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;display:flex;align-items:center;gap:6px;margin-bottom:-1px;transition:color .15s} .tab-btn:hover{color:var(--text2)} .tab-btn.active{color:var(--text);border-bottom-color:#534ab7} .tab-count{font-size:18px;font-weight:500;color:var(--text3);background:var(--surface2);border:0.5px solid var(--border-strong);padding:1px 5px;border-radius:10px} .tab-btn.active .tab-count{background:#eeedfe;color:#26215c;border-color:#534ab7} @media(prefers-color-scheme:dark){.tab-btn.active .tab-count{background:#3c3489;color:#eeedfe;border-color:#afa9ec}} .panel{display:none}.panel.active{display:block} .grid-wrap{padding:20px;overflow-x:auto} .timeline-grid{display:grid;min-width:max-content;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden} .tl-corner{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:8px;display:flex;align-items:flex-end;justify-content:center;font-size:19px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em} .tl-sprint-head{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:6px 8px;text-align:center;cursor:pointer;transition:background .12s;user-select:none} .tl-sprint-head:last-child{border-right:none} .tl-sprint-head:hover{background:var(--surface)} .tl-sprint-head.selected{background:#eeedfe;box-shadow:inset 0 -3px 0 #534ab7} @media(prefers-color-scheme:dark){.tl-sprint-head.selected{background:#3c3489}} .tl-sprint-num{font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text)} .tl-sprint-dates{font-size:19px;color:var(--text3);margin-top:1px} .tl-row-head{border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:4px} .tl-row-head:last-of-type{border-bottom:none} .owner-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600} .owner-name{font-size:19px;font-weight:600;text-align:center} .tl-cell{border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);min-height:64px;padding:3px;position:relative} .tl-cell:last-child{border-right:none} .theme-bar{border-radius:4px;padding:3px 7px;font-size:18px;font-weight:500;line-height:1.3;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px;transition:filter .1s;min-height:22px} .theme-bar:hover{filter:brightness(0.95)} .theme-bar .priority-dot{flex-shrink:0} .theme-bar.start{border-top-left-radius:4px;border-bottom-left-radius:4px;border-top-right-radius:0;border-bottom-right-radius:0} .theme-bar.middle{border-radius:0} .theme-bar.end{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:4px;border-bottom-right-radius:4px} .theme-bar.single{border-radius:4px} .theme-bar .bar-actions{display:none;gap:1px;margin-left:auto} .theme-bar:hover .bar-actions{display:flex} .detail-panel{margin:0 16px 16px;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden} .detail-header{background:var(--surface2);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-strong)} .detail-title{font-size:19px;font-weight:600;display:flex;align-items:center;gap:8px} .ticket{background:var(--surface);border-radius:5px;border:0.5px solid var(--border);padding:9px 11px;cursor:grab;transition:border-color .15s,opacity .15s;user-select:none} .ticket:hover{border-color:var(--border-strong)} .ticket.dragging{opacity:.3} .ticket-top{display:flex;align-items:flex-start;justify-content:space-between;gap:4px;margin-bottom:3px} .ticket-title{font-size:19px;font-weight:500;line-height:1.35;flex:1} .ticket-jira{font-size:19px;font-weight:600;color:#534ab7;text-decoration:none;padding:1px 4px;border-radius:3px;background:rgba(83,74,183,0.08);white-space:nowrap;transition:background .1s} .ticket-jira:hover{background:rgba(83,74,183,0.18)} .ticket-footer{display:flex;align-items:center;justify-content:space-between;gap:3px} .ticket-actions{display:flex;gap:1px;opacity:0;transition:opacity .15s} .ticket:hover .ticket-actions{opacity:1} .priority-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0} .priority-high{background:#e24b4a}.priority-medium{background:#ef9f27}.priority-low{background:#1d9e75} .priority-must-do{background:#7c0a02}.priority-bau{background:#888780} .goal-flag{font-size:11px;background:#fff8e1;border:0.5px solid #f0c030;color:#7a5a00;padding:1px 5px;border-radius:3px;white-space:nowrap} .multi-select{position:relative} .ms-trigger{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);cursor:pointer;min-height:38px;transition:border-color .15s} .ms-trigger:hover{border-color:#534ab7} .ms-display{font-size:13px;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap} .ms-display.placeholder{color:var(--text3)} .ms-dropdown{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);overflow:hidden} .ms-dropdown.open{display:block} .ms-option{display:flex;align-items:center;gap:9px;padding:8px 12px;font-size:13px;cursor:pointer;transition:background .1s;color:var(--text)} .ms-option:hover{background:var(--surface2)} .ms-option input[type=checkbox]{width:14px;height:14px;accent-color:#534ab7;cursor:pointer;flex-shrink:0} .icon-btn{background:none;border:none;cursor:pointer;color:var(--text3);padding:2px;border-radius:3px;display:flex;align-items:center;font-size:18px;transition:color .1s,background .1s} .icon-btn:hover{color:var(--text);background:rgba(0,0,0,0.06)} .icon-btn.delete:hover{color:#e24b4a} .empty-state{color:var(--text3);font-size:18px;text-align:center;padding:12px 6px;border:1px dashed var(--border);border-radius:4px;cursor:pointer} .empty-state:hover{border-color:var(--text3);color:var(--text2)} .progress-wrap{padding:20px} .progress-board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px} .progress-col{border-radius:var(--radius);border:1px solid var(--border-strong);overflow:hidden;display:flex;flex-direction:column} .progress-col-head{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-strong)} .progress-col-title{font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:8px} .progress-col-body{padding:10px;display:flex;flex-direction:column;gap:8px;min-height:100px;flex:1;transition:box-shadow .12s} .progress-col-body.drag-over{box-shadow:inset 0 0 0 2px #534ab7} .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:200;align-items:center;justify-content:center;padding:20px} .modal-overlay.open{display:flex} .modal{background:var(--surface);border-radius:var(--radius);border:.5px solid var(--border-strong);padding:22px;width:100%;max-width:460px;max-height:90vh;overflow-y:auto} .modal h2{font-size:19px;font-weight:500;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between} .form-group{margin-bottom:12px} .form-group label{display:block;font-size:19px;font-weight:500;color:var(--text2);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em} .form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 11px;border:.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:19px;font-family:inherit;outline:none} .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#534ab7} .form-group textarea{resize:vertical;min-height:50px} .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px} .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px} .modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:16px} .hint{font-size:18px;color:var(--text3);margin-top:3px} .detail-table{display:grid;grid-template-columns:90px repeat(3,1fr);border-top:1px solid var(--border-strong)} .dt-row-label{padding:7px 12px;font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);display:flex;align-items:flex-start;border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border);background:var(--surface2)} .dt-col-head{padding:7px 12px;font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border-strong);display:flex;align-items:center;justify-content:space-between;background:var(--surface2);color:var(--text2);border-right:1px solid var(--border)} .dt-col-head:last-child{border-right:none} .dt-col-head .col-count{font-size:19px;font-weight:500;padding:1px 5px;border-radius:10px;background:rgba(0,0,0,0.06)} @media(prefers-color-scheme:dark){.dt-col-head .col-count{background:rgba(255,255,255,0.1)}} .dt-body-cell{padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px;align-content:start;background:var(--surface);border-right:1px solid var(--border);border-bottom:1px solid var(--border)} .dt-body-cell:last-of-type{border-right:none} .df-label{padding:7px 12px;font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);display:flex;align-items:center;border-right:1px solid var(--border-strong);border-top:1px solid var(--border);background:var(--surface2)} .df-cell{padding:6px 8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;color:var(--text2);border-right:1px solid var(--border);border-top:1px solid var(--border);background:var(--surface)} .df-cell:last-child{border-right:none} .df-cell.over-cap{color:#e24b4a;background:#fff5f5} .df-cell.at-cap{color:#1d9e75;background:#f0faf5} .df-cell.under-cap{color:#534ab7} .df-cell.df-muted{color:var(--text3);font-weight:400} @media(prefers-color-scheme:dark){ .df-cell.over-cap{background:#3d1212} .df-cell.at-cap{background:#0d2e1e} } .cap-input{width:52px;text-align:center;padding:3px 4px;border:.5px solid var(--border-strong);border-radius:4px;background:var(--surface);color:var(--text);font-size:18px;font-weight:600;font-family:inherit;outline:none} .cap-input:focus{border-color:#534ab7} .settings-pop{display:none;position:absolute;top:100%;right:0;margin-top:6px;background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--radius);padding:14px;width:300px;z-index:150;box-shadow:0 4px 16px rgba(0,0,0,0.12)} .settings-pop.open{display:block} .settings-wrap{position:relative}.sprint-nav{display:flex;align-items:center;gap:10px;padding:12px 20px 0;} .sprint-nav-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:6px;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:20px;cursor:pointer;transition:background .15s;font-weight:500;line-height:1;flex-shrink:0;} .sprint-nav-btn:hover{background:var(--surface2)} .sprint-nav-btn:disabled{opacity:.3;cursor:default} .sprint-nav-label{font-size:14px;font-weight:500;color:var(--text2);white-space:nowrap} .sprint-nav-range{font-size:14px;color:var(--text3);white-space:nowrap} </style>
+</head>
+<body><header><h1><i class="ti ti-table" aria-hidden="true" style="font-size:19px"></i> Product Priority Planning Board</h1><div class="header-actions"><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Changes are shared with your team in real time"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);display:inline-block;transition:background .3s"></span><span id="sync-label">Live</span></div><div class="settings-wrap"><button class="btn sm" onclick="toggleSettings()"><i class="ti ti-settings" aria-hidden="true"></i> Jira</button><div class="settings-pop" id="settings-pop"><div style="font-size:18px;font-weight:600;margin-bottom:10px;color:var(--text)">Jira settings</div><div class="form-group" style="margin-bottom:10px"><label>Base URL</label><input type="text" id="jira-url" placeholder="https://dlapiperuk.atlassian.net" style="font-size:18px;padding:5px 7px" /></div><button class="btn sm primary" onclick="saveJiraSettings()">Save</button><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px">Bookmarklet</div><div style="font-size:18px;color:var(--text3);margin-bottom:8px">Drag this to your bookmarks bar. Click it on any Jira ticket to push it straight into this board.</div><a id="bookmarklet-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:#eeedfe;color:#26215c;border:1px solid #534ab7;border-radius:5px;font-size:19px;font-weight:600;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bookmark" style="font-size:19px"></i> Send to Board </a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the code</button> and create a bookmark manually.</div><div id="bookmarklet-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div></div></div></div><button class="btn primary" id="btn-add-theme" onclick="openThemeModal()"><i class="ti ti-plus" aria-hidden="true"></i> Add theme</button><button class="btn primary" id="btn-add-ticket" onclick="openTicketModal()" style="display:none"><i class="ti ti-plus" aria-hidden="true"></i> Add ticket</button></div></header><nav class="tabs"><button class="tab-btn active" id="tab-plan" onclick="switchTab('plan')"><i class="ti ti-layout-grid" aria-hidden="true"></i> Before 1 Jan 2026 <span class="tab-count" id="tc-plan">0</span></button><button class="tab-btn" id="tab-nfy" onclick="switchTab('nfy')"><i class="ti ti-calendar-stats" aria-hidden="true"></i> Next financial year <span class="tab-count" id="tc-nfy">0</span></button><button class="tab-btn" id="tab-progress" onclick="switchTab('progress')"><i class="ti ti-loader" aria-hidden="true"></i> In progress <span class="tab-count" id="tc-progress">0</span></button></nav><div class="panel active" id="panel-plan"><div class="sprint-nav" id="nav-plan"></div><div class="grid-wrap"><div class="timeline-grid" id="tl-plan"></div></div><div id="detail-plan"></div></div><div class="panel" id="panel-nfy"><div class="sprint-nav" id="nav-nfy"></div><div class="grid-wrap"><div class="timeline-grid" id="tl-nfy"></div></div><div id="detail-nfy"></div></div><div class="panel" id="panel-progress"><div class="progress-wrap"><div class="progress-board" id="progress-board"></div></div></div><!-- Theme Modal --><div class="modal-overlay" id="theme-modal" onclick="if(event.target===this)closeThemeModal()"><div class="modal"><h2><span id="theme-modal-title">Add theme</span><button class="icon-btn" onclick="closeThemeModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div class="form-group"><label>Theme / goal title</label><input type="text" id="th-title" placeholder="e.g. Migrate reporting pipeline" /></div><div class="form-group"><label>Description (optional)</label><textarea id="th-desc" placeholder="What does success look like?"></textarea></div><div class="form-row-3"><div class="form-group"><label>Owner</label><select id="th-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option></select></div><div class="form-group"><label>Start sprint</label><select id="th-start"></select></div><div class="form-group"><label>End sprint</label><select id="th-end"></select></div></div><div class="form-row"><div class="form-group"><label>Priority</label><select id="th-priority"><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></div><div class="form-group"><label>Colour</label><select id="th-color"><option value="blue">Blue</option><option value="purple">Purple</option><option value="green">Green</option><option value="amber">Amber</option><option value="coral">Coral</option><option value="pink">Pink</option><option value="teal">Teal</option></select></div></div><div class="modal-footer"><button class="btn" onclick="closeThemeModal()">Cancel</button><button class="btn primary" onclick="saveTheme()">Save theme</button></div></div></div><!-- Ticket Modal --><div class="modal-overlay" id="ticket-modal" onclick="if(event.target===this)closeTicketModal()"><div class="modal"><h2><span id="ticket-modal-title">Add ticket</span><button class="icon-btn" onclick="closeTicketModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div class="form-group"><label>Jira key</label><input type="text" id="tk-jira" placeholder="ISB-1234" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()" /><div id="jira-fetch-status" style="font-size:18px;margin-top:4px;min-height:14px"></div></div><div class="form-group"><label>Ticket title</label><input type="text" id="tk-title" placeholder="Task summary" /></div><div class="form-row"><div class="form-group"><label>Status</label><input type="text" id="tk-status" placeholder="e.g. In Progress" readonly style="background:var(--surface2);cursor:default" /></div><div class="form-group"><label>Story points</label><input type="number" id="tk-points" placeholder="—" min="0" /></div></div><div class="form-group"><label>Epic link (Jira URL)</label><input type="text" id="tk-epic-url" placeholder="https://dlapiperuk.atlassian.net/browse/ISB-XXXX" /></div><div class="form-group"><label>Status labels</label><div class="multi-select" id="tk-labels-wrap"><div class="ms-trigger" onclick="toggleMultiSelect('tk-labels-wrap')"><span class="ms-display" id="tk-labels-display">Select labels…</span><i class="ti ti-chevron-down" style="font-size:13px;color:var(--text3);flex-shrink:0"></i></div><div class="ms-dropdown" id="tk-labels-dropdown"><label class="ms-option"><input type="checkbox" value="Ticket Creation" onchange="syncMultiSelect('tk-labels-wrap','tk-labels','tk-labels-display')"> Ticket Creation</label><label class="ms-option"><input type="checkbox" value="Ready To Refine" onchange="syncMultiSelect('tk-labels-wrap','tk-labels','tk-labels-display')"> Ready To Refine</label><label class="ms-option"><input type="checkbox" value="Ready for Sprint" onchange="syncMultiSelect('tk-labels-wrap','tk-labels','tk-labels-display')"> Ready for Sprint</label><label class="ms-option"><input type="checkbox" value="Refinement Session 1" onchange="syncMultiSelect('tk-labels-wrap','tk-labels','tk-labels-display')"> Refinement Session 1</label><label class="ms-option"><input type="checkbox" value="Refinement Session 2" onchange="syncMultiSelect('tk-labels-wrap','tk-labels','tk-labels-display')"> Refinement Session 2</label><label class="ms-option"><input type="checkbox" value="Refinement Session 3" onchange="syncMultiSelect('tk-labels-wrap','tk-labels','tk-labels-display')"> Refinement Session 3</label></div></div><input type="hidden" id="tk-labels" /></div><div class="form-group"><label>Comments</label><textarea id="tk-comments" placeholder="Add notes or comments…" style="min-height:60px"></textarea></div><div class="form-row-3"><div class="form-group"><label>Category</label><select id="tk-cat"><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><div class="form-group"><label>Owner</label><select id="tk-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option></select></div><div class="form-group"><label>Priority</label><select id="tk-priority"><option value="must-do">Must Do</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option><option value="bau">BAU</option></select></div></div><div class="form-row"><div class="form-group"><label>Sprint</label><select id="tk-sprint"></select></div><div class="form-group"><label>Linked epic (optional)</label><select id="tk-theme"><option value="">None</option></select></div></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-goal" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🎯 This is a goal ticket</span></label></div><div class="modal-footer"><button class="btn" onclick="closeTicketModal()">Cancel</button><button class="btn primary" onclick="saveTicket()">Save ticket</button></div></div></div><script>
+// ── SUPABASE COLLABORATIVE STORAGE ──
+const SB_URL = 'https://osrlxmkpljcfobunulot.supabase.co';
+const SB_KEY = 'sb_publishable_3jXCj52EKTGKhbQbgYeS4A_JkkSNtUX';
+const SB_HEADERS = {
+  'apikey': SB_KEY,
+  'Authorization': 'Bearer ' + SB_KEY,
+  'Content-Type': 'application/json',
+  'Prefer': 'resolution=merge-duplicates'
+};
+
+let themes  = [];
+let tickets = [];
+let capData = {};
+let jiraUrl = 'https://dlapiperuk.atlassian.net';
+let editingThemeId = null, editingTicketId = null;
+let selectedSprint = { plan: null, nfy: null };
+let activeTab = 'plan';
+let sprintOffset = { plan: 0, nfy: 0 };
+let _lastHash = '';
+
+async function sbGet(table) {
+  const r = await fetch(`${SB_URL}/rest/v1/${table}?select=*`, { headers: SB_HEADERS });
+  if (!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+async function sbUpsert(table, row) {
+  const r = await fetch(`${SB_URL}/rest/v1/${table}`, {
+    method: 'POST', headers: SB_HEADERS, body: JSON.stringify(row)
+  });
+  if (!r.ok) throw new Error(await r.text());
+}
+async function sbDelete(table, id) {
+  const r = await fetch(`${SB_URL}/rest/v1/${table}?id=eq.${encodeURIComponent(id)}`, {
+    method: 'DELETE', headers: SB_HEADERS
+  });
+  if (!r.ok) throw new Error(await r.text());
+}
+
+async function loadData() {
+  try {
+    const [thRows, tkRows, metaRows] = await Promise.all([
+      sbGet('pb_themes'), sbGet('pb_tickets'), sbGet('pb_meta'),
+    ]);
+    const newThemes  = thRows.map(r => r.data);
+    const newTickets = tkRows.map(r => r.data);
+    const newCap  = JSON.parse(metaRows.find(r=>r.key==='cap')?.value  || '{}');
+    const newJira = metaRows.find(r=>r.key==='jira')?.value || 'https://dlapiperuk.atlassian.net';
+    const hash = JSON.stringify([newThemes, newTickets, newCap, newJira]);
+    if (hash !== _lastHash) {
+      _lastHash = hash;
+      themes = newThemes; tickets = newTickets; capData = newCap; jiraUrl = newJira;
+      const ju = document.getElementById('jira-url');
+      if (ju) ju.value = jiraUrl;
+      render();
+    }
+  } catch(e) { console.error('Load failed', e); setSyncBadge(false); }
+}
+
+function setSyncBadge(ok) {
+  const dot = document.getElementById('sync-dot');
+  const lbl = document.getElementById('sync-label');
+  if (!dot) return;
+  dot.style.background = ok ? '#1d9e75' : '#e24b4a';
+  lbl.textContent = ok ? 'Saved' : 'Error saving';
+  clearTimeout(window._syncTimer);
+  window._syncTimer = setTimeout(() => { dot.style.background='var(--text3)'; lbl.textContent='Live'; }, 2000);
+}
+
+async function save() {
+  // Bulk save — used for drag-drop etc
+  try {
+    await Promise.all([
+      ...themes.map(t => sbUpsert('pb_themes', {id: t.id, data: t})),
+      ...tickets.map(t => sbUpsert('pb_tickets', {id: t.id, data: t})),
+    ]);
+    _lastHash = JSON.stringify([themes, tickets, capData, jiraUrl]);
+    setSyncBadge(true);
+  } catch(e) { console.error('Save failed', e); setSyncBadge(false); }
+}
+
+async function saveOne(type, item) {
+  try {
+    await sbUpsert(type==='theme' ? 'pb_themes' : 'pb_tickets', {id: item.id, data: item});
+    setSyncBadge(true);
+  } catch(e) { console.error('Save failed', e); setSyncBadge(false); }
+}
+
+async function deleteOne(type, id) {
+  try {
+    await sbDelete(type==='theme' ? 'pb_themes' : 'pb_tickets', id);
+    setSyncBadge(true);
+  } catch(e) { console.error('Delete failed', e); setSyncBadge(false); }
+}
+
+async function saveCapData() {
+  try {
+    await sbUpsert('pb_meta', {key:'cap', value: JSON.stringify(capData)});
+  } catch(e) { console.error('Save cap failed', e); }
+}
+
+async function saveJiraUrlShared(url) {
+  try {
+    await sbUpsert('pb_meta', {key:'jira', value: url});
+  } catch(e) { console.error('Save jira failed', e); }
+}
+
+const SPRINT_WINDOW = 4;
+const OWNERS = [
+  {id:'george',label:'George',color:'var(--george-color)',bg:'var(--george-bg)',bg2:'var(--george-bg2)',head:'var(--george-head)',textColor:'var(--george-text)'},
+  {id:'jemma', label:'Jemma', color:'var(--jemma-color)', bg:'var(--jemma-bg)', bg2:'var(--jemma-bg2)', head:'var(--jemma-head)', textColor:'var(--jemma-text)'},
+  {id:'sam',   label:'Sam',   color:'var(--sam-color)',   bg:'var(--sam-bg)',   bg2:'var(--sam-bg2)',   head:'var(--sam-head)',   textColor:'var(--sam-text)'},
+  {id:'chris', label:'Chris', color:'var(--chris-color)', bg:'var(--chris-bg)', bg2:'var(--chris-bg2)', head:'var(--chris-head)', textColor:'var(--chris-text)'}
+];
+const THEME_COLORS = {
+  blue:  {bg:'#b5d4f4',text:'#042c53',dbg:'#0c447c',dt:'#e6f1fb'},
+  purple:{bg:'#cecbf6',text:'#26215c',dbg:'#3c3489',dt:'#eeedfe'},
+  green: {bg:'#c0dd97',text:'#173404',dbg:'#27500a',dt:'#eaf3de'},
+  amber: {bg:'#fac775',text:'#412402',dbg:'#633806',dt:'#faeeda'},
+  coral: {bg:'#f0997b',text:'#4a1b0c',dbg:'#712b13',dt:'#faece7'},
+  pink:  {bg:'#f4c0d1',text:'#4b1528',dbg:'#72243e',dt:'#fbeaf0'},
+  teal:  {bg:'#9fe1cb',text:'#04342c',dbg:'#085041',dt:'#e1f5ee'}
+};
+const PLAN_SPRINTS = [
+  {id:'s104',num:104,label:'11 Jun–24 Jun'},
+  {id:'s105',num:105,label:'25 Jun–7 Jul'},{id:'s106',num:106,label:'9 Jul–21 Jul'},
+  {id:'s107',num:107,label:'23 Jul–4 Aug'},{id:'s108',num:108,label:'6 Aug–18 Aug'},
+  {id:'s109',num:109,label:'20 Aug–1 Sep'},{id:'s110',num:110,label:'3 Sep–15 Sep'},
+  {id:'s111',num:111,label:'17 Sep–29 Sep'},{id:'s112',num:112,label:'1 Oct–13 Oct'},
+  {id:'s113',num:113,label:'15 Oct–27 Oct'},{id:'s114',num:114,label:'29 Oct–10 Nov'},
+  {id:'s115',num:115,label:'12 Nov–24 Nov'},{id:'s116',num:116,label:'26 Nov–8 Dec'},
+  {id:'s117',num:117,label:'10 Dec–22 Dec'},{id:'s118',num:118,label:'24 Dec–31 Dec'}
+];
+const NFY_SPRINTS = [
+  {id:'s119',num:119,label:'7 Jan–20 Jan'},{id:'s120',num:120,label:'21 Jan–3 Feb'},
+  {id:'s121',num:121,label:'4 Feb–17 Feb'},{id:'s122',num:122,label:'18 Feb–3 Mar'},
+  {id:'s123',num:123,label:'4 Mar–17 Mar'},{id:'s124',num:124,label:'18 Mar–31 Mar'},
+  {id:'s125',num:125,label:'1 Apr–14 Apr'},{id:'s126',num:126,label:'15 Apr–28 Apr'},
+  {id:'s127',num:127,label:'29 Apr–12 May'},{id:'s128',num:128,label:'13 May–26 May'},
+  {id:'s129',num:129,label:'27 May–9 Jun'},{id:'s130',num:130,label:'10 Jun–23 Jun'},
+  {id:'s131',num:131,label:'24 Jun–7 Jul'},{id:'s132',num:132,label:'8 Jul–21 Jul'},
+  {id:'s133',num:133,label:'22 Jul–4 Aug'},{id:'s134',num:134,label:'5 Aug–18 Aug'},
+  {id:'s135',num:135,label:'19 Aug–1 Sep'},{id:'s136',num:136,label:'2 Sep–15 Sep'},
+  {id:'s137',num:137,label:'16 Sep–29 Sep'},{id:'s138',num:138,label:'30 Sep–13 Oct'},
+  {id:'s139',num:139,label:'14 Oct–27 Oct'},{id:'s140',num:140,label:'28 Oct–10 Nov'},
+  {id:'s141',num:141,label:'11 Nov–24 Nov'},{id:'s142',num:142,label:'25 Nov–8 Dec'},
+  {id:'s143',num:143,label:'9 Dec–22 Dec'},{id:'s144',num:144,label:'23 Dec–31 Dec'}
+];
+const SUBCATS = [
+  {id:'data',label:'Data'},
+  {id:'webi',label:'Webi'},
+  {id:'dashboard',label:'Dashboard'}
+];
+// save() defined above as async
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function isDark(){return window.matchMedia('(prefers-color-scheme:dark)').matches}
+function switchTab(tab){
+  activeTab=tab;
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('tab-'+tab).classList.add('active');
+  document.getElementById('panel-'+tab).classList.add('active');
+  document.getElementById('btn-add-theme').style.display = tab==='progress'?'none':'';
+  document.getElementById('btn-add-ticket').style.display = (tab!=='progress' && selectedSprint[tab])?'':'none';
+}
+function updateCounts(){
+  const planIds=new Set(PLAN_SPRINTS.map(s=>s.id)), nfyIds=new Set(NFY_SPRINTS.map(s=>s.id));
+  document.getElementById('tc-plan').textContent = themes.filter(t=>planIds.has(t.startSprint)||planIds.has(t.endSprint)).length + tickets.filter(t=>planIds.has(t.sprint)).length;
+  document.getElementById('tc-nfy').textContent  = themes.filter(t=>nfyIds.has(t.startSprint)||nfyIds.has(t.endSprint)).length + tickets.filter(t=>nfyIds.has(t.sprint)).length;
+  document.getElementById('tc-progress').textContent = tickets.filter(t=>t.sprint==='progress').length;
+}
+function navSprints(tabKey, dir){
+  const all = tabKey==='plan' ? PLAN_SPRINTS : NFY_SPRINTS;
+  sprintOffset[tabKey] = Math.max(0, Math.min(all.length - SPRINT_WINDOW, sprintOffset[tabKey] + dir));
+  render();
+}
+/* ── TIMELINE GRID ── */
+function renderTimeline(gridId, allSprints, tabKey){
+  const grid = document.getElementById(gridId);
+  const offset = sprintOffset[tabKey];
+  const sprints = allSprints.slice(offset, offset + SPRINT_WINDOW);
+  const n = sprints.length;
+  const canPrev = offset > 0;
+  const canNext = offset + SPRINT_WINDOW < allSprints.length;
+  grid.style.gridTemplateColumns = `var(--owner-w) repeat(${n},minmax(160px,1fr))`;
+
+  // Render nav bar above grid
+  const navEl = document.getElementById('nav-' + tabKey);
+  if(navEl){
+    navEl.innerHTML = `
+      <button class="sprint-nav-btn" onclick="navSprints('${tabKey}',-1)" ${canPrev?'':'disabled'} title="Previous sprints">&#8249;</button>
+      <button class="sprint-nav-btn" onclick="navSprints('${tabKey}',1)" ${canNext?'':'disabled'} title="Next sprints">&#8250;</button>
+      <span class="sprint-nav-label">Sprints ${allSprints[offset].num}–${allSprints[Math.min(offset+n-1,allSprints.length-1)].num}</span>
+      <span class="sprint-nav-range">(${offset+1}–${offset+n} of ${allSprints.length})</span>
+    `;
+  }
+
+  const sprintIds = sprints.map(s=>s.id);
+  const idxOf = id => sprintIds.indexOf(id);
+  let html = '';
+  html += `<div class="tl-corner"><span style="font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text3)">Themes</span></div>`;
+  sprints.forEach(s => {
+    const sel = selectedSprint[tabKey]===s.id ? ' selected':'';
+    html += `<div class="tl-sprint-head${sel}" onclick="selectSprint('${tabKey}','${s.id}')">
+      <div class="tl-sprint-num">${s.num}</div><div class="tl-sprint-dates">${esc(s.label)}</div></div>`;
+  });
+  OWNERS.forEach((o,oi) => {
+    const isLast = oi===OWNERS.length-1;
+    const ownerThemes = themes.filter(t => t.owner===o.id && sprintIds.includes(t.startSprint));
+    const rowNum = 2+oi;
+    html += `<div class="tl-row-head" style="grid-row:${rowNum};grid-column:1;background:${o.head};${isLast?'border-bottom:none;':''}">
+      <div class="owner-avatar" style="background:rgba(255,255,255,0.5);color:${o.textColor}">${o.label.charAt(0)}</div>
+      <div class="owner-name" style="color:${o.textColor}">${esc(o.label)}</div></div>`;
+    sprints.forEach((s,si) => {
+      const col = 2+si;
+      const bgColor = si%2===0?o.bg:o.bg2;
+      const isLastCol = si===n-1;
+      html += `<div class="tl-cell" style="grid-row:${rowNum};grid-column:${col};background:${bgColor};${isLast?'border-bottom:none;':''}${isLastCol?'border-right:none;':''}">`;
+      ownerThemes.forEach(th => {
+        const si0 = idxOf(th.startSprint);
+        const si1 = idxOf(th.endSprint);
+        if(si1<0 || si<si0 || si>si1) return;
+        const tc = THEME_COLORS[th.color]||THEME_COLORS.blue;
+        const dark = isDark();
+        const bg = dark?tc.dbg:tc.bg;
+        const txt = dark?tc.dt:tc.text;
+        let cls = 'theme-bar';
+        if(si0===si1) cls+=' single';
+        else if(si===si0) cls+=' start';
+        else if(si===si1) cls+=' end';
+        else cls+=' middle';
+        const showTitle = si===si0;
+        html += `<div class="${cls}" style="background:${bg};color:${txt}" title="${esc(th.title)}">
+          <span class="priority-dot priority-${th.priority}"></span>
+          ${showTitle ? esc(th.title) : ''}
+          ${showTitle ? `<span class="bar-actions"><button class="icon-btn" style="color:${txt}" onclick="event.stopPropagation();editTheme('${th.id}')" aria-label="Edit"><i class="ti ti-edit"></i></button><button class="icon-btn delete" onclick="event.stopPropagation();deleteTheme('${th.id}')" aria-label="Delete"><i class="ti ti-trash"></i></button></span>` : ''}
+        </div>`;
+      });
+      const hasTheme = ownerThemes.some(th => {
+        const si0=idxOf(th.startSprint), si1=idxOf(th.endSprint);
+        return si1>=0 && si>=si0 && si<=si1;
+      });
+      if(!hasTheme) html += `<div class="empty-state" style="padding:6px 2px" onclick="openThemeModal('${o.id}','${s.id}','${s.id}')">+</div>`;
+      html += `</div>`;
+    });
+  });
+  grid.innerHTML = html;
+}
+function selectSprint(tabKey, sprintId){
+  selectedSprint[tabKey] = selectedSprint[tabKey]===sprintId ? null : sprintId;
+  document.getElementById('btn-add-ticket').style.display = selectedSprint[tabKey]?'':'none';
+  render();
+}
+/* ── DETAIL PANEL ── */
+function renderDetail(containerId, sprints, tabKey){
+  const container = document.getElementById(containerId);
+  const sid = selectedSprint[tabKey];
+  if(!sid){container.innerHTML='';return;}
+  const sprint = sprints.find(s=>s.id===sid);
+  if(!sprint){container.innerHTML='';return;}
+  const sprintTickets = tickets.filter(t=>t.sprint===sid);
+  // capData loaded from shared storage
+  const capKey = sid;
+  const totalCapacity = capData[capKey] !== undefined ? Number(capData[capKey]) : null;
+  const totalTickets = sprintTickets.length;
+  let html = `<div class="detail-panel"><div class="detail-header">
+    <div class="detail-title"><i class="ti ti-subtask" style="font-size:19px"></i> Sprint ${sprint.num} tickets <span style="font-size:19px;color:var(--text3);font-weight:400">${esc(sprint.label)}</span></div>
+    <button class="btn sm primary" onclick="openTicketModal(null,'${sid}')"><i class="ti ti-plus"></i> Add ticket</button>
+  </div>
+  <div class="detail-table">
+    <!-- COLUMN HEADERS: empty label cell + one per category -->
+    <div class="dt-row-label"></div>`;
+  SUBCATS.forEach(sc => {
+    const n = sprintTickets.filter(t=>t.cat===sc.id).length;
+    html += `<div class="dt-col-head">${sc.label}<span class="col-count">${n}</span></div>`;
+  });
+  const activeOwners = OWNERS.filter(o => sprintTickets.some(t=>t.owner===o.id));
+  if(activeOwners.length === 0){
+    html += `<div class="dt-row-label" style="color:var(--text3);font-style:italic">No tickets</div>`;
+    SUBCATS.forEach(sc => {
+      html += `<div class="dt-body-cell">
+        <div class="empty-state" style="grid-column:1/-1" onclick="openTicketModal(null,'${sid}','${sc.id}')">+ add ticket</div>
+      </div>`;
+    });
+  } else {
+    OWNERS.forEach(o => {
+      const ownerSprintTickets = sprintTickets.filter(t=>t.owner===o.id);
+      const hasSome = ownerSprintTickets.length > 0;
+      if(!hasSome) return;
+      html += `<div class="dt-row-label" style="background:${o.bg}">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;width:100%">
+          <div class="owner-avatar" style="background:${o.head};color:${o.textColor};width:26px;height:26px;font-size:19px">${o.label.charAt(0)}</div>
+          <span style="font-size:18px;font-weight:600;color:${o.textColor}">${esc(o.label)}</span>
+        </div>
+      </div>`;
+      SUBCATS.forEach(sc => {
+        const cellTk = ownerSprintTickets.filter(t=>t.cat===sc.id);
+        html += `<div class="dt-body-cell"
+          ondragover="event.preventDefault();this.style.boxShadow='inset 0 0 0 2px #534ab7'"
+          ondragleave="this.style.boxShadow=''"
+          ondrop="dropTicket(event,'${sc.id}','${sid}',this)">`;
+        if(cellTk.length === 0){
+          html += `<div class="empty-state" style="grid-column:1/-1" onclick="openTicketModal('${o.id}','${sid}','${sc.id}')">+ add</div>`;
+        } else {
+          cellTk.forEach(tk => {
+            const jLink = jiraLink(tk);
+            html += ticketCard(tk);
+          });
+          html += `<div class="empty-state" style="grid-column:1/-1;padding:3px;font-size:13px" onclick="openTicketModal('${o.id}','${sid}','${sc.id}')">+ add</div>`;
+        }
+        html += `</div>`;
+      });
+    });
+    html += `<div class="dt-row-label"></div>`;
+    SUBCATS.forEach(sc => {
+      html += `<div class="dt-body-cell" style="background:var(--surface2)"
+        ondragover="event.preventDefault();this.style.boxShadow='inset 0 0 0 2px #534ab7'"
+        ondragleave="this.style.boxShadow=''"
+        ondrop="dropTicket(event,'${sc.id}','${sid}',this)">
+        <div class="empty-state" style="grid-column:1/-1" onclick="openTicketModal(null,'${sid}','${sc.id}')">+ add ticket</div>
+      </div>`;
+    });
+  }
+  html += `<div class="df-label">Total</div>`;
+  SUBCATS.forEach(sc => {
+    const n = sprintTickets.filter(t=>t.cat===sc.id).length;
+    html += `<div class="df-cell">${n}</div>`;
+  });
+  html += `<div class="df-label">Capacity</div>`;
+  SUBCATS.forEach(sc => {
+    const ck = `${sid}-${sc.id}`;
+    const cv = capData[ck] !== undefined ? capData[ck] : '';
+    html += `<div class="df-cell"><input class="cap-input" type="number" min="0" placeholder="—"
+      value="${cv}" onchange="setSprintCap('${ck}',this.value)" title="Capacity for ${sc.label}" /></div>`;
+  });
+  html += `<div class="df-label">Remaining</div>`;
+  SUBCATS.forEach(sc => {
+    const n = sprintTickets.filter(t=>t.cat===sc.id).length;
+    const ck = `${sid}-${sc.id}`;
+    const cv = capData[ck] !== undefined ? Number(capData[ck]) : null;
+    if(cv===null){ html += `<div class="df-cell df-muted">—</div>`; return; }
+    const rem = cv - n;
+    const cls = rem < 0 ? 'over-cap' : rem === 0 ? 'at-cap' : 'under-cap';
+    html += `<div class="df-cell ${cls}">${rem > 0 ? '+' : ''}${rem}</div>`;
+  });
+  html += `</div></div>`;
+  container.innerHTML = html;
+}
+function setSprintCap(key, val){
+  if(val===''||val===null){delete capData[key];}else{capData[key]=parseInt(val)||0;}
+  saveCapData();
+  render();
+}
+function dropTicket(e, newCat, sprintId, el){
+  e.preventDefault(); el.style.boxShadow='';
+  const tkId = e.dataTransfer.getData('text');
+  if(!tkId) return;
+  const updated = tickets.map(t=>t.id===tkId?{...t,cat:newCat,sprint:sprintId}:t);
+  tickets = updated;
+  const moved = tickets.find(t=>t.id===tkId);
+  if(moved) saveOne('ticket', moved);
+  render();
+}
+/* ── PROGRESS ── */
+function renderProgress(){
+  const board=document.getElementById('progress-board');
+  let html='';
+  OWNERS.forEach(o=>{
+    const colTk=tickets.filter(t=>t.owner===o.id&&t.sprint==='progress');
+    const colId=`prog-${o.id}`;
+    const cards=colTk.length ? colTk.map(tk=>ticketCard(tk)).join('') : `<div class="empty-state">No tickets</div>`;
+    html+=`<div class="progress-col"><div class="progress-col-head" style="background:${o.head}">
+      <div class="progress-col-title"><div class="owner-avatar" style="background:rgba(255,255,255,.5);color:${o.textColor};width:28px;height:28px;font-size:18px">${o.label.charAt(0)}</div><span style="color:${o.textColor};font-weight:600">${esc(o.label)}</span></div>
+      <span style="font-size:18px;color:${o.textColor}">${colTk.length}</span></div>
+      <div class="progress-col-body" id="${colId}" style="background:${o.bg}"
+        ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')"
+        ondrop="event.preventDefault();this.classList.remove('drag-over');const id=event.dataTransfer.getData('text');if(id){tickets=tickets.map(t=>t.id===id?{...t,owner:'${o.id}',sprint:'progress'}:t);const mv=tickets.find(t=>t.id===id);if(mv)saveOne('ticket',mv);render()}">${cards}</div></div>`;
+  });
+  board.innerHTML=html;
+}
+function render(){
+  renderTimeline('tl-plan',PLAN_SPRINTS,'plan');
+  renderTimeline('tl-nfy',NFY_SPRINTS,'nfy');
+  renderDetail('detail-plan',PLAN_SPRINTS,'plan');
+  renderDetail('detail-nfy',NFY_SPRINTS,'nfy');
+  renderProgress();
+  updateCounts();
+}
+/* ── SETTINGS ── */
+function toggleSettings(){document.getElementById('settings-pop').classList.toggle('open')}
+function ticketCard(tk){
+  const jLink = jiraLink(tk);
+  const priorityLabel = {
+    'must-do':'Must Do','high':'High','medium':'Medium','low':'Low','bau':'BAU'
+  }[tk.priority] || tk.priority;
+  const LABEL_BG = {
+    'Ticket Creation':  {bg:'#fce8e8',border:'#e24b4a',text:'#5c0a0a'},
+    'Ready To Refine':  {bg:'#faeeda',border:'#ef9f27',text:'#412402'},
+    'Ready for Sprint': {bg:'#eaf3de',border:'#3b6d11',text:'#173404'},
+  };
+  const REFINEMENT_LABELS = ['Refinement Session 1','Refinement Session 2','Refinement Session 3'];
+  const labels = tk.labels ? tk.labels.split(',').map(l=>l.trim()).filter(Boolean) : [];
+  const colourLabel = labels.find(l => LABEL_BG[l]);
+  const refinementLabel = labels.find(l => REFINEMENT_LABELS.includes(l));
+  const cardBg     = colourLabel ? LABEL_BG[colourLabel].bg     : 'var(--surface)';
+  const cardBorder = colourLabel ? LABEL_BG[colourLabel].border  : 'var(--border)';
+  const cardText   = colourLabel ? LABEL_BG[colourLabel].text    : 'var(--text)';
+  const refinementBadge = refinementLabel
+    ? `<div style="font-size:11px;font-weight:600;color:var(--text2);margin-top:3px;padding:2px 0">${esc(refinementLabel)}</div>`
+    : '';
+  const statusBadge   = tk.status  ? `<span style="font-size:11px;font-weight:500;padding:1px 5px;border-radius:3px;background:rgba(0,0,0,0.07);color:${cardText}">${esc(tk.status)}</span>` : '';
+  const pointsBadge   = tk.points  ? `<span style="font-size:11px;font-weight:600;padding:1px 5px;border-radius:3px;background:#eeedfe;color:#26215c" title="Story points">${tk.points}pt</span>` : '';
+  const goalBadge     = tk.goal    ? `<span class="goal-flag">🎯 Goal</span>` : '';
+  const epicBadge     = tk.epicUrl ? `<a href="${tk.epicUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-size:11px;color:${cardText};opacity:.7;display:block;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none" title="${esc(tk.epicUrl)}">⬡ Epic</a>` : '';
+  const commentsBadge = tk.comments ? `<div style="font-size:12px;color:${cardText};opacity:.8;margin-top:3px;line-height:1.35;font-style:italic">${esc(tk.comments)}</div>` : '';
+  return `<div class="ticket" id="card-${tk.id}" draggable="true"
+    ondragstart="event.dataTransfer.setData('text','${tk.id}');this.classList.add('dragging')"
+    ondragend="this.classList.remove('dragging')"
+    style="background:${cardBg};border-color:${cardBorder}">
+    <div class="ticket-top">
+      <div class="ticket-title" style="color:${cardText}">${esc(tk.title)}</div>
+      <div style="display:flex;align-items:center;gap:3px;flex-shrink:0">${goalBadge}${jLink}</div>
+    </div>
+    ${epicBadge}
+    ${refinementBadge}
+    ${commentsBadge}
+    <div style="display:flex;align-items:center;gap:3px;flex-wrap:wrap;margin-top:4px">
+      ${statusBadge}${pointsBadge}
+    </div>
+    <div class="ticket-footer" style="margin-top:4px">
+      <div style="display:flex;align-items:center;gap:4px">
+        <span class="priority-dot priority-${tk.priority}" title="${priorityLabel}"></span>
+        <span style="font-size:11px;color:${cardText};opacity:.7">${priorityLabel}</span>
+      </div>
+      <div class="ticket-actions">
+        <button class="icon-btn" onclick="editTicket('${tk.id}')" aria-label="Edit"><i class="ti ti-edit"></i></button>
+        <button class="icon-btn delete" onclick="deleteTicket('${tk.id}')" aria-label="Delete"><i class="ti ti-trash"></i></button>
+      </div>
+    </div>
+  </div>`;
+}
+function jiraLink(tk){
+  if(!tk.jira) return '';
+  const base = jiraUrl || 'https://dlapiperuk.atlassian.net';
+  return `<a class="ticket-jira" href="${base}/browse/${tk.jira}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(tk.jira)}</a>`;
+}
+function saveJiraSettings(){
+  jiraUrl = document.getElementById('jira-url').value.replace(/\/$/,'') || 'https://dlapiperuk.atlassian.net';
+  // jiraUrl saved via saveJiraUrlShared
+  document.getElementById('settings-pop').classList.remove('open');
+  render();
+}
+document.addEventListener('click',e=>{if(!e.target.closest('.settings-wrap'))document.getElementById('settings-pop').classList.remove('open')});
+/* ── POPULATE SPRINT SELECTS ── */
+function popSprintOpts(selId, selected, includeProgress){
+  const sel=document.getElementById(selId);
+  let html=includeProgress?'<option value="progress">In progress</option>':'';
+  html+=`<optgroup label="Before 1 Jan 2026">`;
+  PLAN_SPRINTS.forEach(s=>{html+=`<option value="${s.id}"${s.id===selected?' selected':''}>Sprint ${s.num} (${s.label})</option>`});
+  html+=`</optgroup><optgroup label="Next financial year">`;
+  NFY_SPRINTS.forEach(s=>{html+=`<option value="${s.id}"${s.id===selected?' selected':''}>Sprint ${s.num} (${s.label})</option>`});
+  html+=`</optgroup>`;
+  sel.innerHTML=html;
+}
+/* ── THEME MODAL ── */
+function openThemeModal(owner,start,end){
+  editingThemeId=null;
+  document.getElementById('theme-modal-title').textContent='Add theme';
+  document.getElementById('th-title').value='';
+  document.getElementById('th-desc').value='';
+  document.getElementById('th-owner').value=owner||'george';
+  document.getElementById('th-priority').value='medium';
+  document.getElementById('th-color').value='blue';
+  const defSprint=activeTab==='nfy'?'s119':'s105';
+  popSprintOpts('th-start',start||defSprint,false);
+  popSprintOpts('th-end',end||start||defSprint,false);
+  document.getElementById('theme-modal').classList.add('open');
+  setTimeout(()=>document.getElementById('th-title').focus(),50);
+}
+function editTheme(id){
+  const t=themes.find(x=>x.id===id);if(!t)return;
+  editingThemeId=id;
+  document.getElementById('theme-modal-title').textContent='Edit theme';
+  document.getElementById('th-title').value=t.title;
+  document.getElementById('th-desc').value=t.desc||'';
+  document.getElementById('th-owner').value=t.owner;
+  document.getElementById('th-priority').value=t.priority;
+  document.getElementById('th-color').value=t.color||'blue';
+  popSprintOpts('th-start',t.startSprint,false);
+  popSprintOpts('th-end',t.endSprint,false);
+  document.getElementById('theme-modal').classList.add('open');
+}
+function deleteTheme(id){themes=themes.filter(t=>t.id!==id);deleteOne('theme',id);render()}
+function closeThemeModal(){document.getElementById('theme-modal').classList.remove('open')}
+function saveTheme(){
+  const title=document.getElementById('th-title').value.trim();
+  if(!title){document.getElementById('th-title').style.borderColor='#e24b4a';return}
+  document.getElementById('th-title').style.borderColor='';
+  const obj={id:editingThemeId||Date.now().toString(),title,desc:document.getElementById('th-desc').value.trim(),
+    owner:document.getElementById('th-owner').value,startSprint:document.getElementById('th-start').value,
+    endSprint:document.getElementById('th-end').value,priority:document.getElementById('th-priority').value,
+    color:document.getElementById('th-color').value};
+  themes=editingThemeId?themes.map(t=>t.id===editingThemeId?obj:t):[...themes,obj];
+  saveOne('theme',obj);closeThemeModal();render();
+}
+/* ── TICKET MODAL ── */
+function openTicketModal(owner,sprint,cat){
+  editingTicketId=null;
+  document.getElementById('ticket-modal-title').textContent='Add ticket';
+  document.getElementById('tk-title').value='';
+  document.getElementById('tk-jira').value='';
+  document.getElementById('tk-status').value='';
+  document.getElementById('tk-points').value='';
+  document.getElementById('tk-epic-url').value='';
+  document.getElementById('tk-labels').value='';
+  setMultiSelectValues('tk-labels-wrap','tk-labels','tk-labels-display','');
+  document.getElementById('tk-comments').value='';
+  document.getElementById('tk-goal').checked=false;
+  document.getElementById('jira-fetch-status').textContent='';
+  document.getElementById('tk-cat').value=cat||'data';
+  document.getElementById('tk-owner').value=owner||'george';
+  document.getElementById('tk-priority').value='medium';
+  const defSprint = sprint || selectedSprint[activeTab] || (activeTab==='nfy'?'s119':'s105');
+  popSprintOpts('tk-sprint',defSprint,true);
+  populateThemeSelect();
+  document.getElementById('ticket-modal').classList.add('open');
+  setTimeout(()=>document.getElementById('tk-jira').focus(),50);
+}
+function editTicket(id){
+  const t=tickets.find(x=>x.id===id);if(!t)return;
+  editingTicketId=id;
+  document.getElementById('ticket-modal-title').textContent='Edit ticket';
+  document.getElementById('tk-title').value=t.title;
+  document.getElementById('tk-jira').value=t.jira||'';
+  document.getElementById('tk-status').value=t.status||'';
+  document.getElementById('tk-points').value=t.points||'';
+  document.getElementById('tk-epic-url').value=t.epicUrl||'';
+  document.getElementById('tk-labels').value=t.labels||'';
+  setMultiSelectValues('tk-labels-wrap','tk-labels','tk-labels-display',t.labels||'');
+  document.getElementById('tk-comments').value=t.comments||'';
+  document.getElementById('tk-goal').checked=!!t.goal;
+  document.getElementById('jira-fetch-status').textContent='';
+  document.getElementById('tk-cat').value=t.cat;
+  document.getElementById('tk-owner').value=t.owner;
+  document.getElementById('tk-priority').value=t.priority||'medium';
+  popSprintOpts('tk-sprint',t.sprint,true);
+  populateThemeSelect(t.themeId);
+  document.getElementById('ticket-modal').classList.add('open');
+}
+function populateThemeSelect(sel){
+  const s=document.getElementById('tk-theme');
+  let html='<option value="">None</option>';
+  themes.forEach(t=>{html+=`<option value="${t.id}"${t.id===sel?' selected':''}>${esc(t.title)} (${esc(t.owner)})</option>`});
+  s.innerHTML=html;
+}
+function deleteTicket(id){tickets=tickets.filter(t=>t.id!==id);deleteOne('ticket',id);render()}
+function closeTicketModal(){document.getElementById('ticket-modal').classList.remove('open')}
+/* ── MULTI-SELECT ── */
+function toggleMultiSelect(wrapId){
+  const dd = document.getElementById(wrapId).querySelector('.ms-dropdown');
+  const isOpen = dd.classList.contains('open');
+  document.querySelectorAll('.ms-dropdown.open').forEach(d => d.classList.remove('open'));
+  if(!isOpen) dd.classList.add('open');
+}
+function syncMultiSelect(wrapId, hiddenId, displayId){
+  const wrap = document.getElementById(wrapId);
+  const checked = Array.from(wrap.querySelectorAll('input[type=checkbox]:checked')).map(cb => cb.value);
+  document.getElementById(hiddenId).value = checked.join(',');
+  const disp = document.getElementById(displayId);
+  if(checked.length === 0){ disp.textContent = 'Select labels…'; disp.classList.add('placeholder'); }
+  else { disp.textContent = checked.join(', '); disp.classList.remove('placeholder'); }
+}
+function setMultiSelectValues(wrapId, hiddenId, displayId, valuesStr){
+  const values = valuesStr ? valuesStr.split(',').map(v=>v.trim()).filter(Boolean) : [];
+  const wrap = document.getElementById(wrapId);
+  wrap.querySelectorAll('input[type=checkbox]').forEach(cb => {
+    cb.checked = values.includes(cb.value);
+  });
+  syncMultiSelect(wrapId, hiddenId, displayId);
+}
+document.addEventListener('click', e => {
+  if(!e.target.closest('.multi-select')){
+    document.querySelectorAll('.ms-dropdown.open').forEach(d => d.classList.remove('open'));
+  }
+});
+function saveTicket(){
+  const title=document.getElementById('tk-title').value.trim();
+  if(!title){document.getElementById('tk-title').style.borderColor='#e24b4a';return}
+  document.getElementById('tk-title').style.borderColor='';
+  const obj={
+    id:       editingTicketId||Date.now().toString(),
+    title,
+    jira:     document.getElementById('tk-jira').value.trim(),
+    status:   document.getElementById('tk-status').value.trim(),
+    points:   document.getElementById('tk-points').value.trim(),
+    epicUrl:  document.getElementById('tk-epic-url').value.trim(),
+    labels:   document.getElementById('tk-labels').value.trim(),
+    comments: document.getElementById('tk-comments').value.trim(),
+    goal:     document.getElementById('tk-goal').checked,
+    cat:      document.getElementById('tk-cat').value,
+    owner:    document.getElementById('tk-owner').value,
+    priority: document.getElementById('tk-priority').value,
+    sprint:   document.getElementById('tk-sprint').value,
+    themeId:  document.getElementById('tk-theme').value||null
+  };
+  tickets=editingTicketId?tickets.map(t=>t.id===editingTicketId?obj:t):[...tickets,obj];
+  saveOne('ticket',obj);closeTicketModal();render();
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeThemeModal();closeTicketModal()}});
+(function checkUrlParams(){
+  const p = new URLSearchParams(window.location.search);
+  if(!p.get('bm')) return;
+  setTimeout(() => {
+    openTicketModal(null, null, null);
+    if(p.get('key'))    document.getElementById('tk-jira').value   = p.get('key');
+    if(p.get('title'))  document.getElementById('tk-title').value  = p.get('title');
+    if(p.get('status')) document.getElementById('tk-status').value = p.get('status');
+    if(p.get('points')) document.getElementById('tk-points').value = p.get('points');
+    if(p.get('epic'))   document.getElementById('tk-epic-url').value = p.get('epic');
+    if(p.get('labels')) document.getElementById('tk-labels').value = p.get('labels');
+    if(p.get('priority')){
+      const pr = p.get('priority').toLowerCase();
+      document.getElementById('tk-priority').value =
+        (pr.includes('high')||pr.includes('critical')||pr.includes('blocker')) ? 'high' :
+        (pr.includes('low')||pr.includes('minor')||pr.includes('trivial'))     ? 'low'  : 'medium';
+    }
+    document.getElementById('jira-fetch-status').style.color = '#1d9e75';
+    document.getElementById('jira-fetch-status').textContent = '\u2713 Imported from Jira \u2014 pick a sprint, category and owner then save';
+    window.history.replaceState({}, '', window.location.pathname);
+  }, 300);
+})();
+// jiraUrl set after loadData()
+(function buildBookmarklet(){
+  const boardUrl = window.location.href.split('?')[0];
+  const code = `(function(){
+  try{
+    var key='',title='',status='',priority='',points='',epic='',labels='';
+    var m=location.pathname.match(/\\/browse\\/([A-Z]+-\\d+)/);
+    if(m) key=m[1];
+    var t=document.querySelector('[data-testid="issue.views.issue-base.foundation.summary.heading"]')||
+          document.querySelector('[data-testid*="summary"] h1')||
+          document.querySelector('h1[class*="summary"]')||
+          document.querySelector('h1');
+    if(t) title=t.innerText.trim();
+    var s=document.querySelector('[data-testid*="status"] button')||
+          document.querySelector('[class*="status-lozenge"]')||
+          document.querySelector('#status-val');
+    if(s) status=s.innerText.trim();
+    var pr=document.querySelector('[data-testid*="priority"] img')||
+           document.querySelector('[aria-label*="priority" i]')||
+           document.querySelector('#priority-val');
+    if(pr) priority=pr.alt||pr.getAttribute('aria-label')||pr.innerText||'';
+    var sp=document.querySelector('[data-testid*="story_points"] [class*="value"]')||
+           document.querySelector('[data-testid*="customfield_10016"] [class*="value"]')||
+           document.querySelector('[data-testid*="storyPoints"] span');
+    if(sp) points=sp.innerText.trim();
+    var ep=document.querySelector('[data-testid*="epic"] a')||
+           document.querySelector('[data-testid*="parent"] a')||
+           document.querySelector('#customfield_10014-val a');
+    if(ep) epic=ep.innerText.trim();
+    var lb=document.querySelectorAll('[data-testid*="labels"] a,[data-testid*="labels"] span[class*="tag"],#labels-val .lozenge');
+    if(lb.length) labels=Array.from(lb).map(function(l){return l.innerText.trim();}).filter(Boolean).join(',');
+    if(!key){alert('No Jira ticket key found. Make sure you have a ticket open (the URL should contain /browse/KEY-123).');return;}
+    var url='` + boardUrl + `?bm=1&key='+encodeURIComponent(key)+'&title='+encodeURIComponent(title)+'&status='+encodeURIComponent(status)+'&priority='+encodeURIComponent(priority)+'&points='+encodeURIComponent(points)+'&epic='+encodeURIComponent(epic)+'&labels='+encodeURIComponent(labels);
+    window.open(url,'_blank');
+  }catch(e){alert('Bookmarklet error: '+e.message);}
+})();`;
+  const href = 'javascript:' + encodeURIComponent(code);
+  const link = document.getElementById('bookmarklet-link');
+  if(link) link.href = href;
+})();
+function copyBookmarklet(){
+  const link = document.getElementById('bookmarklet-link');
+  navigator.clipboard.writeText(link.href).then(()=>{
+    const el = document.getElementById('bookmarklet-copied');
+    el.style.display='block';
+    setTimeout(()=>el.style.display='none', 2000);
+  });
+}
+// Init
+loadData();
+setInterval(loadData, 5000);
+</script>
+</body>
+</html>
