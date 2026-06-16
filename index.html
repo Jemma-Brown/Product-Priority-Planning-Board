@@ -757,31 +757,75 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeThemeModal();c
 (function checkUrlParams(){
   const p = new URLSearchParams(window.location.search);
   if(!p.get('bm')) return;
-  setTimeout(() => {
-    openTicketModal(null, null, null);
-    if(p.get('key'))    document.getElementById('tk-jira').value   = p.get('key');
-    if(p.get('title'))  document.getElementById('tk-title').value  = p.get('title');
-    if(p.get('status')) document.getElementById('tk-status').value = p.get('status');
-    if(p.get('points')) document.getElementById('tk-points').value = p.get('points');
-    if(p.get('epic'))   document.getElementById('tk-epic-url').value = p.get('epic');
-    if(p.get('labels')) document.getElementById('tk-labels').value = p.get('labels');
-    if(p.get('priority')){
-      const pr = p.get('priority').toLowerCase();
-      document.getElementById('tk-priority').value =
-        (pr.includes('high')||pr.includes('critical')||pr.includes('blocker')) ? 'high' :
-        (pr.includes('low')||pr.includes('minor')||pr.includes('trivial'))     ? 'low'  : 'medium';
-    }
-    document.getElementById('jira-fetch-status').style.color = '#1d9e75';
-    document.getElementById('jira-fetch-status').textContent = '\u2713 Imported from Jira \u2014 pick a sprint, category and owner then save';
-    window.history.replaceState({}, '', window.location.pathname);
-  }, 300);
+  // Wait longer to ensure loadData() has completed
+  function tryOpen(attemptsLeft){
+    setTimeout(() => {
+      openTicketModal(null, null, null);
+      if(p.get('key'))    document.getElementById('tk-jira').value   = p.get('key');
+      if(p.get('title'))  document.getElementById('tk-title').value  = p.get('title');
+      if(p.get('status')) document.getElementById('tk-status').value = p.get('status');
+      if(p.get('points')) document.getElementById('tk-points').value = p.get('points');
+
+      // Match reporter name to a board owner
+      const reporterRaw = (p.get('reporter') || '').toLowerCase().trim();
+      if(reporterRaw){
+        const matched = OWNERS.find(o => reporterRaw.includes(o.label.toLowerCase()) || o.label.toLowerCase().includes(reporterRaw));
+        if(matched) document.getElementById('tk-owner').value = matched.id;
+      }
+
+      // Map Jira labels to board labels
+      const rawLabels = (p.get('labels') || '').split(',').map(l => l.trim().toLowerCase()).filter(Boolean);
+      const mappedLabels = [];
+      const LABEL_MAP = {
+        'ready':             'Ready for Sprint',
+        'readyforspprint':   'Ready for Sprint',
+        'readyforsprint':    'Ready for Sprint',
+        'readytorefine':     'Ready To Refine',
+        'ticketcreation':    'Ticket Creation',
+        'refinementone':     'Refinement Session 1',
+        'refinementtwo':     'Refinement Session 2',
+        'refinementthree':   'Refinement Session 3',
+      };
+      rawLabels.forEach(function(l){
+        const norm = l.replace(/[\s_-]/g,'').toLowerCase();
+        if(LABEL_MAP[norm]) { if(!mappedLabels.includes(LABEL_MAP[norm])) mappedLabels.push(LABEL_MAP[norm]); }
+      });
+      if(mappedLabels.length){
+        const labelsStr = mappedLabels.join(',');
+        document.getElementById('tk-labels').value = labelsStr;
+        setMultiSelectValues('tk-labels-wrap','tk-labels','tk-labels-display', labelsStr);
+      }
+
+      // Try to match the scraped sprint name against known sprints
+      const sprintRaw = p.get('sprint') || '';
+      let sprintMatched = false;
+      if(sprintRaw){
+        const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+        const numMatch = sprintRaw.match(/\b(\d{3,})\b/);
+        const matched = numMatch
+          ? allSprints.find(s => String(s.num) === numMatch[1])
+          : allSprints.find(s => sprintRaw.toLowerCase().includes(String(s.num)));
+        if(matched){ popSprintOpts('tk-sprint', matched.id, true); sprintMatched = true; }
+      }
+
+      const ownerMatched = !!document.getElementById('tk-owner').value;
+      const hints = [];
+      if(!sprintMatched) hints.push('pick a sprint');
+      if(!ownerMatched)  hints.push('pick an owner');
+      hints.push('pick a category');
+      document.getElementById('jira-fetch-status').style.color = '#1d9e75';
+      document.getElementById('jira-fetch-status').textContent = '✓ Imported from Jira — ' + hints.join(', ') + ' then save';
+      window.history.replaceState({}, '', window.location.pathname);
+    }, 800);
+  }
+  tryOpen(1);
 })();
 // jiraUrl set after loadData()
 (function buildBookmarklet(){
   const boardUrl = window.location.href.split('?')[0];
   const code = `(function(){
   try{
-    var key='',title='',status='',priority='',points='',epic='',labels='';
+    var key='',title='',status='',priority='',points='',epic='',labels='',sprint='',reporter='';
     var m=location.pathname.match(/\\/browse\\/([A-Z]+-\\d+)/);
     if(m) key=m[1];
     var t=document.querySelector('[data-testid="issue.views.issue-base.foundation.summary.heading"]')||
@@ -799,16 +843,31 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeThemeModal();c
     if(pr) priority=pr.alt||pr.getAttribute('aria-label')||pr.innerText||'';
     var sp=document.querySelector('[data-testid*="story_points"] [class*="value"]')||
            document.querySelector('[data-testid*="customfield_10016"] [class*="value"]')||
-           document.querySelector('[data-testid*="storyPoints"] span');
-    if(sp) points=sp.innerText.trim();
+           document.querySelector('[data-testid*="storyPoints"] span')||
+           document.querySelector('[data-testid*="story-points"] span');
+    if(sp) points=sp.innerText.trim().replace(/[^0-9.]/g,'');
     var ep=document.querySelector('[data-testid*="epic"] a')||
            document.querySelector('[data-testid*="parent"] a')||
            document.querySelector('#customfield_10014-val a');
     if(ep) epic=ep.innerText.trim();
     var lb=document.querySelectorAll('[data-testid*="labels"] a,[data-testid*="labels"] span[class*="tag"],#labels-val .lozenge');
     if(lb.length) labels=Array.from(lb).map(function(l){return l.innerText.trim();}).filter(Boolean).join(',');
+    var sprintEl=document.querySelector('[data-testid*="sprint"] a')||
+                 document.querySelector('[data-testid*="sprint"] span[class*="value"]')||
+                 document.querySelector('[data-testid*="customfield_10020"] a')||
+                 document.querySelector('[data-testid*="customfield_10020"] span')||
+                 document.querySelector('#customfield_10020-val a')||
+                 document.querySelector('#customfield_10020-val');
+    if(sprintEl) sprint=sprintEl.innerText.trim();
+    var reporterEl=document.querySelector('[data-testid*="reporter"] [data-testid*="name"]')||
+                   document.querySelector('[data-testid*="reporter"] span[class*="user"]')||
+                   document.querySelector('[data-testid*="reporter"] a')||
+                   document.querySelector('[data-testid="issue.views.issue-base.foundation.change-boilerplate.reporter"] span')||
+                   document.querySelector('#reporter-val .user-hover')||
+                   document.querySelector('#reporter-val');
+    if(reporterEl) reporter=reporterEl.innerText.trim();
     if(!key){alert('No Jira ticket key found. Make sure you have a ticket open (the URL should contain /browse/KEY-123).');return;}
-    var url='` + boardUrl + `?bm=1&key='+encodeURIComponent(key)+'&title='+encodeURIComponent(title)+'&status='+encodeURIComponent(status)+'&priority='+encodeURIComponent(priority)+'&points='+encodeURIComponent(points)+'&epic='+encodeURIComponent(epic)+'&labels='+encodeURIComponent(labels);
+    var url='` + boardUrl + `?bm=1&key='+encodeURIComponent(key)+'&title='+encodeURIComponent(title)+'&status='+encodeURIComponent(status)+'&priority='+encodeURIComponent(priority)+'&points='+encodeURIComponent(points)+'&epic='+encodeURIComponent(epic)+'&labels='+encodeURIComponent(labels)+'&sprint='+encodeURIComponent(sprint)+'&reporter='+encodeURIComponent(reporter);
     window.open(url,'_blank');
   }catch(e){alert('Bookmarklet error: '+e.message);}
 })();`;
