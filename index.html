@@ -50,7 +50,20 @@
 .goal-drag-over{background:#eeedfe !important;box-shadow:inset 0 2px 0 #534ab7}
 @media(prefers-color-scheme:dark){.goal-drag-over{background:#3c3489 !important}} </style>
 </head>
-<body><header><h1><i class="ti ti-table" aria-hidden="true" style="font-size:19px"></i> Product Priority Planning Board</h1><div class="header-actions"><div id="header-user-chip" style="display:flex;align-items:center;gap:6px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2);cursor:pointer" onclick="switchUser()" title="Switch user"><span id="header-user-dot" style="width:8px;height:8px;border-radius:50%;background:var(--text3);display:inline-block;flex-shrink:0"></span><span style="font-size:12px;font-weight:600;color:var(--text2)" id="header-user-name">—</span></div><div id="online-presence" style="display:flex;align-items:center;gap:4px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Who's online now"></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Last saved"><span id="last-updated-label" style="color:var(--text3)">—</span></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Changes are shared with your team in real time"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);display:inline-block;transition:background .3s"></span><span id="sync-label">Live</span></div><div class="settings-wrap"><button class="btn sm" onclick="toggleSettings()"><i class="ti ti-settings" aria-hidden="true"></i> Jira</button><div class="settings-pop" id="settings-pop"><div style="font-size:18px;font-weight:600;margin-bottom:10px;color:var(--text)">Jira settings</div><div class="form-group" style="margin-bottom:10px"><label>Base URL</label><input type="text" id="jira-url" placeholder="https://dlapiperuk.atlassian.net" style="font-size:18px;padding:5px 7px" /></div><button class="btn sm primary" onclick="saveJiraSettings()">Save</button><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Signed in as</div><div style="display:flex;align-items:center;justify-content:space-between"><span id="current-user-label" style="font-size:13px;color:var(--text2)"></span><button class="btn sm" onclick="switchUser()" style="font-size:12px;padding:3px 8px">Switch</button></div></div><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px">Bookmarklet</div><div style="font-size:18px;color:var(--text3);margin-bottom:8px">Drag this to your bookmarks bar. Click it on any Jira ticket to push it straight into this board.</div><a id="bookmarklet-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:#eeedfe;color:#26215c;border:1px solid #534ab7;border-radius:5px;font-size:19px;font-weight:600;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bookmark" style="font-size:19px"></i> Send to Board </a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the code</button> and create a bookmark manually.</div><div id="bookmarklet-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div><div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.1)"><div style="font-size:18px;color:var(--text3);margin-bottom:6px">Not picking up all fields? Drag this debug bookmarklet to your bookmarks bar and click it on a Jira ticket to see exactly what the scraper finds:</div><a id="bookmarklet-debug-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:var(--surface2);color:var(--text2);border:1px solid var(--border-strong);border-radius:5px;font-size:19px;font-weight:500;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bug" style="font-size:19px"></i> Debug Jira Fields</a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyDebugBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the debug code</button> and save it as a bookmark manually.</div><div id="bookmarklet-debug-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div></div></div></div></div><button class="btn sm" id="btn-undo" onclick="undo()" title="Undo last change (Ctrl+Z)" disabled style="opacity:0.4"><i class="ti ti-arrow-back-up" aria-hidden="true"></i> Undo</button><button class="btn sm" onclick="openArchiveModal()" title="Manage past sprints"><i class="ti ti-archive" aria-hidden="true"></i> Archive</button><button class="btn primary" id="btn-add-theme" onclick="openThemeModal()"><i class="ti ti-plus" aria-hidden="true"></i> Add theme</button><button class="btn primary" id="btn-add-ticket" onclick="openTicketModal()" style="display:none"><i class="ti ti-plus" aria-hidden="true"></i> Add ticket</button></div></header><nav class="tabs"><button class="tab-btn active" id="tab-plan" onclick="switchTab('plan')"><i class="ti ti-layout-grid" aria-hidden="true"></i> Before 1 Jan 2026 <span class="tab-count" id="tc-plan">0</span></button><button class="tab-btn" id="tab-progress" onclick="switchTab('progress')"><i class="ti ti-loader" aria-hidden="true"></i> Progress <span class="tab-count" id="tc-progress">0</span></button><button class="tab-btn" id="tab-nfy" onclick="switchTab('nfy')"><i class="ti ti-calendar-stats" aria-hidden="true"></i> Next Financial Year <span class="tab-count" id="tc-nfy">0</span></button></nav><div class="panel active" id="panel-plan"><div class="sprint-nav" id="nav-plan"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-plan"><div class="timeline-grid" id="tl-plan"></div></div><div class="grid-resizer" id="resizer-plan" style="display:none" onmousedown="startResize(event,'plan')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-plan" class="side-detail"></div></div></div><div class="panel" id="panel-nfy"><div class="sprint-nav" id="nav-nfy"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-nfy"><div class="timeline-grid" id="tl-nfy"></div></div><div class="grid-resizer" id="resizer-nfy" style="display:none" onmousedown="startResize(event,'nfy')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-nfy" class="side-detail"></div></div></div><div class="panel" id="panel-progress"><div class="progress-wrap"><div class="progress-board" id="progress-board"></div></div></div><!-- Archive Modal -->
+<body><header><h1><i class="ti ti-table" aria-hidden="true" style="font-size:19px"></i> Product Priority Planning Board</h1><div class="header-actions"><div id="header-user-chip" style="display:flex;align-items:center;gap:6px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2);cursor:pointer" onclick="switchUser()" title="Switch user"><span id="header-user-dot" style="width:8px;height:8px;border-radius:50%;background:var(--text3);display:inline-block;flex-shrink:0"></span><span style="font-size:12px;font-weight:600;color:var(--text2)" id="header-user-name">—</span></div><div id="online-presence" style="display:flex;align-items:center;gap:4px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Who's online now"></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Last saved"><span id="last-updated-label" style="color:var(--text3)">—</span></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Changes are shared with your team in real time"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);display:inline-block;transition:background .3s"></span><span id="sync-label">Live</span></div><div class="settings-wrap"><button class="btn sm" onclick="toggleSettings()"><i class="ti ti-settings" aria-hidden="true"></i> Jira</button><div class="settings-pop" id="settings-pop"><div style="font-size:18px;font-weight:600;margin-bottom:10px;color:var(--text)">Jira settings</div><div class="form-group" style="margin-bottom:10px"><label>Base URL</label><input type="text" id="jira-url" placeholder="https://dlapiperuk.atlassian.net" style="font-size:18px;padding:5px 7px" /></div><button class="btn sm primary" onclick="saveJiraSettings()">Save</button><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Signed in as</div><div style="display:flex;align-items:center;justify-content:space-between"><span id="current-user-label" style="font-size:13px;color:var(--text2)"></span><button class="btn sm" onclick="switchUser()" style="font-size:12px;padding:3px 8px">Switch</button></div></div><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px">Bookmarklet</div><div style="font-size:18px;color:var(--text3);margin-bottom:8px">Drag this to your bookmarks bar. Click it on any Jira ticket to push it straight into this board.</div><a id="bookmarklet-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:#eeedfe;color:#26215c;border:1px solid #534ab7;border-radius:5px;font-size:19px;font-weight:600;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bookmark" style="font-size:19px"></i> Send to Board </a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the code</button> and create a bookmark manually.</div><div id="bookmarklet-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div><div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.1)"><div style="font-size:18px;color:var(--text3);margin-bottom:6px">Not picking up all fields? Drag this debug bookmarklet to your bookmarks bar and click it on a Jira ticket to see exactly what the scraper finds:</div><a id="bookmarklet-debug-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:var(--surface2);color:var(--text2);border:1px solid var(--border-strong);border-radius:5px;font-size:19px;font-weight:500;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bug" style="font-size:19px"></i> Debug Jira Fields</a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyDebugBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the debug code</button> and save it as a bookmark manually.</div><div id="bookmarklet-debug-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div></div></div></div></div><button class="btn sm" id="btn-undo" onclick="undo()" title="Undo last change (Ctrl+Z)" disabled style="opacity:0.4"><i class="ti ti-arrow-back-up" aria-hidden="true"></i> Undo</button><button class="btn sm" onclick="openArchiveModal()" title="Manage past sprints"><i class="ti ti-archive" aria-hidden="true"></i> Archive</button><button class="btn primary" id="btn-add-theme" onclick="openThemeModal()"><i class="ti ti-plus" aria-hidden="true"></i> Add theme</button><button class="btn primary" id="btn-add-ticket" onclick="openTicketModal()" style="display:none"><i class="ti ti-plus" aria-hidden="true"></i> Add ticket</button></div></header><nav class="tabs"><button class="tab-btn active" id="tab-plan" onclick="switchTab('plan')"><i class="ti ti-layout-grid" aria-hidden="true"></i> CY 2026 <span class="tab-count" id="tc-plan">0</span></button><button class="tab-btn" id="tab-progress" onclick="switchTab('progress')"><i class="ti ti-loader" aria-hidden="true"></i> Progress <span class="tab-count" id="tc-progress">0</span></button><button class="tab-btn" id="tab-nfy" onclick="switchTab('nfy')"><i class="ti ti-calendar-stats" aria-hidden="true"></i> CY 2027 <span class="tab-count" id="tc-nfy">0</span></button><button class="tab-btn" id="tab-planner" onclick="switchTab('planner')"><i class="ti ti-filter" aria-hidden="true"></i> Planner</button></nav><div class="panel active" id="panel-plan"><div class="sprint-nav" id="nav-plan"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-plan"><div class="timeline-grid" id="tl-plan"></div></div><div class="grid-resizer" id="resizer-plan" style="display:none" onmousedown="startResize(event,'plan')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-plan" class="side-detail"></div></div></div><div class="panel" id="panel-nfy"><div class="sprint-nav" id="nav-nfy"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-nfy"><div class="timeline-grid" id="tl-nfy"></div></div><div class="grid-resizer" id="resizer-nfy" style="display:none" onmousedown="startResize(event,'nfy')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-nfy" class="side-detail"></div></div></div><div class="panel" id="panel-progress"><div class="progress-wrap"><div class="progress-board" id="progress-board"></div></div></div><div class="panel" id="panel-planner"><div style="padding:16px"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px"><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Theme</label><select id="planner-theme" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All themes</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Person</label><select id="planner-owner" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All people</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Status Label</label><select id="planner-label" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All statuses</option><option value="Ticket Creation">Ticket Creation</option><option value="Ready To Refine">Ready To Refine</option><option value="Ready for Sprint">Ready for Sprint</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Refinement</label><select id="planner-refinement" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All sessions</option><option value="Refinement Session 1">Session 1</option><option value="Refinement Session 2">Session 2</option><option value="Refinement Session 3">Session 3</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Category</label><select id="planner-cat" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All</option><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap"><input type="checkbox" id="planner-deadlines-only" onchange="renderPlanner()" style="width:auto;cursor:pointer" /> Deadlines only</label><button class="btn sm" onclick="openDeadlineModal(null)" style="white-space:nowrap"><i class="ti ti-calendar-plus"></i> Add Deadline</button></div><div id="planner-body"></div></div></div><div class="modal-overlay" id="deadline-modal" onclick="if(event.target===this)closeDeadlineModal()">
+  <div class="modal" style="max-width:720px;min-height:700px;display:flex;flex-direction:column">
+    <h2><span id="deadline-modal-title">Add Deadline</span><button class="icon-btn" onclick="closeDeadlineModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2>
+    <div class="form-group"><label>Title</label><input type="text" id="dl-title" placeholder="e.g. Q2 Board Review" /></div>
+    <div class="form-group"><label>Date</label><input type="date" id="dl-date" /></div>
+    <div class="form-group"><label>Person</label><select id="dl-owner" style="width:100%;padding:9px 11px;border:.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:19px;font-family:inherit;outline:none"><option value="">No person</option></select></div>
+    <div class="form-group"><label>Theme (optional)</label><div style="position:relative"><input type="text" id="dl-theme-input" placeholder="Search themes…" autocomplete="off" oninput="filterDlThemeDropdown()" onfocus="openDlThemeDropdown()" style="width:100%;padding:9px 11px;border:.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:19px;font-family:inherit;outline:none" /><div id="dl-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:400px;overflow-y:auto"></div><input type="hidden" id="dl-theme" /></div></div>
+    <div class="modal-footer">
+      <button class="btn delete" id="dl-delete-btn" style="margin-right:auto;color:#e24b4a;border-color:#e24b4a;display:none" onclick="deleteDeadline()"><i class="ti ti-trash"></i> Delete</button>
+      <button class="btn" onclick="closeDeadlineModal()">Cancel</button>
+      <button class="btn primary" onclick="saveDeadlineModal()">Save</button>
+    </div>
+  </div>
+</div><!-- Archive Modal -->
 <div class="modal-overlay" id="archive-modal" onclick="if(event.target===this)closeArchiveModal()">
   <div class="modal" style="max-width:540px">
     <h2><span><i class="ti ti-archive" style="font-size:18px;margin-right:6px"></i>Past sprints</span><button class="icon-btn" onclick="closeArchiveModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2>
@@ -76,7 +89,7 @@
 <label class="ms-option" id="ref-opt-1"><input type="checkbox" value="Refinement Session 1" onchange="onRefinementLabelChange(this)" disabled> Refinement Session 1</label>
 <label class="ms-option" id="ref-opt-2"><input type="checkbox" value="Refinement Session 2" onchange="onRefinementLabelChange(this)" disabled> Refinement Session 2</label>
 <label class="ms-option" id="ref-opt-3"><input type="checkbox" value="Refinement Session 3" onchange="onRefinementLabelChange(this)" disabled> Refinement Session 3</label>
-</div></div><input type="hidden" id="tk-labels" /></div></div><div><div class="form-row"><div class="form-group"><label>Category</label><select id="tk-cat"><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><div class="form-group"><label>Owner</label><select id="tk-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option></select></div></div><div class="form-group"><label>Sprint</label><select id="tk-sprint"></select></div><div class="form-group"><label>Theme (optional)</label><div class="theme-search-wrap" id="tk-theme-wrap" style="position:relative"><input type="text" id="tk-theme-input" placeholder="Search themes…" autocomplete="off" oninput="filterThemeDropdown()" onfocus="openThemeDropdown()" style="width:100%" /><div id="tk-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:180px;overflow-y:auto"></div><input type="hidden" id="tk-theme" /></div></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-goal" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🎯 This is a goal ticket</span></label></div><div class="form-group"><label>Comments</label><textarea id="tk-comments" placeholder="Add notes or comments…" style="min-height:100px"></textarea></div></div></div><div class="modal-footer"><button class="btn delete" id="tk-delete-btn" onclick="deleteTicketFromModal()" style="margin-right:auto;color:#e24b4a;border-color:#e24b4a;display:none"><i class="ti ti-trash"></i> Delete ticket</button><button class="btn" onclick="closeTicketModal()">Cancel</button><button class="btn primary" onclick="saveTicket()">Save ticket</button></div></div></div><script>
+</div></div><input type="hidden" id="tk-labels" /></div></div><div><div class="form-row"><div class="form-group"><label>Category</label><select id="tk-cat"><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><div class="form-group"><label>Owner</label><select id="tk-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option></select></div></div><div class="form-group"><label>Sprint</label><select id="tk-sprint"></select></div><div class="form-group"><label>Theme (optional)</label><div class="theme-search-wrap" id="tk-theme-wrap" style="position:relative"><input type="text" id="tk-theme-input" placeholder="Search themes…" autocomplete="off" oninput="filterThemeDropdown()" onfocus="openThemeDropdown()" style="width:100%" /><div id="tk-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:400px;overflow-y:auto"></div><input type="hidden" id="tk-theme" /></div></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-goal" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🎯 This is a goal ticket</span></label></div><div class="form-group"><label>Comments</label><textarea id="tk-comments" placeholder="Add notes or comments…" style="min-height:100px"></textarea></div></div></div><div class="modal-footer"><button class="btn delete" id="tk-delete-btn" onclick="deleteTicketFromModal()" style="margin-right:auto;color:#e24b4a;border-color:#e24b4a;display:none"><i class="ti ti-trash"></i> Delete ticket</button><button class="btn" onclick="closeTicketModal()">Cancel</button><button class="btn primary" onclick="saveTicket()">Save ticket</button></div></div></div><script>
 // ── SUPABASE COLLABORATIVE STORAGE ──
 const SB_URL = 'https://osrlxmkpljcfobunulot.supabase.co';
 const SB_KEY = 'sb_publishable_3jXCj52EKTGKhbQbgYeS4A_JkkSNtUX';
@@ -91,6 +104,8 @@ let themes  = [];
 let tickets = [];
 let capData = {};
 let goalsData = {}; // { sprintId: [{id, text}] }
+let deadlines = []; // [{id, title, date, sprintId, color}]
+let plannerOrder = {}; // { sprintId: [ticketId, ...] } — planner-specific ordering
 let jiraUrl = 'https://dlapiperuk.atlassian.net';
 let currentUser = localStorage.getItem('pb_user') || null;
 let editingThemeId = null, editingTicketId = null;
@@ -166,13 +181,14 @@ async function loadData() {
     const newTickets = tkRows.map(r => r.data);
     const newCap   = JSON.parse(metaRows.find(r=>r.key==='cap')?.value   || '{}');
     const newGoals = JSON.parse(metaRows.find(r=>r.key==='goals')?.value || '{}');
+    const newDeadlines = JSON.parse(metaRows.find(r=>r.key==='deadlines')?.value || '[]');
     const newJira  = metaRows.find(r=>r.key==='jira')?.value || 'https://dlapiperuk.atlassian.net';
     const lastUpdatedRaw = metaRows.find(r=>r.key==='last_updated')?.value;
     if(lastUpdatedRaw){ try{ const lu=JSON.parse(lastUpdatedRaw); updateLastUpdatedHeader(lu.by,lu.ts); }catch(e){} }
     const hash = JSON.stringify([newThemes, newTickets, newCap, newGoals, newJira]);
     if (hash !== _lastHash) {
       _lastHash = hash;
-      themes = newThemes; tickets = newTickets; capData = newCap; goalsData = newGoals; jiraUrl = newJira;
+      themes = newThemes; tickets = newTickets; capData = newCap; goalsData = newGoals; deadlines = newDeadlines; jiraUrl = newJira;
       const ju = document.getElementById('jira-url');
       if (ju) ju.value = jiraUrl;
       // Don't re-render if user is actively editing a goal
@@ -364,6 +380,13 @@ async function saveGoalsData() {
   } catch(e) { console.error('Save goals failed', e); setSyncBadge(false); }
 }
 
+async function saveDeadlines() {
+  try {
+    await sbUpsert('pb_meta', {key:'deadlines', value: JSON.stringify(deadlines)});
+    setSyncBadge(true);
+  } catch(e) { console.error('Save deadlines failed', e); setSyncBadge(false); }
+}
+
 async function saveJiraUrlShared(url) {
   try {
     await sbUpsert('pb_meta', {key:'jira', value: url});
@@ -397,9 +420,10 @@ const PLAN_SPRINTS = [
   {id:'s111',num:111,label:'17 Sep–29 Sep',end:'2026-09-29'},{id:'s112',num:112,label:'1 Oct–13 Oct',end:'2026-10-13'},
   {id:'s113',num:113,label:'15 Oct–27 Oct',end:'2026-10-27'},{id:'s114',num:114,label:'29 Oct–10 Nov',end:'2026-11-10'},
   {id:'s115',num:115,label:'12 Nov–24 Nov',end:'2026-11-24'},{id:'s116',num:116,label:'26 Nov–8 Dec',end:'2026-12-08'},
-  {id:'s117',num:117,label:'10 Dec–22 Dec',end:'2026-12-22'},{id:'s118',num:118,label:'24 Dec–31 Dec',end:'2026-12-31'}
+  {id:'s117',num:117,label:'10 Dec–22 Dec',end:'2026-12-22'},{id:'s118',num:118,label:'24 Dec 2026–6 Jan 2027',end:'2026-12-31'}
 ];
 const NFY_SPRINTS = [
+  {id:'s118',num:118,label:'24 Dec 2026–6 Jan 2027',end:'2026-12-31'},
   {id:'s119',num:119,label:'7 Jan–20 Jan',end:'2027-01-20'},{id:'s120',num:120,label:'21 Jan–3 Feb',end:'2027-02-03'},
   {id:'s121',num:121,label:'4 Feb–17 Feb',end:'2027-02-17'},{id:'s122',num:122,label:'18 Feb–3 Mar',end:'2027-03-03'},
   {id:'s123',num:123,label:'4 Mar–17 Mar',end:'2027-03-17'},{id:'s124',num:124,label:'18 Mar–31 Mar',end:'2027-03-31'},
@@ -430,8 +454,9 @@ function switchTab(tab){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-'+tab).classList.add('active');
   document.getElementById('panel-'+tab).classList.add('active');
-  document.getElementById('btn-add-theme').style.display = tab==='progress'?'none':'';
-  document.getElementById('btn-add-ticket').style.display = (tab!=='progress' && selectedSprint[tab])?'':'none';
+  document.getElementById('btn-add-theme').style.display = (tab==='progress'||tab==='planner')?'none':'';
+  document.getElementById('btn-add-ticket').style.display = (tab!=='progress'&&tab!=='planner'&&selectedSprint[tab])?'':'none';
+  if(tab==='planner') renderPlanner();
 }
 function updateCounts(){
   const planIds=new Set(PLAN_SPRINTS.map(s=>s.id)), nfyIds=new Set(NFY_SPRINTS.map(s=>s.id));
@@ -524,7 +549,7 @@ function renderTimeline(gridId, allSprints, tabKey){
       ? `<div style="position:absolute;bottom:3px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#534ab7;background:#eeedfe;border:1px solid #534ab7;border-radius:3px;padding:0px 4px;white-space:nowrap;pointer-events:none">Next</div>`
       : '';
     html += `<div class="tl-sprint-head${sel}" style="grid-row:1;" onclick="selectSprint('${tabKey}','${s.id}')">
-      <div class="tl-sprint-num">${s.num}</div><div class="tl-sprint-dates">${esc(s.label)}</div>${badge}</div>`;
+      <div class="tl-sprint-num">${s.num}</div><div class="tl-sprint-dates">${esc(s.label)}${s.end&&!s.label.includes(s.end.substring(0,4))?" "+s.end.substring(0,4):""}</div>${badge}</div>`;
   });
 
   // Row 2: Sprint goals label + data cells
@@ -1011,6 +1036,7 @@ function render(){
   renderDetail('detail-plan',PLAN_SPRINTS,'plan');
   renderDetail('detail-nfy',NFY_SPRINTS,'nfy');
   renderProgress();
+  if(activeTab==='planner') renderPlanner();
   updateCounts();
   updateResizer('plan');
   updateResizer('nfy');
@@ -1059,7 +1085,7 @@ function ticketCard(tk){
           <span style="font-size:9px;color:${cardText};opacity:.7">${priorityLabel}</span>
           ${goalBadge}${refinementBadge}
         </div>
-${tk.points ? `<span style="font-size:11px;font-weight:700;color:#534ab7;width:20px;height:20px;border-radius:50%;border:1.5px solid #534ab7;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">${tk.points}</span>` : ''}
+        <span style="font-size:11px;font-weight:700;color:#534ab7;width:20px;height:20px;border-radius:50%;border:1.5px solid #534ab7;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">${tk.points||''}</span>
       </div>
     </div>
   </div>`;
@@ -1107,9 +1133,9 @@ document.addEventListener('click',e=>{if(!e.target.closest('.settings-wrap'))doc
 function popSprintOpts(selId, selected, includeProgress){
   const sel=document.getElementById(selId);
   let html=includeProgress?'<option value="progress">In progress</option>':'';
-  html+=`<optgroup label="Before 1 Jan 2026">`;
+  html+=`<optgroup label="CY 2026">`;
   PLAN_SPRINTS.forEach(s=>{html+=`<option value="${s.id}"${s.id===selected?' selected':''}>Sprint ${s.num} (${s.label})</option>`});
-  html+=`</optgroup><optgroup label="Next Financial Year">`;
+  html+=`</optgroup><optgroup label="CY 2027">`;
   NFY_SPRINTS.forEach(s=>{html+=`<option value="${s.id}"${s.id===selected?' selected':''}>Sprint ${s.num} (${s.label})</option>`});
   html+=`</optgroup>`;
   sel.innerHTML=html;
@@ -1225,12 +1251,26 @@ function renderThemeDropdown(query){
   const q = query.toLowerCase();
   const filtered = themes.filter(t => !q || t.title.toLowerCase().includes(q) || t.owner.toLowerCase().includes(q));
   const cur = document.getElementById('tk-theme').value;
+  // Sort by tickets current user has in each theme, then by ownership
+  const ticketCountByTheme = {};
+  tickets.filter(tk=>tk.owner===currentUser).forEach(tk=>{
+    if(tk.themeId) ticketCountByTheme[tk.themeId] = (ticketCountByTheme[tk.themeId]||0)+1;
+  });
+  filtered.sort((a,b)=>{
+    const ca = ticketCountByTheme[a.id]||0, cb = ticketCountByTheme[b.id]||0;
+    if(ca!==cb) return cb-ca;
+    const oa = a.owner===currentUser?1:0, ob = b.owner===currentUser?1:0;
+    if(oa!==ob) return ob-oa;
+    return a.title.localeCompare(b.title);
+  });
   let html = `<div class="ms-option" style="color:var(--text3)" onmousedown="selectTheme('','')">None</div>`;
   filtered.forEach(t => {
     const o = OWNERS.find(o=>o.id===t.owner);
     const dot = o ? `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${o.barBg};flex-shrink:0;margin-right:4px"></span>` : '';
     const sel = t.id===cur ? 'font-weight:600;' : '';
-    html += `<div class="ms-option" style="${sel}" onmousedown="selectTheme('${t.id}','${esc(t.title)} (${esc(t.owner)})')">${dot}${esc(t.title)} <span style="color:var(--text3);font-size:11px">${esc(t.owner)}</span></div>`;
+    const count = ticketCountByTheme[t.id]||0;
+    const badge = count ? `<span style="font-size:10px;color:#534ab7;background:#eeedfe;padding:1px 5px;border-radius:8px;margin-left:6px">${count}</span>` : '';
+    html += `<div class="ms-option" style="${sel}display:flex;align-items:center;justify-content:space-between" onmousedown="selectTheme('${t.id}','${esc(t.title)} (${esc(t.owner)})')"><span>${dot}${esc(t.title)} <span style="color:var(--text3);font-size:11px">${esc(t.owner)}</span></span>${badge}</div>`;
   });
   if(!filtered.length) html = `<div style="padding:8px 12px;font-size:13px;color:var(--text3)">No themes found</div>`;
   dd.innerHTML = html;
@@ -1320,7 +1360,7 @@ function saveTicket(){
   pushUndo(editingTicketId ? `Edit ticket "${title}"` : `Add ticket "${title}"`);
   saveOne('ticket',obj);closeTicketModal();render();
 }
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeThemeModal();closeTicketModal()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeThemeModal();closeTicketModal();closeDeadlineModal()}});
 (function checkUrlParams(){
   const p = new URLSearchParams(window.location.search);
   if(!p.get('bm')) return;
@@ -1671,6 +1711,322 @@ heartbeat();
 setInterval(heartbeat, 30000);
 loadPresence();
 setInterval(loadPresence, 10000);
+
+let _editingDeadlineId = null;
+function sprintForDate(dateStr){
+  if(!dateStr) return null;
+  const allSprints = [...PLAN_SPRINTS,...NFY_SPRINTS];
+  const d = new Date(dateStr);
+  // Find the sprint whose end date is >= the deadline date (first sprint that covers it)
+  const sprint = allSprints.find(s => new Date(s.end) >= d);
+  return sprint ? sprint.id : allSprints[allSprints.length-1].id;
+}
+function openDeadlineModal(id){
+  _editingDeadlineId = id;
+  const dl = id ? deadlines.find(d=>d.id===id) : null;
+  document.getElementById('deadline-modal-title').textContent = dl ? 'Edit Deadline' : 'Add Deadline';
+  document.getElementById('dl-title').value = dl?.title || '';
+  document.getElementById('dl-date').value = dl?.date || '';
+  document.getElementById('dl-delete-btn').style.display = dl ? '' : 'none';
+  // Populate owner select
+  const ownerSel = document.getElementById('dl-owner');
+  ownerSel.innerHTML = '<option value="">No person</option>' +
+    OWNERS.map(o=>`<option value="${o.id}"${o.id===(dl?.ownerId)?' selected':''}>${o.label}</option>`).join('');
+  const themeSel = document.getElementById('dl-theme');
+  const matched = dl?.themeId ? themes.find(t=>t.id===dl.themeId) : null;
+  themeSel.value = dl?.themeId || '';
+  document.getElementById('dl-theme-input').value = matched ? matched.title : '';
+  document.getElementById('deadline-modal').classList.add('open');
+  setTimeout(()=>document.getElementById('dl-title').focus(),50);
+}
+function closeDeadlineModal(){ document.getElementById('deadline-modal').classList.remove('open'); }
+function saveDeadlineModal(){
+  const title = document.getElementById('dl-title').value.trim();
+  if(!title){ document.getElementById('dl-title').style.borderColor='#e24b4a'; return; }
+  document.getElementById('dl-title').style.borderColor='';
+  const date = document.getElementById('dl-date').value;
+  const ownerId = document.getElementById('dl-owner').value;
+  const themeId = document.getElementById('dl-theme').value;
+  const obj = {
+    id: _editingDeadlineId || Date.now().toString(),
+    title,
+    date,
+    sprintId: sprintForDate(date),
+    ownerId: ownerId || null,
+    themeId: themeId || null
+  };
+  deadlines = _editingDeadlineId ? deadlines.map(d=>d.id===_editingDeadlineId?obj:d) : [...deadlines,obj];
+  saveDeadlines();
+  closeDeadlineModal();
+  renderPlanner();
+}
+function deleteDeadline(){
+  if(!_editingDeadlineId) return;
+  deadlines = deadlines.filter(d=>d.id!==_editingDeadlineId);
+  saveDeadlines();
+  closeDeadlineModal();
+  renderPlanner();
+}
+
+let _plannerDragId = null;
+let _plannerOverId = null;
+
+function plannerDropTicket(e, newSprintId, el){
+  e.preventDefault();
+  el.style.outline = '';
+  // Clear border-top on all ticket divs
+  el.querySelectorAll('[draggable]').forEach(d=>d.style.borderTop='');
+  const tkId = _plannerDragId || e.dataTransfer.getData('text');
+  const overTkId = _plannerOverId;
+  _plannerDragId = null;
+  _plannerOverId = null;
+  if(!tkId) return;
+  const tk = tickets.find(t=>t.id===tkId);
+  if(!tk) return;
+
+  if(tk.sprint !== newSprintId){
+    // Moving between sprints
+    pushUndo(`Move "${tk.title}" to sprint`);
+    const updated = {...tk, sprint: newSprintId};
+    tickets = tickets.map(t=>t.id===tkId ? updated : t);
+    saveOne('ticket', updated);
+    if(plannerOrder[tk.sprint]) plannerOrder[tk.sprint] = plannerOrder[tk.sprint].filter(id=>id!==tkId);
+    if(!plannerOrder[newSprintId]) plannerOrder[newSprintId] = tickets.filter(t=>t.sprint===newSprintId).map(t=>t.id);
+    plannerOrder[newSprintId] = plannerOrder[newSprintId].filter(id=>id!==tkId);
+    if(overTkId && overTkId !== tkId){
+      const idx = plannerOrder[newSprintId].indexOf(overTkId);
+      plannerOrder[newSprintId].splice(idx>=0?idx:plannerOrder[newSprintId].length, 0, tkId);
+    } else {
+      plannerOrder[newSprintId].push(tkId);
+    }
+  } else if(overTkId && overTkId !== tkId){
+    // Reordering within same sprint
+    if(!plannerOrder[newSprintId]){
+      plannerOrder[newSprintId] = tickets.filter(t=>t.sprint===newSprintId).map(t=>t.id);
+    }
+    const order = plannerOrder[newSprintId].filter(id=>id!==tkId);
+    const insertIdx = order.indexOf(overTkId);
+    order.splice(insertIdx>=0?insertIdx:order.length, 0, tkId);
+    plannerOrder[newSprintId] = order;
+  }
+  render();
+}
+
+function openDlThemeDropdown(){
+  document.getElementById('dl-theme-dropdown').style.display='block';
+  renderDlThemeDropdown(document.getElementById('dl-theme-input').value);
+}
+function filterDlThemeDropdown(){
+  document.getElementById('dl-theme').value='';
+  document.getElementById('dl-theme-dropdown').style.display='block';
+  renderDlThemeDropdown(document.getElementById('dl-theme-input').value);
+}
+function renderDlThemeDropdown(query){
+  const dd = document.getElementById('dl-theme-dropdown');
+  const q = query.toLowerCase();
+  const filtered = themes.filter(t=>!q||t.title.toLowerCase().includes(q));
+  // Sort: themes the user has tickets in (by count desc), then themes owned by user, then rest
+  const ticketCountByTheme = {};
+  tickets.filter(tk=>tk.owner===currentUser).forEach(tk=>{
+    if(tk.themeId) ticketCountByTheme[tk.themeId] = (ticketCountByTheme[tk.themeId]||0)+1;
+  });
+  filtered.sort((a,b)=>{
+    const ca = ticketCountByTheme[a.id]||0, cb = ticketCountByTheme[b.id]||0;
+    if(ca!==cb) return cb-ca;
+    const oa = a.owner===currentUser?1:0, ob = b.owner===currentUser?1:0;
+    if(oa!==ob) return ob-oa;
+    return a.title.localeCompare(b.title);
+  });
+  let html = `<div onclick="selectDlTheme('','')" style="padding:8px 12px;font-size:13px;cursor:pointer;color:var(--text3)" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background=''">No theme</div>`;
+  filtered.forEach(t=>{
+    const count = ticketCountByTheme[t.id]||0;
+    const badge = count ? `<span style="font-size:10px;color:#534ab7;background:#eeedfe;padding:1px 5px;border-radius:8px;margin-left:6px">${count} ticket${count>1?'s':''}</span>` : '';
+    html+=`<div onclick="selectDlTheme('${t.id}','${t.title.replace(/'/g,"\\'")}')" style="padding:8px 12px;font-size:13px;cursor:pointer;color:var(--text);display:flex;align-items:center;justify-content:space-between" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background=''"><span>${esc(t.title)}</span>${badge}</div>`;
+  });
+  dd.innerHTML = html || '<div style="padding:8px 12px;font-size:13px;color:var(--text3)">No themes found</div>';
+}
+function selectDlTheme(id, title){
+  document.getElementById('dl-theme').value = id;
+  document.getElementById('dl-theme-input').value = title;
+  document.getElementById('dl-theme-dropdown').style.display='none';
+}
+document.addEventListener('click', e=>{
+  if(!e.target.closest('#dl-theme-input') && !e.target.closest('#dl-theme-dropdown')){
+    const dd=document.getElementById('dl-theme-dropdown');
+    if(dd) dd.style.display='none';
+  }
+});
+
+function renderPlanner(){
+  const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+  const themeSelect = document.getElementById('planner-theme');
+  const ownerSelect = document.getElementById('planner-owner');
+  const labelSelect = document.getElementById('planner-label');
+  const refinementSelect = document.getElementById('planner-refinement');
+  const catSelect = document.getElementById('planner-cat');
+  if(!themeSelect) return;
+  const selTheme = themeSelect.value;
+  const selOwner = ownerSelect.value;
+  const selLabel = labelSelect?.value || '';
+  const selRefinement = refinementSelect?.value || '';
+  const selCat = catSelect?.value || '';
+
+  themeSelect.innerHTML = '<option value="">All themes</option>' +
+    themes.map(t=>`<option value="${t.id}"${t.id===selTheme?' selected':''}>${esc(t.title)}</option>`).join('');
+  ownerSelect.innerHTML = '<option value="">All people</option>' +
+    TIMELINE_OWNERS.map(o=>`<option value="${o.id}"${o.id===selOwner?' selected':''}>${esc(o.label)}</option>`).join('');
+
+  const filtered = tickets.filter(tk => {
+    if(selTheme && tk.themeId !== selTheme) return false;
+    if(selOwner && tk.owner !== selOwner) return false;
+    if(selLabel && !(tk.labels && tk.labels.split(',').map(l=>l.trim()).includes(selLabel))) return false;
+    if(selRefinement && !(tk.labels && tk.labels.split(',').map(l=>l.trim()).includes(selRefinement))) return false;
+    if(selCat && tk.cat !== selCat) return false;
+    return true;
+  });
+
+  const deadlinesOnlyCheck = document.getElementById('planner-deadlines-only')?.checked;
+  const activeOwners = TIMELINE_OWNERS.filter(o =>
+    filtered.some(tk => tk.owner === o.id) ||
+    (deadlinesOnlyCheck && deadlines.some(d => d.ownerId === o.id))
+  );
+
+  if(activeOwners.length === 0){
+    document.getElementById('planner-body').innerHTML = `<div style="color:var(--text3);font-size:14px;padding:20px 0">No tickets match the selected filters.</div>`;
+    return;
+  }
+
+  // Collect all theme keys across filtered tickets (in order they appear)
+  const allThemeKeys = [...new Set(filtered.map(tk=>tk.themeId||'__none__'))];
+
+  let html = `<div style="overflow-x:auto;width:100%"><table style="border-collapse:collapse;table-layout:fixed;width:max-content">
+    <thead><tr>
+      <th style="padding:6px 10px;background:var(--surface2);border:1px solid var(--border-strong);font-size:13px;font-weight:700;text-align:left;white-space:nowrap;position:sticky;left:0;z-index:3;width:200px;min-width:200px">Person / Theme</th>`;
+
+  allSprints.forEach(s => {
+    const sprintPts = filtered.filter(tk=>tk.sprint===s.id).reduce((sum,tk)=>sum+(parseFloat(tk.points)||0),0);
+    const sprintYear = (s.end && !s.label.includes(s.end.substring(0,4))) ? s.end.substring(0,4) : '';
+    html += `<th style="padding:6px 8px;background:var(--surface2);border:1px solid var(--border-strong);font-size:11px;font-weight:700;text-align:center;width:320px;min-width:320px">
+      <div style="font-size:13px">Sprint ${s.num}</div>
+      <div style="font-size:10px;font-weight:400;color:var(--text3)">${s.label} ${sprintYear}</div>
+      ${sprintPts ? `<div style="font-size:11px;font-weight:600;color:#534ab7;margin-top:2px">${sprintPts} pts</div>` : ''}
+    </th>`;
+  });
+  html += `</tr></thead><tbody>`;
+
+  activeOwners.forEach(o => {
+    // Get themes this owner has tickets in, ordered by theme endSprint (earliest first)
+    const ownerFiltered = filtered.filter(tk=>tk.owner===o.id);
+    const allSprintIds = [...PLAN_SPRINTS,...NFY_SPRINTS].map(s=>s.id);
+    const ownerThemeKeys = [...new Set(ownerFiltered.map(tk=>tk.themeId||'__none__'))].sort((a,b) => {
+      const thA = a !== '__none__' ? themes.find(t=>t.id===a) : null;
+      const thB = b !== '__none__' ? themes.find(t=>t.id===b) : null;
+      const idxA = thA ? allSprintIds.indexOf(thA.endSprint) : 9999;
+      const idxB = thB ? allSprintIds.indexOf(thB.endSprint) : 9999;
+      return idxA - idxB;
+    });
+    const ownerPts = ownerFiltered.reduce((sum,tk)=>sum+(parseFloat(tk.points)||0),0);
+
+    // Owner header row spanning all sprints
+    html += `<tr>
+      <td colspan="${allSprints.length+1}" style="padding:5px 10px;background:${o.barBg||o.bg};border:1px solid var(--border-strong);font-size:13px;font-weight:700;color:#1a1a18;position:sticky;left:0;">
+        ${esc(o.label)}<span style="font-size:11px;font-weight:600;color:#534ab7;margin-left:10px;background:#eeedfe;padding:1px 8px;border-radius:10px">${ownerPts} pts</span>
+      </td>
+    </tr>`;
+
+    // Deadlines row at top of person section (only for deadlines with no theme)
+    const ownerDeadlines = deadlines.filter(d=>d.ownerId===o.id);
+    const unthemedDeadlines = ownerDeadlines.filter(d=>!d.themeId);
+    if(unthemedDeadlines.length > 0){
+      html += `<tr>
+        <td style="padding:5px 8px;background:${o.bg};border:1px solid var(--border-strong);font-size:11px;font-weight:600;vertical-align:top;position:sticky;left:0;z-index:1;width:200px;min-width:200px;font-style:italic;color:var(--text2)">📅 Deadlines</td>`;
+      allSprints.forEach(s => {
+        const sprintDls = unthemedDeadlines.filter(d=>d.sprintId===s.id);
+        html += `<td style="padding:5px;background:${o.bg};border:1px solid var(--border-strong);vertical-align:top">`;
+        sprintDls.forEach(d => {
+          html += `<div onclick="openDeadlineModal('${d.id}')" style="background:${o.barBg}28;border-left:3px solid ${o.barBg};border-radius:3px;padding:3px 6px;margin-bottom:3px;cursor:pointer">
+            <div style="font-size:12px;font-weight:600;color:${o.barBg}">${esc(d.title)}</div>
+            ${d.date ? `<div style="font-size:10px;color:var(--text3)">${d.date}</div>` : ''}
+          </div>`;
+        });
+        html += `</td>`;
+      });
+      html += `</tr>`;
+    }
+
+    // One row per theme for this owner (hidden when deadlines-only mode)
+    const deadlinesOnly = document.getElementById('planner-deadlines-only')?.checked;
+    if(!deadlinesOnly){
+      ownerThemeKeys.forEach(tkId => {
+      const th = tkId !== '__none__' ? themes.find(t=>t.id===tkId) : null;
+      const themeLabel = th ? esc(th.title) : '<em style="color:var(--text3);font-weight:400">No Theme</em>';
+      const themeFiltered = ownerFiltered.filter(tk=>(tk.themeId||'__none__')===tkId);
+      const themePts = themeFiltered.reduce((sum,tk)=>sum+(parseFloat(tk.points)||0),0);
+
+      html += `<tr>
+        <td style="padding:5px 8px;background:${o.bg};border:1px solid var(--border-strong);font-size:11px;font-weight:600;vertical-align:top;position:sticky;left:0;z-index:1;width:200px;min-width:200px">
+          <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${themeLabel}</div>
+          ${themePts ? `<div style="font-size:10px;font-weight:600;color:#534ab7;margin-top:1px">${themePts} pts</div>` : ''}
+        </td>`;
+
+      allSprints.forEach(s => {
+        const cellTks = themeFiltered.filter(tk=>tk.sprint===s.id);
+        const cellDls = ownerDeadlines.filter(d=>d.themeId===tkId && d.sprintId===s.id);
+        html += `<td style="padding:5px;background:${o.bg};border:1px solid var(--border-strong);vertical-align:top;min-height:40px"
+          ondragover="event.preventDefault();this.style.outline='2px solid #534ab7'"
+          ondragleave="this.style.outline=''"
+          ondrop="plannerDropTicket(event,'${s.id}',this)">`;
+        // Deadlines at top of cell
+        cellDls.forEach(d => {
+          html += `<div onclick="openDeadlineModal('${d.id}')" style="background:${o.barBg}28;border-left:3px solid ${o.barBg};border-radius:3px;padding:3px 6px;margin-bottom:4px;cursor:pointer">
+            <div style="font-size:11px;font-weight:700;color:${o.barBg}">📅 ${esc(d.title)}</div>
+            ${d.date ? `<div style="font-size:10px;color:var(--text3)">${d.date}</div>` : ''}
+          </div>`;
+        });
+        if(cellTks.length === 0){
+          html += ``;
+        } else {
+          // Apply planner-specific order if set
+          const order = plannerOrder[s.id];
+          const sortedTks = order
+            ? [...cellTks].sort((a,b)=>{ const ia=order.indexOf(a.id), ib=order.indexOf(b.id); return (ia<0?9999:ia)-(ib<0?9999:ib); })
+            : cellTks;
+          sortedTks.forEach(tk => {
+            const tkLabels = tk.labels ? tk.labels.split(',').map(l=>l.trim()) : [];
+            const PLANNER_LABEL_BG = {'Ticket Creation':{bg:'#fce8e8',border:'#e24b4a',text:'#5c0a0a'},'Ready To Refine':{bg:'#faeeda',border:'#ef9f27',text:'#412402'},'Ready for Sprint':{bg:'#eaf3de',border:'#3b6d11',text:'#173404'}};
+            const colourLabel = tkLabels.find(l=>PLANNER_LABEL_BG[l]);
+            const cardBg = colourLabel ? PLANNER_LABEL_BG[colourLabel].bg : 'var(--surface)';
+            const cardBorder = colourLabel ? PLANNER_LABEL_BG[colourLabel].border : 'var(--border)';
+            const cardText = colourLabel ? PLANNER_LABEL_BG[colourLabel].text : 'var(--text)';
+            const pts = `<span style="font-size:11px;font-weight:700;color:#534ab7;border:1px solid #534ab7;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">${tk.points||''}</span>`;
+            const jiraBase = jiraUrl || 'https://dlapiperuk.atlassian.net';
+            const jira = tk.jira ? `<a href="${jiraBase}/browse/${tk.jira}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-size:10px;font-weight:600;color:#534ab7;text-decoration:none;white-space:nowrap;padding:1px 3px;background:rgba(83,74,183,0.08);border-radius:3px">${esc(tk.jira)}</a>` : '';
+            const CAT_STYLES = {data:{bg:'var(--cat-data-bg)',text:'var(--cat-data)',label:'Data'},webi:{bg:'var(--cat-webi-bg)',text:'var(--cat-webi)',label:'Webi'},dashboard:{bg:'var(--cat-dash-bg)',text:'var(--cat-dash)',label:'Dash'}};
+            const catStyle = CAT_STYLES[tk.cat];
+            const catBadge = catStyle ? `<span style="font-size:9px;font-weight:600;padding:1px 4px;border-radius:3px;background:${catStyle.bg};color:${catStyle.text};white-space:nowrap">${catStyle.label}</span>` : '';
+            html += `<div draggable="true"
+              ondragstart="event.dataTransfer.setData('text','${tk.id}');_plannerDragId='${tk.id}';this.style.opacity='0.4'"
+              ondragend="this.style.opacity='';this.style.borderTop=''"
+              ondragover="event.preventDefault();event.stopPropagation();_plannerOverId='${tk.id}';this.style.borderTop='2px solid #534ab7'"
+              ondragleave="if(_plannerOverId==='${tk.id}'){_plannerOverId=null;}this.style.borderTop=''"
+              onclick="editTicket('${tk.id}')" style="background:${cardBg};border:0.5px solid ${cardBorder};border-radius:4px;padding:3px 5px;margin-bottom:3px;cursor:grab;display:flex;align-items:flex-start;gap:3px;justify-content:space-between" title="${esc(tk.title)}">
+              <span style="font-size:12px;font-weight:500;flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;color:${cardText}">${esc(tk.title)}</span>
+              <div style="display:flex;align-items:center;gap:2px;flex-shrink:0">${catBadge}${jira}${pts}</div>
+            </div>`;
+          });
+        }
+        html += `</td>`;
+      });
+      html += `</tr>`;
+      }); // end ownerThemeKeys.forEach
+    } // end if(!deadlinesOnly)
+
+    // Deadlines row moved to top of person section above
+  });
+
+  html += `</tbody></table></div>`;
+  document.getElementById('planner-body').innerHTML = html;
+}
 
 function equaliseTicketHeights() {
   document.querySelectorAll('.detail-table').forEach(table => {
