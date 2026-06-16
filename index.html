@@ -5,9 +5,65 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Product Priority Planning Board</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0} :root{ --bg:#f7f6f3;--surface:#fff;--surface2:#f1f0ec; --border:rgba(0,0,0,0.12);--border-strong:rgba(0,0,0,0.22); --text:#1a1a18;--text2:#5f5e5a;--text3:#888780; --radius:8px;--radius-sm:5px;--owner-w:100px; --george-color:#B3D4FF;--george-bg:#eef5ff;--george-bg2:#eef5ff;--george-text:#172b4d;--george-head:#B3D4FF; --jemma-color:#998DD9;--jemma-bg:#f0eefb;--jemma-bg2:#f0eefb;--jemma-text:#172b4d;--jemma-head:#998DD9; --sam-color:#79F2C0;--sam-bg:#eafbf4;--sam-bg2:#eafbf4;--sam-text:#172b4d;--sam-head:#79F2C0; --chris-color:#FFE380;--chris-bg:#fffbe6;--chris-bg2:#fffbe6;--chris-text:#172b4d;--chris-head:#FFE380; --cat-data:#854f0b;--cat-data-bg:#faeeda;--cat-data-bg2:#f5e4c5; --cat-webi:#185fa5;--cat-webi-bg:#e6f1fb;--cat-webi-bg2:#d4e6f7; --cat-dash:#534ab7;--cat-dash-bg:#eeedfe;--cat-dash-bg2:#e0dffb; } @media(prefers-color-scheme:dark){:root{ --bg:#1c1c1a;--surface:#252523;--surface2:#2e2e2b; --border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.22); --text:#f1efe8;--text2:#b4b2a9;--text3:#888780; --george-bg:#0c3a5e;--george-bg2:#0e4670;--george-text:#e6f1fb;--george-head:#0c447c; --jemma-bg:#2d2868;--jemma-bg2:#362f7a;--jemma-text:#eeedfe;--jemma-head:#3c3489; --sam-bg:#073d2e;--sam-bg2:#094a37;--sam-text:#e1f5ee;--sam-head:#085041; --chris-bg:#5a2c08;--chris-bg2:#6e3a0c;--chris-text:#fef0e3;--chris-head:#8c4e18; --cat-data-bg:#412402;--cat-data-bg2:#523005;--cat-webi-bg:#042c53;--cat-webi-bg2:#0a3a68;--cat-dash-bg:#26215c;--cat-dash-bg2:#332d75; }} body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:18px} header{background:var(--surface);border-bottom:1px solid var(--border-strong);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100} header h1{font-size:20px;font-weight:500;display:flex;align-items:center;gap:8px} .header-actions{display:flex;gap:8px;align-items:center} .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--radius-sm);border:0.5px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:18px;font-weight:500;cursor:pointer;transition:background .15s} .btn:hover{background:var(--surface2)} .btn.primary{background:#2c2c2a;color:#f1efe8;border-color:transparent} .btn.primary:hover{background:#444441} @media(prefers-color-scheme:dark){.btn.primary{background:#f1efe8;color:#1c1c1a}.btn.primary:hover{background:#d3d1c7}} .btn.sm{padding:4px 8px;font-size:19px} .tabs{display:flex;align-items:center;background:var(--surface);border-bottom:1px solid var(--border-strong);padding:0 20px} .tab-btn{padding:10px 16px;font-size:18px;font-weight:500;color:var(--text3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;display:flex;align-items:center;gap:6px;margin-bottom:-1px;transition:color .15s} .tab-btn:hover{color:var(--text2)} .tab-btn.active{color:var(--text);border-bottom-color:#534ab7} .tab-count{font-size:18px;font-weight:500;color:var(--text3);background:var(--surface2);border:0.5px solid var(--border-strong);padding:1px 5px;border-radius:10px} .tab-btn.active .tab-count{background:#eeedfe;color:#26215c;border-color:#534ab7} @media(prefers-color-scheme:dark){.tab-btn.active .tab-count{background:#3c3489;color:#eeedfe;border-color:#afa9ec}} .panel{display:none}.panel.active{display:block} .grid-wrap{padding:20px;overflow-x:auto} .timeline-grid{display:grid;min-width:max-content;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;align-items:start} .tl-corner{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:8px;display:flex;align-items:flex-end;justify-content:center;font-size:19px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em} .tl-sprint-head{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:6px 8px;text-align:center;cursor:pointer;transition:background .12s;user-select:none} .tl-sprint-head:last-child{border-right:none} .tl-sprint-head:hover{background:var(--surface)} .tl-sprint-head.selected{background:#eeedfe;box-shadow:inset 0 -3px 0 #534ab7} @media(prefers-color-scheme:dark){.tl-sprint-head.selected{background:#3c3489}} .tl-sprint-num{font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text)} .tl-sprint-dates{font-size:19px;color:var(--text3);margin-top:1px} .tl-row-head{border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:4px} .tl-row-head:last-of-type{border-bottom:none} .owner-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600} .owner-name{font-size:19px;font-weight:600;text-align:center} .tl-cell{border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);min-height:50px;padding:3px;position:relative;display:flex;flex-direction:column;gap:2px} .theme-bar-span{display:block;margin-left:2px;margin-right:2px;} .tl-add-btn{pointer-events:all;cursor:pointer;} .tl-cell:last-child{border-right:none} .theme-bar{border-radius:4px;padding:3px 7px;font-size:18px;font-weight:500;line-height:1.3;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px;transition:filter .1s;min-height:22px} .theme-bar:hover{filter:brightness(0.95)} .theme-bar .priority-dot{flex-shrink:0} .theme-bar.start{border-top-left-radius:4px;border-bottom-left-radius:4px;border-top-right-radius:0;border-bottom-right-radius:0} .theme-bar.middle{border-radius:0} .theme-bar.end{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:4px;border-bottom-right-radius:4px} .theme-bar.single{border-radius:4px} .theme-bar .bar-actions{display:none;gap:1px;margin-left:auto} .theme-bar:hover .bar-actions{display:flex} .detail-panel{margin:0 16px 16px;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden} .detail-header{background:var(--surface2);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-strong)} .detail-title{font-size:19px;font-weight:600;display:flex;align-items:center;gap:8px} .ticket{background:var(--surface);border-radius:5px;border:0.5px solid var(--border);padding:9px 11px;cursor:grab;transition:border-color .15s,opacity .15s;user-select:none} .ticket:hover{border-color:var(--border-strong)} .ticket.dragging{opacity:.3} .ticket-top{display:flex;align-items:flex-start;justify-content:space-between;gap:4px;margin-bottom:3px} .ticket-title{font-size:19px;font-weight:500;line-height:1.35;flex:1} .ticket-jira{font-size:19px;font-weight:600;color:#534ab7;text-decoration:none;padding:1px 4px;border-radius:3px;background:rgba(83,74,183,0.08);white-space:nowrap;transition:background .1s} .ticket-jira:hover{background:rgba(83,74,183,0.18)} .ticket-footer{display:flex;align-items:center;justify-content:space-between;gap:3px} .ticket-actions{display:flex;gap:1px;opacity:0;transition:opacity .15s} .ticket:hover .ticket-actions{opacity:1} .priority-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0} .priority-high{background:#e24b4a}.priority-medium{background:#ef9f27}.priority-low{background:#1d9e75} .priority-must-do{background:#7c0a02}.priority-bau{background:#888780} .goal-flag{font-size:11px;background:#fff8e1;border:0.5px solid #f0c030;color:#7a5a00;padding:1px 5px;border-radius:3px;white-space:nowrap} .multi-select{position:relative} .ms-trigger{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);cursor:pointer;min-height:38px;transition:border-color .15s} .ms-trigger:hover{border-color:#534ab7} .ms-display{font-size:13px;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap} .ms-display.placeholder{color:var(--text3)} .ms-dropdown{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);overflow:hidden} .ms-dropdown.open{display:block} .ms-option{display:flex;align-items:center;gap:9px;padding:8px 12px;font-size:13px;cursor:pointer;transition:background .1s;color:var(--text)} .ms-option:hover{background:var(--surface2)} .ms-option input[type=checkbox]{width:14px;height:14px;accent-color:#534ab7;cursor:pointer;flex-shrink:0} .icon-btn{background:none;border:none;cursor:pointer;color:var(--text3);padding:2px;border-radius:3px;display:flex;align-items:center;font-size:18px;transition:color .1s,background .1s} .icon-btn:hover{color:var(--text);background:rgba(0,0,0,0.06)} .icon-btn.delete:hover{color:#e24b4a} .empty-state{color:var(--text3);font-size:18px;text-align:center;padding:12px 6px;border:1px dashed var(--border);border-radius:4px;cursor:pointer} .empty-state:hover{border-color:var(--text3);color:var(--text2)} .progress-wrap{padding:20px} .progress-board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px} .progress-col{border-radius:var(--radius);border:1px solid var(--border-strong);overflow:hidden;display:flex;flex-direction:column} .progress-col-head{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-strong)} .progress-col-title{font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:8px} .progress-col-body{padding:10px;display:flex;flex-direction:column;gap:8px;min-height:100px;flex:1;transition:box-shadow .12s} .progress-col-body.drag-over{box-shadow:inset 0 0 0 2px #534ab7} .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:200;align-items:center;justify-content:center;padding:20px} .modal-overlay.open{display:flex} .modal{background:var(--surface);border-radius:var(--radius);border:.5px solid var(--border-strong);padding:22px;width:100%;max-width:900px;max-height:90vh;overflow-y:auto} .modal h2{font-size:19px;font-weight:500;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between} .form-group{margin-bottom:12px} .form-group label{display:block;font-size:19px;font-weight:500;color:var(--text2);margin-bottom:4px;text-transform:none;letter-spacing:0} .form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 11px;border:.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:19px;font-family:inherit;outline:none} .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#534ab7} .form-group textarea{resize:vertical;min-height:50px} .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px} .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px} .modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:16px} .hint{font-size:18px;color:var(--text3);margin-top:3px} .detail-table{display:grid;grid-template-columns:max-content repeat(3,1fr);border-top:1px solid var(--border-strong)} .dt-row-label{padding:7px 12px;font-size:17px;font-weight:700;text-transform:none;letter-spacing:0;color:var(--text3);display:flex;align-items:flex-start;border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap;} .dt-col-head{padding:7px 12px;font-size:18px;font-weight:700;text-transform:none;letter-spacing:0;border-bottom:1px solid var(--border-strong);display:flex;align-items:center;justify-content:space-between;background:var(--surface2);color:var(--text2);border-right:1px solid var(--border)} .dt-col-head:last-child{border-right:none} .dt-col-head .col-count{font-size:19px;font-weight:500;padding:1px 5px;border-radius:10px;background:rgba(0,0,0,0.06)} @media(prefers-color-scheme:dark){.dt-col-head .col-count{background:rgba(255,255,255,0.1)}} .dt-body-cell{padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px;align-content:start;background:var(--surface);border-right:1px solid var(--border);border-bottom:1px solid var(--border)} .dt-body-cell:last-of-type{border-right:none} .df-label{padding:7px 12px;font-size:17px;font-weight:700;text-transform:none;letter-spacing:0;color:var(--text3);display:flex;align-items:center;border-right:1px solid var(--border-strong);border-top:1px solid var(--border);background:var(--surface2);white-space:nowrap;} .df-cell{padding:6px 8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;color:var(--text2);border-right:1px solid var(--border);border-top:1px solid var(--border);background:var(--surface)} .df-cell:last-child{border-right:none} .df-cell.over-cap{color:#e24b4a;background:#fff5f5} .df-cell.at-cap{color:#1d9e75;background:#f0faf5} .df-cell.under-cap{color:#534ab7} .df-cell.df-muted{color:var(--text3);font-weight:400} @media(prefers-color-scheme:dark){ .df-cell.over-cap{background:#3d1212} .df-cell.at-cap{background:#0d2e1e} } .cap-input{width:52px;text-align:center;padding:3px 4px;border:.5px solid var(--border-strong);border-radius:4px;background:var(--surface);color:var(--text);font-size:18px;font-weight:600;font-family:inherit;outline:none} .cap-input:focus{border-color:#534ab7} .settings-pop{display:none;position:absolute;top:100%;right:0;margin-top:6px;background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--radius);padding:14px;width:300px;z-index:150;box-shadow:0 4px 16px rgba(0,0,0,0.12)} .settings-pop.open{display:block} .settings-wrap{position:relative}.sprint-nav{display:flex;align-items:center;gap:10px;padding:12px 20px 0;position:relative;z-index:1;} .panel-body-row{display:flex;align-items:flex-start;overflow-x:auto;overflow-y:visible;} .panel-body-row .grid-wrap{flex-shrink:0;overflow-x:auto;padding:20px;min-width:0;} .side-detail{flex:1 1 0;min-width:280px;padding:12px 16px 16px;border-left:1px solid var(--border-strong);overflow-y:auto;} .side-detail .detail-panel{margin:0;} .grid-resizer{flex-shrink:0;width:28px;cursor:col-resize;background:var(--surface2);border-left:1px solid var(--border-strong);border-right:1px solid var(--border-strong);transition:background .15s,border-color .15s;display:flex;align-items:center;justify-content:center;user-select:none;} .grid-resizer:hover,.grid-resizer.dragging{background:#eeedfe;border-color:#534ab7;} .resizer-icon{display:flex;align-items:center;gap:1px;background:var(--surface);border:1px solid var(--border-strong);border-radius:4px;padding:5px 3px;box-shadow:0 1px 3px rgba(0,0,0,0.1);pointer-events:none;} .resizer-icon span{font-size:12px;font-weight:700;line-height:1;color:var(--text3);} .resizer-icon .resizer-pipe{color:var(--border-strong);margin:0 1px;} .grid-resizer:hover .resizer-icon,.grid-resizer.dragging .resizer-icon{border-color:#534ab7;} .grid-resizer:hover .resizer-icon span,.grid-resizer.dragging .resizer-icon span{color:#534ab7;} .grid-resizer:hover .resizer-pipe,.grid-resizer.dragging .resizer-pipe{color:#534ab7;} .sprint-nav-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:6px;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:20px;cursor:pointer;transition:background .15s;font-weight:500;line-height:1;flex-shrink:0;} .sprint-nav-btn:hover{background:var(--surface2)} .sprint-nav-btn:disabled{opacity:.3;cursor:default} .sprint-nav-label{font-size:14px;font-weight:500;color:var(--text2);white-space:nowrap} .sprint-nav-range{font-size:14px;color:var(--text3);white-space:nowrap} </style>
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0} :root{ --bg:#f7f6f3;--surface:#fff;--surface2:#f1f0ec; --border:rgba(0,0,0,0.12);--border-strong:rgba(0,0,0,0.22); --text:#1a1a18;--text2:#5f5e5a;--text3:#888780; --radius:8px;--radius-sm:5px;--owner-w:100px; --george-color:#B3D4FF;--george-bg:#eef5ff;--george-bg2:#eef5ff;--george-text:#172b4d;--george-head:#B3D4FF; --jemma-color:#998DD9;--jemma-bg:#f0eefb;--jemma-bg2:#f0eefb;--jemma-text:#172b4d;--jemma-head:#998DD9; --sam-color:#79F2C0;--sam-bg:#eafbf4;--sam-bg2:#eafbf4;--sam-text:#172b4d;--sam-head:#79F2C0; --chris-color:#7DD3F0;--chris-bg:#e8f6fc;--chris-bg2:#e8f6fc;--chris-text:#172b4d;--chris-head:#7DD3F0; --claire-color:#FFE380;--claire-bg:#fffbe6;--claire-bg2:#fffbe6;--claire-text:#172b4d;--claire-head:#FFE380; --lorna-color:#F9A8D4;--lorna-bg:#fdf2f8;--lorna-bg2:#fdf2f8;--lorna-text:#172b4d;--lorna-head:#F9A8D4; --cat-data:#854f0b;--cat-data-bg:#faeeda;--cat-data-bg2:#f5e4c5; --cat-webi:#185fa5;--cat-webi-bg:#e6f1fb;--cat-webi-bg2:#d4e6f7; --cat-dash:#534ab7;--cat-dash-bg:#eeedfe;--cat-dash-bg2:#e0dffb; } @media(prefers-color-scheme:dark){:root{ --bg:#1c1c1a;--surface:#252523;--surface2:#2e2e2b; --border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.22); --text:#f1efe8;--text2:#b4b2a9;--text3:#888780; --george-bg:#0c3a5e;--george-bg2:#0e4670;--george-text:#e6f1fb;--george-head:#0c447c; --jemma-bg:#2d2868;--jemma-bg2:#362f7a;--jemma-text:#eeedfe;--jemma-head:#3c3489; --sam-bg:#073d2e;--sam-bg2:#094a37;--sam-text:#e1f5ee;--sam-head:#085041; --chris-bg:#0e3d4f;--chris-bg2:#154d61;--chris-text:#e0f4fb;--chris-head:#1a6585; --claire-bg:#5a2c08;--claire-bg2:#6e3a0c;--claire-text:#fef0e3;--claire-head:#8c4e18; --lorna-bg:#5b1a3a;--lorna-bg2:#6e2048;--lorna-text:#fce7f3;--lorna-head:#8c2d5e; --cat-data-bg:#412402;--cat-data-bg2:#523005;--cat-webi-bg:#042c53;--cat-webi-bg2:#0a3a68;--cat-dash-bg:#26215c;--cat-dash-bg2:#332d75; }} body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:18px} header{background:var(--surface);border-bottom:1px solid var(--border-strong);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100} header h1{font-size:20px;font-weight:500;display:flex;align-items:center;gap:8px} .header-actions{display:flex;gap:8px;align-items:center} .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--radius-sm);border:0.5px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:18px;font-weight:500;cursor:pointer;transition:background .15s} .btn:hover{background:var(--surface2)} .btn.primary{background:#2c2c2a;color:#f1efe8;border-color:transparent} .btn.primary:hover{background:#444441} @media(prefers-color-scheme:dark){.btn.primary{background:#f1efe8;color:#1c1c1a}.btn.primary:hover{background:#d3d1c7}} .btn.sm{padding:4px 8px;font-size:19px} .tabs{display:flex;align-items:center;background:var(--surface);border-bottom:1px solid var(--border-strong);padding:0 20px} .tab-btn{padding:10px 16px;font-size:18px;font-weight:500;color:var(--text3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;display:flex;align-items:center;gap:6px;margin-bottom:-1px;transition:color .15s} .tab-btn:hover{color:var(--text2)} .tab-btn.active{color:var(--text);border-bottom-color:#534ab7} .tab-count{font-size:18px;font-weight:500;color:var(--text3);background:var(--surface2);border:0.5px solid var(--border-strong);padding:1px 5px;border-radius:10px} .tab-btn.active .tab-count{background:#eeedfe;color:#26215c;border-color:#534ab7} @media(prefers-color-scheme:dark){.tab-btn.active .tab-count{background:#3c3489;color:#eeedfe;border-color:#afa9ec}} .panel{display:none}.panel.active{display:block} .grid-wrap{padding:20px;overflow-x:auto} .timeline-grid{display:grid;min-width:max-content;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;align-items:start} .tl-corner{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:8px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;align-self:stretch} .tl-sprint-head{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:6px 8px 18px;text-align:center;cursor:pointer;transition:background .12s;user-select:none;position:relative} .tl-sprint-head:last-child{border-right:none} .tl-sprint-head:hover{background:var(--surface)} .tl-sprint-head.selected{background:#eeedfe;box-shadow:inset 0 -3px 0 #534ab7} @media(prefers-color-scheme:dark){.tl-sprint-head.selected{background:#3c3489}} .tl-sprint-num{font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text)} .tl-sprint-dates{font-size:19px;color:var(--text3);margin-top:1px} .tl-row-head{border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:4px} .tl-row-head:last-of-type{border-bottom:none} .owner-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600} .owner-name{font-size:19px;font-weight:600;text-align:center} .tl-cell{border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);min-height:50px;padding:3px;position:relative;display:flex;flex-direction:column;gap:2px} .theme-bar-span{display:block;margin-left:2px;margin-right:2px;} .tl-add-btn{pointer-events:all;cursor:pointer;} .tl-cell:last-child{border-right:none} .theme-bar{border-radius:4px;padding:3px 7px;font-size:18px;font-weight:500;line-height:1.3;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px;transition:filter .1s;min-height:22px} .theme-bar:hover{filter:brightness(0.95)} .theme-bar .priority-dot{flex-shrink:0} .theme-bar.start{border-top-left-radius:4px;border-bottom-left-radius:4px;border-top-right-radius:0;border-bottom-right-radius:0} .theme-bar.middle{border-radius:0} .theme-bar.end{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:4px;border-bottom-right-radius:4px} .theme-bar.single{border-radius:4px} .theme-bar .bar-actions{display:none;gap:1px;margin-left:auto} .theme-bar:hover .bar-actions{display:flex} .detail-panel{margin:0 16px 16px;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden} .detail-header{background:var(--surface2);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-strong)} .detail-title{font-size:19px;font-weight:600;display:flex;align-items:center;gap:8px} .ticket{background:var(--surface);border-radius:5px;border:0.5px solid var(--border);padding:9px 11px;cursor:grab;transition:border-color .15s,opacity .15s;user-select:none} .ticket:hover{border-color:var(--border-strong)} .ticket.dragging{opacity:.3} .ticket-top{display:flex;align-items:flex-start;justify-content:space-between;gap:4px;margin-bottom:3px} .ticket-title{font-size:19px;font-weight:500;line-height:1.35;flex:1} .ticket-jira{font-size:19px;font-weight:600;color:#534ab7;text-decoration:none;padding:1px 4px;border-radius:3px;background:rgba(83,74,183,0.08);white-space:nowrap;transition:background .1s} .ticket-jira:hover{background:rgba(83,74,183,0.18)} .ticket-footer{display:flex;align-items:center;justify-content:space-between;gap:3px} .ticket-actions{display:flex;gap:1px;opacity:0;transition:opacity .15s} .ticket:hover .ticket-actions{opacity:1} .priority-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0} .priority-high{background:#e24b4a}.priority-medium{background:#ef9f27}.priority-low{background:#1d9e75} .priority-must-do{background:#7c0a02}.priority-bau{background:#888780} .goal-flag{font-size:11px;background:#fff8e1;border:0.5px solid #f0c030;color:#7a5a00;padding:1px 5px;border-radius:3px;white-space:nowrap} .multi-select{position:relative} .ms-trigger{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);cursor:pointer;min-height:38px;transition:border-color .15s} .ms-trigger:hover{border-color:#534ab7} .ms-display{font-size:13px;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap} .ms-display.placeholder{color:var(--text3)} .ms-dropdown{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);overflow:hidden} .ms-dropdown.open{display:block} .ms-option{display:flex;align-items:center;gap:9px;padding:8px 12px;font-size:13px;cursor:pointer;transition:background .1s;color:var(--text)} .ms-option:hover{background:var(--surface2)} .ms-option input[type=checkbox]{width:14px;height:14px;accent-color:#534ab7;cursor:pointer;flex-shrink:0} .icon-btn{background:none;border:none;cursor:pointer;color:var(--text3);padding:2px;border-radius:3px;display:flex;align-items:center;font-size:18px;transition:color .1s,background .1s} .icon-btn:hover{color:var(--text);background:rgba(0,0,0,0.06)} .icon-btn.delete:hover{color:#e24b4a} .empty-state{color:var(--text3);font-size:18px;text-align:center;padding:12px 6px;border:1px dashed var(--border);border-radius:4px;cursor:pointer} .empty-state:hover{border-color:var(--text3);color:var(--text2)} .progress-wrap{padding:20px} .progress-board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px} .progress-col{border-radius:var(--radius);border:1px solid var(--border-strong);overflow:hidden;display:flex;flex-direction:column} .progress-col-head{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-strong)} .progress-col-title{font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:8px} .progress-col-body{padding:10px;display:flex;flex-direction:column;gap:8px;min-height:100px;flex:1;transition:box-shadow .12s} .progress-col-body.drag-over{box-shadow:inset 0 0 0 2px #534ab7} .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:200;align-items:center;justify-content:center;padding:20px} .modal-overlay.open{display:flex} .modal{background:var(--surface);border-radius:var(--radius);border:.5px solid var(--border-strong);padding:22px;width:100%;max-width:900px;max-height:90vh;overflow-y:auto} .modal h2{font-size:19px;font-weight:500;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between} .form-group{margin-bottom:12px} .form-group label{display:block;font-size:19px;font-weight:500;color:var(--text2);margin-bottom:4px;text-transform:none;letter-spacing:0} .form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 11px;border:.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:19px;font-family:inherit;outline:none} .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#534ab7} .form-group textarea{resize:vertical;min-height:50px} .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px} .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px} .modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:16px} .hint{font-size:18px;color:var(--text3);margin-top:3px} .detail-table{display:grid;grid-template-columns:max-content repeat(3,1fr);border-top:1px solid var(--border-strong)} .dt-row-label{padding:7px 12px;font-size:17px;font-weight:700;text-transform:none;letter-spacing:0;color:var(--text3);display:flex;align-items:flex-start;border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap;} .dt-col-head{padding:7px 12px;font-size:18px;font-weight:700;text-transform:none;letter-spacing:0;border-bottom:1px solid var(--border-strong);display:flex;align-items:center;justify-content:space-between;background:var(--surface2);color:var(--text2);border-right:1px solid var(--border)} .dt-col-head:last-child{border-right:none} .dt-col-head .col-count{font-size:19px;font-weight:500;padding:1px 5px;border-radius:10px;background:rgba(0,0,0,0.06)} @media(prefers-color-scheme:dark){.dt-col-head .col-count{background:rgba(255,255,255,0.1)}} .dt-body-cell{padding:8px;display:grid;grid-template-columns:1fr 1fr;gap:6px;align-content:start;background:var(--surface);border-right:1px solid var(--border);border-bottom:1px solid var(--border)} .dt-body-cell:last-of-type{border-right:none} .df-label{padding:7px 12px;font-size:17px;font-weight:700;text-transform:none;letter-spacing:0;color:var(--text3);display:flex;align-items:center;border-right:1px solid var(--border-strong);border-top:1px solid var(--border);background:var(--surface2);white-space:nowrap;} .df-cell{padding:6px 8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;color:var(--text2);border-right:1px solid var(--border);border-top:1px solid var(--border);background:var(--surface)} .df-cell:last-child{border-right:none} .df-cell.over-cap{color:#e24b4a;background:#fff5f5} .df-cell.at-cap{color:#1d9e75;background:#f0faf5} .df-cell.under-cap{color:#534ab7} .df-cell.df-muted{color:var(--text3);font-weight:400} @media(prefers-color-scheme:dark){ .df-cell.over-cap{background:#3d1212} .df-cell.at-cap{background:#0d2e1e} } .cap-input{width:52px;text-align:center;padding:3px 4px;border:.5px solid var(--border-strong);border-radius:4px;background:var(--surface);color:var(--text);font-size:18px;font-weight:600;font-family:inherit;outline:none} .cap-input:focus{border-color:#534ab7} .settings-pop{display:none;position:absolute;top:100%;right:0;margin-top:6px;background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--radius);padding:14px;width:300px;z-index:150;box-shadow:0 4px 16px rgba(0,0,0,0.12)} .settings-pop.open{display:block} .settings-wrap{position:relative}.sprint-nav{display:flex;align-items:center;gap:10px;padding:12px 20px 0;position:relative;z-index:1;} .panel-body-row{display:flex;align-items:flex-start;overflow-x:auto;overflow-y:visible;} .panel-body-row .grid-wrap{flex-shrink:0;overflow-x:auto;padding:20px;min-width:0;} .side-detail{flex:1 1 0;min-width:280px;padding:12px 16px 16px;border-left:1px solid var(--border-strong);overflow-y:auto;} .side-detail .detail-panel{margin:0;} .grid-resizer{flex-shrink:0;width:28px;cursor:col-resize;background:var(--surface2);border-left:1px solid var(--border-strong);border-right:1px solid var(--border-strong);transition:background .15s,border-color .15s;display:flex;align-items:center;justify-content:center;user-select:none;} .grid-resizer:hover,.grid-resizer.dragging{background:#eeedfe;border-color:#534ab7;} .resizer-icon{display:flex;align-items:center;gap:1px;background:var(--surface);border:1px solid var(--border-strong);border-radius:4px;padding:5px 3px;box-shadow:0 1px 3px rgba(0,0,0,0.1);pointer-events:none;} .resizer-icon span{font-size:12px;font-weight:700;line-height:1;color:var(--text3);} .resizer-icon .resizer-pipe{color:var(--border-strong);margin:0 1px;} .grid-resizer:hover .resizer-icon,.grid-resizer.dragging .resizer-icon{border-color:#534ab7;} .grid-resizer:hover .resizer-icon span,.grid-resizer.dragging .resizer-icon span{color:#534ab7;} .grid-resizer:hover .resizer-pipe,.grid-resizer.dragging .resizer-pipe{color:#534ab7;} .sprint-nav-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:6px;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:20px;cursor:pointer;transition:background .15s;font-weight:500;line-height:1;flex-shrink:0;} .sprint-nav-btn:hover{background:var(--surface2)} .sprint-nav-btn:disabled{opacity:.3;cursor:default} .sprint-nav-label{font-size:14px;font-weight:500;color:var(--text2);white-space:nowrap} .sprint-nav-range{font-size:14px;color:var(--text3);white-space:nowrap}
+.goals-section{border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;margin-bottom:12px}
+.tl-row-head.tl-goals-label{justify-content:center;background:var(--surface2);min-height:unset;padding:6px 4px;border-bottom:1px solid var(--border-strong)}
+.tl-goals-label-cell{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:5px 8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);text-align:center;line-height:1.3}
+.tl-corner-split{flex-direction:column;align-items:stretch;justify-content:stretch;padding:0;gap:0;}
+.tl-corner-split-top{flex:1;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border-strong);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);}
+.tl-corner-split-bot{flex:1;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);}
+.prog-card{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 8px;border-radius:5px;cursor:grab;transition:filter .1s;min-height:28px;overflow:hidden}
+.prog-card:hover{filter:brightness(0.95)}
+.prog-card:hover .ticket-actions{opacity:1 !important}
+.prog-card.dragging{opacity:.3}
+.prog-add-btn{display:flex;align-items:center;gap:5px;width:100%;padding:5px 8px;border-radius:4px;border:1px dashed var(--border);background:none;color:var(--text3);font-size:12px;cursor:pointer;transition:border-color .15s,color .15s;margin-top:2px}
+.prog-add-btn:hover{border-color:var(--text3);color:var(--text2);background:var(--surface2)}
+.tl-goals-cell{border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);background:var(--surface);padding:5px 8px;display:flex;flex-direction:column;gap:2px;cursor:pointer;transition:background .1s;overflow:hidden}
+.tl-goals-cell:hover{background:var(--surface2)}
+.tl-goal-pill{display:flex;align-items:baseline;gap:5px;padding:1px 0}
+.tl-goal-num{font-size:10px;font-weight:700;color:var(--text3);flex-shrink:0;min-width:10px}
+.tl-goal-text{font-size:11px;color:var(--text);line-height:1.4;word-break:break-word}
+.tl-goal-add{font-size:10px;color:var(--text3);padding:2px 0;opacity:0;cursor:pointer;margin-top:1px}
+.tl-goals-cell:hover .tl-goal-add{opacity:1}
+@media(prefers-color-scheme:dark){.tl-goals-cell{background:var(--surface)}}.goals-header{background:var(--surface2);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-strong)}
+.goals-title{font-size:13px;font-weight:600;color:var(--text2);display:flex;align-items:center;gap:6px;text-transform:uppercase;letter-spacing:.04em}
+.goals-list{display:flex;flex-direction:column;background:var(--surface)}
+.goals-empty{padding:10px 14px;font-size:13px;color:var(--text3);cursor:pointer;border:1px dashed var(--border);border-radius:4px;margin:8px;text-align:center}
+.goals-empty:hover{border-color:var(--text3);color:var(--text2)}
+.goal-item{display:flex;align-items:center;gap:8px;padding:7px 10px;border-bottom:1px solid var(--border);transition:background .1s;cursor:default}
+.goal-item:last-child{border-bottom:none}
+.goal-item:hover{background:var(--surface2)}
+.goal-drag-handle{color:var(--text3);cursor:grab;font-size:15px;flex-shrink:0;padding:2px;opacity:0;transition:opacity .15s}
+.goal-item:hover .goal-drag-handle{opacity:1}
+.goal-drag-handle:active{cursor:grabbing}
+.goal-order{font-size:11px;font-weight:700;color:var(--text3);width:16px;text-align:center;flex-shrink:0}
+.goal-text{flex:1;font-size:13px;color:var(--text);line-height:1.4;outline:none;border-radius:3px;padding:2px 4px;min-height:20px;cursor:text}
+.goal-text:focus{background:var(--bg);box-shadow:0 0 0 2px #534ab7;cursor:text}
+.goal-text:empty::before{content:'Enter goal…';color:var(--text3)}
+.goal-delete{opacity:0;transition:opacity .15s;flex-shrink:0}
+.goal-item:hover .goal-delete{opacity:1}
+.goal-dragging{opacity:.4}
+.goal-drag-over{background:#eeedfe !important;box-shadow:inset 0 2px 0 #534ab7}
+@media(prefers-color-scheme:dark){.goal-drag-over{background:#3c3489 !important}} </style>
 </head>
-<body><header><h1><i class="ti ti-table" aria-hidden="true" style="font-size:19px"></i> Product Priority Planning Board</h1><div class="header-actions"><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Changes are shared with your team in real time"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);display:inline-block;transition:background .3s"></span><span id="sync-label">Live</span></div><div class="settings-wrap"><button class="btn sm" onclick="toggleSettings()"><i class="ti ti-settings" aria-hidden="true"></i> Jira</button><div class="settings-pop" id="settings-pop"><div style="font-size:18px;font-weight:600;margin-bottom:10px;color:var(--text)">Jira settings</div><div class="form-group" style="margin-bottom:10px"><label>Base URL</label><input type="text" id="jira-url" placeholder="https://dlapiperuk.atlassian.net" style="font-size:18px;padding:5px 7px" /></div><button class="btn sm primary" onclick="saveJiraSettings()">Save</button><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px">Bookmarklet</div><div style="font-size:18px;color:var(--text3);margin-bottom:8px">Drag this to your bookmarks bar. Click it on any Jira ticket to push it straight into this board.</div><a id="bookmarklet-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:#eeedfe;color:#26215c;border:1px solid #534ab7;border-radius:5px;font-size:19px;font-weight:600;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bookmark" style="font-size:19px"></i> Send to Board </a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the code</button> and create a bookmark manually.</div><div id="bookmarklet-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div><div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.1)"><div style="font-size:18px;color:var(--text3);margin-bottom:6px">Not picking up all fields? Drag this debug bookmarklet to your bookmarks bar and click it on a Jira ticket to see exactly what the scraper finds:</div><a id="bookmarklet-debug-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:var(--surface2);color:var(--text2);border:1px solid var(--border-strong);border-radius:5px;font-size:19px;font-weight:500;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bug" style="font-size:19px"></i> Debug Jira Fields</a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyDebugBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the debug code</button> and save it as a bookmark manually.</div><div id="bookmarklet-debug-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div></div></div></div></div><button class="btn primary" id="btn-add-theme" onclick="openThemeModal()"><i class="ti ti-plus" aria-hidden="true"></i> Add theme</button><button class="btn primary" id="btn-add-ticket" onclick="openTicketModal()" style="display:none"><i class="ti ti-plus" aria-hidden="true"></i> Add ticket</button></div></header><nav class="tabs"><button class="tab-btn active" id="tab-plan" onclick="switchTab('plan')"><i class="ti ti-layout-grid" aria-hidden="true"></i> Before 1 Jan 2026 <span class="tab-count" id="tc-plan">0</span></button><button class="tab-btn" id="tab-nfy" onclick="switchTab('nfy')"><i class="ti ti-calendar-stats" aria-hidden="true"></i> Next financial year <span class="tab-count" id="tc-nfy">0</span></button><button class="tab-btn" id="tab-progress" onclick="switchTab('progress')"><i class="ti ti-loader" aria-hidden="true"></i> In progress <span class="tab-count" id="tc-progress">0</span></button></nav><div class="panel active" id="panel-plan"><div class="sprint-nav" id="nav-plan"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-plan"><div class="timeline-grid" id="tl-plan"></div></div><div class="grid-resizer" id="resizer-plan" style="display:none" onmousedown="startResize(event,'plan')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-plan" class="side-detail"></div></div></div><div class="panel" id="panel-nfy"><div class="sprint-nav" id="nav-nfy"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-nfy"><div class="timeline-grid" id="tl-nfy"></div></div><div class="grid-resizer" id="resizer-nfy" style="display:none" onmousedown="startResize(event,'nfy')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-nfy" class="side-detail"></div></div></div><div class="panel" id="panel-progress"><div class="progress-wrap"><div class="progress-board" id="progress-board"></div></div></div><!-- Theme Modal --><div class="modal-overlay" id="theme-modal" onclick="if(event.target===this)closeThemeModal()"><div class="modal"><h2><span id="theme-modal-title">Add theme</span><button class="icon-btn" onclick="closeThemeModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div class="form-group"><label>Theme / goal title</label><input type="text" id="th-title" placeholder="e.g. Migrate reporting pipeline" /></div><div class="form-group"><label>Description (optional)</label><textarea id="th-desc" placeholder="What does success look like?"></textarea></div><div class="form-row-3"><div class="form-group"><label>Owner</label><select id="th-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option></select></div><div class="form-group"><label>Start sprint</label><select id="th-start"></select></div><div class="form-group"><label>End sprint</label><select id="th-end"></select></div></div><div class="form-row"><div class="form-group"><label>Priority</label><select id="th-priority"><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></div><div class="form-group"><label>Status</label><select id="th-color"><option value="todo">To do</option><option value="wip">Work in Progress</option><option value="done">Done</option></select></div></div><div class="modal-footer"><button class="btn" onclick="closeThemeModal()">Cancel</button><button class="btn primary" onclick="saveTheme()">Save theme</button></div></div></div><!-- Ticket Modal --><div class="modal-overlay" id="ticket-modal" onclick="if(event.target===this)closeTicketModal()"><div class="modal" style="max-width:900px"><h2><span id="ticket-modal-title">Add ticket</span><button class="icon-btn" onclick="closeTicketModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px"><div><div class="form-group"><label>Jira key</label><input type="text" id="tk-jira" placeholder="ISB-1234" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()" /><div id="jira-fetch-status" style="font-size:18px;margin-top:4px;min-height:14px"></div></div><div class="form-group"><label>Ticket title</label><input type="text" id="tk-title" placeholder="Task summary" /></div><div class="form-row"><div class="form-group"><label>Status</label><input type="text" id="tk-status" placeholder="e.g. In Progress" readonly style="background:var(--surface2);cursor:default" /></div><div class="form-group"><label>Story points</label><input type="number" id="tk-points" placeholder="—" min="0" /></div></div><div class="form-group"><label>Status labels</label><div class="multi-select" id="tk-labels-wrap"><div class="ms-trigger" onclick="toggleMultiSelect('tk-labels-wrap')"><span class="ms-display" id="tk-labels-display">Select labels…</span><i class="ti ti-chevron-down" style="font-size:13px;color:var(--text3);flex-shrink:0"></i></div><div class="ms-dropdown" id="tk-labels-dropdown">
+<body><header><h1><i class="ti ti-table" aria-hidden="true" style="font-size:19px"></i> Product Priority Planning Board</h1><div class="header-actions"><div id="header-user-chip" style="display:flex;align-items:center;gap:6px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2);cursor:pointer" onclick="switchUser()" title="Switch user"><span id="header-user-dot" style="width:8px;height:8px;border-radius:50%;background:var(--text3);display:inline-block;flex-shrink:0"></span><span style="font-size:12px;font-weight:600;color:var(--text2)" id="header-user-name">—</span></div><div id="online-presence" style="display:flex;align-items:center;gap:4px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Who's online now"></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Last saved"><span id="last-updated-label" style="color:var(--text3)">—</span></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Changes are shared with your team in real time"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);display:inline-block;transition:background .3s"></span><span id="sync-label">Live</span></div><div class="settings-wrap"><button class="btn sm" onclick="toggleSettings()"><i class="ti ti-settings" aria-hidden="true"></i> Jira</button><div class="settings-pop" id="settings-pop"><div style="font-size:18px;font-weight:600;margin-bottom:10px;color:var(--text)">Jira settings</div><div class="form-group" style="margin-bottom:10px"><label>Base URL</label><input type="text" id="jira-url" placeholder="https://dlapiperuk.atlassian.net" style="font-size:18px;padding:5px 7px" /></div><button class="btn sm primary" onclick="saveJiraSettings()">Save</button><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Signed in as</div><div style="display:flex;align-items:center;justify-content:space-between"><span id="current-user-label" style="font-size:13px;color:var(--text2)"></span><button class="btn sm" onclick="switchUser()" style="font-size:12px;padding:3px 8px">Switch</button></div></div><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px">Bookmarklet</div><div style="font-size:18px;color:var(--text3);margin-bottom:8px">Drag this to your bookmarks bar. Click it on any Jira ticket to push it straight into this board.</div><a id="bookmarklet-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:#eeedfe;color:#26215c;border:1px solid #534ab7;border-radius:5px;font-size:19px;font-weight:600;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bookmark" style="font-size:19px"></i> Send to Board </a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the code</button> and create a bookmark manually.</div><div id="bookmarklet-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div><div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.1)"><div style="font-size:18px;color:var(--text3);margin-bottom:6px">Not picking up all fields? Drag this debug bookmarklet to your bookmarks bar and click it on a Jira ticket to see exactly what the scraper finds:</div><a id="bookmarklet-debug-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:var(--surface2);color:var(--text2);border:1px solid var(--border-strong);border-radius:5px;font-size:19px;font-weight:500;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bug" style="font-size:19px"></i> Debug Jira Fields</a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyDebugBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the debug code</button> and save it as a bookmark manually.</div><div id="bookmarklet-debug-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div></div></div></div></div><button class="btn sm" onclick="openArchiveModal()" title="Manage past sprints"><i class="ti ti-archive" aria-hidden="true"></i> Archive</button><button class="btn primary" id="btn-add-theme" onclick="openThemeModal()"><i class="ti ti-plus" aria-hidden="true"></i> Add theme</button><button class="btn primary" id="btn-add-ticket" onclick="openTicketModal()" style="display:none"><i class="ti ti-plus" aria-hidden="true"></i> Add ticket</button></div></header><nav class="tabs"><button class="tab-btn active" id="tab-plan" onclick="switchTab('plan')"><i class="ti ti-layout-grid" aria-hidden="true"></i> Before 1 Jan 2026 <span class="tab-count" id="tc-plan">0</span></button><button class="tab-btn" id="tab-progress" onclick="switchTab('progress')"><i class="ti ti-loader" aria-hidden="true"></i> Progress <span class="tab-count" id="tc-progress">0</span></button><button class="tab-btn" id="tab-nfy" onclick="switchTab('nfy')"><i class="ti ti-calendar-stats" aria-hidden="true"></i> Next Financial Year <span class="tab-count" id="tc-nfy">0</span></button></nav><div class="panel active" id="panel-plan"><div class="sprint-nav" id="nav-plan"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-plan"><div class="timeline-grid" id="tl-plan"></div></div><div class="grid-resizer" id="resizer-plan" style="display:none" onmousedown="startResize(event,'plan')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-plan" class="side-detail"></div></div></div><div class="panel" id="panel-nfy"><div class="sprint-nav" id="nav-nfy"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-nfy"><div class="timeline-grid" id="tl-nfy"></div></div><div class="grid-resizer" id="resizer-nfy" style="display:none" onmousedown="startResize(event,'nfy')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-nfy" class="side-detail"></div></div></div><div class="panel" id="panel-progress"><div class="progress-wrap"><div class="progress-board" id="progress-board"></div></div></div><!-- Archive Modal -->
+<div class="modal-overlay" id="archive-modal" onclick="if(event.target===this)closeArchiveModal()">
+  <div class="modal" style="max-width:540px">
+    <h2><span><i class="ti ti-archive" style="font-size:18px;margin-right:6px"></i>Past sprints</span><button class="icon-btn" onclick="closeArchiveModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2>
+    <div style="font-size:13px;color:var(--text3);margin-bottom:14px">Sprints whose end date has passed. You can remove them and optionally delete their data.</div>
+    <div id="archive-list"></div>
+    <div class="modal-footer"><button class="btn" onclick="closeArchiveModal()">Close</button></div>
+  </div>
+</div>
+<!-- User Picker -->
+<div class="modal-overlay" id="user-picker" style="z-index:300;background:rgba(0,0,0,.55)">
+  <div class="modal" style="max-width:380px;text-align:center">
+    <div style="font-size:22px;font-weight:600;margin-bottom:6px;color:var(--text)">Who are you?</div>
+    <div style="font-size:14px;color:var(--text3);margin-bottom:20px">We'll remember your choice on this device</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="user-picker-btns"></div>
+  </div>
+</div>
+<!-- Theme Modal --><div class="modal-overlay" id="theme-modal" onclick="if(event.target===this)closeThemeModal()"><div class="modal"><h2><span id="theme-modal-title">Add theme</span><button class="icon-btn" onclick="closeThemeModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div class="form-group"><label>Theme / goal title</label><input type="text" id="th-title" placeholder="e.g. Migrate reporting pipeline" /></div><div class="form-group"><label>Description (optional)</label><textarea id="th-desc" placeholder="What does success look like?"></textarea></div><div class="form-group"><label>Owner</label><select id="th-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option><option value="unknown">Unknown</option></select></div><div class="form-row" id="th-sprint-row"><div class="form-group"><label>Start sprint</label><select id="th-start"></select></div><div class="form-group"><label>End sprint</label><select id="th-end"></select></div></div><div class="form-row"><div class="form-group"><label>Priority</label><select id="th-priority"><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></div><div class="form-group"><label>Status</label><select id="th-color"><option value="todo">To do</option><option value="wip">Work in Progress</option><option value="done">Done</option></select></div></div><div class="modal-footer"><button class="btn" onclick="closeThemeModal()">Cancel</button><button class="btn primary" onclick="saveTheme()">Save theme</button></div></div></div><!-- Ticket Modal --><div class="modal-overlay" id="ticket-modal" onclick="if(event.target===this)closeTicketModal()"><div class="modal" style="max-width:900px"><h2><span id="ticket-modal-title">Add ticket</span><button class="icon-btn" onclick="closeTicketModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px"><div><div class="form-group"><label>Jira key</label><input type="text" id="tk-jira" placeholder="ISB-1234" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()" /><div id="jira-fetch-status" style="font-size:18px;margin-top:4px;min-height:14px"></div></div><div class="form-group"><label>Ticket title</label><input type="text" id="tk-title" placeholder="Task summary" /></div><div class="form-row"><div class="form-group"><label>Status</label><input type="text" id="tk-status" placeholder="e.g. In Progress" readonly style="background:var(--surface2);cursor:default" /></div><div class="form-group"><label>Story points</label><input type="number" id="tk-points" placeholder="—" min="0" /></div></div><div class="form-group"><label>Status labels</label><div class="multi-select" id="tk-labels-wrap"><div class="ms-trigger" onclick="toggleMultiSelect('tk-labels-wrap')"><span class="ms-display" id="tk-labels-display">Select labels…</span><i class="ti ti-chevron-down" style="font-size:13px;color:var(--text3);flex-shrink:0"></i></div><div class="ms-dropdown" id="tk-labels-dropdown">
 <div style="padding:6px 12px 4px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3)">Status</div>
 <label class="ms-option"><input type="checkbox" value="Ticket Creation" onchange="onStatusLabelChange(this)"> Ticket Creation</label>
 <label class="ms-option"><input type="checkbox" value="Ready To Refine" onchange="onStatusLabelChange(this)"> Ready To Refine</label>
@@ -16,7 +72,7 @@
 <label class="ms-option" id="ref-opt-1"><input type="checkbox" value="Refinement Session 1" onchange="onRefinementLabelChange(this)" disabled> Refinement Session 1</label>
 <label class="ms-option" id="ref-opt-2"><input type="checkbox" value="Refinement Session 2" onchange="onRefinementLabelChange(this)" disabled> Refinement Session 2</label>
 <label class="ms-option" id="ref-opt-3"><input type="checkbox" value="Refinement Session 3" onchange="onRefinementLabelChange(this)" disabled> Refinement Session 3</label>
-</div></div><input type="hidden" id="tk-labels" /></div></div><div><div class="form-row"><div class="form-group"><label>Category</label><select id="tk-cat"><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><div class="form-group"><label>Owner</label><select id="tk-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option></select></div></div><div class="form-group"><label>Sprint</label><select id="tk-sprint"></select></div><div class="form-group"><label>Theme (optional)</label><div class="theme-search-wrap" id="tk-theme-wrap" style="position:relative"><input type="text" id="tk-theme-input" placeholder="Search themes…" autocomplete="off" oninput="filterThemeDropdown()" onfocus="openThemeDropdown()" style="width:100%" /><div id="tk-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:180px;overflow-y:auto"></div><input type="hidden" id="tk-theme" /></div></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-goal" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🎯 This is a goal ticket</span></label></div><div class="form-group"><label>Comments</label><textarea id="tk-comments" placeholder="Add notes or comments…" style="min-height:100px"></textarea></div></div></div><div class="modal-footer"><button class="btn" onclick="closeTicketModal()">Cancel</button><button class="btn primary" onclick="saveTicket()">Save ticket</button></div></div></div><script>
+</div></div><input type="hidden" id="tk-labels" /></div></div><div><div class="form-row"><div class="form-group"><label>Category</label><select id="tk-cat"><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><div class="form-group"><label>Owner</label><select id="tk-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option></select></div></div><div class="form-group"><label>Sprint</label><select id="tk-sprint"></select></div><div class="form-group"><label>Theme (optional)</label><div class="theme-search-wrap" id="tk-theme-wrap" style="position:relative"><input type="text" id="tk-theme-input" placeholder="Search themes…" autocomplete="off" oninput="filterThemeDropdown()" onfocus="openThemeDropdown()" style="width:100%" /><div id="tk-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:180px;overflow-y:auto"></div><input type="hidden" id="tk-theme" /></div></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-goal" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🎯 This is a goal ticket</span></label></div><div class="form-group"><label>Comments</label><textarea id="tk-comments" placeholder="Add notes or comments…" style="min-height:100px"></textarea></div></div></div><div class="modal-footer"><button class="btn" onclick="closeTicketModal()">Cancel</button><button class="btn primary" onclick="saveTicket()">Save ticket</button></div></div></div><script>
 // ── SUPABASE COLLABORATIVE STORAGE ──
 const SB_URL = 'https://osrlxmkpljcfobunulot.supabase.co';
 const SB_KEY = 'sb_publishable_3jXCj52EKTGKhbQbgYeS4A_JkkSNtUX';
@@ -30,7 +86,9 @@ const SB_HEADERS = {
 let themes  = [];
 let tickets = [];
 let capData = {};
+let goalsData = {}; // { sprintId: [{id, text}] }
 let jiraUrl = 'https://dlapiperuk.atlassian.net';
+let currentUser = localStorage.getItem('pb_user') || null;
 let editingThemeId = null, editingTicketId = null;
 let selectedSprint = { plan: null, nfy: null };
 let activeTab = 'plan';
@@ -62,15 +120,21 @@ async function loadData() {
     ]);
     const newThemes  = thRows.map(r => r.data);
     const newTickets = tkRows.map(r => r.data);
-    const newCap  = JSON.parse(metaRows.find(r=>r.key==='cap')?.value  || '{}');
-    const newJira = metaRows.find(r=>r.key==='jira')?.value || 'https://dlapiperuk.atlassian.net';
-    const hash = JSON.stringify([newThemes, newTickets, newCap, newJira]);
+    const newCap   = JSON.parse(metaRows.find(r=>r.key==='cap')?.value   || '{}');
+    const newGoals = JSON.parse(metaRows.find(r=>r.key==='goals')?.value || '{}');
+    const newJira  = metaRows.find(r=>r.key==='jira')?.value || 'https://dlapiperuk.atlassian.net';
+    const lastUpdatedRaw = metaRows.find(r=>r.key==='last_updated')?.value;
+    if(lastUpdatedRaw){ try{ const lu=JSON.parse(lastUpdatedRaw); updateLastUpdatedHeader(lu.by,lu.ts); }catch(e){} }
+    const hash = JSON.stringify([newThemes, newTickets, newCap, newGoals, newJira]);
     if (hash !== _lastHash) {
       _lastHash = hash;
-      themes = newThemes; tickets = newTickets; capData = newCap; jiraUrl = newJira;
+      themes = newThemes; tickets = newTickets; capData = newCap; goalsData = newGoals; jiraUrl = newJira;
       const ju = document.getElementById('jira-url');
       if (ju) ju.value = jiraUrl;
-      render();
+      // Don't re-render if user is actively editing a goal
+      if(!document.activeElement || !document.activeElement.classList.contains('goal-text')){
+        render();
+      }
     }
   } catch(e) { console.error('Load failed', e); setSyncBadge(false); }
 }
@@ -97,10 +161,142 @@ async function save() {
   } catch(e) { console.error('Save failed', e); setSyncBadge(false); }
 }
 
+/* ── SPRINT DATE UTILS ── */
+function sprintStatus(s) {
+  // Returns 'current', 'next', 'past', or 'future'
+  const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+  const today = new Date(); today.setHours(0,0,0,0);
+  const idx = allSprints.findIndex(x => x.id === s.id);
+  const endDate = new Date(s.end); endDate.setHours(23,59,59,999);
+  // find current sprint = first sprint whose end >= today
+  const currentIdx = allSprints.findIndex(x => new Date(x.end) >= today);
+  if(idx === currentIdx) return 'current';
+  if(idx === currentIdx + 1) return 'next';
+  if(endDate < today) return 'past';
+  return 'future';
+}
+function pastSprints() {
+  const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+  const today = new Date(); today.setHours(0,0,0,0);
+  return allSprints.filter(s => new Date(s.end) < today);
+}
+
+/* ── ARCHIVE MODAL ── */
+function openArchiveModal() {
+  const past = pastSprints();
+  const modal = document.getElementById('archive-modal');
+  const list  = document.getElementById('archive-list');
+  if(!past.length) {
+    list.innerHTML = '<div style="color:var(--text3);font-size:13px;padding:8px 0">No past sprints found.</div>';
+  } else {
+    list.innerHTML = past.map(s => {
+      const themeCount  = themes.filter(t => t.startSprint===s.id||t.endSprint===s.id).length;
+      const ticketCount = tickets.filter(t => t.sprint===s.id).length;
+      const hasData = themeCount + ticketCount > 0;
+      return `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+        <div>
+          <span style="font-size:13px;font-weight:600;color:var(--text)">Sprint ${s.num}</span>
+          <span style="font-size:12px;color:var(--text3);margin-left:6px">${esc(s.label)}</span>
+          ${hasData ? `<span style="font-size:11px;color:var(--text3);margin-left:6px">${themeCount} theme${themeCount!==1?'s':''}, ${ticketCount} ticket${ticketCount!==1?'s':''}</span>` : '<span style="font-size:11px;color:#1d9e75;margin-left:6px">empty</span>'}
+        </div>
+        <button class="btn sm" style="${hasData?'color:#e24b4a;border-color:#e24b4a;':'color:var(--text3);'}" onclick="archiveSprint('${s.id}',${hasData})">${hasData?'Delete data &amp; remove':'Remove'}</button>
+      </div>`;
+    }).join('');
+  }
+  modal.classList.add('open');
+}
+function closeArchiveModal() { document.getElementById('archive-modal').classList.remove('open'); }
+async function archiveSprint(sid, hasData) {
+  if(hasData && !confirm(`Delete all themes and tickets for this sprint? This cannot be undone.`)) return;
+  // Delete associated tickets
+  const toDeleteTickets = tickets.filter(t => t.sprint===sid);
+  for(const t of toDeleteTickets) await deleteOne('ticket', t.id);
+  tickets = tickets.filter(t => t.sprint!==sid);
+  // Remove sprint from themes (if it's the only sprint, delete theme; else clamp)
+  const toDeleteThemes = themes.filter(t => t.startSprint===sid && t.endSprint===sid);
+  for(const t of toDeleteThemes) await deleteOne('theme', t.id);
+  themes = themes.filter(t => !(t.startSprint===sid && t.endSprint===sid));
+  render();
+  openArchiveModal(); // refresh list
+}
+const PRESENCE_TTL = 90000; // 90s — gone if no ping in this window
+async function heartbeat(){
+  if(!currentUser) return;
+  try {
+    await sbUpsert('pb_meta', {key:'presence_'+currentUser, value: new Date().toISOString()});
+  } catch(e) {}
+}
+async function loadPresence(){
+  try {
+    const rows = await sbGet('pb_meta');
+    const now = Date.now();
+    const online = [];
+    rows.forEach(r => {
+      if(!r.key.startsWith('presence_')) return;
+      const userId = r.key.replace('presence_','');
+      const ts = new Date(r.value).getTime();
+      if(now - ts < PRESENCE_TTL) online.push(userId);
+    });
+    renderPresence(online);
+  } catch(e) {}
+}
+function renderPresence(online){
+  const el = document.getElementById('online-presence');
+  if(!el) return;
+  // Only show others (not yourself), but include yourself with a "you" marker
+  const others = online.filter(id => id !== currentUser);
+  const all = currentUser && online.includes(currentUser)
+    ? [currentUser, ...others]
+    : others;
+  if(all.length === 0){ el.style.display='none'; return; }
+  el.style.display='flex';
+  let html = '<span style="font-size:11px;font-weight:500;color:var(--text3);margin-right:2px">Online:</span>';
+  all.forEach(id => {
+    const o = OWNERS.find(x=>x.id===id);
+    if(!o) return;
+    const isMe = id === currentUser;
+    const title = isMe ? `${o.label} (you)` : o.label;
+    html += `<div style="display:flex;align-items:center;gap:3px;" title="${title}">
+      <span style="width:8px;height:8px;border-radius:50%;background:${o.barBg};display:inline-block;${isMe?'box-shadow:0 0 0 2px #534ab7':''}"></span>
+      <span style="font-size:11px;font-weight:${isMe?'700':'500'};color:${isMe?'var(--text)':'var(--text2)'}">${o.label}${isMe?' ✓':''}</span>
+    </div>`;
+  });
+  el.innerHTML = html;
+}
+async function leavePresence(){
+  if(!currentUser) return;
+  try { await sbDelete('pb_meta','presence_'+currentUser); } catch(e) {}
+}
+function updateLastUpdatedHeader(by, ts){
+  const el = document.getElementById('last-updated-label');
+  if(!el) return;
+  el.dataset.by = by;
+  el.dataset.ts = ts;
+  const o = OWNERS.find(x=>x.id===by);
+  const name = o ? o.label : by;
+  const d = new Date(ts);
+  const now = new Date();
+  const diffMs = now - d;
+  const diffMins = Math.floor(diffMs / 60000);
+  let timeStr;
+  if(diffMins < 1) timeStr = 'just now';
+  else if(diffMins < 60) timeStr = `${diffMins}m ago`;
+  else if(diffMins < 1440) timeStr = `${Math.floor(diffMins/60)}h ago`;
+  else timeStr = d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+  el.textContent = `Last updated by ${name} · ${timeStr}`;
+}
+async function saveLastUpdated(){
+  const record = {by: currentUser, ts: new Date().toISOString()};
+  try {
+    await sbUpsert('pb_meta', {key:'last_updated', value: JSON.stringify(record)});
+    updateLastUpdatedHeader(record.by, record.ts);
+  } catch(e) { /* silent */ }
+}
 async function saveOne(type, item) {
   try {
     await sbUpsert(type==='theme' ? 'pb_themes' : 'pb_tickets', {id: item.id, data: item});
     setSyncBadge(true);
+    saveLastUpdated();
   } catch(e) { console.error('Save failed', e); setSyncBadge(false); }
 }
 
@@ -115,6 +311,13 @@ async function saveCapData() {
   try {
     await sbUpsert('pb_meta', {key:'cap', value: JSON.stringify(capData)});
   } catch(e) { console.error('Save cap failed', e); }
+}
+
+async function saveGoalsData() {
+  try {
+    await sbUpsert('pb_meta', {key:'goals', value: JSON.stringify(goalsData)});
+    setSyncBadge(true);
+  } catch(e) { console.error('Save goals failed', e); setSyncBadge(false); }
 }
 
 async function saveJiraUrlShared(url) {
@@ -133,7 +336,9 @@ const OWNERS = [
   {id:'george',label:'George',color:'var(--george-color)',bg:'var(--george-bg)',bg2:'var(--george-bg2)',head:'var(--george-head)',textColor:'#172b4d',barBg:'#B3D4FF',barText:'#172b4d'},
   {id:'jemma', label:'Jemma', color:'var(--jemma-color)', bg:'var(--jemma-bg)', bg2:'var(--jemma-bg2)', head:'var(--jemma-head)', textColor:'#172b4d', barBg:'#998DD9',barText:'#172b4d'},
   {id:'sam',   label:'Sam',   color:'var(--sam-color)',   bg:'var(--sam-bg)',   bg2:'var(--sam-bg2)',   head:'var(--sam-head)',   textColor:'#172b4d', barBg:'#79F2C0',barText:'#172b4d'},
-  {id:'chris', label:'Chris', color:'var(--chris-color)', bg:'var(--chris-bg)', bg2:'var(--chris-bg2)', head:'var(--chris-head)', textColor:'#172b4d', barBg:'#FFE380',barText:'#172b4d'}
+  {id:'chris', label:'Chris', color:'var(--chris-color)', bg:'var(--chris-bg)', bg2:'var(--chris-bg2)', head:'var(--chris-head)', textColor:'#172b4d', barBg:'#227D9B',barText:'#ffffff'},
+  {id:'claire',label:'Claire',color:'var(--claire-color)',bg:'var(--claire-bg)',bg2:'var(--claire-bg2)',head:'var(--claire-head)',textColor:'#172b4d',barBg:'#FFE380',barText:'#172b4d'},
+  {id:'lorna', label:'Lorna', color:'var(--lorna-color)', bg:'var(--lorna-bg)', bg2:'var(--lorna-bg2)', head:'var(--lorna-head)', textColor:'#172b4d', barBg:'#F9A8D4', barText:'#172b4d'}
 ];
 const THEME_COLORS = {
   todo: {bg:null,text:null,dbg:null,dt:null,label:'To do'},
@@ -141,35 +346,37 @@ const THEME_COLORS = {
   done: {bg:'#9fe1cb',text:'#04342c',dbg:'#085041',dt:'#e1f5ee',label:'Done'}
 };
 const PLAN_SPRINTS = [
-  {id:'s104',num:104,label:'11 Jun–24 Jun'},
-  {id:'s105',num:105,label:'25 Jun–7 Jul'},{id:'s106',num:106,label:'9 Jul–21 Jul'},
-  {id:'s107',num:107,label:'23 Jul–4 Aug'},{id:'s108',num:108,label:'6 Aug–18 Aug'},
-  {id:'s109',num:109,label:'20 Aug–1 Sep'},{id:'s110',num:110,label:'3 Sep–15 Sep'},
-  {id:'s111',num:111,label:'17 Sep–29 Sep'},{id:'s112',num:112,label:'1 Oct–13 Oct'},
-  {id:'s113',num:113,label:'15 Oct–27 Oct'},{id:'s114',num:114,label:'29 Oct–10 Nov'},
-  {id:'s115',num:115,label:'12 Nov–24 Nov'},{id:'s116',num:116,label:'26 Nov–8 Dec'},
-  {id:'s117',num:117,label:'10 Dec–22 Dec'},{id:'s118',num:118,label:'24 Dec–31 Dec'}
+  {id:'s104',num:104,label:'11 Jun–24 Jun',end:'2026-06-24'},
+  {id:'s105',num:105,label:'25 Jun–7 Jul',end:'2026-07-07'},{id:'s106',num:106,label:'9 Jul–21 Jul',end:'2026-07-21'},
+  {id:'s107',num:107,label:'23 Jul–4 Aug',end:'2026-08-04'},{id:'s108',num:108,label:'6 Aug–18 Aug',end:'2026-08-18'},
+  {id:'s109',num:109,label:'20 Aug–1 Sep',end:'2026-09-01'},{id:'s110',num:110,label:'3 Sep–15 Sep',end:'2026-09-15'},
+  {id:'s111',num:111,label:'17 Sep–29 Sep',end:'2026-09-29'},{id:'s112',num:112,label:'1 Oct–13 Oct',end:'2026-10-13'},
+  {id:'s113',num:113,label:'15 Oct–27 Oct',end:'2026-10-27'},{id:'s114',num:114,label:'29 Oct–10 Nov',end:'2026-11-10'},
+  {id:'s115',num:115,label:'12 Nov–24 Nov',end:'2026-11-24'},{id:'s116',num:116,label:'26 Nov–8 Dec',end:'2026-12-08'},
+  {id:'s117',num:117,label:'10 Dec–22 Dec',end:'2026-12-22'},{id:'s118',num:118,label:'24 Dec–31 Dec',end:'2026-12-31'}
 ];
 const NFY_SPRINTS = [
-  {id:'s119',num:119,label:'7 Jan–20 Jan'},{id:'s120',num:120,label:'21 Jan–3 Feb'},
-  {id:'s121',num:121,label:'4 Feb–17 Feb'},{id:'s122',num:122,label:'18 Feb–3 Mar'},
-  {id:'s123',num:123,label:'4 Mar–17 Mar'},{id:'s124',num:124,label:'18 Mar–31 Mar'},
-  {id:'s125',num:125,label:'1 Apr–14 Apr'},{id:'s126',num:126,label:'15 Apr–28 Apr'},
-  {id:'s127',num:127,label:'29 Apr–12 May'},{id:'s128',num:128,label:'13 May–26 May'},
-  {id:'s129',num:129,label:'27 May–9 Jun'},{id:'s130',num:130,label:'10 Jun–23 Jun'},
-  {id:'s131',num:131,label:'24 Jun–7 Jul'},{id:'s132',num:132,label:'8 Jul–21 Jul'},
-  {id:'s133',num:133,label:'22 Jul–4 Aug'},{id:'s134',num:134,label:'5 Aug–18 Aug'},
-  {id:'s135',num:135,label:'19 Aug–1 Sep'},{id:'s136',num:136,label:'2 Sep–15 Sep'},
-  {id:'s137',num:137,label:'16 Sep–29 Sep'},{id:'s138',num:138,label:'30 Sep–13 Oct'},
-  {id:'s139',num:139,label:'14 Oct–27 Oct'},{id:'s140',num:140,label:'28 Oct–10 Nov'},
-  {id:'s141',num:141,label:'11 Nov–24 Nov'},{id:'s142',num:142,label:'25 Nov–8 Dec'},
-  {id:'s143',num:143,label:'9 Dec–22 Dec'},{id:'s144',num:144,label:'23 Dec–31 Dec'}
+  {id:'s119',num:119,label:'7 Jan–20 Jan',end:'2027-01-20'},{id:'s120',num:120,label:'21 Jan–3 Feb',end:'2027-02-03'},
+  {id:'s121',num:121,label:'4 Feb–17 Feb',end:'2027-02-17'},{id:'s122',num:122,label:'18 Feb–3 Mar',end:'2027-03-03'},
+  {id:'s123',num:123,label:'4 Mar–17 Mar',end:'2027-03-17'},{id:'s124',num:124,label:'18 Mar–31 Mar',end:'2027-03-31'},
+  {id:'s125',num:125,label:'1 Apr–14 Apr',end:'2027-04-14'},{id:'s126',num:126,label:'15 Apr–28 Apr',end:'2027-04-28'},
+  {id:'s127',num:127,label:'29 Apr–12 May',end:'2027-05-12'},{id:'s128',num:128,label:'13 May–26 May',end:'2027-05-26'},
+  {id:'s129',num:129,label:'27 May–9 Jun',end:'2027-06-09'},{id:'s130',num:130,label:'10 Jun–23 Jun',end:'2027-06-23'},
+  {id:'s131',num:131,label:'24 Jun–7 Jul',end:'2027-07-07'},{id:'s132',num:132,label:'8 Jul–21 Jul',end:'2027-07-21'},
+  {id:'s133',num:133,label:'22 Jul–4 Aug',end:'2027-08-04'},{id:'s134',num:134,label:'5 Aug–18 Aug',end:'2027-08-18'},
+  {id:'s135',num:135,label:'19 Aug–1 Sep',end:'2027-09-01'},{id:'s136',num:136,label:'2 Sep–15 Sep',end:'2027-09-15'},
+  {id:'s137',num:137,label:'16 Sep–29 Sep',end:'2027-09-29'},{id:'s138',num:138,label:'30 Sep–13 Oct',end:'2027-10-13'},
+  {id:'s139',num:139,label:'14 Oct–27 Oct',end:'2027-10-27'},{id:'s140',num:140,label:'28 Oct–10 Nov',end:'2027-11-10'},
+  {id:'s141',num:141,label:'11 Nov–24 Nov',end:'2027-11-24'},{id:'s142',num:142,label:'25 Nov–8 Dec',end:'2027-12-08'},
+  {id:'s143',num:143,label:'9 Dec–22 Dec',end:'2027-12-22'},{id:'s144',num:144,label:'23 Dec–31 Dec',end:'2027-12-31'}
 ];
 const SUBCATS = [
   {id:'data',label:'Data'},
   {id:'webi',label:'Webi'},
   {id:'dashboard',label:'Dashboard'}
 ];
+// Owners shown in the timeline grid and sprint detail — excludes view-only members
+const TIMELINE_OWNERS = OWNERS.filter(o => o.id !== 'lorna');
 // save() defined above as async
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function isDark(){return window.matchMedia('(prefers-color-scheme:dark)').matches}
@@ -186,7 +393,7 @@ function updateCounts(){
   const planIds=new Set(PLAN_SPRINTS.map(s=>s.id)), nfyIds=new Set(NFY_SPRINTS.map(s=>s.id));
   document.getElementById('tc-plan').textContent = themes.filter(t=>planIds.has(t.startSprint)||planIds.has(t.endSprint)).length + tickets.filter(t=>planIds.has(t.sprint)).length;
   document.getElementById('tc-nfy').textContent  = themes.filter(t=>nfyIds.has(t.startSprint)||nfyIds.has(t.endSprint)).length + tickets.filter(t=>nfyIds.has(t.sprint)).length;
-  document.getElementById('tc-progress').textContent = tickets.filter(t=>t.sprint==='progress').length;
+  document.getElementById('tc-progress').textContent = themes.filter(t=>t.startSprint==='progress').length;
 }
 function navSprints(tabKey, dir){
   const all = tabKey==='plan' ? PLAN_SPRINTS : NFY_SPRINTS;
@@ -248,16 +455,47 @@ function renderTimeline(gridId, allSprints, tabKey){
   }
 
   let html = '';
-  html += `<div class="tl-corner"><span style="font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text3)">Themes</span></div>`;
+
+  // ── GOALS ROW SIZING — compute fixed height from max goals across visible sprints ──
+  const GOAL_LINE_H = 18; // px per goal line
+  const GOALS_PAD = 10;   // top+bottom padding
+  const maxGoals = Math.max(1, ...sprints.map(s => (goalsData[s.id]||[]).length));
+  const GOALS_ROW_H = Math.max(36, maxGoals * GOAL_LINE_H + GOALS_PAD);
+
+  // ── HEADER ROWS ──
+  // Row 1 col 1: corner with "Themes" above "Sprint" — same height as sprint heads
+  html += `<div class="tl-corner" style="grid-row:1;grid-column:1;align-self:stretch;flex-direction:column;align-items:center;justify-content:space-evenly;"><span style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3)">Themes</span><span style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3)">Sprint</span></div>`;
+  // Row 1: sprint header cells
   sprints.forEach(s => {
     const sel = selectedSprint[tabKey]===s.id ? ' selected':'';
-    html += `<div class="tl-sprint-head${sel}" onclick="selectSprint('${tabKey}','${s.id}')">
-      <div class="tl-sprint-num">${s.num}</div><div class="tl-sprint-dates">${esc(s.label)}</div></div>`;
+    const status = sprintStatus(s);
+    const badge = status==='current'
+      ? `<div style="position:absolute;bottom:3px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#1d9e75;background:#eafbf4;border:1px solid #1d9e75;border-radius:3px;padding:0px 4px;white-space:nowrap;pointer-events:none">Current</div>`
+      : status==='next'
+      ? `<div style="position:absolute;bottom:3px;left:50%;transform:translateX(-50%);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#534ab7;background:#eeedfe;border:1px solid #534ab7;border-radius:3px;padding:0px 4px;white-space:nowrap;pointer-events:none">Next</div>`
+      : '';
+    html += `<div class="tl-sprint-head${sel}" style="grid-row:1;" onclick="selectSprint('${tabKey}','${s.id}')">
+      <div class="tl-sprint-num">${s.num}</div><div class="tl-sprint-dates">${esc(s.label)}</div>${badge}</div>`;
   });
 
-  OWNERS.forEach((o,oi) => {
-    const isLast = oi===OWNERS.length-1;
-    const rowNum = 2+oi;
+  // Row 2: Sprint goals label + data cells
+  const GOALS_ROW = 2;
+  html += `<div class="tl-goals-label-cell" style="grid-row:${GOALS_ROW};grid-column:1;height:${GOALS_ROW_H}px;box-sizing:border-box;">Sprint goals</div>`;
+  sprints.forEach((s, si) => {
+    const col = 2 + si;
+    const isLastCol = si === n - 1;
+    const sprintGoals = (goalsData[s.id] || []);
+    const goalsHtml = sprintGoals.length
+      ? sprintGoals.map((g, idx) => `<div class="tl-goal-pill"><span class="tl-goal-num">${idx+1}.</span><span class="tl-goal-text">${esc(g.text)}</span></div>`).join('')
+      : '';
+    const addBtn = `<div class="tl-goal-add" onclick="tlAddGoal(event,'${tabKey}','${s.id}')">+ add goal</div>`;
+    html += `<div class="tl-goals-cell" style="grid-row:${GOALS_ROW};grid-column:${col};height:${GOALS_ROW_H}px;box-sizing:border-box;${isLastCol?'border-right:none;':''}">${goalsHtml}${addBtn}</div>`;
+  });
+
+  // Owner rows start at row 3 now
+  TIMELINE_OWNERS.forEach((o,oi) => {
+    const isLast = oi===TIMELINE_OWNERS.length-1;
+    const rowNum = 3+oi;
 
     // Get themes visible for this owner in this window
     const ownerThemes = themes.filter(t => t.owner===o.id && clamp(t) !== null);
@@ -355,6 +593,77 @@ function renderTimeline(gridId, allSprints, tabKey){
       });
     });
   });
+
+  // ── UNKNOWN ROW (NFY only) ──
+  if(tabKey === 'nfy'){
+    const knownIds = new Set(TIMELINE_OWNERS.map(o=>o.id));
+    const unknownThemes = themes.filter(t => !knownIds.has(t.owner) && clamp(t) !== null);
+    const unknownRowNum = 3 + TIMELINE_OWNERS.length;
+    const unknownBg = 'var(--surface2)';
+    const unknownBg2 = 'var(--surface)';
+
+    const themeSlots = unknownThemes.map(th => ({ th, ...clamp(th) })).filter(Boolean);
+    const lanes = [];
+    themeSlots.forEach(slot => {
+      let placed = false;
+      for(let li=0;li<lanes.length;li++){
+        const lane = lanes[li];
+        if(lane[lane.length-1].visEnd < slot.visStart){ lane.push(slot); placed=true; break; }
+      }
+      if(!placed) lanes.push([slot]);
+      slot.laneIdx = lanes.findIndex(l => l.includes(slot));
+    });
+
+    const LANE_H = 26, LANE_GAP = 3, PAD = 4;
+    const addBtnTop = PAD + lanes.length * (LANE_H + LANE_GAP);
+    const rowH = Math.max(50, addBtnTop + 28 + PAD);
+
+    html += `<div class="tl-row-head" style="grid-row:${unknownRowNum};grid-column:1;background:${unknownBg};height:${rowH}px;box-sizing:border-box;border-bottom:none;">
+      <div class="owner-name" style="color:var(--text3);font-size:13px;font-weight:700;text-align:center;padding:0 4px;font-style:italic">Unknown</div></div>`;
+
+    sprints.forEach((s,si) => {
+      const col = 2+si;
+      const bgColor = si%2===0 ? unknownBg : unknownBg2;
+      const isLastCol = si===n-1;
+      html += `<div class="tl-cell" style="grid-row:${unknownRowNum};grid-column:${col};background:${bgColor};height:${rowH}px;box-sizing:border-box;border-bottom:none;${isLastCol?'border-right:none;':''}"></div>`;
+    });
+
+    sprints.forEach((s,si) => {
+      const col = 2+si;
+      html += `<div style="grid-row:${unknownRowNum};grid-column:${col};z-index:2;pointer-events:none;align-self:start;padding-top:${addBtnTop}px;padding-left:3px;padding-right:3px;">
+        <div class="empty-state tl-add-btn" style="font-size:11px;opacity:0.6;pointer-events:all;padding:3px 6px;color:var(--text2);border-color:rgba(0,0,0,0.2);" onclick="openThemeModal(null,'${s.id}','${s.id}')">+ add theme</div>
+      </div>`;
+    });
+
+    lanes.forEach((lane) => {
+      lane.forEach(slot => {
+        const { th, visStart, visEnd, truncLeft, truncRight } = slot;
+        const colStart = 2 + visStart;
+        const colEnd   = 2 + visEnd + 1;
+        const dark = isDark();
+        const bg  = th.color==='done' ? (dark ? '#085041' : '#2a9d7c') : '#b0b0b0';
+        const txt = th.color==='done' ? (dark ? '#e1f5ee' : '#fff') : '#fff';
+        const rLeft  = truncLeft  ? '0' : '4px';
+        const rRight = truncRight ? '0' : '4px';
+        const topOffset = PAD + slot.laneIdx * (LANE_H + LANE_GAP);
+        html += `<div style="grid-row:${unknownRowNum};grid-column:${colStart}/${colEnd};z-index:3;pointer-events:none;align-self:start;padding-top:${topOffset}px;padding-left:2px;padding-right:2px;">
+          <div class="theme-bar single" style="background:${bg};color:${txt};border-radius:${rLeft} ${rRight} ${rRight} ${rLeft};pointer-events:all;height:${LANE_H}px;display:flex;align-items:center;gap:4px;padding:0 7px;overflow:hidden;cursor:pointer;white-space:nowrap;"
+            title="${esc(th.title)}" onclick="editTheme('${th.id}')">
+            ${truncLeft ? `<span style="opacity:.6;font-size:10px;flex-shrink:0">◀</span>` : ''}
+            <span style="overflow:hidden;text-overflow:ellipsis;min-width:0;font-size:12px;font-weight:500">${esc(th.title)}</span>
+            ${th.color ? `<span style="font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px;background:rgba(0,0,0,0.14);flex-shrink:0;white-space:nowrap;margin-left:2px">${esc(THEME_COLORS[th.color]?.label||th.color)}</span>` : ''}
+            <span style="flex:1;min-width:4px"></span>
+            ${truncRight ? `<span style="opacity:.6;font-size:10px;flex-shrink:0">▶</span>` : ''}
+            <span class="bar-actions" style="flex-shrink:0;gap:1px">
+              <button class="icon-btn" style="color:${txt}" onclick="event.stopPropagation();editTheme('${th.id}')" aria-label="Edit"><i class="ti ti-edit"></i></button>
+              <button class="icon-btn delete" onclick="event.stopPropagation();deleteTheme('${th.id}')" aria-label="Delete"><i class="ti ti-trash"></i></button>
+            </span>
+          </div>
+        </div>`;
+      });
+    });
+  }
+
   grid.innerHTML = html;
 }
 function selectSprint(tabKey, sprintId){
@@ -377,15 +686,47 @@ function renderDetail(containerId, sprints, tabKey){
   let html = `<div class="detail-panel" style="border-radius:var(--radius);border:1px solid var(--border-strong);overflow:hidden"><div class="detail-header">
     <div class="detail-title"><i class="ti ti-subtask" style="font-size:19px"></i> Sprint ${sprint.num} tickets <span style="font-size:19px;color:var(--text3);font-weight:400">${esc(sprint.label)}</span></div>
     <button class="btn sm primary" onclick="openTicketModal(null,'${sid}')"><i class="ti ti-plus"></i> Add ticket</button>
-  </div>
-  <div class="detail-table">
+  </div>`;
+
+  // ── GOALS SECTION (top, under header) ──
+  const sprintGoals = goalsData[sid] || [];
+  html += `<div class="goals-section" id="goals-${sid}" style="border-radius:0;border:none;border-bottom:1px solid var(--border-strong)">
+    <div class="goals-header">
+      <div class="goals-title"><i class="ti ti-target" style="font-size:15px"></i> Sprint goals</div>
+      <button class="btn sm" onclick="addGoal('${sid}')"><i class="ti ti-plus"></i> Add goal</button>
+    </div>
+    <div class="goals-list" id="goals-list-${sid}">`;
+  if(sprintGoals.length === 0){
+    html += `<div class="goals-empty" onclick="addGoal('${sid}')">+ Add a sprint goal</div>`;
+  } else {
+    sprintGoals.forEach((g, idx) => {
+      html += `<div class="goal-item" id="goal-item-${g.id}" draggable="true"
+        ondragstart="goalDragStart(event,'${g.id}','${sid}')"
+        ondragover="goalDragOver(event)"
+        ondragleave="goalDragLeave(event)"
+        ondrop="goalDrop(event,'${g.id}','${sid}')"
+        ondragend="goalDragEnd(event)">
+        <div class="goal-drag-handle"><i class="ti ti-grip-vertical"></i></div>
+        <div class="goal-order">${idx + 1}</div>
+        <div class="goal-text" id="goal-text-${g.id}"
+          contenteditable="true"
+          onblur="saveGoalText('${sid}','${g.id}',this.innerText)"
+          onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}if(event.key==='Escape'){event.preventDefault();this.innerText=${JSON.stringify(g.text)};this.blur();}"
+          >${esc(g.text)}</div>
+        <button class="icon-btn delete goal-delete" onmousedown="event.preventDefault()" onclick="deleteGoal('${sid}','${g.id}')" aria-label="Delete goal"><i class="ti ti-trash"></i></button>
+      </div>`;
+    });
+  }
+  html += `</div></div>`;
+
+  html += `<div class="detail-table">
     <!-- COLUMN HEADERS: empty label cell + one per category -->
     <div class="dt-row-label"></div>`;
   SUBCATS.forEach(sc => {
     const n = sprintTickets.filter(t=>t.cat===sc.id).length;
     html += `<div class="dt-col-head">${sc.label}<span class="col-count">${n}</span></div>`;
   });
-  const activeOwners = OWNERS.filter(o => sprintTickets.some(t=>t.owner===o.id));
+  const activeOwners = TIMELINE_OWNERS.filter(o => sprintTickets.some(t=>t.owner===o.id));
   if(activeOwners.length === 0){
     html += `<div class="dt-row-label" style="color:var(--text3);font-style:italic">No tickets</div>`;
     SUBCATS.forEach(sc => {
@@ -394,7 +735,7 @@ function renderDetail(containerId, sprints, tabKey){
       </div>`;
     });
   } else {
-    OWNERS.forEach(o => {
+    TIMELINE_OWNERS.forEach(o => {
       const ownerSprintTickets = sprintTickets.filter(t=>t.owner===o.id);
       const hasSome = ownerSprintTickets.length > 0;
       if(!hasSome) return;
@@ -459,11 +800,77 @@ function renderDetail(containerId, sprints, tabKey){
     html += `<div class="df-cell" style="color:var(--text2)">${unpointed || '—'}</div>`;
   });
   html += `</div></div>`;
+
   container.innerHTML = html;
 }
 function setSprintCap(key, val){
   if(val===''||val===null){delete capData[key];}else{capData[key]=parseInt(val)||0;}
   saveCapData();
+  render();
+}
+
+/* ── GOALS ── */
+function tlAddGoal(e, tabKey, sid){
+  e.stopPropagation();
+  // Select the sprint to open the side panel, then add a goal
+  if(selectedSprint[tabKey] !== sid){ selectSprint(tabKey, sid); }
+  // Small delay to let render complete, then add goal
+  setTimeout(() => addGoal(sid), 50);
+}
+function addGoal(sid){
+  if(!goalsData[sid]) goalsData[sid] = [];
+  const newGoal = {id: Date.now().toString(), text: ''};
+  goalsData[sid].push(newGoal);
+  saveGoalsData();
+  render();
+  // Focus the new goal text after render
+  setTimeout(() => {
+    const el = document.getElementById('goal-text-' + newGoal.id);
+    if(el){ el.focus(); const r = document.createRange(); r.selectNodeContents(el); r.collapse(false); const s = window.getSelection(); s.removeAllRanges(); s.addRange(r); }
+  }, 50);
+}
+function saveGoalText(sid, goalId, text){
+  if(!goalsData[sid]) return;
+  const g = goalsData[sid].find(g=>g.id===goalId);
+  if(!g) return;
+  const trimmed = text.trim();
+  if(!trimmed){ deleteGoal(sid, goalId); return; }
+  if(g.text === trimmed) return; // no change, skip save + render
+  g.text = trimmed;
+  saveGoalsData();
+  render();
+}
+function deleteGoal(sid, goalId){
+  if(!goalsData[sid]) return;
+  goalsData[sid] = goalsData[sid].filter(g=>g.id!==goalId);
+  saveGoalsData();
+  render();
+}
+let _goalDragId = null, _goalDragSid = null;
+function goalDragStart(e, goalId, sid){
+  _goalDragId = goalId; _goalDragSid = sid;
+  e.dataTransfer.effectAllowed = 'move';
+  e.currentTarget.classList.add('goal-dragging');
+}
+function goalDragEnd(e){ e.currentTarget.classList.remove('goal-dragging'); }
+function goalDragOver(e){
+  e.preventDefault(); e.dataTransfer.dropEffect = 'move';
+  e.currentTarget.classList.add('goal-drag-over');
+}
+function goalDragLeave(e){ e.currentTarget.classList.remove('goal-drag-over'); }
+function goalDrop(e, targetId, sid){
+  e.preventDefault(); e.stopPropagation();
+  e.currentTarget.classList.remove('goal-drag-over');
+  if(!_goalDragId || _goalDragId === targetId || _goalDragSid !== sid) return;
+  const goals = goalsData[sid];
+  if(!goals) return;
+  const fromIdx = goals.findIndex(g=>g.id===_goalDragId);
+  const toIdx   = goals.findIndex(g=>g.id===targetId);
+  if(fromIdx === -1 || toIdx === -1) return;
+  const [moved] = goals.splice(fromIdx, 1);
+  goals.splice(toIdx, 0, moved);
+  goalsData[sid] = goals;
+  saveGoalsData();
   render();
 }
 function dropTicket(e, newCat, sprintId, el){
@@ -480,20 +887,43 @@ function dropTicket(e, newCat, sprintId, el){
 function renderProgress(){
   const board=document.getElementById('progress-board');
   let html='';
-  OWNERS.forEach(o=>{
-    const colTk=tickets.filter(t=>t.owner===o.id&&t.sprint==='progress');
+  TIMELINE_OWNERS.forEach(o=>{
+    const colItems=themes.filter(t=>t.startSprint==='progress'&&t.owner===o.id);
     const colId=`prog-${o.id}`;
-    const cards=colTk.length ? colTk.map(tk=>ticketCard(tk)).join('') : `<div class="empty-state">No tickets</div>`;
+    const cards=colItems.length
+      ? colItems.map(t=>progressCard(t)).join('') + `<button class="prog-add-btn" onclick="openThemeModal('${o.id}',null,null,true)"><i class="ti ti-plus"></i> Add item</button>`
+      : `<div class="empty-state" onclick="openThemeModal('${o.id}',null,null,true)">+ add item</div>`;
     html+=`<div class="progress-col"><div class="progress-col-head" style="background:${o.head}">
       <div class="progress-col-title"><div class="owner-avatar" style="background:rgba(255,255,255,.5);color:${o.textColor};width:28px;height:28px;font-size:18px">${o.label.charAt(0)}</div><span style="color:${o.textColor};font-weight:600">${esc(o.label)}</span></div>
-      <span style="font-size:18px;color:${o.textColor}">${colTk.length}</span></div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <span style="font-size:18px;color:${o.textColor}">${colItems.length}</span>
+        <button class="btn sm" style="background:rgba(255,255,255,0.25);border-color:rgba(255,255,255,0.4);color:${o.textColor}" onclick="openThemeModal('${o.id}',null,null,true)"><i class="ti ti-plus"></i></button>
+      </div></div>
       <div class="progress-col-body" id="${colId}" style="background:${o.bg}"
         ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')"
-        ondrop="event.preventDefault();this.classList.remove('drag-over');const id=event.dataTransfer.getData('text');if(id){tickets=tickets.map(t=>t.id===id?{...t,owner:'${o.id}',sprint:'progress'}:t);const mv=tickets.find(t=>t.id===id);if(mv)saveOne('ticket',mv);render()}">${cards}</div></div>`;
+        ondrop="event.preventDefault();this.classList.remove('drag-over');const id=event.dataTransfer.getData('text');if(id){themes=themes.map(t=>t.id===id?{...t,owner:'${o.id}',startSprint:'progress',endSprint:'progress'}:t);const mv=themes.find(t=>t.id===id);if(mv)saveOne('theme',mv);render()}">${cards}</div></div>`;
   });
   board.innerHTML=html;
 }
+function switchUser(){
+  document.getElementById('settings-pop').classList.remove('open');
+  document.getElementById('user-picker').classList.add('open');
+}
 function render(){
+  // Update signed-in label (settings panel)
+  const lbl = document.getElementById('current-user-label');
+  if(lbl){
+    const o = OWNERS.find(x=>x.id===currentUser);
+    lbl.textContent = o ? o.label : 'Not set';
+  }
+  // Update header user chip
+  const chipName = document.getElementById('header-user-name');
+  const chipDot  = document.getElementById('header-user-dot');
+  if(chipName && chipDot){
+    const o = OWNERS.find(x=>x.id===currentUser);
+    chipName.textContent = o ? o.label : 'Not set';
+    chipDot.style.background = o ? o.barBg : 'var(--text3)';
+  }
   renderTimeline('tl-plan',PLAN_SPRINTS,'plan');
   renderTimeline('tl-nfy',NFY_SPRINTS,'nfy');
   renderDetail('detail-plan',PLAN_SPRINTS,'plan');
@@ -561,6 +991,33 @@ function jiraLink(tk){
   const base = jiraUrl || 'https://dlapiperuk.atlassian.net';
   return `<a class="ticket-jira" href="${base}/browse/${tk.jira}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${esc(tk.jira)}</a>`;
 }
+function progressCard(t){
+  const o = OWNERS.find(x=>x.id===t.owner);
+  const bg  = o ? o.barBg  : 'var(--surface2)';
+  const txt = o ? o.barText : 'var(--text)';
+  const THEME_STATUS = {todo:'To do',wip:'Work in progress',done:'Done'};
+  const statusLabel = THEME_STATUS[t.color] || t.color || '';
+  const priorityLabel = {high:'High',medium:'Medium',low:'Low','must-do':'Must do',bau:'BAU'}[t.priority] || t.priority || '';
+  const statusBadge = statusLabel ? `<span style="font-size:11px;font-weight:500;padding:1px 6px;border-radius:3px;background:rgba(0,0,0,0.12);color:${txt};white-space:nowrap;flex-shrink:0">${esc(statusLabel)}</span>` : '';
+  const desc = t.desc ? `<div style="font-size:11px;color:${txt};opacity:.75;margin-top:3px;line-height:1.35;font-style:italic;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${esc(t.desc)}</div>` : '';
+  return `<div class="prog-card" id="card-${t.id}" draggable="true"
+    ondragstart="event.dataTransfer.setData('text','${t.id}');this.classList.add('dragging')"
+    ondragend="this.classList.remove('dragging')"
+    style="background:${bg};color:${txt};flex-direction:column;align-items:stretch;gap:4px;padding:8px 10px">
+    <div style="display:flex;align-items:center;gap:6px;justify-content:space-between">
+      <div style="display:flex;align-items:center;gap:5px;min-width:0">
+        <span class="priority-dot priority-${t.priority}" style="flex-shrink:0" title="${priorityLabel}"></span>
+        <span style="font-size:12px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(t.title)}</span>
+      </div>
+      <div class="ticket-actions" style="opacity:0;flex-shrink:0">
+        <button class="icon-btn" style="color:${txt}" onclick="editTheme('${t.id}')" aria-label="Edit"><i class="ti ti-edit"></i></button>
+        <button class="icon-btn delete" onclick="deleteTheme('${t.id}')" aria-label="Delete"><i class="ti ti-trash"></i></button>
+      </div>
+    </div>
+    ${desc}
+    <div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-top:2px">${statusBadge}</div>
+  </div>`;
+}
 function saveJiraSettings(){
   jiraUrl = document.getElementById('jira-url').value.replace(/\/$/,'') || 'https://dlapiperuk.atlassian.net';
   // jiraUrl saved via saveJiraUrlShared
@@ -574,37 +1031,52 @@ function popSprintOpts(selId, selected, includeProgress){
   let html=includeProgress?'<option value="progress">In progress</option>':'';
   html+=`<optgroup label="Before 1 Jan 2026">`;
   PLAN_SPRINTS.forEach(s=>{html+=`<option value="${s.id}"${s.id===selected?' selected':''}>Sprint ${s.num} (${s.label})</option>`});
-  html+=`</optgroup><optgroup label="Next financial year">`;
+  html+=`</optgroup><optgroup label="Next Financial Year">`;
   NFY_SPRINTS.forEach(s=>{html+=`<option value="${s.id}"${s.id===selected?' selected':''}>Sprint ${s.num} (${s.label})</option>`});
   html+=`</optgroup>`;
   sel.innerHTML=html;
 }
 /* ── THEME MODAL ── */
-function openThemeModal(owner,start,end){
+let _themeProgressMode = false;
+function openThemeModal(owner,start,end,progressMode){
   editingThemeId=null;
-  document.getElementById('theme-modal-title').textContent='Add theme';
+  _themeProgressMode = !!progressMode;
+  document.getElementById('theme-modal-title').textContent = progressMode ? 'Add progress item' : 'Add theme';
   document.getElementById('th-title').value='';
   document.getElementById('th-desc').value='';
-  document.getElementById('th-owner').value=owner||'george';
+  document.getElementById('th-owner').value=owner||(activeTab==='nfy'&&!owner ? 'unknown' : (currentUser||'george'));
   document.getElementById('th-priority').value='medium';
   document.getElementById('th-color').value='todo';
-  const defSprint=activeTab==='nfy'?'s119':'s105';
-  popSprintOpts('th-start',start||defSprint,false);
-  popSprintOpts('th-end',end||start||defSprint,false);
+  const sprintRow = document.getElementById('th-sprint-row');
+  if(progressMode){
+    sprintRow.style.display='none';
+  } else {
+    sprintRow.style.display='';
+    const defSprint=activeTab==='nfy'?'s119':'s105';
+    popSprintOpts('th-start',start||defSprint,false);
+    popSprintOpts('th-end',end||start||defSprint,false);
+  }
   document.getElementById('theme-modal').classList.add('open');
   setTimeout(()=>document.getElementById('th-title').focus(),50);
 }
 function editTheme(id){
   const t=themes.find(x=>x.id===id);if(!t)return;
   editingThemeId=id;
-  document.getElementById('theme-modal-title').textContent='Edit theme';
+  _themeProgressMode = (t.startSprint==='progress');
+  document.getElementById('theme-modal-title').textContent = _themeProgressMode ? 'Edit progress item' : 'Edit theme';
   document.getElementById('th-title').value=t.title;
   document.getElementById('th-desc').value=t.desc||'';
   document.getElementById('th-owner').value=t.owner;
   document.getElementById('th-priority').value=t.priority;
-  document.getElementById('th-color').value=t.color||'blue';
-  popSprintOpts('th-start',t.startSprint,false);
-  popSprintOpts('th-end',t.endSprint,false);
+  document.getElementById('th-color').value=t.color||'todo';
+  const sprintRow = document.getElementById('th-sprint-row');
+  if(_themeProgressMode){
+    sprintRow.style.display='none';
+  } else {
+    sprintRow.style.display='';
+    popSprintOpts('th-start',t.startSprint,false);
+    popSprintOpts('th-end',t.endSprint,false);
+  }
   document.getElementById('theme-modal').classList.add('open');
 }
 function deleteTheme(id){themes=themes.filter(t=>t.id!==id);deleteOne('theme',id);render()}
@@ -613,9 +1085,11 @@ function saveTheme(){
   const title=document.getElementById('th-title').value.trim();
   if(!title){document.getElementById('th-title').style.borderColor='#e24b4a';return}
   document.getElementById('th-title').style.borderColor='';
+  const startSprint = _themeProgressMode ? 'progress' : document.getElementById('th-start').value;
+  const endSprint   = _themeProgressMode ? 'progress' : document.getElementById('th-end').value;
   const obj={id:editingThemeId||Date.now().toString(),title,desc:document.getElementById('th-desc').value.trim(),
-    owner:document.getElementById('th-owner').value,startSprint:document.getElementById('th-start').value,
-    endSprint:document.getElementById('th-end').value,priority:document.getElementById('th-priority').value,
+    owner:document.getElementById('th-owner').value,startSprint,endSprint,
+    priority:document.getElementById('th-priority').value,
     color:document.getElementById('th-color').value};
   themes=editingThemeId?themes.map(t=>t.id===editingThemeId?obj:t):[...themes,obj];
   saveOne('theme',obj);closeThemeModal();render();
@@ -634,7 +1108,7 @@ function openTicketModal(owner,sprint,cat){
   document.getElementById('tk-goal').checked=false;
   document.getElementById('jira-fetch-status').textContent='';
   document.getElementById('tk-cat').value=cat||'data';
-  document.getElementById('tk-owner').value=owner||'george';
+  document.getElementById('tk-owner').value=owner||(currentUser||'george');
   const defSprint = sprint || selectedSprint[activeTab] || (activeTab==='nfy'?'s119':'s105');
   popSprintOpts('tk-sprint',defSprint,true);
   populateThemeSelect();
@@ -1075,8 +1549,37 @@ function updateResizer(tabKey) {
   if (!sid && gridWrap) { gridWrap.style.width = ''; gridWrap.style.flex = ''; }
 }
 // Init
+(function initUserPicker(){
+  const picker = document.getElementById('user-picker');
+  const btnsEl = document.getElementById('user-picker-btns');
+  OWNERS.forEach(o => {
+    const btn = document.createElement('button');
+    btn.className = 'btn';
+    btn.style.cssText = `background:${o.barBg};color:${o.barText};border-color:transparent;font-size:16px;padding:14px;justify-content:center;font-weight:600`;
+    btn.textContent = o.label;
+    btn.onclick = () => {
+      currentUser = o.id;
+      localStorage.setItem('pb_user', o.id);
+      picker.classList.remove('open');
+      heartbeat();
+      loadPresence();
+    };
+    btnsEl.appendChild(btn);
+  });
+  if(!currentUser) picker.classList.add('open');
+})();
 loadData();
 setInterval(loadData, 5000);
+setInterval(() => {
+  const el = document.getElementById('last-updated-label');
+  if(el && el.dataset.by) updateLastUpdatedHeader(el.dataset.by, el.dataset.ts);
+}, 60000);
+// Presence: heartbeat every 30s, poll every 10s
+heartbeat();
+setInterval(heartbeat, 30000);
+loadPresence();
+setInterval(loadPresence, 10000);
+window.addEventListener('beforeunload', leavePresence);
 window.addEventListener('resize', () => render());
 </script>
 </body>
