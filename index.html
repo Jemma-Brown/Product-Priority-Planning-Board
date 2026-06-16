@@ -766,10 +766,13 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeThemeModal();c
       if(p.get('status')) document.getElementById('tk-status').value = p.get('status');
       if(p.get('points')) document.getElementById('tk-points').value = p.get('points');
 
-      // Match reporter name to a board owner
+      // Match reporter name to a board owner (handles first name, full name, last name)
       const reporterRaw = (p.get('reporter') || '').toLowerCase().trim();
       if(reporterRaw){
-        const matched = OWNERS.find(o => reporterRaw.includes(o.label.toLowerCase()) || o.label.toLowerCase().includes(reporterRaw));
+        const matched = OWNERS.find(o => {
+          const lbl = o.label.toLowerCase();
+          return reporterRaw.includes(lbl) || lbl.includes(reporterRaw) || reporterRaw.startsWith(lbl) || reporterRaw.endsWith(lbl);
+        });
         if(matched) document.getElementById('tk-owner').value = matched.id;
       }
 
@@ -786,15 +789,30 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeThemeModal();c
         'refinementtwo':     'Refinement Session 2',
         'refinementthree':   'Refinement Session 3',
       };
+      // Map Jira labels to board category (data / webi / dashboard)
+      const CAT_MAP = {
+        'data':           'data',
+        'dataeng':        'data',
+        'dataengineering':'data',
+        'webi':           'webi',
+        'webintelligence':'webi',
+        'web-i':          'webi',
+        'dashboard':      'dashboard',
+        'dashboards':     'dashboard',
+        'dash':           'dashboard',
+      };
+      let detectedCat = null;
       rawLabels.forEach(function(l){
         const norm = l.replace(/[\s_-]/g,'').toLowerCase();
         if(LABEL_MAP[norm]) { if(!mappedLabels.includes(LABEL_MAP[norm])) mappedLabels.push(LABEL_MAP[norm]); }
+        if(!detectedCat && CAT_MAP[norm]) detectedCat = CAT_MAP[norm];
       });
       if(mappedLabels.length){
         const labelsStr = mappedLabels.join(',');
         document.getElementById('tk-labels').value = labelsStr;
         setMultiSelectValues('tk-labels-wrap','tk-labels','tk-labels-display', labelsStr);
       }
+      if(detectedCat) document.getElementById('tk-cat').value = detectedCat;
 
       // Try to match the scraped sprint name against known sprints
       const sprintRaw = p.get('sprint') || '';
@@ -812,9 +830,14 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeThemeModal();c
       const hints = [];
       if(!sprintMatched) hints.push('pick a sprint');
       if(!ownerMatched)  hints.push('pick an owner');
-      hints.push('pick a category');
+      if(!detectedCat)   hints.push('pick a category');
+      const autoFilled = [];
+      if(ownerMatched)  autoFilled.push('owner');
+      if(detectedCat)   autoFilled.push('category');
+      if(p.get('points')) autoFilled.push('points');
+      const autoMsg = autoFilled.length ? ' (auto-filled: ' + autoFilled.join(', ') + ')' : '';
       document.getElementById('jira-fetch-status').style.color = '#1d9e75';
-      document.getElementById('jira-fetch-status').textContent = '✓ Imported from Jira — ' + hints.join(', ') + ' then save';
+      document.getElementById('jira-fetch-status').textContent = '✓ Imported from Jira' + autoMsg + (hints.length ? ' — ' + hints.join(', ') + ' then save' : ' — review and save');
       window.history.replaceState({}, '', window.location.pathname);
     }, 800);
   }
@@ -841,11 +864,19 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeThemeModal();c
            document.querySelector('[aria-label*="priority" i]')||
            document.querySelector('#priority-val');
     if(pr) priority=pr.alt||pr.getAttribute('aria-label')||pr.innerText||'';
-    var sp=document.querySelector('[data-testid*="story_points"] [class*="value"]')||
+    var sp=document.querySelector('[data-testid="field-storyPoints"] [class*="value"]')||
+           document.querySelector('[data-testid="field-storyPoints"] span')||
+           document.querySelector('[data-testid="field-storyPoints"]')||
+           document.querySelector('[data-testid*="story_points"] [class*="value"]')||
+           document.querySelector('[data-testid*="story_points"] span')||
            document.querySelector('[data-testid*="customfield_10016"] [class*="value"]')||
+           document.querySelector('[data-testid*="customfield_10016"] span')||
            document.querySelector('[data-testid*="storyPoints"] span')||
-           document.querySelector('[data-testid*="story-points"] span');
-    if(sp) points=sp.innerText.trim().replace(/[^0-9.]/g,'');
+           document.querySelector('[data-testid*="story-points"] span')||
+           document.querySelector('[data-testid*="storypoint"] span')||
+           document.querySelector('[aria-label*="story point" i]')||
+           document.querySelector('[aria-label*="story_point" i]');
+    if(sp){var spTxt=sp.innerText.trim().replace(/[^0-9.]/g,'');if(spTxt) points=spTxt;}
     var ep=document.querySelector('[data-testid*="epic"] a')||
            document.querySelector('[data-testid*="parent"] a')||
            document.querySelector('#customfield_10014-val a');
@@ -859,7 +890,11 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeThemeModal();c
                  document.querySelector('#customfield_10020-val a')||
                  document.querySelector('#customfield_10020-val');
     if(sprintEl) sprint=sprintEl.innerText.trim();
-    var reporterEl=document.querySelector('[data-testid*="reporter"] [data-testid*="name"]')||
+    var reporterEl=document.querySelector('[data-testid="field-reporter"] [data-testid*="name"]')||
+                   document.querySelector('[data-testid="field-reporter"] a')||
+                   document.querySelector('[data-testid="field-reporter"] span[class*="user"]')||
+                   document.querySelector('[data-testid="field-reporter"]')||
+                   document.querySelector('[data-testid*="reporter"] [data-testid*="name"]')||
                    document.querySelector('[data-testid*="reporter"] span[class*="user"]')||
                    document.querySelector('[data-testid*="reporter"] a')||
                    document.querySelector('[data-testid="issue.views.issue-base.foundation.change-boilerplate.reporter"] span')||
