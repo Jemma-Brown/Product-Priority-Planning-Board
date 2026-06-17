@@ -80,7 +80,7 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="user-picker-btns"></div>
   </div>
 </div>
-<!-- Theme Modal --><div class="modal-overlay" id="theme-modal" onclick="if(event.target===this)closeThemeModal()"><div class="modal"><h2><span id="theme-modal-title">Add theme</span><button class="icon-btn" onclick="closeThemeModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div class="form-group"><label>Theme / goal title</label><input type="text" id="th-title" placeholder="e.g. Migrate reporting pipeline" /></div><div class="form-group"><label>Description (optional)</label><textarea id="th-desc" placeholder="What does success look like?"></textarea></div><div class="form-group"><label>Owner</label><select id="th-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option><option value="unknown">Unknown</option></select></div><div class="form-row" id="th-sprint-row"><div class="form-group"><label>Start sprint</label><select id="th-start"></select></div><div class="form-group"><label>End sprint</label><select id="th-end"></select></div></div><div class="form-row"><div class="form-group"><label>Priority</label><select id="th-priority"><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></div><div class="form-group"><label>Status</label><select id="th-color"><option value="todo">To do</option><option value="wip">Work in Progress</option><option value="done">Done</option></select></div></div><div class="modal-footer"><button class="btn" onclick="closeThemeModal()">Cancel</button><button class="btn primary" onclick="saveTheme()">Save theme</button></div></div></div><!-- Ticket Modal --><div class="modal-overlay" id="ticket-modal" onclick="if(event.target===this)closeTicketModal()"><div class="modal" style="max-width:900px"><h2><span id="ticket-modal-title">Add ticket</span><button class="icon-btn" onclick="closeTicketModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px"><div><div class="form-group"><label>Jira key</label><input type="text" id="tk-jira" placeholder="ISB-1234" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()" /><div id="jira-fetch-status" style="font-size:18px;margin-top:4px;min-height:14px"></div></div><div class="form-group"><label>Ticket title</label><input type="text" id="tk-title" placeholder="Task summary" /></div><div class="form-group"><label>Story points</label><select id="tk-points"><option value="">— Unpointed</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="5">5</option><option value="8">8</option></select></div><div class="form-group"><label>Status labels</label><div class="multi-select" id="tk-labels-wrap"><div class="ms-trigger" onclick="toggleMultiSelect('tk-labels-wrap')"><span class="ms-display" id="tk-labels-display">Select labels…</span><i class="ti ti-chevron-down" style="font-size:13px;color:var(--text3);flex-shrink:0"></i></div><div class="ms-dropdown" id="tk-labels-dropdown">
+<!-- Theme Modal --><div class="modal-overlay" id="theme-modal" onclick="if(event.target===this)closeThemeModal()"><div class="modal"><h2><span id="theme-modal-title">Add theme</span><button class="icon-btn" onclick="closeThemeModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div class="form-group"><label>Theme / goal title</label><input type="text" id="th-title" placeholder="e.g. Migrate reporting pipeline" /></div><div class="form-group"><label>Description (optional)</label><textarea id="th-desc" placeholder="What does success look like?"></textarea></div><div class="form-group"><label>Group (optional) <span style="font-size:11px;font-weight:400;color:var(--text3)">— links non-consecutive segments of the same theme</span></label><input type="text" id="th-group" placeholder="e.g. Data migration" autocomplete="off" /></div><div class="form-group"><label>Owner</label><select id="th-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option><option value="unknown">Unknown</option></select></div><div class="form-row" id="th-sprint-row"><div class="form-group"><label>Start sprint</label><select id="th-start"></select></div><div class="form-group"><label>End sprint</label><select id="th-end"></select></div></div><div class="form-row"><div class="form-group"><label>Priority</label><select id="th-priority"><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></div><div class="form-group"><label>Status</label><select id="th-color"><option value="todo">To do</option><option value="wip">Work in Progress</option><option value="done">Done</option></select></div></div><div class="modal-footer"><button class="btn" onclick="closeThemeModal()">Cancel</button><button class="btn primary" onclick="saveTheme()">Save theme</button></div></div></div><!-- Ticket Modal --><div class="modal-overlay" id="ticket-modal" onclick="if(event.target===this)closeTicketModal()"><div class="modal" style="max-width:900px"><h2><span id="ticket-modal-title">Add ticket</span><button class="icon-btn" onclick="closeTicketModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px"><div><div class="form-group"><label>Jira key</label><input type="text" id="tk-jira" placeholder="ISB-1234" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()" /><div id="jira-fetch-status" style="font-size:18px;margin-top:4px;min-height:14px"></div></div><div class="form-group"><label>Ticket title</label><input type="text" id="tk-title" placeholder="Task summary" /></div><div class="form-group"><label>Story points</label><select id="tk-points"><option value="">— Unpointed</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="5">5</option><option value="8">8</option></select></div><div class="form-group"><label>Status labels</label><div class="multi-select" id="tk-labels-wrap"><div class="ms-trigger" onclick="toggleMultiSelect('tk-labels-wrap')"><span class="ms-display" id="tk-labels-display">Select labels…</span><i class="ti ti-chevron-down" style="font-size:13px;color:var(--text3);flex-shrink:0"></i></div><div class="ms-dropdown" id="tk-labels-dropdown">
 <div style="padding:6px 12px 4px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3)">Status</div>
 <label class="ms-option"><input type="checkbox" value="Ticket Creation" onchange="onStatusLabelChange(this)"> Ticket Creation</label>
 <label class="ms-option"><input type="checkbox" value="Ready To Refine" onchange="onStatusLabelChange(this)"> Ready To Refine</label>
@@ -413,30 +413,50 @@ const THEME_COLORS = {
   done: {bg:'#9fe1cb',text:'#04342c',dbg:'#085041',dt:'#e1f5ee',label:'Done'}
 };
 const PLAN_SPRINTS = [
-  {id:'s104',num:104,label:'11 Jun–24 Jun',end:'2026-06-24'},
-  {id:'s105',num:105,label:'25 Jun–7 Jul',end:'2026-07-07'},{id:'s106',num:106,label:'9 Jul–21 Jul',end:'2026-07-21'},
-  {id:'s107',num:107,label:'23 Jul–4 Aug',end:'2026-08-04'},{id:'s108',num:108,label:'6 Aug–18 Aug',end:'2026-08-18'},
-  {id:'s109',num:109,label:'20 Aug–1 Sep',end:'2026-09-01'},{id:'s110',num:110,label:'3 Sep–15 Sep',end:'2026-09-15'},
-  {id:'s111',num:111,label:'17 Sep–29 Sep',end:'2026-09-29'},{id:'s112',num:112,label:'1 Oct–13 Oct',end:'2026-10-13'},
-  {id:'s113',num:113,label:'15 Oct–27 Oct',end:'2026-10-27'},{id:'s114',num:114,label:'29 Oct–10 Nov',end:'2026-11-10'},
-  {id:'s115',num:115,label:'12 Nov–24 Nov',end:'2026-11-24'},{id:'s116',num:116,label:'26 Nov–8 Dec',end:'2026-12-08'},
-  {id:'s117',num:117,label:'10 Dec–22 Dec',end:'2026-12-22'},{id:'s118',num:118,label:'24 Dec 2026–6 Jan 2027',end:'2026-12-31'}
+  {id:'s104',num:104,label:'11 Jun–24 Jun',start:'2026-06-11',end:'2026-06-24'},
+  {id:'s105',num:105,label:'25 Jun–8 Jul',start:'2026-06-25',end:'2026-07-08'},
+  {id:'s106',num:106,label:'9 Jul–22 Jul',start:'2026-07-09',end:'2026-07-22'},
+  {id:'s107',num:107,label:'23 Jul–5 Aug',start:'2026-07-23',end:'2026-08-05'},
+  {id:'s108',num:108,label:'6 Aug–19 Aug',start:'2026-08-06',end:'2026-08-19'},
+  {id:'s109',num:109,label:'20 Aug–2 Sep',start:'2026-08-20',end:'2026-09-02'},
+  {id:'s110',num:110,label:'3 Sep–16 Sep',start:'2026-09-03',end:'2026-09-16'},
+  {id:'s111',num:111,label:'17 Sep–30 Sep',start:'2026-09-17',end:'2026-09-30'},
+  {id:'s112',num:112,label:'1 Oct–14 Oct',start:'2026-10-01',end:'2026-10-14'},
+  {id:'s113',num:113,label:'15 Oct–28 Oct',start:'2026-10-15',end:'2026-10-28'},
+  {id:'s114',num:114,label:'29 Oct–11 Nov',start:'2026-10-29',end:'2026-11-11'},
+  {id:'s115',num:115,label:'12 Nov–25 Nov',start:'2026-11-12',end:'2026-11-25'},
+  {id:'s116',num:116,label:'26 Nov–9 Dec',start:'2026-11-26',end:'2026-12-09'},
+  {id:'s117',num:117,label:'10 Dec–23 Dec',start:'2026-12-10',end:'2026-12-23'},
+  {id:'s118',num:118,label:'24 Dec 2026–6 Jan 2027',start:'2026-12-24',end:'2027-01-06'}
 ];
 const NFY_SPRINTS = [
-  {id:'s118',num:118,label:'24 Dec 2026–6 Jan 2027',end:'2026-12-31'},
-  {id:'s119',num:119,label:'7 Jan–20 Jan',end:'2027-01-20'},{id:'s120',num:120,label:'21 Jan–3 Feb',end:'2027-02-03'},
-  {id:'s121',num:121,label:'4 Feb–17 Feb',end:'2027-02-17'},{id:'s122',num:122,label:'18 Feb–3 Mar',end:'2027-03-03'},
-  {id:'s123',num:123,label:'4 Mar–17 Mar',end:'2027-03-17'},{id:'s124',num:124,label:'18 Mar–31 Mar',end:'2027-03-31'},
-  {id:'s125',num:125,label:'1 Apr–14 Apr',end:'2027-04-14'},{id:'s126',num:126,label:'15 Apr–28 Apr',end:'2027-04-28'},
-  {id:'s127',num:127,label:'29 Apr–12 May',end:'2027-05-12'},{id:'s128',num:128,label:'13 May–26 May',end:'2027-05-26'},
-  {id:'s129',num:129,label:'27 May–9 Jun',end:'2027-06-09'},{id:'s130',num:130,label:'10 Jun–23 Jun',end:'2027-06-23'},
-  {id:'s131',num:131,label:'24 Jun–7 Jul',end:'2027-07-07'},{id:'s132',num:132,label:'8 Jul–21 Jul',end:'2027-07-21'},
-  {id:'s133',num:133,label:'22 Jul–4 Aug',end:'2027-08-04'},{id:'s134',num:134,label:'5 Aug–18 Aug',end:'2027-08-18'},
-  {id:'s135',num:135,label:'19 Aug–1 Sep',end:'2027-09-01'},{id:'s136',num:136,label:'2 Sep–15 Sep',end:'2027-09-15'},
-  {id:'s137',num:137,label:'16 Sep–29 Sep',end:'2027-09-29'},{id:'s138',num:138,label:'30 Sep–13 Oct',end:'2027-10-13'},
-  {id:'s139',num:139,label:'14 Oct–27 Oct',end:'2027-10-27'},{id:'s140',num:140,label:'28 Oct–10 Nov',end:'2027-11-10'},
-  {id:'s141',num:141,label:'11 Nov–24 Nov',end:'2027-11-24'},{id:'s142',num:142,label:'25 Nov–8 Dec',end:'2027-12-08'},
-  {id:'s143',num:143,label:'9 Dec–22 Dec',end:'2027-12-22'},{id:'s144',num:144,label:'23 Dec–31 Dec',end:'2027-12-31'}
+  {id:'s118',num:118,label:'24 Dec 2026–6 Jan 2027',start:'2026-12-24',end:'2027-01-06'},
+  {id:'s119',num:119,label:'7 Jan–20 Jan',start:'2027-01-07',end:'2027-01-20'},
+  {id:'s120',num:120,label:'21 Jan–3 Feb',start:'2027-01-21',end:'2027-02-03'},
+  {id:'s121',num:121,label:'4 Feb–17 Feb',start:'2027-02-04',end:'2027-02-17'},
+  {id:'s122',num:122,label:'18 Feb–3 Mar',start:'2027-02-18',end:'2027-03-03'},
+  {id:'s123',num:123,label:'4 Mar–17 Mar',start:'2027-03-04',end:'2027-03-17'},
+  {id:'s124',num:124,label:'18 Mar–31 Mar',start:'2027-03-18',end:'2027-03-31'},
+  {id:'s125',num:125,label:'1 Apr–14 Apr',start:'2027-04-01',end:'2027-04-14'},
+  {id:'s126',num:126,label:'15 Apr–28 Apr',start:'2027-04-15',end:'2027-04-28'},
+  {id:'s127',num:127,label:'29 Apr–12 May',start:'2027-04-29',end:'2027-05-12'},
+  {id:'s128',num:128,label:'13 May–26 May',start:'2027-05-13',end:'2027-05-26'},
+  {id:'s129',num:129,label:'27 May–9 Jun',start:'2027-05-27',end:'2027-06-09'},
+  {id:'s130',num:130,label:'10 Jun–23 Jun',start:'2027-06-10',end:'2027-06-23'},
+  {id:'s131',num:131,label:'24 Jun–7 Jul',start:'2027-06-24',end:'2027-07-07'},
+  {id:'s132',num:132,label:'8 Jul–21 Jul',start:'2027-07-08',end:'2027-07-21'},
+  {id:'s133',num:133,label:'22 Jul–4 Aug',start:'2027-07-22',end:'2027-08-04'},
+  {id:'s134',num:134,label:'5 Aug–18 Aug',start:'2027-08-05',end:'2027-08-18'},
+  {id:'s135',num:135,label:'19 Aug–1 Sep',start:'2027-08-19',end:'2027-09-01'},
+  {id:'s136',num:136,label:'2 Sep–15 Sep',start:'2027-09-02',end:'2027-09-15'},
+  {id:'s137',num:137,label:'16 Sep–29 Sep',start:'2027-09-16',end:'2027-09-29'},
+  {id:'s138',num:138,label:'30 Sep–13 Oct',start:'2027-09-30',end:'2027-10-13'},
+  {id:'s139',num:139,label:'14 Oct–27 Oct',start:'2027-10-14',end:'2027-10-27'},
+  {id:'s140',num:140,label:'28 Oct–10 Nov',start:'2027-10-28',end:'2027-11-10'},
+  {id:'s141',num:141,label:'11 Nov–24 Nov',start:'2027-11-11',end:'2027-11-24'},
+  {id:'s142',num:142,label:'25 Nov–8 Dec',start:'2027-11-25',end:'2027-12-08'},
+  {id:'s143',num:143,label:'9 Dec–22 Dec',start:'2027-12-09',end:'2027-12-22'},
+  {id:'s144',num:144,label:'23 Dec–31 Dec',start:'2027-12-23',end:'2027-12-31'}
 ];
 const SUBCATS = [
   {id:'data',label:'Data'},
@@ -666,6 +686,48 @@ function renderTimeline(gridId, allSprints, tabKey){
         </div>`;
       });
     });
+
+    // ── GROUP CONNECTORS: dashed lines between same-group segments ──
+    if(ownerThemes.some(th => th.groupId)) {
+      // Build map: groupId -> sorted list of slots by visStart
+      const groupMap = {};
+      themeSlots.forEach(slot => {
+        if(!slot.th.groupId) return;
+        const key = slot.th.owner + '::' + slot.th.groupId;
+        if(!groupMap[key]) groupMap[key] = [];
+        groupMap[key].push(slot);
+      });
+      Object.values(groupMap).forEach(slots => {
+        if(slots.length < 2) return;
+        slots.sort((a,b) => a.visStart - b.visStart);
+        for(let i=0; i<slots.length-1; i++){
+          const a = slots[i], b = slots[i+1];
+          if(b.visStart <= a.visEnd + 1) continue; // consecutive/overlapping, no gap
+          // Draw connector spanning from col after a.visEnd to col before b.visStart
+          const connColStart = 2 + a.visEnd + 1;
+          const connColEnd   = 2 + b.visStart + 1;
+          if(connColStart >= connColEnd) continue;
+          const tc = THEME_COLORS[a.th.color]||THEME_COLORS.todo;
+          const dark = isDark();
+          const connColor = (a.th.color==='done') ? (dark ? '#085041' : '#2a9d7c') : o.barBg;
+          const laneY = PAD + a.laneIdx * (LANE_H + LANE_GAP) + LANE_H/2;
+          html += `<div style="
+            grid-row:${rowNum};
+            grid-column:${connColStart}/${connColEnd};
+            z-index:2;
+            pointer-events:none;
+            align-self:start;
+            padding-top:${laneY - 1}px;
+            overflow:hidden;
+          "><div style="
+            height:2px;
+            width:100%;
+            background:repeating-linear-gradient(90deg,${connColor} 0px,${connColor} 6px,transparent 6px,transparent 12px);
+            opacity:0.6;
+          "></div></div>`;
+        }
+      });
+    }
   });
 
   // ── UNKNOWN ROW (NFY only) ──
@@ -768,6 +830,30 @@ function renderDetail(containerId, sprints, tabKey){
     <button class="btn sm primary" onclick="openTicketModal(null,'${sid}')"><i class="ti ti-plus"></i> Add ticket</button>
   </div>`;
 
+  // ── CATEGORY SPLIT STRIP ──
+  const totalAllPts = sprintTickets.reduce((sum,t)=>sum+(parseFloat(t.points)||0),0);
+  const catColors = {data:'#854f0b',webi:'#185fa5',dashboard:'#534ab7'};
+  const catBgs = {data:'#faeeda',webi:'#e6f1fb',dashboard:'#eeedfe'};
+  html += `<div style="display:flex;border-bottom:1px solid var(--border-strong)">`;
+  SUBCATS.forEach((sc, i) => {
+    const pts = sprintTickets.filter(t=>t.cat===sc.id).reduce((sum,t)=>sum+(parseFloat(t.points)||0),0);
+    const goalPtsForCat = sprintTickets.filter(t=>t.cat===sc.id&&t.goal).reduce((sum,t)=>sum+(parseFloat(t.points)||0),0);
+    const count = sprintTickets.filter(t=>t.cat===sc.id).length;
+    const goalPct = pts > 0 ? Math.round(goalPtsForCat/pts*100) : 0;
+    const color = catColors[sc.id] || 'var(--text2)';
+    const bg = catBgs[sc.id] || 'var(--surface2)';
+    const border = i < SUBCATS.length-1 ? `border-right:1px solid var(--border);` : '';
+    html += `<div style="flex:1;padding:8px 12px;${border}display:flex;flex-direction:column;gap:2px;background:${bg}">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:${color}">${sc.label}</div>
+      <div style="display:flex;align-items:baseline;gap:6px">
+        <span style="font-size:18px;font-weight:700;color:${color}">${pts}<span style="font-size:10px;font-weight:500;margin-left:1px">pts</span></span>
+        <span style="font-size:11px;color:${color};opacity:.7">${count} ticket${count!==1?'s':''}</span>
+      </div>
+      <div style="font-size:10px;color:${color};opacity:.75;font-weight:600">🎯 ${goalPct}% goal</div>
+    </div>`;
+  });
+  html += `</div>`;
+
   // ── GOALS SECTION (top, under header) ──
   const sprintGoals = goalsData[sid] || [];
   html += `<div class="goals-section" id="goals-${sid}" style="border-radius:0;border:none;border-bottom:1px solid var(--border-strong)">
@@ -799,14 +885,16 @@ function renderDetail(containerId, sprints, tabKey){
       </div>`;
     });
   }
-  html += `</div></div>`;
+  html += `</div>`;
+
+
+  html += `</div>`;
 
   html += `<div class="detail-table">
     <!-- COLUMN HEADERS: empty label cell + one per category -->
     <div class="dt-row-label"></div>`;
   SUBCATS.forEach(sc => {
-    const n = sprintTickets.filter(t=>t.cat===sc.id).length;
-    html += `<div class="dt-col-head">${sc.label}<span class="col-count">${n}</span></div>`;
+    html += `<div class="dt-col-head">${sc.label}</div>`;
   });
   const activeOwners = TIMELINE_OWNERS.filter(o => sprintTickets.some(t=>t.owner===o.id));
   if(activeOwners.length === 0){
@@ -1068,13 +1156,18 @@ function ticketCard(tk){
   const goalBadge     = tk.goal    ? `<span class="goal-flag">🎯 Goal</span>` : '';
   const epicBadge     = tk.epicUrl ? `<a href="${tk.epicUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-size:11px;color:${cardText};opacity:.7;display:block;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none" title="${esc(tk.epicUrl)}">⬡ Epic</a>` : '';
   const commentsBadge = tk.comments ? `<div style="font-size:9px;color:${cardText};opacity:.8;margin-top:1px;line-height:1.3;font-style:italic;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${esc(tk.comments)}</div>` : '';
+  const isDone = !!tk.done;
+  const doneCardBg     = isDone ? (colourLabel ? cardBg : '#f0faf5') : cardBg;
+  const doneCardBorder = isDone ? '#1d9e75' : cardBorder;
+  const doneCardText   = isDone ? (colourLabel ? cardText : '#1d9e75') : cardText;
+  const doneOverlay    = isDone ? 'opacity:0.7;' : '';
   return `<div class="ticket" id="card-${tk.id}" draggable="true"
     ondragstart="event.dataTransfer.setData('text','${tk.id}');this.classList.add('dragging')"
     ondragend="this.classList.remove('dragging')"
     onclick="editTicket('${tk.id}')"
-    style="background:${cardBg};border-color:${cardBorder};cursor:pointer">
+    style="background:${doneCardBg};border-color:${doneCardBorder};cursor:pointer;${doneOverlay}">
     <div class="ticket-top" style="flex:1;overflow:hidden">
-      <div class="ticket-title" style="color:${cardText}">${esc(tk.title)}</div>
+      <div class="ticket-title" style="color:${doneCardText};${isDone?'text-decoration:line-through;opacity:.7;':''}">${esc(tk.title)}</div>
       <div style="display:flex;align-items:flex-start;gap:2px;flex-shrink:0">${jLink}</div>
     </div>
     <div style="flex-shrink:0;display:flex;flex-direction:column;gap:1px">
@@ -1082,10 +1175,14 @@ function ticketCard(tk){
       <div class="ticket-footer" style="margin-top:1px">
         <div style="display:flex;align-items:center;gap:3px;flex-wrap:wrap">
           <span class="priority-dot priority-${tk.priority}" title="${priorityLabel}"></span>
-          <span style="font-size:9px;color:${cardText};opacity:.7">${priorityLabel}</span>
+          <span style="font-size:9px;color:${doneCardText};opacity:.7">${priorityLabel}</span>
           ${goalBadge}${refinementBadge}
         </div>
-        <span style="font-size:11px;font-weight:700;color:#534ab7;width:20px;height:20px;border-radius:50%;border:1.5px solid #534ab7;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">${tk.points||''}</span>
+        <div style="display:flex;align-items:center;gap:3px;flex-shrink:0">
+          <span style="font-size:11px;font-weight:700;color:#534ab7;width:20px;height:20px;border-radius:50%;border:1.5px solid #534ab7;display:inline-flex;align-items:center;justify-content:center">${tk.points||''}</span>
+          <button onclick="event.stopPropagation();toggleTicketDone('${tk.id}')" title="${isDone?'Mark as not done':'Mark as done'}"
+            style="width:20px;height:20px;border-radius:50%;border:1.5px solid ${isDone?'#1d9e75':'var(--border-strong)'};background:${isDone?'#1d9e75':'transparent'};color:${isDone?'#fff':'var(--text3)'};display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;padding:0;flex-shrink:0;transition:all .15s">✓</button>
+        </div>
       </div>
     </div>
   </div>`;
@@ -1148,6 +1245,7 @@ function openThemeModal(owner,start,end,progressMode){
   document.getElementById('theme-modal-title').textContent = progressMode ? 'Add progress item' : 'Add theme';
   document.getElementById('th-title').value='';
   document.getElementById('th-desc').value='';
+  document.getElementById('th-group').value='';
   document.getElementById('th-owner').value=owner||(activeTab==='nfy'&&!owner ? 'unknown' : (currentUser||'george'));
   document.getElementById('th-priority').value='medium';
   document.getElementById('th-color').value='todo';
@@ -1170,6 +1268,7 @@ function editTheme(id){
   document.getElementById('theme-modal-title').textContent = _themeProgressMode ? 'Edit progress item' : 'Edit theme';
   document.getElementById('th-title').value=t.title;
   document.getElementById('th-desc').value=t.desc||'';
+  document.getElementById('th-group').value=t.groupId||'';
   document.getElementById('th-owner').value=t.owner;
   document.getElementById('th-priority').value=t.priority;
   document.getElementById('th-color').value=t.color||'todo';
@@ -1191,10 +1290,11 @@ function saveTheme(){
   document.getElementById('th-title').style.borderColor='';
   const startSprint = _themeProgressMode ? 'progress' : document.getElementById('th-start').value;
   const endSprint   = _themeProgressMode ? 'progress' : document.getElementById('th-end').value;
+  const groupId=document.getElementById('th-group').value.trim()||undefined;
   const obj={id:editingThemeId||Date.now().toString(),title,desc:document.getElementById('th-desc').value.trim(),
     owner:document.getElementById('th-owner').value,startSprint,endSprint,
     priority:document.getElementById('th-priority').value,
-    color:document.getElementById('th-color').value};
+    color:document.getElementById('th-color').value,...(groupId?{groupId}:{})};
   pushUndo(editingThemeId ? `Edit theme "${title}"` : `Add theme "${title}"`);
   themes=editingThemeId?themes.map(t=>t.id===editingThemeId?obj:t):[...themes,obj];
   saveOne('theme',obj);closeThemeModal();render();
@@ -1239,18 +1339,56 @@ function editTicket(id){
   populateThemeSelect(t.themeId);
   document.getElementById('ticket-modal').classList.add('open');
 }
+// Deduplicate themes for dropdowns:
+// - themes sharing a groupId+owner collapse to the earliest segment
+// - themes with the same title+owner (no groupId) also collapse to the earliest
+function dedupedThemes() {
+  const allTabIds = [...(PLAN_SPRINTS||[]), ...(NFY_SPRINTS||[])].map(s=>s.id);
+  const sprintIdx = id => { const i = allTabIds.indexOf(id); return i < 0 ? 9999 : i; };
+  const sorted = [...themes].sort((a,b) => sprintIdx(a.startSprint) - sprintIdx(b.startSprint));
+  const seen = {}; // key -> true
+  const result = [];
+  sorted.forEach(t => {
+    const key = t.groupId
+      ? t.owner + '::group::' + t.groupId
+      : t.owner + '::title::' + t.title.trim().toLowerCase();
+    if(!seen[key]) { seen[key] = true; result.push(t); }
+  });
+  return result;
+}
+// Given any themeId (possibly a non-canonical duplicate), return the canonical theme
+function canonicalTheme(themeId) {
+  if(!themeId) return null;
+  const t = themes.find(x=>x.id===themeId);
+  if(!t) return null;
+  const allTabIds = [...(PLAN_SPRINTS||[]), ...(NFY_SPRINTS||[])].map(s=>s.id);
+  const sprintIdx = id => { const i = allTabIds.indexOf(id); return i < 0 ? 9999 : i; };
+  const key = t.groupId
+    ? t.owner + '::group::' + t.groupId
+    : t.owner + '::title::' + t.title.trim().toLowerCase();
+  const siblings = themes.filter(x => {
+    const k = x.groupId
+      ? x.owner + '::group::' + x.groupId
+      : x.owner + '::title::' + x.title.trim().toLowerCase();
+    return k === key;
+  });
+  siblings.sort((a,b) => sprintIdx(a.startSprint) - sprintIdx(b.startSprint));
+  return siblings[0] || t;
+}
 function populateThemeSelect(sel){
-  // Set hidden value and display text
-  document.getElementById('tk-theme').value = sel || '';
-  const matched = sel ? themes.find(t=>t.id===sel) : null;
-  document.getElementById('tk-theme-input').value = matched ? `${matched.title} (${matched.owner})` : '';
+  // Resolve to canonical theme if grouped
+  const canonical = sel ? canonicalTheme(sel) : null;
+  const canonicalId = canonical?.id || sel || '';
+  document.getElementById('tk-theme').value = canonicalId;
+  document.getElementById('tk-theme-input').value = canonical ? `${canonical.title} (${canonical.owner})` : '';
   renderThemeDropdown('');
 }
 function renderThemeDropdown(query){
   const dd = document.getElementById('tk-theme-dropdown');
   const q = query.toLowerCase();
-  const filtered = themes.filter(t => !q || t.title.toLowerCase().includes(q) || t.owner.toLowerCase().includes(q));
-  const cur = document.getElementById('tk-theme').value;
+  const filtered = dedupedThemes().filter(t => !q || t.title.toLowerCase().includes(q) || t.owner.toLowerCase().includes(q));
+  const curRaw = document.getElementById('tk-theme').value;
+  const cur = curRaw ? (canonicalTheme(curRaw)?.id || curRaw) : '';
   // Sort by tickets current user has in each theme, then by ownership
   const ticketCountByTheme = {};
   tickets.filter(tk=>tk.owner===currentUser).forEach(tk=>{
@@ -1297,6 +1435,15 @@ document.addEventListener('click', e => {
 function deleteTicket(id){const tk=tickets.find(t=>t.id===id);pushUndo(`Delete ticket "${tk?.title||id}"`);tickets=tickets.filter(t=>t.id!==id);deleteOne('ticket',id);render()}
 function deleteTicketFromModal(){if(!editingTicketId)return;const id=editingTicketId;closeTicketModal();deleteTicket(id);}
 function closeTicketModal(){document.getElementById('ticket-modal').classList.remove('open')}
+function toggleTicketDone(id){
+  const tk = tickets.find(t=>t.id===id);
+  if(!tk) return;
+  pushUndo(`${tk.done?'Unmark':'Mark'} "${tk.title}" as done`);
+  const updated = {...tk, done: !tk.done};
+  tickets = tickets.map(t=>t.id===id ? updated : t);
+  saveOne('ticket', updated);
+  render();
+}
 /* ── MULTI-SELECT ── */
 function toggleMultiSelect(wrapId){
   const dd = document.getElementById(wrapId).querySelector('.ms-dropdown');
@@ -1361,94 +1508,107 @@ function saveTicket(){
   saveOne('ticket',obj);closeTicketModal();render();
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeThemeModal();closeTicketModal();closeDeadlineModal()}});
+function openTicketFromParams(p) {
+  setTimeout(() => {
+    openTicketModal(null, null, null);
+    if(p.get('key'))    document.getElementById('tk-jira').value   = p.get('key');
+    if(p.get('title'))  document.getElementById('tk-title').value  = p.get('title');
+    if(p.get('points')) document.getElementById('tk-points').value = p.get('points');
+
+    // Match reporter name to a board owner (handles first name, full name, last name)
+    const reporterRaw = (p.get('reporter') || '').toLowerCase().trim();
+    if(reporterRaw){
+      const matched = OWNERS.find(o => {
+        const lbl = o.label.toLowerCase();
+        return reporterRaw.includes(lbl) || lbl.includes(reporterRaw) || reporterRaw.startsWith(lbl) || reporterRaw.endsWith(lbl);
+      });
+      if(matched) document.getElementById('tk-owner').value = matched.id;
+    }
+
+    // Map Jira labels to board labels
+    const rawLabels = (p.get('labels') || '').split(',').map(l => l.trim().toLowerCase()).filter(Boolean);
+    const mappedLabels = [];
+    const LABEL_MAP = {
+      'ready':             'Ready for Sprint',
+      'readyforspprint':   'Ready for Sprint',
+      'readyforsprint':    'Ready for Sprint',
+      'readytorefine':     'Ready To Refine',
+      'ticketcreation':    'Ticket Creation',
+      'refinementone':     'Refinement Session 1',
+      'refinementtwo':     'Refinement Session 2',
+      'refinementthree':   'Refinement Session 3',
+    };
+    // Map Jira labels to board category (data / webi / dashboard)
+    const CAT_MAP = {
+      'data':           'data',
+      'dataeng':        'data',
+      'dataengineering':'data',
+      'webi':           'webi',
+      'webintelligence':'webi',
+      'web-i':          'webi',
+      'dashboard':      'dashboard',
+      'dashboards':     'dashboard',
+      'dash':           'dashboard',
+    };
+    let detectedCat = null;
+    rawLabels.forEach(function(l){
+      const norm = l.replace(/[\s_-]/g,'').toLowerCase();
+      if(LABEL_MAP[norm]) { if(!mappedLabels.includes(LABEL_MAP[norm])) mappedLabels.push(LABEL_MAP[norm]); }
+      if(!detectedCat && CAT_MAP[norm]) detectedCat = CAT_MAP[norm];
+    });
+    if(mappedLabels.length){
+      const labelsStr = mappedLabels.join(',');
+      document.getElementById('tk-labels').value = labelsStr;
+      setMultiSelectValues('tk-labels-wrap','tk-labels','tk-labels-display', labelsStr);
+    }
+    if(detectedCat) document.getElementById('tk-cat').value = detectedCat;
+
+    // Try to match the scraped sprint name against known sprints
+    const sprintRaw = p.get('sprint') || '';
+    let sprintMatched = false;
+    if(sprintRaw){
+      const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+      const numMatch = sprintRaw.match(/\b(\d{3,})\b/);
+      const matched = numMatch
+        ? allSprints.find(s => String(s.num) === numMatch[1])
+        : allSprints.find(s => sprintRaw.toLowerCase().includes(String(s.num)));
+      if(matched){ popSprintOpts('tk-sprint', matched.id, true); sprintMatched = true; }
+    }
+
+    const ownerMatched = !!document.getElementById('tk-owner').value;
+    const hints = [];
+    if(!sprintMatched) hints.push('pick a sprint');
+    if(!ownerMatched)  hints.push('pick an owner');
+    if(!detectedCat)   hints.push('pick a category');
+    const autoFilled = [];
+    if(ownerMatched)  autoFilled.push('owner');
+    if(detectedCat)   autoFilled.push('category');
+    if(p.get('points')) autoFilled.push('points');
+    const autoMsg = autoFilled.length ? ' (auto-filled: ' + autoFilled.join(', ') + ')' : '';
+    document.getElementById('jira-fetch-status').style.color = '#1d9e75';
+    document.getElementById('jira-fetch-status').textContent = '✓ Imported from Jira' + autoMsg + (hints.length ? ' — ' + hints.join(', ') + ' then save' : ' — review and save');
+    window.history.replaceState({}, '', window.location.pathname);
+  }, 800);
+}
 (function checkUrlParams(){
   const p = new URLSearchParams(window.location.search);
   if(!p.get('bm')) return;
-  // Wait longer to ensure loadData() has completed
-  function tryOpen(attemptsLeft){
-    setTimeout(() => {
-      openTicketModal(null, null, null);
-      if(p.get('key'))    document.getElementById('tk-jira').value   = p.get('key');
-      if(p.get('title'))  document.getElementById('tk-title').value  = p.get('title');
-      if(p.get('points')) document.getElementById('tk-points').value = p.get('points');
-
-      // Match reporter name to a board owner (handles first name, full name, last name)
-      const reporterRaw = (p.get('reporter') || '').toLowerCase().trim();
-      if(reporterRaw){
-        const matched = OWNERS.find(o => {
-          const lbl = o.label.toLowerCase();
-          return reporterRaw.includes(lbl) || lbl.includes(reporterRaw) || reporterRaw.startsWith(lbl) || reporterRaw.endsWith(lbl);
-        });
-        if(matched) document.getElementById('tk-owner').value = matched.id;
-      }
-
-      // Map Jira labels to board labels
-      const rawLabels = (p.get('labels') || '').split(',').map(l => l.trim().toLowerCase()).filter(Boolean);
-      const mappedLabels = [];
-      const LABEL_MAP = {
-        'ready':             'Ready for Sprint',
-        'readyforspprint':   'Ready for Sprint',
-        'readyforsprint':    'Ready for Sprint',
-        'readytorefine':     'Ready To Refine',
-        'ticketcreation':    'Ticket Creation',
-        'refinementone':     'Refinement Session 1',
-        'refinementtwo':     'Refinement Session 2',
-        'refinementthree':   'Refinement Session 3',
-      };
-      // Map Jira labels to board category (data / webi / dashboard)
-      const CAT_MAP = {
-        'data':           'data',
-        'dataeng':        'data',
-        'dataengineering':'data',
-        'webi':           'webi',
-        'webintelligence':'webi',
-        'web-i':          'webi',
-        'dashboard':      'dashboard',
-        'dashboards':     'dashboard',
-        'dash':           'dashboard',
-      };
-      let detectedCat = null;
-      rawLabels.forEach(function(l){
-        const norm = l.replace(/[\s_-]/g,'').toLowerCase();
-        if(LABEL_MAP[norm]) { if(!mappedLabels.includes(LABEL_MAP[norm])) mappedLabels.push(LABEL_MAP[norm]); }
-        if(!detectedCat && CAT_MAP[norm]) detectedCat = CAT_MAP[norm];
-      });
-      if(mappedLabels.length){
-        const labelsStr = mappedLabels.join(',');
-        document.getElementById('tk-labels').value = labelsStr;
-        setMultiSelectValues('tk-labels-wrap','tk-labels','tk-labels-display', labelsStr);
-      }
-      if(detectedCat) document.getElementById('tk-cat').value = detectedCat;
-
-      // Try to match the scraped sprint name against known sprints
-      const sprintRaw = p.get('sprint') || '';
-      let sprintMatched = false;
-      if(sprintRaw){
-        const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
-        const numMatch = sprintRaw.match(/\b(\d{3,})\b/);
-        const matched = numMatch
-          ? allSprints.find(s => String(s.num) === numMatch[1])
-          : allSprints.find(s => sprintRaw.toLowerCase().includes(String(s.num)));
-        if(matched){ popSprintOpts('tk-sprint', matched.id, true); sprintMatched = true; }
-      }
-
-      const ownerMatched = !!document.getElementById('tk-owner').value;
-      const hints = [];
-      if(!sprintMatched) hints.push('pick a sprint');
-      if(!ownerMatched)  hints.push('pick an owner');
-      if(!detectedCat)   hints.push('pick a category');
-      const autoFilled = [];
-      if(ownerMatched)  autoFilled.push('owner');
-      if(detectedCat)   autoFilled.push('category');
-      if(p.get('points')) autoFilled.push('points');
-      const autoMsg = autoFilled.length ? ' (auto-filled: ' + autoFilled.join(', ') + ')' : '';
-      document.getElementById('jira-fetch-status').style.color = '#1d9e75';
-      document.getElementById('jira-fetch-status').textContent = '✓ Imported from Jira' + autoMsg + (hints.length ? ' — ' + hints.join(', ') + ' then save' : ' — review and save');
-      window.history.replaceState({}, '', window.location.pathname);
-    }, 800);
-  }
-  tryOpen(1);
+  openTicketFromParams(p);
 })();
+
+// ── BROADCAST CHANNEL: receive bookmarklet data from already-open board tab ──
+(function(){
+  try {
+    const bc = new BroadcastChannel('planning-board-bm');
+    bc.onmessage = function(e) {
+      if(!e.data || e.data.type !== 'jira-ticket') return;
+      bc.postMessage({type:'ack'});
+      openTicketFromParams(new URLSearchParams(e.data.params));
+    };
+    window._boardBC = bc;
+  } catch(err) { /* BroadcastChannel not supported */ }
+})();
+
 // jiraUrl set after loadData()
 function buildBookmarklet(){
   const boardUrl = window.location.href.split('?')[0];
@@ -1520,8 +1680,20 @@ function buildBookmarklet(){
     if(reporterEl) reporter=reporterEl.innerText.trim();
     if(!reporter){var repRaw=_fieldByLabel(['Reporter']);if(repRaw) reporter=repRaw;}
     if(!key){alert('No Jira ticket key found. Make sure you have a ticket open (the URL should contain /browse/KEY-123).');return;}
-    var url='` + boardUrl + `?bm=1&key='+encodeURIComponent(key)+'&title='+encodeURIComponent(title)+'&status='+encodeURIComponent(status)+'&priority='+encodeURIComponent(priority)+'&points='+encodeURIComponent(points)+'&epic='+encodeURIComponent(epic)+'&labels='+encodeURIComponent(labels)+'&sprint='+encodeURIComponent(sprint)+'&reporter='+encodeURIComponent(reporter);
-    window.open(url,'_blank');
+    var params='key='+encodeURIComponent(key)+'&title='+encodeURIComponent(title)+'&status='+encodeURIComponent(status)+'&priority='+encodeURIComponent(priority)+'&points='+encodeURIComponent(points)+'&epic='+encodeURIComponent(epic)+'&labels='+encodeURIComponent(labels)+'&sprint='+encodeURIComponent(sprint)+'&reporter='+encodeURIComponent(reporter);
+    var url='` + boardUrl + `?bm=1&'+params;
+    // Try to send to an already-open board tab via BroadcastChannel
+    var sent=false;
+    try{
+      var bc=new BroadcastChannel('planning-board-bm');
+      var ackTimer=setTimeout(function(){
+        if(!sent){ bc.close(); window.open(url,'_blank'); }
+      },400);
+      bc.onmessage=function(e){
+        if(e.data&&e.data.type==='ack'){ sent=true; clearTimeout(ackTimer); bc.close(); }
+      };
+      bc.postMessage({type:'jira-ticket',params:params});
+    }catch(e2){ window.open(url,'_blank'); }
   }catch(e){alert('Bookmarklet error: '+e.message);}
 })();`;
   const debugCode = `(function(){
@@ -1824,11 +1996,11 @@ function filterDlThemeDropdown(){
 function renderDlThemeDropdown(query){
   const dd = document.getElementById('dl-theme-dropdown');
   const q = query.toLowerCase();
-  const filtered = themes.filter(t=>!q||t.title.toLowerCase().includes(q));
+  const filtered = dedupedThemes().filter(t=>!q||t.title.toLowerCase().includes(q));
   // Sort: themes the user has tickets in (by count desc), then themes owned by user, then rest
   const ticketCountByTheme = {};
   tickets.filter(tk=>tk.owner===currentUser).forEach(tk=>{
-    if(tk.themeId) ticketCountByTheme[tk.themeId] = (ticketCountByTheme[tk.themeId]||0)+1;
+    if(tk.themeId) { const cid=canonicalTheme(tk.themeId)?.id||tk.themeId; ticketCountByTheme[cid]=(ticketCountByTheme[cid]||0)+1; }
   });
   filtered.sort((a,b)=>{
     const ca = ticketCountByTheme[a.id]||0, cb = ticketCountByTheme[b.id]||0;
@@ -1871,8 +2043,9 @@ function renderPlanner(){
   const selRefinement = refinementSelect?.value || '';
   const selCat = catSelect?.value || '';
 
+  const plannerThemes = dedupedThemes();
   themeSelect.innerHTML = '<option value="">All themes</option>' +
-    themes.map(t=>`<option value="${t.id}"${t.id===selTheme?' selected':''}>${esc(t.title)}</option>`).join('');
+    plannerThemes.map(t=>`<option value="${t.id}"${t.id===selTheme?' selected':''}>${esc(t.title)}</option>`).join('');
   ownerSelect.innerHTML = '<option value="">All people</option>' +
     TIMELINE_OWNERS.map(o=>`<option value="${o.id}"${o.id===selOwner?' selected':''}>${esc(o.label)}</option>`).join('');
 
