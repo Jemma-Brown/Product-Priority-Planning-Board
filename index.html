@@ -80,7 +80,7 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="user-picker-btns"></div>
   </div>
 </div>
-<!-- Theme Modal --><div class="modal-overlay" id="theme-modal" onclick="if(event.target===this)closeThemeModal()"><div class="modal"><h2><span id="theme-modal-title">Add theme</span><button class="icon-btn" onclick="closeThemeModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div class="form-group"><label>Theme / goal title</label><input type="text" id="th-title" placeholder="e.g. Migrate reporting pipeline" /></div><div class="form-group"><label>Description (optional)</label><textarea id="th-desc" placeholder="What does success look like?"></textarea></div><div class="form-group"><label>Owner</label><select id="th-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option><option value="unknown">Unknown</option></select></div><div class="form-row" id="th-sprint-row"><div class="form-group"><label>Start sprint</label><select id="th-start"></select></div><div class="form-group"><label>End sprint</label><select id="th-end"></select></div></div><div class="form-row"><div class="form-group"><label>Priority</label><select id="th-priority"><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></div><div class="form-group"><label>Status</label><select id="th-color"><option value="todo">To do</option><option value="wip">Work in Progress</option><option value="done">Done</option></select></div></div><div class="modal-footer"><button class="btn" onclick="closeThemeModal()">Cancel</button><button class="btn primary" onclick="saveTheme()">Save theme</button></div></div></div><!-- Ticket Modal --><div class="modal-overlay" id="ticket-modal" onclick="if(event.target===this)closeTicketModal()"><div class="modal" style="max-width:900px"><h2><span id="ticket-modal-title">Add ticket</span><button class="icon-btn" onclick="closeTicketModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px"><div><div class="form-group"><label>Jira key</label><input type="text" id="tk-jira" placeholder="ISB-1234" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()" /><div id="jira-fetch-status" style="font-size:18px;margin-top:4px;min-height:14px"></div></div><div class="form-group"><label>Ticket title</label><input type="text" id="tk-title" placeholder="Task summary" /></div><div class="form-group"><label>Story points</label><input type="number" id="tk-points" placeholder="—" min="0" /></div><div class="form-group"><label>Status labels</label><div class="multi-select" id="tk-labels-wrap"><div class="ms-trigger" onclick="toggleMultiSelect('tk-labels-wrap')"><span class="ms-display" id="tk-labels-display">Select labels…</span><i class="ti ti-chevron-down" style="font-size:13px;color:var(--text3);flex-shrink:0"></i></div><div class="ms-dropdown" id="tk-labels-dropdown">
+<!-- Theme Modal --><div class="modal-overlay" id="theme-modal" onclick="if(event.target===this)closeThemeModal()"><div class="modal"><h2><span id="theme-modal-title">Add theme</span><button class="icon-btn" onclick="closeThemeModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div class="form-group"><label>Theme / goal title</label><input type="text" id="th-title" placeholder="e.g. Migrate reporting pipeline" /></div><div class="form-group"><label>Description (optional)</label><textarea id="th-desc" placeholder="What does success look like?"></textarea></div><div class="form-group"><label>Owner</label><select id="th-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option><option value="unknown">Unknown</option></select></div><div class="form-row" id="th-sprint-row"><div class="form-group"><label>Start sprint</label><select id="th-start"></select></div><div class="form-group"><label>End sprint</label><select id="th-end"></select></div></div><div class="form-row"><div class="form-group"><label>Priority</label><select id="th-priority"><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></div><div class="form-group"><label>Status</label><select id="th-color"><option value="todo">To do</option><option value="wip">Work in Progress</option><option value="done">Done</option></select></div></div><div class="modal-footer"><button class="btn" onclick="closeThemeModal()">Cancel</button><button class="btn primary" onclick="saveTheme()">Save theme</button></div></div></div><!-- Ticket Modal --><div class="modal-overlay" id="ticket-modal" onclick="if(event.target===this)closeTicketModal()"><div class="modal" style="max-width:900px"><h2><span id="ticket-modal-title">Add ticket</span><button class="icon-btn" onclick="closeTicketModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px"><div><div class="form-group"><label>Jira key</label><input type="text" id="tk-jira" placeholder="ISB-1234" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()" /><div id="jira-fetch-status" style="font-size:18px;margin-top:4px;min-height:14px"></div></div><div class="form-group"><label>Ticket title</label><input type="text" id="tk-title" placeholder="Task summary" /></div><div class="form-group"><label>Story points</label><select id="tk-points"><option value="">— Unpointed</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="5">5</option><option value="8">8</option></select></div><div class="form-group"><label>Status labels</label><div class="multi-select" id="tk-labels-wrap"><div class="ms-trigger" onclick="toggleMultiSelect('tk-labels-wrap')"><span class="ms-display" id="tk-labels-display">Select labels…</span><i class="ti ti-chevron-down" style="font-size:13px;color:var(--text3);flex-shrink:0"></i></div><div class="ms-dropdown" id="tk-labels-dropdown">
 <div style="padding:6px 12px 4px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3)">Status</div>
 <label class="ms-option"><input type="checkbox" value="Ticket Creation" onchange="onStatusLabelChange(this)"> Ticket Creation</label>
 <label class="ms-option"><input type="checkbox" value="Ready To Refine" onchange="onStatusLabelChange(this)"> Ready To Refine</label>
@@ -768,6 +768,30 @@ function renderDetail(containerId, sprints, tabKey){
     <button class="btn sm primary" onclick="openTicketModal(null,'${sid}')"><i class="ti ti-plus"></i> Add ticket</button>
   </div>`;
 
+  // ── CATEGORY SPLIT STRIP ──
+  const totalAllPts = sprintTickets.reduce((sum,t)=>sum+(parseFloat(t.points)||0),0);
+  const catColors = {data:'#854f0b',webi:'#185fa5',dashboard:'#534ab7'};
+  const catBgs = {data:'#faeeda',webi:'#e6f1fb',dashboard:'#eeedfe'};
+  html += `<div style="display:flex;border-bottom:1px solid var(--border-strong)">`;
+  SUBCATS.forEach((sc, i) => {
+    const pts = sprintTickets.filter(t=>t.cat===sc.id).reduce((sum,t)=>sum+(parseFloat(t.points)||0),0);
+    const goalPtsForCat = sprintTickets.filter(t=>t.cat===sc.id&&t.goal).reduce((sum,t)=>sum+(parseFloat(t.points)||0),0);
+    const count = sprintTickets.filter(t=>t.cat===sc.id).length;
+    const goalPct = pts > 0 ? Math.round(goalPtsForCat/pts*100) : 0;
+    const color = catColors[sc.id] || 'var(--text2)';
+    const bg = catBgs[sc.id] || 'var(--surface2)';
+    const border = i < SUBCATS.length-1 ? `border-right:1px solid var(--border);` : '';
+    html += `<div style="flex:1;padding:8px 12px;${border}display:flex;flex-direction:column;gap:2px;background:${bg}">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:${color}">${sc.label}</div>
+      <div style="display:flex;align-items:baseline;gap:6px">
+        <span style="font-size:18px;font-weight:700;color:${color}">${pts}<span style="font-size:10px;font-weight:500;margin-left:1px">pts</span></span>
+        <span style="font-size:11px;color:${color};opacity:.7">${count} ticket${count!==1?'s':''}</span>
+      </div>
+      <div style="font-size:10px;color:${color};opacity:.75;font-weight:600">🎯 ${goalPct}% goal</div>
+    </div>`;
+  });
+  html += `</div>`;
+
   // ── GOALS SECTION (top, under header) ──
   const sprintGoals = goalsData[sid] || [];
   html += `<div class="goals-section" id="goals-${sid}" style="border-radius:0;border:none;border-bottom:1px solid var(--border-strong)">
@@ -799,14 +823,16 @@ function renderDetail(containerId, sprints, tabKey){
       </div>`;
     });
   }
-  html += `</div></div>`;
+  html += `</div>`;
+
+
+  html += `</div>`;
 
   html += `<div class="detail-table">
     <!-- COLUMN HEADERS: empty label cell + one per category -->
     <div class="dt-row-label"></div>`;
   SUBCATS.forEach(sc => {
-    const n = sprintTickets.filter(t=>t.cat===sc.id).length;
-    html += `<div class="dt-col-head">${sc.label}<span class="col-count">${n}</span></div>`;
+    html += `<div class="dt-col-head">${sc.label}</div>`;
   });
   const activeOwners = TIMELINE_OWNERS.filter(o => sprintTickets.some(t=>t.owner===o.id));
   if(activeOwners.length === 0){
