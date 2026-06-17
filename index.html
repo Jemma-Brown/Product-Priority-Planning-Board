@@ -1156,13 +1156,18 @@ function ticketCard(tk){
   const goalBadge     = tk.goal    ? `<span class="goal-flag">🎯 Goal</span>` : '';
   const epicBadge     = tk.epicUrl ? `<a href="${tk.epicUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-size:11px;color:${cardText};opacity:.7;display:block;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none" title="${esc(tk.epicUrl)}">⬡ Epic</a>` : '';
   const commentsBadge = tk.comments ? `<div style="font-size:9px;color:${cardText};opacity:.8;margin-top:1px;line-height:1.3;font-style:italic;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">${esc(tk.comments)}</div>` : '';
+  const isDone = !!tk.done;
+  const doneCardBg     = isDone ? (colourLabel ? cardBg : '#f0faf5') : cardBg;
+  const doneCardBorder = isDone ? '#1d9e75' : cardBorder;
+  const doneCardText   = isDone ? (colourLabel ? cardText : '#1d9e75') : cardText;
+  const doneOverlay    = isDone ? 'opacity:0.7;' : '';
   return `<div class="ticket" id="card-${tk.id}" draggable="true"
     ondragstart="event.dataTransfer.setData('text','${tk.id}');this.classList.add('dragging')"
     ondragend="this.classList.remove('dragging')"
     onclick="editTicket('${tk.id}')"
-    style="background:${cardBg};border-color:${cardBorder};cursor:pointer">
+    style="background:${doneCardBg};border-color:${doneCardBorder};cursor:pointer;${doneOverlay}">
     <div class="ticket-top" style="flex:1;overflow:hidden">
-      <div class="ticket-title" style="color:${cardText}">${esc(tk.title)}</div>
+      <div class="ticket-title" style="color:${doneCardText};${isDone?'text-decoration:line-through;opacity:.7;':''}">${esc(tk.title)}</div>
       <div style="display:flex;align-items:flex-start;gap:2px;flex-shrink:0">${jLink}</div>
     </div>
     <div style="flex-shrink:0;display:flex;flex-direction:column;gap:1px">
@@ -1170,10 +1175,14 @@ function ticketCard(tk){
       <div class="ticket-footer" style="margin-top:1px">
         <div style="display:flex;align-items:center;gap:3px;flex-wrap:wrap">
           <span class="priority-dot priority-${tk.priority}" title="${priorityLabel}"></span>
-          <span style="font-size:9px;color:${cardText};opacity:.7">${priorityLabel}</span>
+          <span style="font-size:9px;color:${doneCardText};opacity:.7">${priorityLabel}</span>
           ${goalBadge}${refinementBadge}
         </div>
-        <span style="font-size:11px;font-weight:700;color:#534ab7;width:20px;height:20px;border-radius:50%;border:1.5px solid #534ab7;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">${tk.points||''}</span>
+        <div style="display:flex;align-items:center;gap:3px;flex-shrink:0">
+          <span style="font-size:11px;font-weight:700;color:#534ab7;width:20px;height:20px;border-radius:50%;border:1.5px solid #534ab7;display:inline-flex;align-items:center;justify-content:center">${tk.points||''}</span>
+          <button onclick="event.stopPropagation();toggleTicketDone('${tk.id}')" title="${isDone?'Mark as not done':'Mark as done'}"
+            style="width:20px;height:20px;border-radius:50%;border:1.5px solid ${isDone?'#1d9e75':'var(--border-strong)'};background:${isDone?'#1d9e75':'transparent'};color:${isDone?'#fff':'var(--text3)'};display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;padding:0;flex-shrink:0;transition:all .15s">✓</button>
+        </div>
       </div>
     </div>
   </div>`;
@@ -1426,6 +1435,15 @@ document.addEventListener('click', e => {
 function deleteTicket(id){const tk=tickets.find(t=>t.id===id);pushUndo(`Delete ticket "${tk?.title||id}"`);tickets=tickets.filter(t=>t.id!==id);deleteOne('ticket',id);render()}
 function deleteTicketFromModal(){if(!editingTicketId)return;const id=editingTicketId;closeTicketModal();deleteTicket(id);}
 function closeTicketModal(){document.getElementById('ticket-modal').classList.remove('open')}
+function toggleTicketDone(id){
+  const tk = tickets.find(t=>t.id===id);
+  if(!tk) return;
+  pushUndo(`${tk.done?'Unmark':'Mark'} "${tk.title}" as done`);
+  const updated = {...tk, done: !tk.done};
+  tickets = tickets.map(t=>t.id===id ? updated : t);
+  saveOne('ticket', updated);
+  render();
+}
 /* ── MULTI-SELECT ── */
 function toggleMultiSelect(wrapId){
   const dd = document.getElementById(wrapId).querySelector('.ms-dropdown');
