@@ -80,7 +80,7 @@
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px" id="user-picker-btns"></div>
   </div>
 </div>
-<!-- Theme Modal --><div class="modal-overlay" id="theme-modal" onclick="if(event.target===this)closeThemeModal()"><div class="modal"><h2><span id="theme-modal-title">Add theme</span><button class="icon-btn" onclick="closeThemeModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div class="form-group"><label>Theme / goal title</label><input type="text" id="th-title" placeholder="e.g. Migrate reporting pipeline" /></div><div class="form-group"><label>Description (optional)</label><textarea id="th-desc" placeholder="What does success look like?"></textarea></div><div class="form-group"><label>Owner</label><select id="th-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option><option value="unknown">Unknown</option></select></div><div class="form-row" id="th-sprint-row"><div class="form-group"><label>Start sprint</label><select id="th-start"></select></div><div class="form-group"><label>End sprint</label><select id="th-end"></select></div></div><div class="form-row"><div class="form-group"><label>Priority</label><select id="th-priority"><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></div><div class="form-group"><label>Status</label><select id="th-color"><option value="todo">To do</option><option value="wip">Work in Progress</option><option value="done">Done</option></select></div></div><div class="modal-footer"><button class="btn" onclick="closeThemeModal()">Cancel</button><button class="btn primary" onclick="saveTheme()">Save theme</button></div></div></div><!-- Ticket Modal --><div class="modal-overlay" id="ticket-modal" onclick="if(event.target===this)closeTicketModal()"><div class="modal" style="max-width:900px"><h2><span id="ticket-modal-title">Add ticket</span><button class="icon-btn" onclick="closeTicketModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px"><div><div class="form-group"><label>Jira key</label><input type="text" id="tk-jira" placeholder="ISB-1234" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()" /><div id="jira-fetch-status" style="font-size:18px;margin-top:4px;min-height:14px"></div></div><div class="form-group"><label>Ticket title</label><input type="text" id="tk-title" placeholder="Task summary" /></div><div class="form-group"><label>Story points</label><select id="tk-points"><option value="">— Unpointed</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="5">5</option><option value="8">8</option></select></div><div class="form-group"><label>Status labels</label><div class="multi-select" id="tk-labels-wrap"><div class="ms-trigger" onclick="toggleMultiSelect('tk-labels-wrap')"><span class="ms-display" id="tk-labels-display">Select labels…</span><i class="ti ti-chevron-down" style="font-size:13px;color:var(--text3);flex-shrink:0"></i></div><div class="ms-dropdown" id="tk-labels-dropdown">
+<!-- Theme Modal --><div class="modal-overlay" id="theme-modal" onclick="if(event.target===this)closeThemeModal()"><div class="modal"><h2><span id="theme-modal-title">Add theme</span><button class="icon-btn" onclick="closeThemeModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div class="form-group"><label>Theme / goal title</label><input type="text" id="th-title" placeholder="e.g. Migrate reporting pipeline" /></div><div class="form-group"><label>Description (optional)</label><textarea id="th-desc" placeholder="What does success look like?"></textarea></div><div class="form-group"><label>Group (optional) <span style="font-size:11px;font-weight:400;color:var(--text3)">— links non-consecutive segments of the same theme</span></label><input type="text" id="th-group" placeholder="e.g. Data migration" autocomplete="off" /></div><div class="form-group"><label>Owner</label><select id="th-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option><option value="unknown">Unknown</option></select></div><div class="form-row" id="th-sprint-row"><div class="form-group"><label>Start sprint</label><select id="th-start"></select></div><div class="form-group"><label>End sprint</label><select id="th-end"></select></div></div><div class="form-row"><div class="form-group"><label>Priority</label><select id="th-priority"><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select></div><div class="form-group"><label>Status</label><select id="th-color"><option value="todo">To do</option><option value="wip">Work in Progress</option><option value="done">Done</option></select></div></div><div class="modal-footer"><button class="btn" onclick="closeThemeModal()">Cancel</button><button class="btn primary" onclick="saveTheme()">Save theme</button></div></div></div><!-- Ticket Modal --><div class="modal-overlay" id="ticket-modal" onclick="if(event.target===this)closeTicketModal()"><div class="modal" style="max-width:900px"><h2><span id="ticket-modal-title">Add ticket</span><button class="icon-btn" onclick="closeTicketModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2><div style="display:grid;grid-template-columns:1fr 1fr;gap:0 24px"><div><div class="form-group"><label>Jira key</label><input type="text" id="tk-jira" placeholder="ISB-1234" style="text-transform:uppercase" oninput="this.value=this.value.toUpperCase()" /><div id="jira-fetch-status" style="font-size:18px;margin-top:4px;min-height:14px"></div></div><div class="form-group"><label>Ticket title</label><input type="text" id="tk-title" placeholder="Task summary" /></div><div class="form-group"><label>Story points</label><select id="tk-points"><option value="">— Unpointed</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="5">5</option><option value="8">8</option></select></div><div class="form-group"><label>Status labels</label><div class="multi-select" id="tk-labels-wrap"><div class="ms-trigger" onclick="toggleMultiSelect('tk-labels-wrap')"><span class="ms-display" id="tk-labels-display">Select labels…</span><i class="ti ti-chevron-down" style="font-size:13px;color:var(--text3);flex-shrink:0"></i></div><div class="ms-dropdown" id="tk-labels-dropdown">
 <div style="padding:6px 12px 4px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--text3)">Status</div>
 <label class="ms-option"><input type="checkbox" value="Ticket Creation" onchange="onStatusLabelChange(this)"> Ticket Creation</label>
 <label class="ms-option"><input type="checkbox" value="Ready To Refine" onchange="onStatusLabelChange(this)"> Ready To Refine</label>
@@ -666,6 +666,48 @@ function renderTimeline(gridId, allSprints, tabKey){
         </div>`;
       });
     });
+
+    // ── GROUP CONNECTORS: dashed lines between same-group segments ──
+    if(ownerThemes.some(th => th.groupId)) {
+      // Build map: groupId -> sorted list of slots by visStart
+      const groupMap = {};
+      themeSlots.forEach(slot => {
+        if(!slot.th.groupId) return;
+        const key = slot.th.owner + '::' + slot.th.groupId;
+        if(!groupMap[key]) groupMap[key] = [];
+        groupMap[key].push(slot);
+      });
+      Object.values(groupMap).forEach(slots => {
+        if(slots.length < 2) return;
+        slots.sort((a,b) => a.visStart - b.visStart);
+        for(let i=0; i<slots.length-1; i++){
+          const a = slots[i], b = slots[i+1];
+          if(b.visStart <= a.visEnd + 1) continue; // consecutive/overlapping, no gap
+          // Draw connector spanning from col after a.visEnd to col before b.visStart
+          const connColStart = 2 + a.visEnd + 1;
+          const connColEnd   = 2 + b.visStart + 1;
+          if(connColStart >= connColEnd) continue;
+          const tc = THEME_COLORS[a.th.color]||THEME_COLORS.todo;
+          const dark = isDark();
+          const connColor = (a.th.color==='done') ? (dark ? '#085041' : '#2a9d7c') : o.barBg;
+          const laneY = PAD + a.laneIdx * (LANE_H + LANE_GAP) + LANE_H/2;
+          html += `<div style="
+            grid-row:${rowNum};
+            grid-column:${connColStart}/${connColEnd};
+            z-index:2;
+            pointer-events:none;
+            align-self:start;
+            padding-top:${laneY - 1}px;
+            overflow:hidden;
+          "><div style="
+            height:2px;
+            width:100%;
+            background:repeating-linear-gradient(90deg,${connColor} 0px,${connColor} 6px,transparent 6px,transparent 12px);
+            opacity:0.6;
+          "></div></div>`;
+        }
+      });
+    }
   });
 
   // ── UNKNOWN ROW (NFY only) ──
@@ -1174,6 +1216,7 @@ function openThemeModal(owner,start,end,progressMode){
   document.getElementById('theme-modal-title').textContent = progressMode ? 'Add progress item' : 'Add theme';
   document.getElementById('th-title').value='';
   document.getElementById('th-desc').value='';
+  document.getElementById('th-group').value='';
   document.getElementById('th-owner').value=owner||(activeTab==='nfy'&&!owner ? 'unknown' : (currentUser||'george'));
   document.getElementById('th-priority').value='medium';
   document.getElementById('th-color').value='todo';
@@ -1196,6 +1239,7 @@ function editTheme(id){
   document.getElementById('theme-modal-title').textContent = _themeProgressMode ? 'Edit progress item' : 'Edit theme';
   document.getElementById('th-title').value=t.title;
   document.getElementById('th-desc').value=t.desc||'';
+  document.getElementById('th-group').value=t.groupId||'';
   document.getElementById('th-owner').value=t.owner;
   document.getElementById('th-priority').value=t.priority;
   document.getElementById('th-color').value=t.color||'todo';
@@ -1217,10 +1261,11 @@ function saveTheme(){
   document.getElementById('th-title').style.borderColor='';
   const startSprint = _themeProgressMode ? 'progress' : document.getElementById('th-start').value;
   const endSprint   = _themeProgressMode ? 'progress' : document.getElementById('th-end').value;
+  const groupId=document.getElementById('th-group').value.trim()||undefined;
   const obj={id:editingThemeId||Date.now().toString(),title,desc:document.getElementById('th-desc').value.trim(),
     owner:document.getElementById('th-owner').value,startSprint,endSprint,
     priority:document.getElementById('th-priority').value,
-    color:document.getElementById('th-color').value};
+    color:document.getElementById('th-color').value,...(groupId?{groupId}:{})};
   pushUndo(editingThemeId ? `Edit theme "${title}"` : `Add theme "${title}"`);
   themes=editingThemeId?themes.map(t=>t.id===editingThemeId?obj:t):[...themes,obj];
   saveOne('theme',obj);closeThemeModal();render();
@@ -1265,18 +1310,56 @@ function editTicket(id){
   populateThemeSelect(t.themeId);
   document.getElementById('ticket-modal').classList.add('open');
 }
+// Deduplicate themes for dropdowns:
+// - themes sharing a groupId+owner collapse to the earliest segment
+// - themes with the same title+owner (no groupId) also collapse to the earliest
+function dedupedThemes() {
+  const allTabIds = [...(PLAN_SPRINTS||[]), ...(NFY_SPRINTS||[])].map(s=>s.id);
+  const sprintIdx = id => { const i = allTabIds.indexOf(id); return i < 0 ? 9999 : i; };
+  const sorted = [...themes].sort((a,b) => sprintIdx(a.startSprint) - sprintIdx(b.startSprint));
+  const seen = {}; // key -> true
+  const result = [];
+  sorted.forEach(t => {
+    const key = t.groupId
+      ? t.owner + '::group::' + t.groupId
+      : t.owner + '::title::' + t.title.trim().toLowerCase();
+    if(!seen[key]) { seen[key] = true; result.push(t); }
+  });
+  return result;
+}
+// Given any themeId (possibly a non-canonical duplicate), return the canonical theme
+function canonicalTheme(themeId) {
+  if(!themeId) return null;
+  const t = themes.find(x=>x.id===themeId);
+  if(!t) return null;
+  const allTabIds = [...(PLAN_SPRINTS||[]), ...(NFY_SPRINTS||[])].map(s=>s.id);
+  const sprintIdx = id => { const i = allTabIds.indexOf(id); return i < 0 ? 9999 : i; };
+  const key = t.groupId
+    ? t.owner + '::group::' + t.groupId
+    : t.owner + '::title::' + t.title.trim().toLowerCase();
+  const siblings = themes.filter(x => {
+    const k = x.groupId
+      ? x.owner + '::group::' + x.groupId
+      : x.owner + '::title::' + x.title.trim().toLowerCase();
+    return k === key;
+  });
+  siblings.sort((a,b) => sprintIdx(a.startSprint) - sprintIdx(b.startSprint));
+  return siblings[0] || t;
+}
 function populateThemeSelect(sel){
-  // Set hidden value and display text
-  document.getElementById('tk-theme').value = sel || '';
-  const matched = sel ? themes.find(t=>t.id===sel) : null;
-  document.getElementById('tk-theme-input').value = matched ? `${matched.title} (${matched.owner})` : '';
+  // Resolve to canonical theme if grouped
+  const canonical = sel ? canonicalTheme(sel) : null;
+  const canonicalId = canonical?.id || sel || '';
+  document.getElementById('tk-theme').value = canonicalId;
+  document.getElementById('tk-theme-input').value = canonical ? `${canonical.title} (${canonical.owner})` : '';
   renderThemeDropdown('');
 }
 function renderThemeDropdown(query){
   const dd = document.getElementById('tk-theme-dropdown');
   const q = query.toLowerCase();
-  const filtered = themes.filter(t => !q || t.title.toLowerCase().includes(q) || t.owner.toLowerCase().includes(q));
-  const cur = document.getElementById('tk-theme').value;
+  const filtered = dedupedThemes().filter(t => !q || t.title.toLowerCase().includes(q) || t.owner.toLowerCase().includes(q));
+  const curRaw = document.getElementById('tk-theme').value;
+  const cur = curRaw ? (canonicalTheme(curRaw)?.id || curRaw) : '';
   // Sort by tickets current user has in each theme, then by ownership
   const ticketCountByTheme = {};
   tickets.filter(tk=>tk.owner===currentUser).forEach(tk=>{
@@ -1850,11 +1933,11 @@ function filterDlThemeDropdown(){
 function renderDlThemeDropdown(query){
   const dd = document.getElementById('dl-theme-dropdown');
   const q = query.toLowerCase();
-  const filtered = themes.filter(t=>!q||t.title.toLowerCase().includes(q));
+  const filtered = dedupedThemes().filter(t=>!q||t.title.toLowerCase().includes(q));
   // Sort: themes the user has tickets in (by count desc), then themes owned by user, then rest
   const ticketCountByTheme = {};
   tickets.filter(tk=>tk.owner===currentUser).forEach(tk=>{
-    if(tk.themeId) ticketCountByTheme[tk.themeId] = (ticketCountByTheme[tk.themeId]||0)+1;
+    if(tk.themeId) { const cid=canonicalTheme(tk.themeId)?.id||tk.themeId; ticketCountByTheme[cid]=(ticketCountByTheme[cid]||0)+1; }
   });
   filtered.sort((a,b)=>{
     const ca = ticketCountByTheme[a.id]||0, cb = ticketCountByTheme[b.id]||0;
@@ -1897,8 +1980,9 @@ function renderPlanner(){
   const selRefinement = refinementSelect?.value || '';
   const selCat = catSelect?.value || '';
 
+  const plannerThemes = dedupedThemes();
   themeSelect.innerHTML = '<option value="">All themes</option>' +
-    themes.map(t=>`<option value="${t.id}"${t.id===selTheme?' selected':''}>${esc(t.title)}</option>`).join('');
+    plannerThemes.map(t=>`<option value="${t.id}"${t.id===selTheme?' selected':''}>${esc(t.title)}</option>`).join('');
   ownerSelect.innerHTML = '<option value="">All people</option>' +
     TIMELINE_OWNERS.map(o=>`<option value="${o.id}"${o.id===selOwner?' selected':''}>${esc(o.label)}</option>`).join('');
 
