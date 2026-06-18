@@ -1906,10 +1906,12 @@ function buildBookmarklet(){
     try{
       localStorage.setItem('pb_incoming', JSON.stringify({ts:Date.now(),params:params}));
     }catch(e){}
-    // Also try opening/focusing an existing board tab via named window, or open fresh only if nothing is already open
+    // Always open/focus the board tab — use params in URL as fallback if localStorage fails
     var opened=window.open('','planning-board-tab');
-    if(!opened || !opened.location || opened.location.href==='' || opened.location.href==='about:blank'){
-      window.open('` + boardUrl + `','planning-board-tab');
+    if(!opened || !opened.document || !opened.document.body || !opened.document.body.innerHTML){
+      window.open('` + boardUrl + `?bm=1&'+params,'planning-board-tab');
+    } else {
+      try{ opened.focus(); }catch(e){}
     }
   }catch(e){alert('Bookmarklet error: '+e.message);}
 })();`;
