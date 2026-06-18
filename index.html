@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Product Priority Planning Board</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0} :root{ color-scheme:light; --bg:#f7f6f3;--surface:#fff;--surface2:#f1f0ec; --border:rgba(0,0,0,0.12);--border-strong:rgba(0,0,0,0.22); --text:#1a1a18;--text2:#5f5e5a;--text3:#888780; --radius:8px;--radius-sm:5px;--owner-w:100px; --george-color:#B3D4FF;--george-bg:#eef5ff;--george-bg2:#eef5ff;--george-text:#172b4d;--george-head:#B3D4FF;--george-bar-text:#172b4d; --jemma-color:#998DD9;--jemma-bg:#f0eefb;--jemma-bg2:#f0eefb;--jemma-text:#172b4d;--jemma-head:#998DD9;--jemma-bar-text:#172b4d; --sam-color:#79F2C0;--sam-bg:#eafbf4;--sam-bg2:#eafbf4;--sam-text:#172b4d;--sam-head:#79F2C0;--sam-bar-text:#172b4d; --chris-color:#7DD3F0;--chris-bg:#e8f6fc;--chris-bg2:#e8f6fc;--chris-text:#172b4d;--chris-head:#227D9B;--chris-bar-text:#ffffff; --claire-color:#FFE380;--claire-bg:#fffbe6;--claire-bg2:#fffbe6;--claire-text:#172b4d;--claire-head:#FFE380;--claire-bar-text:#172b4d; --lorna-color:#F9A8D4;--lorna-bg:#fdf2f8;--lorna-bg2:#fdf2f8;--lorna-text:#172b4d;--lorna-head:#F9A8D4;--lorna-bar-text:#172b4d; --cat-data:#854f0b;--cat-data-bg:#faeeda;--cat-data-bg2:#f5e4c5; --cat-webi:#185fa5;--cat-webi-bg:#e6f1fb;--cat-webi-bg2:#d4e6f7; --cat-dash:#534ab7;--cat-dash-bg:#eeedfe;--cat-dash-bg2:#e0dffb; } @media(prefers-color-scheme:dark){:root{ color-scheme:dark; --bg:#1c1c1a;--surface:#252523;--surface2:#2e2e2b; --border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.22); --text:#f1efe8;--text2:#b4b2a9;--text3:#888780; --george-bg:#0c3a5e;--george-bg2:#0e4670;--george-text:#e6f1fb;--george-head:#0c447c;--george-bar-text:#e6f1fb; --jemma-bg:#2d2868;--jemma-bg2:#362f7a;--jemma-text:#eeedfe;--jemma-head:#3c3489;--jemma-bar-text:#eeedfe; --sam-bg:#073d2e;--sam-bg2:#094a37;--sam-text:#e1f5ee;--sam-head:#085041;--sam-bar-text:#e1f5ee; --chris-bg:#0e3d4f;--chris-bg2:#154d61;--chris-text:#e0f4fb;--chris-head:#1a6585;--chris-bar-text:#e0f4fb; --claire-bg:#5a2c08;--claire-bg2:#6e3a0c;--claire-text:#fef0e3;--claire-head:#8c4e18;--claire-bar-text:#fef0e3; --lorna-bg:#5b1a3a;--lorna-bg2:#6e2048;--lorna-text:#fce7f3;--lorna-head:#8c2d5e;--lorna-bar-text:#fce7f3; --cat-data-bg:#412402;--cat-data-bg2:#523005;--cat-data:#e8a855; --cat-webi-bg:#042c53;--cat-webi-bg2:#0a3a68;--cat-webi:#7bb8f0; --cat-dash-bg:#26215c;--cat-dash-bg2:#332d75;--cat-dash:#afa9ec; }}html[data-theme="dark"]{ color-scheme:dark; --bg:#1c1c1a;--surface:#252523;--surface2:#2e2e2b; --border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.22); --text:#f1efe8;--text2:#b4b2a9;--text3:#888780; --george-bg:#0c3a5e;--george-bg2:#0e4670;--george-text:#e6f1fb;--george-head:#0c447c;--george-bar-text:#e6f1fb; --jemma-bg:#2d2868;--jemma-bg2:#362f7a;--jemma-text:#eeedfe;--jemma-head:#3c3489;--jemma-bar-text:#eeedfe; --sam-bg:#073d2e;--sam-bg2:#094a37;--sam-text:#e1f5ee;--sam-head:#085041;--sam-bar-text:#e1f5ee; --chris-bg:#0e3d4f;--chris-bg2:#154d61;--chris-text:#e0f4fb;--chris-head:#1a6585;--chris-bar-text:#e0f4fb; --claire-bg:#5a2c08;--claire-bg2:#6e3a0c;--claire-text:#fef0e3;--claire-head:#8c4e18;--claire-bar-text:#fef0e3; --lorna-bg:#5b1a3a;--lorna-bg2:#6e2048;--lorna-text:#fce7f3;--lorna-head:#8c2d5e;--lorna-bar-text:#fce7f3; --cat-data-bg:#412402;--cat-data-bg2:#523005;--cat-data:#e8a855; --cat-webi-bg:#042c53;--cat-webi-bg2:#0a3a68;--cat-webi:#7bb8f0; --cat-dash-bg:#26215c;--cat-dash-bg2:#332d75;--cat-dash:#afa9ec; }[data-theme="dark"]{ --bg:#1c1c1a;--surface:#252523;--surface2:#2e2e2b; --border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.22); --text:#f1efe8;--text2:#b4b2a9;--text3:#888780; --george-bg:#0c3a5e;--george-bg2:#0e4670;--george-text:#e6f1fb;--george-head:#0c447c;--george-bar-text:#e6f1fb; --jemma-bg:#2d2868;--jemma-bg2:#362f7a;--jemma-text:#eeedfe;--jemma-head:#3c3489;--jemma-bar-text:#eeedfe; --sam-bg:#073d2e;--sam-bg2:#094a37;--sam-text:#e1f5ee;--sam-head:#085041;--sam-bar-text:#e1f5ee; --chris-bg:#0e3d4f;--chris-bg2:#154d61;--chris-text:#e0f4fb;--chris-head:#1a6585;--chris-bar-text:#e0f4fb; --claire-bg:#5a2c08;--claire-bg2:#6e3a0c;--claire-text:#fef0e3;--claire-head:#8c4e18;--claire-bar-text:#fef0e3; --lorna-bg:#5b1a3a;--lorna-bg2:#6e2048;--lorna-text:#fce7f3;--lorna-head:#8c2d5e;--lorna-bar-text:#fce7f3; --cat-data-bg:#412402;--cat-data-bg2:#523005;--cat-data:#e8a855; --cat-webi-bg:#042c53;--cat-webi-bg2:#0a3a68;--cat-webi:#7bb8f0; --cat-dash-bg:#26215c;--cat-dash-bg2:#332d75;--cat-dash:#afa9ec; } html[data-theme="light"]{color-scheme:light}body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:18px} header{background:var(--surface);border-bottom:1px solid var(--border-strong);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100} header h1{font-size:20px;font-weight:500;display:flex;align-items:center;gap:8px} .header-actions{display:flex;gap:8px;align-items:center} .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--radius-sm);border:0.5px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:18px;font-weight:500;cursor:pointer;transition:background .15s} .btn:hover{background:var(--surface2)} .btn.primary{background:#2c2c2a;color:#f1efe8;border-color:transparent} .btn.primary:hover{background:#444441} @media(prefers-color-scheme:dark){.btn.primary{background:#f1efe8;color:#1c1c1a}.btn.primary:hover{background:#d3d1c7}}[data-theme="dark"] .btn.primary{background:#f1efe8;color:#1c1c1a}[data-theme="dark"] .btn.primary:hover{background:#d3d1c7} .btn.sm{padding:4px 8px;font-size:19px} .tabs{display:flex;align-items:center;background:var(--surface);border-bottom:1px solid var(--border-strong);padding:0 20px} .tab-btn{padding:10px 16px;font-size:18px;font-weight:500;color:var(--text3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;display:flex;align-items:center;gap:6px;margin-bottom:-1px;transition:color .15s} .tab-btn:hover{color:var(--text2)} .tab-btn.active{color:var(--text);border-bottom-color:#534ab7} .tab-count{font-size:18px;font-weight:500;color:var(--text3);background:var(--surface2);border:0.5px solid var(--border-strong);padding:1px 5px;border-radius:10px} .tab-btn.active .tab-count{background:var(--cat-dash-bg);color:#26215c;border-color:#534ab7} @media(prefers-color-scheme:dark){.tab-btn.active .tab-count{background:#3c3489;color:#eeedfe;border-color:#afa9ec}}[data-theme="dark"] .tab-btn.active .tab-count{background:#3c3489;color:#eeedfe;border-color:#afa9ec} .panel{display:none}.panel.active{display:block} .grid-wrap{padding:20px;overflow-x:auto} .timeline-grid{display:grid;min-width:max-content;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;align-items:start} .tl-corner{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:8px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;align-self:stretch} .tl-sprint-head{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:6px 8px 18px;text-align:center;cursor:pointer;transition:background .12s;user-select:none;position:relative} .tl-sprint-head:last-child{border-right:none} .tl-sprint-head:hover{background:var(--surface)} .tl-sprint-head.selected{background:var(--cat-dash-bg);box-shadow:inset 0 -3px 0 #534ab7} @media(prefers-color-scheme:dark){.tl-sprint-head.selected{background:#3c3489}}[data-theme="dark"] .tl-sprint-head.selected{background:#3c3489} .tl-sprint-num{font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text)} .tl-sprint-dates{font-size:19px;color:var(--text3);margin-top:1px} .tl-row-head{border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:4px} .tl-row-head:last-of-type{border-bottom:none} .owner-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600} .owner-name{font-size:19px;font-weight:600;text-align:center} .tl-cell{border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);min-height:50px;padding:3px;position:relative;display:flex;flex-direction:column;gap:2px} .theme-bar-span{display:block;margin-left:2px;margin-right:2px;} .tl-add-btn{pointer-events:all;cursor:pointer;} .tl-cell:last-child{border-right:none} .theme-bar{border-radius:4px;padding:3px 7px;font-size:18px;font-weight:500;line-height:1.3;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px;transition:filter .1s;min-height:22px} .theme-bar:hover{filter:brightness(0.95)} .theme-bar .priority-dot{flex-shrink:0} .theme-bar.start{border-top-left-radius:4px;border-bottom-left-radius:4px;border-top-right-radius:0;border-bottom-right-radius:0} .theme-bar.middle{border-radius:0} .theme-bar.end{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:4px;border-bottom-right-radius:4px} .theme-bar.single{border-radius:4px} .theme-bar .bar-actions{display:none;gap:1px;margin-left:auto} .theme-bar:hover .bar-actions{display:flex} .detail-panel{margin:0 16px 16px;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;overflow-x:auto} .detail-header{background:var(--surface2);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-strong)} .detail-title{font-size:19px;font-weight:600;display:flex;align-items:center;gap:8px} .ticket{background:var(--surface);border-radius:5px;border:0.5px solid var(--border);padding:6px 8px;cursor:grab;transition:border-color .15s,opacity .15s;user-select:none;display:flex;flex-direction:column;height:90px;overflow:hidden;width:calc(50% - 2px);flex-shrink:0} .ticket:hover{border-color:var(--border-strong)} .ticket.dragging{opacity:.3} .ticket-top{display:flex;align-items:flex-start;justify-content:space-between;gap:4px;margin-bottom:3px;overflow:hidden;min-height:0} .ticket-title{font-size:11px;font-weight:500;line-height:1.25;flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical} .ticket-jira{font-size:9px;font-weight:600;color:#534ab7;text-decoration:none;padding:1px 3px;border-radius:3px;background:var(--cat-dash-bg);white-space:nowrap;transition:background .1s} .ticket-jira:hover{background:var(--cat-dash-bg2)} .ticket-footer{display:flex;align-items:center;justify-content:space-between;gap:2px;margin-top:auto;padding-top:3px} .ticket-actions{display:flex;gap:1px;opacity:0;transition:opacity .15s} .ticket:hover .ticket-actions{opacity:1} .priority-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0} .priority-high{background:#e24b4a}.priority-medium{background:#ef9f27}.priority-low{background:#1d9e75} .priority-must-do{background:#7c0a02}.priority-bau{background:#888780} .goal-flag{font-size:9px;background:var(--claire-bg);border:0.5px solid #f0c030;color:var(--claire-text);padding:1px 3px;border-radius:3px;white-space:nowrap} .multi-select{position:relative} .ms-trigger{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);cursor:pointer;min-height:38px;transition:border-color .15s} .ms-trigger:hover{border-color:#534ab7} .ms-display{font-size:13px;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap} .ms-display.placeholder{color:var(--text3)} .ms-dropdown{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);overflow:hidden} .ms-dropdown.open{display:block} .ms-option{display:flex;align-items:center;gap:9px;padding:8px 12px;font-size:13px;cursor:pointer;transition:background .1s;color:var(--text)} .ms-option:hover{background:var(--surface2)} .ms-option input[type=checkbox]{width:14px;height:14px;accent-color:#534ab7;cursor:pointer;flex-shrink:0} .icon-btn{background:none;border:none;cursor:pointer;color:var(--text3);padding:2px;border-radius:3px;display:flex;align-items:center;font-size:18px;transition:color .1s,background .1s} .icon-btn:hover{color:var(--text);background:rgba(0,0,0,0.06)} .icon-btn.delete:hover{color:#e24b4a} .empty-state{color:var(--text3);font-size:18px;text-align:center;padding:12px 6px;border:1px dashed var(--border);border-radius:4px;cursor:pointer} .empty-state:hover{border-color:var(--text3);color:var(--text2)} .progress-wrap{padding:20px} .progress-board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px} .progress-col{border-radius:var(--radius);border:1px solid var(--border-strong);overflow:hidden;display:flex;flex-direction:column} .progress-col-head{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-strong)} .progress-col-title{font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:8px} .progress-col-body{padding:10px;display:flex;flex-direction:column;gap:8px;min-height:100px;flex:1;transition:box-shadow .12s} .progress-col-body.drag-over{box-shadow:inset 0 0 0 2px #534ab7} .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:200;align-items:center;justify-content:center;padding:20px} .modal-overlay.open{display:flex} .modal{background:var(--surface);border-radius:var(--radius);border:.5px solid var(--border-strong);padding:22px;width:100%;max-width:900px;max-height:90vh;overflow-y:auto} .modal h2{font-size:19px;font-weight:500;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between} .form-group{margin-bottom:12px} .form-group label{display:block;font-size:19px;font-weight:500;color:var(--text2);margin-bottom:4px;text-transform:none;letter-spacing:0} .form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 11px;border:.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:19px;font-family:inherit;outline:none} .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#534ab7} .form-group textarea{resize:vertical;min-height:50px} .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px} .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px} .modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:16px} .hint{font-size:18px;color:var(--text3);margin-top:3px} .detail-table{display:grid;grid-template-columns:max-content repeat(3,1fr);border-top:1px solid var(--border-strong);width:100%} .dt-row-label{padding:7px 12px;font-size:17px;font-weight:700;text-transform:none;letter-spacing:0;color:var(--text3);display:flex;align-items:flex-start;border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap;} .dt-col-head{padding:7px 12px;font-size:18px;font-weight:700;text-transform:none;letter-spacing:0;border-bottom:1px solid var(--border-strong);display:flex;align-items:center;justify-content:space-between;background:var(--surface2);color:var(--text2);border-right:1px solid var(--border)} .dt-col-head:last-child{border-right:none} .dt-col-head .col-count{font-size:19px;font-weight:500;padding:1px 5px;border-radius:10px;background:rgba(0,0,0,0.06)} @media(prefers-color-scheme:dark){.dt-col-head .col-count{background:rgba(255,255,255,0.1)}}[data-theme="dark"] .dt-col-head .col-count{background:rgba(255,255,255,0.1)} .dt-body-cell{padding:5px;display:flex;flex-wrap:wrap;gap:4px;align-content:start;background:var(--surface);border-right:1px solid var(--border);border-bottom:1px solid var(--border)} .dt-body-cell:last-of-type{border-right:none} .df-label{padding:7px 12px;font-size:17px;font-weight:700;text-transform:none;letter-spacing:0;color:var(--text3);display:flex;align-items:center;border-right:1px solid var(--border-strong);border-top:1px solid var(--border);background:var(--surface2);white-space:nowrap;} .df-cell{padding:6px 8px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:18px;font-weight:600;color:var(--text2);border-right:1px solid var(--border);border-top:1px solid var(--border);background:var(--surface)} .df-cell:last-child{border-right:none} .df-cell.over-cap{color:#e24b4a;background:var(--surface2)} .df-cell.at-cap{color:#1d9e75;background:var(--sam-bg)} .df-cell.under-cap{color:#185fa5;background:var(--cat-webi-bg)} .df-cell.df-muted{color:var(--text3);font-weight:400} @media(prefers-color-scheme:dark){ .df-cell.over-cap{background:#3d1212} .df-cell.at-cap{background:#0d2e1e} }[data-theme="dark"] .df-cell.over-cap{background:#3d1212}[data-theme="dark"] .df-cell.at-cap{background:#0d2e1e} .cap-input{width:52px;text-align:center;padding:3px 0;border:.5px solid var(--border-strong);border-radius:4px;background:var(--surface);color:var(--text);font-size:18px;font-weight:600;font-family:inherit;outline:none;-moz-appearance:textfield;} .cap-input::-webkit-outer-spin-button,.cap-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0} .cap-input:focus{border-color:#534ab7} .settings-pop{display:none;position:absolute;top:100%;right:0;margin-top:6px;background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--radius);padding:14px;width:300px;z-index:150;box-shadow:0 4px 16px rgba(0,0,0,0.12)} .settings-pop.open{display:block} .settings-wrap{position:relative}.sprint-nav{display:flex;align-items:center;gap:10px;padding:12px 20px 0;position:relative;z-index:1;} .panel-body-row{display:flex;align-items:flex-start;overflow-x:auto;overflow-y:visible;} .panel-body-row .grid-wrap{flex-shrink:0;overflow-x:auto;padding:20px;min-width:0;} .side-detail{flex:1 1 0;min-width:280px;padding:12px 16px 16px;border-left:1px solid var(--border-strong);overflow-y:auto;overflow-x:auto;min-width:0;} .side-detail .detail-panel{margin:0;width:100%;} .grid-resizer{flex-shrink:0;width:28px;cursor:col-resize;background:var(--surface2);border-left:1px solid var(--border-strong);border-right:1px solid var(--border-strong);transition:background .15s,border-color .15s;display:flex;align-items:center;justify-content:center;user-select:none;} .grid-resizer:hover,.grid-resizer.dragging{background:var(--cat-dash-bg);border-color:#534ab7;} .resizer-icon{display:flex;align-items:center;gap:1px;background:var(--surface);border:1px solid var(--border-strong);border-radius:4px;padding:5px 3px;box-shadow:0 1px 3px rgba(0,0,0,0.1);pointer-events:none;} .resizer-icon span{font-size:12px;font-weight:700;line-height:1;color:var(--text3);} .resizer-icon .resizer-pipe{color:var(--border-strong);margin:0 1px;} .grid-resizer:hover .resizer-icon,.grid-resizer.dragging .resizer-icon{border-color:#534ab7;} .grid-resizer:hover .resizer-icon span,.grid-resizer.dragging .resizer-icon span{color:#534ab7;} .grid-resizer:hover .resizer-pipe,.grid-resizer.dragging .resizer-pipe{color:#534ab7;} .sprint-nav-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:6px;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:20px;cursor:pointer;transition:background .15s;font-weight:500;line-height:1;flex-shrink:0;} .sprint-nav-btn:hover{background:var(--surface2)} .sprint-nav-btn:disabled{opacity:.3;cursor:default} .sprint-nav-label{font-size:14px;font-weight:500;color:var(--text2);white-space:nowrap} .sprint-nav-range{font-size:14px;color:var(--text3);white-space:nowrap}
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0} :root{ color-scheme:light; --bg:#f7f6f3;--surface:#fff;--surface2:#f1f0ec; --border:rgba(0,0,0,0.12);--border-strong:rgba(0,0,0,0.22); --text:#1a1a18;--text2:#5f5e5a;--text3:#888780; --radius:8px;--radius-sm:5px;--owner-w:100px; --george-color:#B3D4FF;--george-bg:#eef5ff;--george-bg2:#eef5ff;--george-text:#172b4d;--george-head:#B3D4FF;--george-bar-text:#172b4d; --jemma-color:#998DD9;--jemma-bg:#f0eefb;--jemma-bg2:#f0eefb;--jemma-text:#172b4d;--jemma-head:#998DD9;--jemma-bar-text:#172b4d; --sam-color:#79F2C0;--sam-bg:#eafbf4;--sam-bg2:#eafbf4;--sam-text:#172b4d;--sam-head:#79F2C0;--sam-bar-text:#172b4d; --chris-color:#7DD3F0;--chris-bg:#e8f6fc;--chris-bg2:#e8f6fc;--chris-text:#172b4d;--chris-head:#227D9B;--chris-bar-text:#ffffff; --claire-color:#FFE380;--claire-bg:#fffbe6;--claire-bg2:#fffbe6;--claire-text:#172b4d;--claire-head:#FFE380;--claire-bar-text:#172b4d; --lorna-color:#F9A8D4;--lorna-bg:#fdf2f8;--lorna-bg2:#fdf2f8;--lorna-text:#172b4d;--lorna-head:#F9A8D4;--lorna-bar-text:#172b4d; --cat-data:#854f0b;--cat-data-bg:#faeeda;--cat-data-bg2:#f5e4c5; --cat-webi:#185fa5;--cat-webi-bg:#e6f1fb;--cat-webi-bg2:#d4e6f7; --cat-dash:#534ab7;--cat-dash-bg:#eeedfe;--cat-dash-bg2:#e0dffb; } @media(prefers-color-scheme:dark){:root{ color-scheme:dark; --bg:#1c1c1a;--surface:#252523;--surface2:#2e2e2b; --border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.22); --text:#f1efe8;--text2:#b4b2a9;--text3:#888780; --george-bg:#0c3a5e;--george-bg2:#0e4670;--george-text:#e6f1fb;--george-head:#0c447c;--george-bar-text:#e6f1fb; --jemma-bg:#2d2868;--jemma-bg2:#362f7a;--jemma-text:#eeedfe;--jemma-head:#3c3489;--jemma-bar-text:#eeedfe; --sam-bg:#073d2e;--sam-bg2:#094a37;--sam-text:#e1f5ee;--sam-head:#085041;--sam-bar-text:#e1f5ee; --chris-bg:#0e3d4f;--chris-bg2:#154d61;--chris-text:#e0f4fb;--chris-head:#1a6585;--chris-bar-text:#e0f4fb; --claire-bg:#5a2c08;--claire-bg2:#6e3a0c;--claire-text:#fef0e3;--claire-head:#8c4e18;--claire-bar-text:#fef0e3; --lorna-bg:#5b1a3a;--lorna-bg2:#6e2048;--lorna-text:#fce7f3;--lorna-head:#8c2d5e;--lorna-bar-text:#fce7f3; --cat-data-bg:#412402;--cat-data-bg2:#523005;--cat-data:#e8a855; --cat-webi-bg:#042c53;--cat-webi-bg2:#0a3a68;--cat-webi:#7bb8f0; --cat-dash-bg:#26215c;--cat-dash-bg2:#332d75;--cat-dash:#afa9ec; }}html[data-theme="dark"]{ color-scheme:dark; --bg:#1c1c1a;--surface:#252523;--surface2:#2e2e2b; --border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.22); --text:#f1efe8;--text2:#b4b2a9;--text3:#888780; --george-bg:#0c3a5e;--george-bg2:#0e4670;--george-text:#e6f1fb;--george-head:#0c447c;--george-bar-text:#e6f1fb; --jemma-bg:#2d2868;--jemma-bg2:#362f7a;--jemma-text:#eeedfe;--jemma-head:#3c3489;--jemma-bar-text:#eeedfe; --sam-bg:#073d2e;--sam-bg2:#094a37;--sam-text:#e1f5ee;--sam-head:#085041;--sam-bar-text:#e1f5ee; --chris-bg:#0e3d4f;--chris-bg2:#154d61;--chris-text:#e0f4fb;--chris-head:#1a6585;--chris-bar-text:#e0f4fb; --claire-bg:#5a2c08;--claire-bg2:#6e3a0c;--claire-text:#fef0e3;--claire-head:#8c4e18;--claire-bar-text:#fef0e3; --lorna-bg:#5b1a3a;--lorna-bg2:#6e2048;--lorna-text:#fce7f3;--lorna-head:#8c2d5e;--lorna-bar-text:#fce7f3; --cat-data-bg:#412402;--cat-data-bg2:#523005;--cat-data:#e8a855; --cat-webi-bg:#042c53;--cat-webi-bg2:#0a3a68;--cat-webi:#7bb8f0; --cat-dash-bg:#26215c;--cat-dash-bg2:#332d75;--cat-dash:#afa9ec; }[data-theme="dark"]{ --bg:#1c1c1a;--surface:#252523;--surface2:#2e2e2b; --border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.22); --text:#f1efe8;--text2:#b4b2a9;--text3:#888780; --george-bg:#0c3a5e;--george-bg2:#0e4670;--george-text:#e6f1fb;--george-head:#0c447c;--george-bar-text:#e6f1fb; --jemma-bg:#2d2868;--jemma-bg2:#362f7a;--jemma-text:#eeedfe;--jemma-head:#3c3489;--jemma-bar-text:#eeedfe; --sam-bg:#073d2e;--sam-bg2:#094a37;--sam-text:#e1f5ee;--sam-head:#085041;--sam-bar-text:#e1f5ee; --chris-bg:#0e3d4f;--chris-bg2:#154d61;--chris-text:#e0f4fb;--chris-head:#1a6585;--chris-bar-text:#e0f4fb; --claire-bg:#5a2c08;--claire-bg2:#6e3a0c;--claire-text:#fef0e3;--claire-head:#8c4e18;--claire-bar-text:#fef0e3; --lorna-bg:#5b1a3a;--lorna-bg2:#6e2048;--lorna-text:#fce7f3;--lorna-head:#8c2d5e;--lorna-bar-text:#fce7f3; --cat-data-bg:#412402;--cat-data-bg2:#523005;--cat-data:#e8a855; --cat-webi-bg:#042c53;--cat-webi-bg2:#0a3a68;--cat-webi:#7bb8f0; --cat-dash-bg:#26215c;--cat-dash-bg2:#332d75;--cat-dash:#afa9ec; } html[data-theme="light"]{color-scheme:light}body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;font-size:18px} header{background:var(--surface);border-bottom:1px solid var(--border-strong);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100} header h1{font-size:20px;font-weight:500;display:flex;align-items:center;gap:8px} .header-actions{display:flex;gap:8px;align-items:center} .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--radius-sm);border:0.5px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:18px;font-weight:500;cursor:pointer;transition:background .15s} .btn:hover{background:var(--surface2)} .btn.primary{background:#2c2c2a;color:#f1efe8;border-color:transparent} .btn.primary:hover{background:#444441} @media(prefers-color-scheme:dark){.btn.primary{background:#f1efe8;color:#1c1c1a}.btn.primary:hover{background:#d3d1c7}}[data-theme="dark"] .btn.primary{background:#f1efe8;color:#1c1c1a}[data-theme="dark"] .btn.primary:hover{background:#d3d1c7} .btn.sm{padding:4px 8px;font-size:19px} .tabs{display:flex;align-items:center;background:var(--surface);border-bottom:1px solid var(--border-strong);padding:0 20px;position:sticky;top:57px;z-index:99} .tab-btn{padding:10px 16px;font-size:18px;font-weight:500;color:var(--text3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;display:flex;align-items:center;gap:6px;margin-bottom:-1px;transition:color .15s} .tab-btn:hover{color:var(--text2)} .tab-btn.active{color:var(--text);border-bottom-color:#534ab7} .tab-count{font-size:18px;font-weight:500;color:var(--text3);background:var(--surface2);border:0.5px solid var(--border-strong);padding:1px 5px;border-radius:10px} .tab-btn.active .tab-count{background:var(--cat-dash-bg);color:#26215c;border-color:#534ab7} @media(prefers-color-scheme:dark){.tab-btn.active .tab-count{background:#3c3489;color:#eeedfe;border-color:#afa9ec}}[data-theme="dark"] .tab-btn.active .tab-count{background:#3c3489;color:#eeedfe;border-color:#afa9ec} .panel{display:none}.panel.active{display:block;height:calc(100vh - 114px);overflow:hidden} .grid-wrap{padding:20px;overflow-x:auto} .timeline-grid{display:grid;min-width:max-content;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;align-items:start} .tl-corner{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:8px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;align-self:stretch} .tl-sprint-head{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:6px 8px 18px;text-align:center;cursor:pointer;transition:background .12s;user-select:none;position:relative} .tl-sprint-head:last-child{border-right:none} .tl-sprint-head:hover{background:var(--surface)} .tl-sprint-head.selected{background:var(--cat-dash-bg);box-shadow:inset 0 -3px 0 #534ab7} @media(prefers-color-scheme:dark){.tl-sprint-head.selected{background:#3c3489}}[data-theme="dark"] .tl-sprint-head.selected{background:#3c3489} .tl-sprint-num{font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text)} .tl-sprint-dates{font-size:19px;color:var(--text3);margin-top:1px} .tl-row-head{border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:4px} .tl-row-head:last-of-type{border-bottom:none} .owner-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600} .owner-name{font-size:19px;font-weight:600;text-align:center} .tl-cell{border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);min-height:50px;padding:3px;position:relative;display:flex;flex-direction:column;gap:2px} .theme-bar-span{display:block;margin-left:2px;margin-right:2px;} .tl-add-btn{pointer-events:all;cursor:pointer;} .tl-cell:last-child{border-right:none} .theme-bar{border-radius:4px;padding:3px 7px;font-size:18px;font-weight:500;line-height:1.3;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px;transition:filter .1s;min-height:22px} .theme-bar:hover{filter:brightness(0.95)} .theme-bar .priority-dot{flex-shrink:0} .theme-bar.start{border-top-left-radius:4px;border-bottom-left-radius:4px;border-top-right-radius:0;border-bottom-right-radius:0} .theme-bar.middle{border-radius:0} .theme-bar.end{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:4px;border-bottom-right-radius:4px} .theme-bar.single{border-radius:4px} .theme-bar .bar-actions{display:none;gap:1px;margin-left:auto} .theme-bar:hover .bar-actions{display:flex} .detail-panel{margin:0 16px 16px;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;overflow-x:auto} .detail-header{background:var(--surface2);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-strong)} .detail-title{font-size:19px;font-weight:600;display:flex;align-items:center;gap:8px} .ticket{background:var(--surface);border-radius:5px;border:0.5px solid var(--border);padding:6px 8px;cursor:grab;transition:border-color .15s,opacity .15s;user-select:none;display:flex;flex-direction:column;height:90px;overflow:hidden;width:calc(50% - 2px);flex-shrink:0} .ticket:hover{border-color:var(--border-strong)} .ticket.dragging{opacity:.3} .ticket-top{display:flex;align-items:flex-start;justify-content:space-between;gap:4px;margin-bottom:3px;overflow:hidden;min-height:0} .ticket-title{font-size:11px;font-weight:500;line-height:1.25;flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical} .ticket-jira{font-size:9px;font-weight:600;color:#534ab7;text-decoration:none;padding:1px 3px;border-radius:3px;background:var(--cat-dash-bg);white-space:nowrap;transition:background .1s} .ticket-jira:hover{background:var(--cat-dash-bg2)} .ticket-footer{display:flex;align-items:center;justify-content:space-between;gap:2px;margin-top:auto;padding-top:3px} .ticket-actions{display:flex;gap:1px;opacity:0;transition:opacity .15s} .ticket:hover .ticket-actions{opacity:1} .priority-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0} .priority-high{background:#e24b4a}.priority-medium{background:#ef9f27}.priority-low{background:#1d9e75} .priority-must-do{background:#7c0a02}.priority-bau{background:#888780} .goal-flag{font-size:9px;background:var(--claire-bg);border:0.5px solid #f0c030;color:var(--claire-text);padding:1px 3px;border-radius:3px;white-space:nowrap} .multi-select{position:relative} .ms-trigger{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);cursor:pointer;min-height:38px;transition:border-color .15s} .ms-trigger:hover{border-color:#534ab7} .ms-display{font-size:13px;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap} .ms-display.placeholder{color:var(--text3)} .ms-dropdown{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);overflow:hidden} .ms-dropdown.open{display:block} .ms-option{display:flex;align-items:center;gap:9px;padding:8px 12px;font-size:13px;cursor:pointer;transition:background .1s;color:var(--text)} .ms-option:hover{background:var(--surface2)} .ms-option input[type=checkbox]{width:14px;height:14px;accent-color:#534ab7;cursor:pointer;flex-shrink:0} .icon-btn{background:none;border:none;cursor:pointer;color:var(--text3);padding:2px;border-radius:3px;display:flex;align-items:center;font-size:18px;transition:color .1s,background .1s} .icon-btn:hover{color:var(--text);background:rgba(0,0,0,0.06)} .icon-btn.delete:hover{color:#e24b4a} .empty-state{color:var(--text3);font-size:18px;text-align:center;padding:12px 6px;border:1px dashed var(--border);border-radius:4px;cursor:pointer} .empty-state:hover{border-color:var(--text3);color:var(--text2)} .progress-wrap{padding:20px;height:100%;overflow-y:auto} .progress-board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px} .progress-col{border-radius:var(--radius);border:1px solid var(--border-strong);overflow:hidden;display:flex;flex-direction:column} .progress-col-head{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-strong)} .progress-col-title{font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:8px} .progress-col-body{padding:10px;display:flex;flex-direction:column;gap:8px;min-height:100px;flex:1;transition:box-shadow .12s} .progress-col-body.drag-over{box-shadow:inset 0 0 0 2px #534ab7} .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:200;align-items:center;justify-content:center;padding:20px} .modal-overlay.open{display:flex} .modal{background:var(--surface);border-radius:var(--radius);border:.5px solid var(--border-strong);padding:22px;width:100%;max-width:900px;max-height:90vh;overflow-y:auto} .modal h2{font-size:19px;font-weight:500;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between} .form-group{margin-bottom:12px} .form-group label{display:block;font-size:19px;font-weight:500;color:var(--text2);margin-bottom:4px;text-transform:none;letter-spacing:0} .form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 11px;border:.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:19px;font-family:inherit;outline:none} .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#534ab7} .form-group textarea{resize:vertical;min-height:50px} .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px} .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px} .modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:16px} .hint{font-size:18px;color:var(--text3);margin-top:3px} .detail-table{display:grid;grid-template-columns:max-content repeat(3,1fr);border-top:1px solid var(--border-strong);width:100%} .dt-row-label{padding:7px 12px;font-size:17px;font-weight:700;text-transform:none;letter-spacing:0;color:var(--text3);display:flex;align-items:flex-start;border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap;} .dt-col-head{padding:7px 12px;font-size:18px;font-weight:700;text-transform:none;letter-spacing:0;border-bottom:1px solid var(--border-strong);display:flex;align-items:center;justify-content:space-between;background:var(--surface2);color:var(--text2);border-right:1px solid var(--border)} .dt-col-head:last-child{border-right:none} .dt-col-head .col-count{font-size:19px;font-weight:500;padding:1px 5px;border-radius:10px;background:rgba(0,0,0,0.06)} @media(prefers-color-scheme:dark){.dt-col-head .col-count{background:rgba(255,255,255,0.1)}}[data-theme="dark"] .dt-col-head .col-count{background:rgba(255,255,255,0.1)} .dt-body-cell{padding:5px;display:flex;flex-wrap:wrap;gap:4px;align-content:start;background:var(--surface);border-right:1px solid var(--border);border-bottom:1px solid var(--border)} .dt-body-cell:last-of-type{border-right:none} .df-label{padding:7px 12px;font-size:17px;font-weight:700;text-transform:none;letter-spacing:0;color:var(--text3);display:flex;align-items:center;border-right:1px solid var(--border-strong);border-top:1px solid var(--border);background:var(--surface2);white-space:nowrap;} .df-cell{padding:6px 8px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:18px;font-weight:600;color:var(--text2);border-right:1px solid var(--border);border-top:1px solid var(--border);background:var(--surface)} .df-cell:last-child{border-right:none} .df-cell.over-cap{color:#e24b4a;background:var(--surface2)} .df-cell.at-cap{color:#1d9e75;background:var(--sam-bg)} .df-cell.under-cap{color:#185fa5;background:var(--cat-webi-bg)} .df-cell.df-muted{color:var(--text3);font-weight:400} @media(prefers-color-scheme:dark){ .df-cell.over-cap{background:#3d1212} .df-cell.at-cap{background:#0d2e1e} }[data-theme="dark"] .df-cell.over-cap{background:#3d1212}[data-theme="dark"] .df-cell.at-cap{background:#0d2e1e} .cap-input{width:52px;text-align:center;padding:3px 0;border:.5px solid var(--border-strong);border-radius:4px;background:var(--surface);color:var(--text);font-size:18px;font-weight:600;font-family:inherit;outline:none;-moz-appearance:textfield;} .cap-input::-webkit-outer-spin-button,.cap-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0} .cap-input:focus{border-color:#534ab7} .settings-pop{display:none;position:absolute;top:100%;right:0;margin-top:6px;background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--radius);padding:14px;width:300px;z-index:150;box-shadow:0 4px 16px rgba(0,0,0,0.12)} .settings-pop.open{display:block} .settings-wrap{position:relative}.sprint-nav{display:flex;align-items:center;gap:10px;padding:12px 20px 0;position:relative;z-index:1;} .panel-body-row{display:flex;align-items:flex-start;overflow-x:auto;overflow-y:auto;height:calc(100vh - 159px);} .panel-body-row .grid-wrap{flex-shrink:0;overflow-x:auto;padding:20px;min-width:0;} .side-detail{flex:1 1 0;min-width:280px;padding:12px 16px 16px;border-left:1px solid var(--border-strong);overflow-y:auto;overflow-x:auto;min-width:0;} .side-detail .detail-panel{margin:0;width:100%;} .grid-resizer{flex-shrink:0;width:28px;cursor:col-resize;background:var(--surface2);border-left:1px solid var(--border-strong);border-right:1px solid var(--border-strong);transition:background .15s,border-color .15s;display:flex;align-items:center;justify-content:center;user-select:none;} .grid-resizer:hover,.grid-resizer.dragging{background:var(--cat-dash-bg);border-color:#534ab7;} .resizer-icon{display:flex;align-items:center;gap:1px;background:var(--surface);border:1px solid var(--border-strong);border-radius:4px;padding:5px 3px;box-shadow:0 1px 3px rgba(0,0,0,0.1);pointer-events:none;} .resizer-icon span{font-size:12px;font-weight:700;line-height:1;color:var(--text3);} .resizer-icon .resizer-pipe{color:var(--border-strong);margin:0 1px;} .grid-resizer:hover .resizer-icon,.grid-resizer.dragging .resizer-icon{border-color:#534ab7;} .grid-resizer:hover .resizer-icon span,.grid-resizer.dragging .resizer-icon span{color:#534ab7;} .grid-resizer:hover .resizer-pipe,.grid-resizer.dragging .resizer-pipe{color:#534ab7;} .sprint-nav-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:6px;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:20px;cursor:pointer;transition:background .15s;font-weight:500;line-height:1;flex-shrink:0;} .sprint-nav-btn:hover{background:var(--surface2)} .sprint-nav-btn:disabled{opacity:.3;cursor:default} .sprint-nav-label{font-size:14px;font-weight:500;color:var(--text2);white-space:nowrap} .sprint-nav-range{font-size:14px;color:var(--text3);white-space:nowrap}
 .goals-section{border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;margin-bottom:12px}
 .tl-row-head.tl-goals-label{justify-content:center;background:var(--surface2);min-height:unset;padding:6px 4px;border-bottom:1px solid var(--border-strong)}
-.tl-goals-label-cell{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:5px 8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);text-align:center;line-height:1.3}
+.tl-goals-label-cell{background:var(--surface2);border-right:1px solid var(--border-strong);padding:5px 8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);text-align:center;line-height:1.3}
 .tl-corner-split{flex-direction:column;align-items:stretch;justify-content:stretch;padding:0;gap:0;}
 .tl-corner-split-top{flex:1;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border-strong);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);}
 .tl-corner-split-bot{flex:1;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);}
@@ -54,7 +54,7 @@
       <div id="viewer-badge" style="display:none;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--text2);background:var(--surface2);border:0.5px solid var(--border-strong);padding:4px 10px;border-radius:20px">
         👁 Viewing
         <button onclick="switchUser()" style="background:none;border:none;cursor:pointer;font-size:11px;color:#534ab7;padding:0;font-weight:600">Switch</button>
-      </div><div id="header-user-chip" style="display:flex;align-items:center;gap:6px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2);cursor:pointer" onclick="switchUser()" title="Switch user"><span id="header-user-dot" style="width:8px;height:8px;border-radius:50%;background:var(--text3);display:inline-block;flex-shrink:0"></span><span style="font-size:12px;font-weight:600;color:var(--text2)" id="header-user-name">—</span></div><div id="online-presence" style="display:flex;align-items:center;gap:4px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Who's online now"></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Last saved"><span id="last-updated-label" style="color:var(--text3)">—</span></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Changes are shared with your team in real time"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);display:inline-block;transition:background .3s"></span><span id="sync-label">Live</span></div><button class="btn sm" id="dark-toggle" onclick="toggleDarkMode()" title="Switch to dark mode"><i class="ti ti-moon"></i></button><div class="settings-wrap"><button class="btn sm" onclick="toggleSettings()"><i class="ti ti-settings" aria-hidden="true"></i> Jira</button><div class="settings-pop" id="settings-pop"><div style="font-size:18px;font-weight:600;margin-bottom:10px;color:var(--text)">Jira settings</div><div class="form-group" style="margin-bottom:10px"><label>Base URL</label><input type="text" id="jira-url" placeholder="https://dlapiperuk.atlassian.net" style="font-size:18px;padding:5px 7px" /></div><button class="btn sm primary" onclick="saveJiraSettings()">Save</button><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Signed in as</div><div style="display:flex;align-items:center;justify-content:space-between"><span id="current-user-label" style="font-size:13px;color:var(--text2)"></span><button class="btn sm" onclick="switchUser()" style="font-size:12px;padding:3px 8px">Switch</button></div></div><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px">Bookmarklet</div><div style="font-size:18px;color:var(--text3);margin-bottom:8px">Drag this to your bookmarks bar. Click it on any Jira ticket to push it straight into this board.</div><a id="bookmarklet-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:var(--cat-dash-bg);color:#26215c;border:1px solid #534ab7;border-radius:5px;font-size:19px;font-weight:600;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bookmark" style="font-size:19px"></i> Send to Board </a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the code</button> and create a bookmark manually.</div><div id="bookmarklet-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div><div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.1)"><div style="font-size:18px;color:var(--text3);margin-bottom:6px">Not picking up all fields? Drag this debug bookmarklet to your bookmarks bar and click it on a Jira ticket to see exactly what the scraper finds:</div><a id="bookmarklet-debug-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:var(--surface2);color:var(--text2);border:1px solid var(--border-strong);border-radius:5px;font-size:19px;font-weight:500;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bug" style="font-size:19px"></i> Debug Jira Fields</a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyDebugBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the debug code</button> and save it as a bookmark manually.</div><div id="bookmarklet-debug-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div></div></div></div></div><button class="btn sm" id="btn-undo" onclick="undo()" title="Undo last change (Ctrl+Z)" disabled style="opacity:0.4"><i class="ti ti-arrow-back-up" aria-hidden="true"></i> Undo</button><button class="btn sm" onclick="openArchiveModal()" title="Manage past sprints"><i class="ti ti-archive" aria-hidden="true"></i> Archive</button><button class="btn primary" id="btn-add-theme" onclick="openThemeModal()"><i class="ti ti-plus" aria-hidden="true"></i> Add theme</button><button class="btn primary" id="btn-add-ticket" onclick="openTicketModal()" style="display:none"><i class="ti ti-plus" aria-hidden="true"></i> Add ticket</button></div></header><nav class="tabs"><button class="tab-btn active" id="tab-plan" onclick="switchTab('plan')"><i class="ti ti-layout-grid" aria-hidden="true"></i> CY 2026 <span class="tab-count" id="tc-plan">0</span></button><button class="tab-btn" id="tab-progress" onclick="switchTab('progress')"><i class="ti ti-loader" aria-hidden="true"></i> Progress <span class="tab-count" id="tc-progress">0</span></button><button class="tab-btn" id="tab-nfy" onclick="switchTab('nfy')"><i class="ti ti-calendar-stats" aria-hidden="true"></i> CY 2027 <span class="tab-count" id="tc-nfy">0</span></button><button class="tab-btn" id="tab-planner" onclick="switchTab('planner')"><i class="ti ti-filter" aria-hidden="true"></i> Planner</button></nav><div class="panel active" id="panel-plan"><div class="sprint-nav" id="nav-plan"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-plan"><div class="timeline-grid" id="tl-plan"></div></div><div class="grid-resizer" id="resizer-plan" style="display:none" onmousedown="startResize(event,'plan')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-plan" class="side-detail"></div></div></div><div class="panel" id="panel-nfy"><div class="sprint-nav" id="nav-nfy"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-nfy"><div class="timeline-grid" id="tl-nfy"></div></div><div class="grid-resizer" id="resizer-nfy" style="display:none" onmousedown="startResize(event,'nfy')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-nfy" class="side-detail"></div></div></div><div class="panel" id="panel-progress"><div class="progress-wrap"><div class="progress-board" id="progress-board"></div></div></div><div class="panel" id="panel-planner"><div style="padding:16px"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px"><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Theme</label><div style="position:relative;min-width:180px"><input type="text" id="planner-theme-input" placeholder="All themes…" autocomplete="off" oninput="filterPlannerThemeDropdown()" onfocus="openPlannerThemeDropdown()" onblur="setTimeout(closePlannerThemeDropdown,180)" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);width:100%;outline:none" /><div id="planner-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:280px;overflow-y:auto"></div><input type="hidden" id="planner-theme" /></div></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Person</label><select id="planner-owner" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All people</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Status Label</label><select id="planner-label" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All statuses</option><option value="Ticket Creation">Ticket Creation</option><option value="Ready To Refine">Ready To Refine</option><option value="Ready for Sprint">Ready for Sprint</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Refinement</label><select id="planner-refinement" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All sessions</option><option value="Refinement Session 1">Session 1</option><option value="Refinement Session 2">Session 2</option><option value="Refinement Session 3">Session 3</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Category</label><select id="planner-cat" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All</option><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap"><input type="checkbox" id="planner-deadlines-only" onchange="renderPlanner()" style="width:auto;cursor:pointer" /> Deadlines only</label><button class="btn sm" onclick="openDeadlineModal(null)" style="white-space:nowrap"><i class="ti ti-calendar-plus"></i> Add Deadline</button></div><div style="margin-bottom:16px;position:relative;max-width:440px"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;color:var(--text2)"><i class="ti ti-search" style="font-size:12px;margin-right:4px"></i>Find ticket by name or Jira key</label><input type="text" id="ticket-search-input-planner" placeholder="e.g. ISB-1234 or migrate pipeline..." autocomplete="off" oninput="renderTicketSearch('planner')" onfocus="renderTicketSearch('planner')" style="width:100%;font-size:13px;padding:6px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none" /><div id="ticket-search-results-planner" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.12);max-height:340px;overflow-y:auto;margin-top:2px"></div></div><div id="planner-body"></div></div></div><div class="modal-overlay" id="deadline-modal" onclick="if(event.target===this)closeDeadlineModal()">
+      </div><div id="header-user-chip" style="display:flex;align-items:center;gap:6px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2);cursor:pointer" onclick="switchUser()" title="Switch user"><span id="header-user-dot" style="width:8px;height:8px;border-radius:50%;background:var(--text3);display:inline-block;flex-shrink:0"></span><span style="font-size:12px;font-weight:600;color:var(--text2)" id="header-user-name">—</span></div><div id="online-presence" style="display:flex;align-items:center;gap:4px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Who's online now"></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Last saved"><span id="last-updated-label" style="color:var(--text3)">—</span></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Changes are shared with your team in real time"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);display:inline-block;transition:background .3s"></span><span id="sync-label">Live</span></div><button class="btn sm" id="dark-toggle" onclick="toggleDarkMode()" title="Switch to dark mode"><i class="ti ti-moon"></i></button><div class="settings-wrap"><button class="btn sm" onclick="toggleSettings()"><i class="ti ti-settings" aria-hidden="true"></i> Jira</button><div class="settings-pop" id="settings-pop"><div style="font-size:18px;font-weight:600;margin-bottom:10px;color:var(--text)">Jira settings</div><div class="form-group" style="margin-bottom:10px"><label>Base URL</label><input type="text" id="jira-url" placeholder="https://dlapiperuk.atlassian.net" style="font-size:18px;padding:5px 7px" /></div><button class="btn sm primary" onclick="saveJiraSettings()">Save</button><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Signed in as</div><div style="display:flex;align-items:center;justify-content:space-between"><span id="current-user-label" style="font-size:13px;color:var(--text2)"></span><button class="btn sm" onclick="switchUser()" style="font-size:12px;padding:3px 8px">Switch</button></div></div><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px">Bookmarklet</div><div style="font-size:18px;color:var(--text3);margin-bottom:8px">Drag this to your bookmarks bar. Click it on any Jira ticket to push it straight into this board.</div><a id="bookmarklet-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:var(--cat-dash-bg);color:#26215c;border:1px solid #534ab7;border-radius:5px;font-size:19px;font-weight:600;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bookmark" style="font-size:19px"></i> Send to Board </a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the code</button> and create a bookmark manually.</div><div id="bookmarklet-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div><div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.1)"><div style="font-size:18px;color:var(--text3);margin-bottom:6px">Not picking up all fields? Drag this debug bookmarklet to your bookmarks bar and click it on a Jira ticket to see exactly what the scraper finds:</div><a id="bookmarklet-debug-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:var(--surface2);color:var(--text2);border:1px solid var(--border-strong);border-radius:5px;font-size:19px;font-weight:500;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bug" style="font-size:19px"></i> Debug Jira Fields</a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyDebugBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the debug code</button> and save it as a bookmark manually.</div><div id="bookmarklet-debug-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div></div></div></div></div><button class="btn sm" id="btn-undo" onclick="undo()" title="Undo last change (Ctrl+Z)" disabled style="opacity:0.4"><i class="ti ti-arrow-back-up" aria-hidden="true"></i> Undo</button><button class="btn sm" onclick="openArchiveModal()" title="Manage past sprints"><i class="ti ti-archive" aria-hidden="true"></i> Archive</button><button class="btn primary" id="btn-add-theme" onclick="openThemeModal()"><i class="ti ti-plus" aria-hidden="true"></i> Add theme</button><button class="btn primary" id="btn-add-ticket" onclick="openTicketModal()" style="display:none"><i class="ti ti-plus" aria-hidden="true"></i> Add ticket</button></div></header><nav class="tabs"><button class="tab-btn active" id="tab-plan" onclick="switchTab('plan')"><i class="ti ti-layout-grid" aria-hidden="true"></i> CY 2026 <span class="tab-count" id="tc-plan">0</span></button><button class="tab-btn" id="tab-progress" onclick="switchTab('progress')"><i class="ti ti-loader" aria-hidden="true"></i> Progress <span class="tab-count" id="tc-progress">0</span></button><button class="tab-btn" id="tab-nfy" onclick="switchTab('nfy')"><i class="ti ti-calendar-stats" aria-hidden="true"></i> CY 2027 <span class="tab-count" id="tc-nfy">0</span></button><button class="tab-btn" id="tab-planner" onclick="switchTab('planner')"><i class="ti ti-filter" aria-hidden="true"></i> Planner</button></nav><div class="panel active" id="panel-plan"><div class="sprint-nav" id="nav-plan"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-plan"><div class="timeline-grid" id="tl-plan"></div></div><div class="grid-resizer" id="resizer-plan" style="display:none" onmousedown="startResize(event,'plan')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-plan" class="side-detail"></div></div></div><div class="panel" id="panel-nfy"><div class="sprint-nav" id="nav-nfy"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-nfy"><div class="timeline-grid" id="tl-nfy"></div></div><div class="grid-resizer" id="resizer-nfy" style="display:none" onmousedown="startResize(event,'nfy')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-nfy" class="side-detail"></div></div></div><div class="panel" id="panel-progress"><div class="progress-wrap"><div class="progress-board" id="progress-board"></div></div></div><div class="panel" id="panel-planner"><div style="padding:16px;height:100%;box-sizing:border-box;overflow-y:auto;display:flex;flex-direction:column"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px"><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Theme</label><div style="position:relative;min-width:180px"><input type="text" id="planner-theme-input" placeholder="All themes…" autocomplete="off" oninput="filterPlannerThemeDropdown()" onfocus="openPlannerThemeDropdown()" onblur="setTimeout(closePlannerThemeDropdown,180)" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);width:100%;outline:none" /><div id="planner-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:280px;overflow-y:auto"></div><input type="hidden" id="planner-theme" /></div></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Person</label><select id="planner-owner" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All people</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Status Label</label><select id="planner-label" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All statuses</option><option value="Ticket Creation">Ticket Creation</option><option value="Ready To Refine">Ready To Refine</option><option value="Ready for Sprint">Ready for Sprint</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Refinement</label><select id="planner-refinement" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All sessions</option><option value="Refinement Session 1">Session 1</option><option value="Refinement Session 2">Session 2</option><option value="Refinement Session 3">Session 3</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Category</label><select id="planner-cat" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All</option><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap"><input type="checkbox" id="planner-deadlines-only" onchange="renderPlanner()" style="width:auto;cursor:pointer" /> Deadlines only</label><button class="btn sm" onclick="openDeadlineModal(null)" style="white-space:nowrap"><i class="ti ti-calendar-plus"></i> Add Deadline</button><button class="btn sm" onclick="openHolidayModal()" style="white-space:nowrap"><i class="ti ti-beach"></i> Add Holiday</button></div><div style="margin-bottom:16px;position:relative;max-width:440px"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;color:var(--text2)"><i class="ti ti-search" style="font-size:12px;margin-right:4px"></i>Find ticket by name or Jira key</label><input type="text" id="ticket-search-input-planner" placeholder="e.g. ISB-1234 or migrate pipeline..." autocomplete="off" oninput="renderTicketSearch('planner')" onfocus="renderTicketSearch('planner')" style="width:100%;font-size:13px;padding:6px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none" /><div id="ticket-search-results-planner" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.12);max-height:340px;overflow-y:auto;margin-top:2px"></div></div><div id="planner-nav" style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-shrink:0"></div><div id="planner-body" style="overflow:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0;"></div></div></div><div class="modal-overlay" id="deadline-modal" onclick="if(event.target===this)closeDeadlineModal()">
   <div class="modal" style="max-width:720px;min-height:700px;display:flex;flex-direction:column">
     <h2><span id="deadline-modal-title">Add Deadline</span><button class="icon-btn" onclick="closeDeadlineModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2>
     <div class="form-group"><label>Title</label><input type="text" id="dl-title" placeholder="e.g. Q2 Board Review" /></div>
@@ -68,6 +68,22 @@
     </div>
   </div>
 </div><!-- Archive Modal -->
+<div class="modal-overlay" id="holiday-modal" onclick="if(event.target===this)closeHolidayModal()">
+  <div class="modal" style="max-width:500px">
+    <h2><span id="holiday-modal-title">Add Holiday</span><button class="icon-btn" onclick="closeHolidayModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2>
+    <div class="form-group"><label>Person</label><select id="hol-owner" style="width:100%;padding:9px 11px;border:.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;font-family:inherit;outline:none"></select></div>
+    <div class="form-group"><label>Label <span style="font-size:11px;font-weight:400;color:var(--text3)">— optional, e.g. "Annual leave"</span></label><input type="text" id="hol-label" placeholder="Holiday" /></div>
+    <div class="form-row">
+      <div class="form-group"><label>Start date</label><input type="date" id="hol-start" /></div>
+      <div class="form-group"><label>End date</label><input type="date" id="hol-end" /></div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" id="hol-delete-btn" style="margin-right:auto;color:#e24b4a;border-color:#e24b4a;display:none" onclick="deleteHoliday()"><i class="ti ti-trash"></i> Delete</button>
+      <button class="btn" onclick="closeHolidayModal()">Cancel</button>
+      <button class="btn primary" onclick="saveHolidayModal()">Save</button>
+    </div>
+  </div>
+</div>
 <div class="modal-overlay" id="archive-modal" onclick="if(event.target===this)closeArchiveModal()">
   <div class="modal" style="max-width:540px">
     <h2><span><i class="ti ti-archive" style="font-size:18px;margin-right:6px"></i>Past sprints</span><button class="icon-btn" onclick="closeArchiveModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2>
@@ -120,7 +136,12 @@ let tickets = [];
 let capData = {};
 let goalsData = {}; // { sprintId: [{id, text}] }
 let deadlines = []; // [{id, title, date, sprintId, color}]
+let holidays = []; // [{id, ownerId, startDate, endDate, label}]
+
+
+let holCollapsed = { plan: true, nfy: true, planner: true };
 let plannerOrder = {}; // { sprintId: [ticketId, ...] } — planner-specific ordering
+let plannerSprintOffset = 0; // which sprint column the planner view starts at
 let jiraUrl = 'https://dlapiperuk.atlassian.net';
 let currentUser = localStorage.getItem('pb_user') || null;
 let viewerName = localStorage.getItem('pb_viewer') || null; // non-owner viewer
@@ -200,13 +221,14 @@ async function loadData() {
     const newCap   = JSON.parse(metaRows.find(r=>r.key==='cap')?.value   || '{}');
     const newGoals = JSON.parse(metaRows.find(r=>r.key==='goals')?.value || '{}');
     const newDeadlines = JSON.parse(metaRows.find(r=>r.key==='deadlines')?.value || '[]');
+    const newHolidays  = JSON.parse(metaRows.find(r=>r.key==='holidays')?.value  || '[]');
     const newJira  = metaRows.find(r=>r.key==='jira')?.value || 'https://dlapiperuk.atlassian.net';
     const lastUpdatedRaw = metaRows.find(r=>r.key==='last_updated')?.value;
     if(lastUpdatedRaw){ try{ const lu=JSON.parse(lastUpdatedRaw); updateLastUpdatedHeader(lu.by,lu.ts); }catch(e){} }
     const hash = JSON.stringify([newThemes, newTickets, newCap, newGoals, newJira]);
     if (hash !== _lastHash) {
       _lastHash = hash;
-      themes = newThemes; tickets = newTickets; capData = newCap; goalsData = newGoals; deadlines = newDeadlines; jiraUrl = newJira;
+      themes = newThemes; tickets = newTickets; capData = newCap; goalsData = newGoals; deadlines = newDeadlines; holidays = newHolidays; jiraUrl = newJira;
       const ju = document.getElementById('jira-url');
       if (ju) ju.value = jiraUrl;
       // Don't re-render if user is actively editing a goal
@@ -410,6 +432,17 @@ async function saveDeadlines() {
     setSyncBadge(true);
   } catch(e) { console.error('Save deadlines failed', e); setSyncBadge(false); }
 }
+function toggleHolCollapsed(tabKey) {
+  holCollapsed[tabKey] = !holCollapsed[tabKey];
+  if(tabKey === 'planner') renderPlanner();
+  else render();
+}
+async function saveHolidays() {
+  try {
+    await sbUpsert('pb_meta', {key:'holidays', value: JSON.stringify(holidays.filter(h => h.ownerId !== 'bank'))});
+    setSyncBadge(true);
+  } catch(e) { console.error('Save holidays failed', e); setSyncBadge(false); }
+}
 
 async function saveJiraUrlShared(url) {
   try {
@@ -429,7 +462,8 @@ const OWNERS = [
   {id:'sam',   label:'Sam',   color:'var(--sam-color)',   bg:'var(--sam-bg)',   bg2:'var(--sam-bg2)',   head:'var(--sam-head)',   textColor:'#172b4d', barBg:'var(--sam-head)',barText:'var(--sam-bar-text)'},
   {id:'chris', label:'Chris', color:'var(--chris-color)', bg:'var(--chris-bg)', bg2:'var(--chris-bg2)', head:'var(--chris-head)', textColor:'#172b4d', barBg:'var(--chris-head)',barText:'var(--chris-bar-text)'},
   {id:'claire',label:'Claire',color:'var(--claire-color)',bg:'var(--claire-bg)',bg2:'var(--claire-bg2)',head:'var(--claire-head)',textColor:'#172b4d',barBg:'var(--claire-head)',barText:'var(--claire-bar-text)'},
-  {id:'lorna', label:'Lorna', color:'var(--lorna-color)', bg:'var(--lorna-bg)', bg2:'var(--lorna-bg2)', head:'var(--lorna-head)', textColor:'#172b4d', barBg:'var(--lorna-head)',barText:'var(--lorna-bar-text)'}
+  {id:'lorna', label:'Lorna', color:'var(--lorna-color)', bg:'var(--lorna-bg)', bg2:'var(--lorna-bg2)', head:'var(--lorna-head)', textColor:'#172b4d', barBg:'var(--lorna-head)',barText:'var(--lorna-bar-text)'},
+  {id:'bank', label:'Bank Holiday', color:'#dc2626', bg:'#fef2f2', bg2:'#fef2f2', head:'#dc2626', textColor:'#fff', barBg:'#dc2626', barText:'#fff'}
 ];
 const THEME_COLORS = {
   todo: {bg:null,text:null,dbg:null,dt:null,label:'To do'},
@@ -569,7 +603,7 @@ function renderTimeline(gridId, allSprints, tabKey){
         <button class="sprint-nav-btn" onclick="selectSprint('${tabKey}','${prevSprint?.id}')" ${prevSprint?'':'disabled'} title="Previous sprint">&#8249;</button>
         <select onchange="selectSprint('${tabKey}',this.value)" style="font-size:13px;font-weight:500;padding:4px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);cursor:pointer;outline:none">${opts}</select>
         <button class="sprint-nav-btn" onclick="selectSprint('${tabKey}','${nextSprint?.id}')" ${nextSprint?'':'disabled'} title="Next sprint">&#8250;</button>
-        <div style=\"position:relative;margin-left:auto\"><input type=\"text\" id=\"ticket-search-input-${tabKey}\" placeholder=\"Find ticket...\" autocomplete=\"off\" oninput=\"renderTicketSearch('${tabKey}')\" onfocus=\"renderTicketSearch('${tabKey}')\" style=\"font-size:12px;padding:5px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none;width:220px\" /><div id=\"ticket-search-results-${tabKey}\" style=\"display:none;position:absolute;top:100%;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.12);max-height:340px;overflow-y:auto;margin-top:2px;width:400px\"></div></div>
+        <button onclick=\"openHolidayModal()\" style=\"margin-left:auto;display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:var(--radius-sm);border:0.5px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;flex-shrink:0\" title=\"Add holiday\"><i class=\"ti ti-beach\" style=\"font-size:13px\"></i> Add Holiday</button><div style=\"position:relative;margin-left:8px\"><input type=\"text\" id=\"ticket-search-input-${tabKey}\" placeholder=\"Find ticket...\" autocomplete=\"off\" oninput=\"renderTicketSearch('${tabKey}')\" onfocus=\"renderTicketSearch('${tabKey}')\" style=\"font-size:12px;padding:5px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none;width:220px\" /><div id=\"ticket-search-results-${tabKey}\" style=\"display:none;position:absolute;top:100%;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.12);max-height:340px;overflow-y:auto;margin-top:2px;width:400px\"></div></div>
       `;
     } else {
       navEl.innerHTML = `
@@ -577,7 +611,7 @@ function renderTimeline(gridId, allSprints, tabKey){
         <button class="sprint-nav-btn" onclick="navSprints('${tabKey}',1)" ${canNext?'':'disabled'} title="Next sprints">&#8250;</button>
         <span class="sprint-nav-label">Sprints ${allSprints[offset].num}–${allSprints[Math.min(offset+n-1,allSprints.length-1)].num}</span>
         <span class="sprint-nav-range">(${offset+1}–${offset+n} of ${allSprints.length})</span>
-        <div style=\"position:relative;margin-left:auto\"><input type=\"text\" id=\"ticket-search-input-${tabKey}\" placeholder=\"Find ticket...\" autocomplete=\"off\" oninput=\"renderTicketSearch('${tabKey}')\" onfocus=\"renderTicketSearch('${tabKey}')\" style=\"font-size:12px;padding:5px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none;width:220px\" /><div id=\"ticket-search-results-${tabKey}\" style=\"display:none;position:absolute;top:100%;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.12);max-height:340px;overflow-y:auto;margin-top:2px;width:400px\"></div></div>
+        <button onclick=\"openHolidayModal()\" style=\"margin-left:auto;display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:var(--radius-sm);border:0.5px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:12px;font-weight:500;cursor:pointer;white-space:nowrap;flex-shrink:0\" title=\"Add holiday\"><i class=\"ti ti-beach\" style=\"font-size:13px\"></i> Add Holiday</button><div style=\"position:relative;margin-left:8px\"><input type=\"text\" id=\"ticket-search-input-${tabKey}\" placeholder=\"Find ticket...\" autocomplete=\"off\" oninput=\"renderTicketSearch('${tabKey}')\" onfocus=\"renderTicketSearch('${tabKey}')\" style=\"font-size:12px;padding:5px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none;width:220px\" /><div id=\"ticket-search-results-${tabKey}\" style=\"display:none;position:absolute;top:100%;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.12);max-height:340px;overflow-y:auto;margin-top:2px;width:400px\"></div></div>
       `;
     }
   }
@@ -634,13 +668,145 @@ function renderTimeline(gridId, allSprints, tabKey){
       ? sprintGoals.map((g, idx) => `<div class="tl-goal-pill"><span class="tl-goal-num">${idx+1}.</span><span class="tl-goal-text">${esc(g.text)}</span></div>`).join('')
       : '';
     const addBtn = `<div class="tl-goal-add" onclick="tlAddGoal(event,'${tabKey}','${s.id}')">+ add goal</div>`;
-    html += `<div class="tl-goals-cell" style="grid-row:${GOALS_ROW};grid-column:${col};height:${GOALS_ROW_H}px;box-sizing:border-box;${isLastCol?'border-right:none;':''}">${goalsHtml}${addBtn}</div>`;
+    html += `<div class="tl-goals-cell" style="grid-row:${GOALS_ROW};grid-column:${col};height:${GOALS_ROW_H}px;box-sizing:border-box;border-bottom:none;${isLastCol?'border-right:none;':''}">${goalsHtml}${addBtn}</div>`;
   });
 
-  // Owner rows start at row 3 now
+  // ── HOLIDAYS ROWS (lane-packed, minimum rows needed) ──
+  const HOLIDAYS_START_ROW = 3;
+  const HOL_BAR_H = 22;
+  const HOL_ROW_PAD = 4;
+  const HOL_ROW_H = HOL_BAR_H + HOL_ROW_PAD * 2;
+  const fmtDate = d => { const p = d.split('-'); return p[2]+'/'+p[1]; };
+
+  // Clamp a holiday into visible sprint column indices
+  function clampHol(h) {
+    let visStart = -1, visEnd = -1;
+    sprints.forEach((s, si) => {
+      if(h.startDate <= s.end && h.endDate >= s.start) {
+        if(visStart === -1) visStart = si;
+        visEnd = si;
+      }
+    });
+    if(visStart === -1) return null;
+    return {
+      visStart, visEnd,
+      truncLeft:  h.startDate < sprints[visStart].start,
+      truncRight: h.endDate   > sprints[visEnd].end
+    };
+  }
+
+  // Gather all holidays visible in this window
+  const allHols = [...holidays, ...[
+    {id:'bh_2026_0831',ownerId:'bank',label:'Summer Bank Holiday',startDate:'2026-08-31',endDate:'2026-08-31'},
+    {id:'bh_2026_1225',ownerId:'bank',label:'Christmas Day',startDate:'2026-12-25',endDate:'2026-12-25'},
+    {id:'bh_2026_1228',ownerId:'bank',label:'Boxing Day (substitute)',startDate:'2026-12-28',endDate:'2026-12-28'},
+    {id:'bh_2027_0101',ownerId:'bank',label:'New Year\u2019s Day',startDate:'2027-01-01',endDate:'2027-01-01'},
+    {id:'bh_2027_0326',ownerId:'bank',label:'Good Friday',startDate:'2027-03-26',endDate:'2027-03-26'},
+    {id:'bh_2027_0329',ownerId:'bank',label:'Easter Monday',startDate:'2027-03-29',endDate:'2027-03-29'},
+    {id:'bh_2027_0503',ownerId:'bank',label:'Early May Bank Holiday',startDate:'2027-05-03',endDate:'2027-05-03'},
+    {id:'bh_2027_0531',ownerId:'bank',label:'Spring Bank Holiday',startDate:'2027-05-31',endDate:'2027-05-31'},
+    {id:'bh_2027_0830',ownerId:'bank',label:'Summer Bank Holiday',startDate:'2027-08-30',endDate:'2027-08-30'},
+    {id:'bh_2027_1227',ownerId:'bank',label:'Christmas Day (substitute)',startDate:'2027-12-27',endDate:'2027-12-27'},
+    {id:'bh_2027_1228',ownerId:'bank',label:'Boxing Day (substitute)',startDate:'2027-12-28',endDate:'2027-12-28'}
+  ]];
+  const visHols = allHols.map(h => {
+    const c = clampHol(h);
+    return c ? { h, ...c } : null;
+  }).filter(Boolean);
+
+  // Lane-pack: assign each holiday to the first lane where it doesn't overlap
+  const holLanes = [];
+  visHols.forEach(slot => {
+    let placed = false;
+    for(let li = 0; li < holLanes.length; li++) {
+      const overlaps = holLanes[li].some(s => s.visStart <= slot.visEnd && s.visEnd >= slot.visStart);
+      if(!overlaps) { holLanes[li].push(slot); placed = true; break; }
+    }
+    if(!placed) holLanes.push([slot]);
+  });
+
+  const numHolRows = holLanes.length;
+
+  const holIsCollapsed = holCollapsed[tabKey] || false;
+  const chevron = holIsCollapsed ? '▶' : '▼';
+  const holLabelContent = `🏖 Holidays <span style="font-size:9px;margin-left:3px;opacity:.7">${chevron}</span>`;
+
+  if(holIsCollapsed) {
+    // Collapsed: single slim row, click label to expand
+    const COLLAPSED_H = 20;
+    html += `<div class="tl-goals-label-cell" style="grid-row:${HOLIDAYS_START_ROW};grid-column:1;height:${COLLAPSED_H}px;box-sizing:border-box;cursor:pointer;align-self:stretch;font-size:10px;" onclick="toggleHolCollapsed('${tabKey}')" title="Expand holidays">${holLabelContent}</div>`;
+    sprints.forEach((s, si) => {
+      const col = 2 + si;
+      const isLastCol = si === n - 1;
+      html += `<div style="grid-row:${HOLIDAYS_START_ROW};grid-column:${col};border-right:${isLastCol?'none':'1px solid var(--border-strong)'};background:var(--surface2);height:${COLLAPSED_H}px;box-sizing:border-box;cursor:pointer;" onclick="toggleHolCollapsed('${tabKey}')"></div>`;
+    });
+  } else if(numHolRows > 0) {
+    // Expanded with holidays
+    html += `<div class="tl-goals-label-cell" style="grid-row:${HOLIDAYS_START_ROW} / span ${numHolRows};grid-column:1;box-sizing:border-box;cursor:pointer;align-items:center;align-self:stretch;" onclick="toggleHolCollapsed('${tabKey}')" title="Collapse holidays">${holLabelContent}</div>`;
+
+    holLanes.forEach((lane, li) => {
+      const rowNum = HOLIDAYS_START_ROW + li;
+      const isLastLane = li === holLanes.length - 1;
+
+      sprints.forEach((s, si) => {
+        const col = 2 + si;
+        const isLastCol = si === n - 1;
+        html += `<div style="grid-row:${rowNum};grid-column:${col};border-right:${isLastCol?'none':'1px solid var(--border-strong)'};background:var(--surface2);min-height:${HOL_ROW_H}px;box-sizing:border-box;cursor:pointer;align-self:stretch;" onclick="openHolidayModal()" title="Add holiday"></div>`;
+      });
+
+      let textShownInLane = {};
+      lane.forEach(slot => {
+        const { h, visStart, visEnd } = slot;
+        const owner = OWNERS.find(o => o.id === h.ownerId);
+        const barBg   = owner ? owner.barBg   : '#888';
+        const barText = owner ? owner.barText : '#fff';
+        const label = h.label || (owner ? owner.label : '');
+        const dateRange = fmtDate(h.startDate) + '–' + fmtDate(h.endDate);
+        const tooltip = `${esc(label)} ${h.startDate}–${h.endDate}`;
+        let textShown = false;
+        for(let si = visStart; si <= visEnd; si++) {
+          const s = sprints[si];
+          const col = 2 + si;
+          const sprintStart = new Date(s.start).getTime();
+          const sprintEnd   = new Date(s.end).getTime();
+          const sprintLen   = sprintEnd - sprintStart;
+          const holStart    = new Date(h.startDate).getTime();
+          const holEnd      = new Date(h.endDate).getTime();
+          const leftPct     = Math.max(0, (holStart - sprintStart) / sprintLen) * 100;
+          const rightPctRaw = Math.max(0, (sprintEnd - holEnd)   / sprintLen) * 100;
+          const rightPct    = Math.min(rightPctRaw, 97 - leftPct); // ensure min 3% bar width
+          const barWidthPct = 100 - leftPct - rightPct;
+          const isFirst = si === visStart;
+          const isLast  = si === visEnd;
+          const rLeft  = isFirst && holStart >= sprintStart ? '4px' : '0';
+          const rRight = isLast  && holEnd   <= sprintEnd   ? '4px' : '0';
+          const isContinuation = holStart < sprintStart;
+          const startsAtEdge = leftPct < 1;
+          const canShowText = !textShown && (isContinuation || startsAtEdge || (isFirst && isLast));
+          if(canShowText) textShown = true;
+          html += `<div style="grid-row:${rowNum};grid-column:${col};z-index:3;pointer-events:none;align-self:start;padding-top:${HOL_ROW_PAD}px;">
+            <div onclick="event.stopPropagation();openHolidayModal('${h.id}')" title="${tooltip}" style="pointer-events:all;cursor:pointer;height:${HOL_BAR_H}px;margin-left:${leftPct.toFixed(1)}%;margin-right:${rightPct.toFixed(1)}%;background:${barBg};color:${barText};border-radius:${rLeft} ${rRight} ${rRight} ${rLeft};box-sizing:border-box;">
+            </div>
+          </div>`;
+        }
+      });
+    });
+  } else {
+    // No holidays — single empty row
+    html += `<div class="tl-goals-label-cell" style="grid-row:${HOLIDAYS_START_ROW};grid-column:1;min-height:${HOL_ROW_H}px;box-sizing:border-box;cursor:pointer;align-self:stretch;" onclick="toggleHolCollapsed('${tabKey}')" title="Collapse holidays">${holLabelContent}</div>`;
+    sprints.forEach((s, si) => {
+      const col = 2 + si;
+      const isLastCol = si === n - 1;
+      html += `<div style="grid-row:${HOLIDAYS_START_ROW};grid-column:${col};border-right:${isLastCol?'none':'1px solid var(--border-strong)'};background:var(--surface2);min-height:${HOL_ROW_H}px;box-sizing:border-box;cursor:pointer;align-self:stretch;" onclick="openHolidayModal()" title="Add holiday"></div>`;
+    });
+  }
+
+  const OWNER_ROW_OFFSET = HOLIDAYS_START_ROW + (holIsCollapsed ? 1 : Math.max(1, numHolRows));
+
+  // Owner rows start at row 3 (or 4 if holidays row shown)
   TIMELINE_OWNERS.forEach((o,oi) => {
     const isLast = oi===TIMELINE_OWNERS.length-1;
-    const rowNum = 3+oi;
+    const rowNum = OWNER_ROW_OFFSET+oi;
 
     // Get themes visible for this owner in this window
     const ownerThemes = themes.filter(t => t.owner===o.id && clamp(t) !== null);
@@ -785,7 +951,7 @@ function renderTimeline(gridId, allSprints, tabKey){
   if(tabKey === 'nfy'){
     const knownIds = new Set(TIMELINE_OWNERS.map(o=>o.id));
     const unknownThemes = themes.filter(t => !knownIds.has(t.owner) && clamp(t) !== null);
-    const unknownRowNum = 3 + TIMELINE_OWNERS.length;
+    const unknownRowNum = OWNER_ROW_OFFSET + TIMELINE_OWNERS.length;
     const unknownBg = 'var(--surface2)';
     const unknownBg2 = 'var(--surface)';
 
@@ -1648,6 +1814,20 @@ function openTicketFromParams(p) {
   openTicketFromParams(p);
 })();
 
+// Also receive bookmarklet data via localStorage (so board tab isn't reloaded/replaced)
+window.addEventListener('storage', function(e){
+  if(e.key !== 'pb_incoming' || !e.newValue) return;
+  try{
+    const d = JSON.parse(e.newValue);
+    if(!d || !d.params) return;
+    // Ignore stale events (older than 10s)
+    if(Date.now() - d.ts > 10000) return;
+    localStorage.removeItem('pb_incoming');
+    const p = new URLSearchParams(d.params);
+    openTicketFromParams(p);
+  }catch(err){}
+});
+
 // Board receives ticket data via URL params (bm=1) when bookmarklet opens/reuses this tab
 
 // jiraUrl set after loadData()
@@ -1722,9 +1902,15 @@ function buildBookmarklet(){
     if(!reporter){var repRaw=_fieldByLabel(['Reporter']);if(repRaw) reporter=repRaw;}
     if(!key){alert('No Jira ticket key found. Make sure you have a ticket open (the URL should contain /browse/KEY-123).');return;}
     var params='key='+encodeURIComponent(key)+'&title='+encodeURIComponent(title)+'&status='+encodeURIComponent(status)+'&priority='+encodeURIComponent(priority)+'&points='+encodeURIComponent(points)+'&epic='+encodeURIComponent(epic)+'&labels='+encodeURIComponent(labels)+'&sprint='+encodeURIComponent(sprint)+'&reporter='+encodeURIComponent(reporter);
-    var url='` + boardUrl + `?bm=1&'+params;
-    // Open in existing board tab (named window reuse) or new tab if not open
-    window.open(url,'planning-board-tab');
+    // Write data to localStorage so any open board tab picks it up instantly
+    try{
+      localStorage.setItem('pb_incoming', JSON.stringify({ts:Date.now(),params:params}));
+    }catch(e){}
+    // Also try opening/focusing an existing board tab via named window, or open fresh only if nothing is already open
+    var opened=window.open('','planning-board-tab');
+    if(!opened || !opened.location || opened.location.href==='' || opened.location.href==='about:blank'){
+      window.open('` + boardUrl + `','planning-board-tab');
+    }
   }catch(e){alert('Bookmarklet error: '+e.message);}
 })();`;
   const debugCode = `(function(){
@@ -2012,6 +2198,47 @@ function deleteDeadline(){
   renderPlanner();
 }
 
+let _editingHolidayId = null;
+function openHolidayModal(id) {
+  _editingHolidayId = id || null;
+  const hol = id ? holidays.find(h=>h.id===id) : null;
+  document.getElementById('holiday-modal-title').textContent = hol ? 'Edit Holiday' : 'Add Holiday';
+  document.getElementById('hol-delete-btn').style.display = hol ? '' : 'none';
+  // Populate owner select
+  const sel = document.getElementById('hol-owner');
+  sel.innerHTML = OWNERS.map(o=>`<option value="${o.id}">${esc(o.label)}</option>`).join('');
+  sel.value = hol ? hol.ownerId : (currentUser || OWNERS[0].id);
+  document.getElementById('hol-label').value = hol ? (hol.label||'') : '';
+  document.getElementById('hol-start').value = hol ? hol.startDate : '';
+  document.getElementById('hol-end').value   = hol ? hol.endDate   : '';
+  document.getElementById('holiday-modal').classList.add('open');
+}
+function closeHolidayModal(){ document.getElementById('holiday-modal').classList.remove('open'); }
+function saveHolidayModal(){
+  const ownerId   = document.getElementById('hol-owner').value;
+  const label     = document.getElementById('hol-label').value.trim();
+  const startDate = document.getElementById('hol-start').value;
+  const endDate   = document.getElementById('hol-end').value;
+  if(!startDate||!endDate){ alert('Please set start and end dates.'); return; }
+  if(endDate < startDate){ alert('End date must be on or after start date.'); return; }
+  if(_editingHolidayId){
+    const h = holidays.find(h=>h.id===_editingHolidayId);
+    if(h){ h.ownerId=ownerId; h.label=label; h.startDate=startDate; h.endDate=endDate; }
+  } else {
+    holidays.push({id:'hol_'+Date.now(), ownerId, label, startDate, endDate});
+  }
+  saveHolidays();
+  closeHolidayModal();
+  render();
+}
+function deleteHoliday(){
+  if(!_editingHolidayId) return;
+  holidays = holidays.filter(h=>h.id!==_editingHolidayId);
+  saveHolidays();
+  closeHolidayModal();
+  render();
+}
+
 let _plannerDragId = null;
 let _plannerOverId = null;
 
@@ -2203,7 +2430,25 @@ function selectPlannerTheme(id, title){
 }
 
 function renderPlanner(){
-  const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+  const _allPlannerSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+  const PLANNER_WINDOW = 6;
+  const _maxOffset = Math.max(0, _allPlannerSprints.length - PLANNER_WINDOW);
+  plannerSprintOffset = Math.max(0, Math.min(_maxOffset, plannerSprintOffset));
+  const allSprints = _allPlannerSprints.slice(plannerSprintOffset, plannerSprintOffset + PLANNER_WINDOW);
+
+  // Render nav bar
+  const _navEl = document.getElementById('planner-nav');
+  if(_navEl){
+    const _canPrev = plannerSprintOffset > 0;
+    const _canNext = plannerSprintOffset < _maxOffset;
+    const _first = _allPlannerSprints[plannerSprintOffset];
+    const _last  = _allPlannerSprints[Math.min(plannerSprintOffset + PLANNER_WINDOW - 1, _allPlannerSprints.length - 1)];
+    _navEl.innerHTML =
+      `<button class="sprint-nav-btn" onclick="navPlanner(-1)" ${_canPrev?'':'disabled'} title="Previous sprints (←)">&#8249;</button>` +
+      `<button class="sprint-nav-btn" onclick="navPlanner(1)"  ${_canNext?'':'disabled'} title="Next sprints (→)">&#8250;</button>` +
+      `<span class="sprint-nav-label">Sprints ${_first.num}–${_last.num}</span>` +
+      `<span class="sprint-nav-range">(${plannerSprintOffset+1}–${plannerSprintOffset+allSprints.length} of ${_allPlannerSprints.length})</span>`;
+  }
   const ownerSelect = document.getElementById('planner-owner');
   const labelSelect = document.getElementById('planner-label');
   const refinementSelect = document.getElementById('planner-refinement');
@@ -2241,7 +2486,7 @@ function renderPlanner(){
   // Collect all theme keys across filtered tickets (in order they appear)
   const allThemeKeys = [...new Set(filtered.map(tk=>tk.themeId||'__none__'))];
 
-  let html = `<div style="overflow-x:auto;width:100%"><table style="border-collapse:collapse;table-layout:fixed;width:max-content">
+  let html = `<div style="overflow-x:auto;width:100%;overflow-y:visible"><table style="border-collapse:separate;border-spacing:0;table-layout:fixed;width:max-content">
     <thead><tr>
       <th style="padding:6px 10px;background:var(--surface2);border:1px solid var(--border-strong);font-size:13px;font-weight:700;text-align:left;white-space:nowrap;position:sticky;left:0;z-index:3;width:200px;min-width:200px">Person / Theme</th>`;
 
@@ -2254,7 +2499,110 @@ function renderPlanner(){
       ${sprintPts ? `<div style="font-size:11px;font-weight:600;color:#534ab7;margin-top:2px">${sprintPts} pts</div>` : ''}
     </th>`;
   });
-  html += `</tr></thead><tbody>`;
+  // Holidays rows in planner — lane-packed, minimum rows
+  const _fmtD = d => { const p = d.split('-'); return p[2]+'/'+p[1]; };
+
+  // Map each holiday to its sprint index range (across allSprints)
+  const allHols2 = [...holidays, ...[
+    {id:'bh_2026_0831',ownerId:'bank',label:'Summer Bank Holiday',startDate:'2026-08-31',endDate:'2026-08-31'},
+    {id:'bh_2026_1225',ownerId:'bank',label:'Christmas Day',startDate:'2026-12-25',endDate:'2026-12-25'},
+    {id:'bh_2026_1228',ownerId:'bank',label:'Boxing Day (substitute)',startDate:'2026-12-28',endDate:'2026-12-28'},
+    {id:'bh_2027_0101',ownerId:'bank',label:'New Year\u2019s Day',startDate:'2027-01-01',endDate:'2027-01-01'},
+    {id:'bh_2027_0326',ownerId:'bank',label:'Good Friday',startDate:'2027-03-26',endDate:'2027-03-26'},
+    {id:'bh_2027_0329',ownerId:'bank',label:'Easter Monday',startDate:'2027-03-29',endDate:'2027-03-29'},
+    {id:'bh_2027_0503',ownerId:'bank',label:'Early May Bank Holiday',startDate:'2027-05-03',endDate:'2027-05-03'},
+    {id:'bh_2027_0531',ownerId:'bank',label:'Spring Bank Holiday',startDate:'2027-05-31',endDate:'2027-05-31'},
+    {id:'bh_2027_0830',ownerId:'bank',label:'Summer Bank Holiday',startDate:'2027-08-30',endDate:'2027-08-30'},
+    {id:'bh_2027_1227',ownerId:'bank',label:'Christmas Day (substitute)',startDate:'2027-12-27',endDate:'2027-12-27'},
+    {id:'bh_2027_1228',ownerId:'bank',label:'Boxing Day (substitute)',startDate:'2027-12-28',endDate:'2027-12-28'}
+  ]];
+  const _plannerHolSlots = allHols2.map(h => {
+    let visStart = -1, visEnd = -1;
+    allSprints.forEach((s, si) => {
+      if(h.startDate <= s.end && h.endDate >= s.start) {
+        if(visStart === -1) visStart = si;
+        visEnd = si;
+      }
+    });
+    if(visStart === -1) return null;
+    return { h, visStart, visEnd,
+      truncLeft:  h.startDate < allSprints[visStart].start,
+      truncRight: h.endDate   > allSprints[visEnd].end };
+  }).filter(Boolean);
+
+  // Lane-pack
+  const _plannerHolLanes = [];
+  _plannerHolSlots.forEach(slot => {
+    let placed = false;
+    for(let li = 0; li < _plannerHolLanes.length; li++) {
+      if(!_plannerHolLanes[li].some(s => s.visStart <= slot.visEnd && s.visEnd >= slot.visStart)) {
+        _plannerHolLanes[li].push(slot); placed = true; break;
+      }
+    }
+    if(!placed) _plannerHolLanes.push([slot]);
+  });
+
+  // Build one <tr> per lane using colspan for spanning bars
+  const _plannerLaneRows = _plannerHolLanes.map((lane, laneIdx) => {
+    // Build a cell array for this lane across all sprints
+    let cells = [], si = 0, textShown = false, lastSlotId = null;
+    while(si < allSprints.length) {
+      const slot = lane.find(s => s.visStart <= si && s.visEnd >= si);
+      if(slot) {
+        // Reset textShown when we encounter a new holiday
+        if(slot.h.id !== lastSlotId) { textShown = false; lastSlotId = slot.h.id; }
+        const owner = OWNERS.find(o => o.id === slot.h.ownerId);
+        const barBg   = owner ? owner.barBg   : '#888';
+        const barText = owner ? owner.barText : '#fff';
+        const label = slot.h.label || (owner ? owner.label : '');
+        const dateRange = _fmtD(slot.h.startDate) + '–' + _fmtD(slot.h.endDate);
+        const sprint = allSprints[si];
+        const sprintStart = new Date(sprint.start).getTime();
+        const sprintEnd   = new Date(sprint.end).getTime();
+        const sprintLen   = sprintEnd - sprintStart;
+        const holStart    = new Date(slot.h.startDate).getTime();
+        const holEnd      = new Date(slot.h.endDate).getTime();
+        const leftPct     = Math.max(0, (holStart - sprintStart) / sprintLen) * 100;
+        const rightPctRaw = Math.max(0, (sprintEnd - holEnd)   / sprintLen) * 100;
+        const rightPct    = Math.min(rightPctRaw, 97 - leftPct); // ensure min 3% bar width
+        const isFirst = si === slot.visStart;
+        const isLast  = si === slot.visEnd;
+        // Show text on first cell where bar starts at left edge (leftPct===0), giving max room
+        // Falls back to isFirst if no left-edge cell exists (holiday entirely within one sprint)
+        // Show text if: bar starts near left edge (leftPct < 5), OR it's the only cell (isFirst && isLast)
+        // For isFirst with large leftPct (tiny bar at end of sprint), defer to next cell
+        const barWidthPct = 100 - leftPct - rightPct;
+        const isContinuation = holStart < sprintStart;
+          const startsAtEdge = leftPct < 1;
+          const canShowText = !textShown && (isContinuation || startsAtEdge || (isFirst && isLast));
+
+        if(canShowText) textShown = true;
+        const rL = isFirst && holStart >= sprintStart ? '4px' : '0';
+        const rR = isLast  && holEnd   <= sprintEnd   ? '4px' : '0';
+        const tooltip = esc(label) + ' ' + esc(dateRange);
+        const bar = '<div onclick="event.stopPropagation();openHolidayModal(\'' + slot.h.id + '\')" title="' + tooltip + '" style="height:22px;margin-left:' + leftPct.toFixed(1) + '%;margin-right:' + rightPct.toFixed(1) + '%;background:' + barBg + ';border-radius:' + rL + ' ' + rR + ' ' + rR + ' ' + rL + ';cursor:pointer;box-sizing:border-box"></div>';
+        cells.push('<td style="padding:2px 0;background:var(--surface2);border-right:1px solid var(--border-strong);border-top:none;height:26px;">' + bar + '</td>');
+        si++;
+      } else {
+        cells.push('<td style="background:var(--surface2);border-right:1px solid var(--border-strong);border-top:none;height:26px;cursor:pointer;" onclick="openHolidayModal()" title="Add holiday"></td>');
+        si++;
+      }
+    }
+    const laneLabel = laneIdx === 0 ? '🏖 Holidays <span style="font-weight:400;opacity:.7;margin-left:3px">▼</span>' : '&nbsp;';
+    const holLabelBorder = laneIdx === 0 ? 'border-left:1px solid var(--border-strong);border-right:1px solid var(--border-strong);border-top:none;' : 'border-left:1px solid var(--border-strong);border-right:1px solid var(--border-strong);border-top:none;';
+    return '<tr><td style="padding:3px 10px;background:var(--surface2);' + holLabelBorder + 'font-size:11px;font-weight:700;color:var(--text3);white-space:nowrap;position:sticky;left:0;z-index:2;cursor:pointer" onclick="toggleHolCollapsed(\'planner\')">' + laneLabel + '</td>' + cells.join('') + '</tr>';
+  });
+
+  const _plannerHolCollapsed = holCollapsed['planner'] || false;
+  const _plannerChevron = _plannerHolCollapsed ? '▶' : '▼';
+  const _plannerHolLabel = '🏖 Holidays <span style="font-weight:400;opacity:.7;margin-left:3px">' + _plannerChevron + '</span>';
+  const _collapsedHolRow = '<tr><td style="padding:4px 10px;background:var(--surface2);border:1px solid var(--border-strong);border-top:none;font-size:11px;font-weight:700;color:var(--text3);white-space:nowrap;position:sticky;left:0;z-index:2;cursor:pointer;height:20px" onclick="toggleHolCollapsed(\'planner\')">' + _plannerHolLabel + '</td>' + allSprints.map(() => '<td style="background:var(--surface2);border-right:1px solid var(--border-strong);border-top:none;padding:0;height:20px;cursor:pointer;" onclick="toggleHolCollapsed(\'planner\')"></td>').join('') + '</tr>';
+  const _emptyHolRow = '<tr><td style="padding:4px 10px;background:var(--surface2);border:1px solid var(--border-strong);border-top:none;font-size:11px;font-weight:700;color:var(--text3);white-space:nowrap;position:sticky;left:0;z-index:2;cursor:pointer" onclick="toggleHolCollapsed(\'planner\')">' + _plannerHolLabel + '</td>' + allSprints.map(() => '<td style="background:var(--surface2);border-right:1px solid var(--border-strong);border-top:none;padding:0;height:26px;cursor:pointer;" onclick="openHolidayModal()"></td>').join('') + '</tr>';
+
+  html += `</tr>
+    ${_plannerHolCollapsed ? _collapsedHolRow : (_plannerLaneRows.length ? _plannerLaneRows.join('') : _emptyHolRow)}
+  </thead><tbody>`;
+
 
   activeOwners.forEach(o => {
     // Get themes this owner has tickets in, ordered by theme endSprint (earliest first)
@@ -2369,6 +2717,22 @@ function renderPlanner(){
   html += `</tbody></table></div>`;
   document.getElementById('planner-body').innerHTML = html;
 }
+
+function navPlanner(dir){
+  const total = PLAN_SPRINTS.length + NFY_SPRINTS.length;
+  const PLANNER_WINDOW = 6;
+  plannerSprintOffset = Math.max(0, Math.min(total - PLANNER_WINDOW, plannerSprintOffset + dir));
+  renderPlanner();
+}
+
+document.addEventListener('keydown', function(e){
+  if(activeTab !== 'planner') return;
+  // Don't hijack arrow keys when user is typing in an input/select/textarea
+  const tag = document.activeElement && document.activeElement.tagName;
+  if(tag === 'INPUT' || tag === 'SELECT' || tag === 'TEXTAREA') return;
+  if(e.key === 'ArrowRight'){ e.preventDefault(); navPlanner(1); }
+  else if(e.key === 'ArrowLeft'){ e.preventDefault(); navPlanner(-1); }
+});
 
 function equaliseTicketHeights() {
   document.querySelectorAll('.detail-table').forEach(table => {
