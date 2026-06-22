@@ -1371,6 +1371,9 @@ function ticketCard(tk){
   const refinementBadge = refinementLabel
     ? `<span style="font-size:9px;font-weight:600;color:var(--text2)">${esc(refinementLabel)}</span>`
     : '';
+  const labelBadge = colourLabel === 'Ready to Test'
+    ? `<span style="font-size:9px;font-weight:600;padding:1px 4px;border-radius:3px;background:rgba(0,0,0,0.08);color:${cardText};white-space:nowrap">${esc(colourLabel)}</span>`
+    : '';
   const statusBadge   = tk.status  ? `<span style="font-size:11px;font-weight:500;padding:1px 5px;border-radius:3px;background:rgba(0,0,0,0.07);color:${cardText}">${esc(tk.status)}</span>` : '';
   const pointsBadge   = tk.points  ? `<span style="font-size:15px;font-weight:700;color:#534ab7" title="Story points">${tk.points}</span>` : '';
   const goalBadge     = tk.goal    ? `<span class="goal-flag">🎯 Goal</span>` : '';
@@ -1388,7 +1391,7 @@ function ticketCard(tk){
     style="background:${doneCardBg};border-color:${doneCardBorder};cursor:pointer;${doneOverlay}">
     <div class="ticket-top" style="flex:1;overflow:hidden">
       <div class="ticket-title" style="color:${doneCardText};${isDone?'text-decoration:line-through;opacity:.7;':''}">${esc(tk.title)}</div>
-      <div style="display:flex;align-items:flex-start;gap:2px;flex-shrink:0">${jLink}</div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0">${jLink}${goalBadge}</div>
     </div>
     <div style="flex-shrink:0;display:flex;flex-direction:column;gap:1px">
       ${epicBadge}${commentsBadge}
@@ -1396,7 +1399,7 @@ function ticketCard(tk){
         <div style="display:flex;align-items:center;gap:3px;flex-wrap:wrap">
           <span class="priority-dot priority-${tk.priority}" title="${priorityLabel}"></span>
           <span style="font-size:9px;color:${doneCardText};opacity:.7">${priorityLabel}</span>
-          ${goalBadge}${refinementBadge}
+          ${refinementBadge || labelBadge}
         </div>
         <div style="display:flex;align-items:center;gap:3px;flex-shrink:0">
           <span style="font-size:11px;font-weight:700;color:#534ab7;width:20px;height:20px;border-radius:50%;border:1.5px solid #534ab7;display:inline-flex;align-items:center;justify-content:center">${tk.points||''}</span>
@@ -1816,25 +1819,22 @@ function openTicketFromParams(p) {
   openTicketFromParams(p);
 })();
 
-// Also receive bookmarklet data via localStorage (so board tab isn't reloaded/replaced)
-window.addEventListener('storage', function(e){
-  if(e.key !== 'pb_incoming' || !e.newValue) return;
-  try{
-    const d = JSON.parse(e.newValue);
-    if(!d || !d.params) return;
-    // Ignore stale events (older than 10s)
-    if(Date.now() - d.ts > 10000) return;
-    localStorage.removeItem('pb_incoming');
-    const p = new URLSearchParams(d.params);
-    openTicketFromParams(p);
-  }catch(err){}
+// Receive ticket data from the Jira bookmarklet via postMessage. The bookmarklet runs on
+// Jira's origin, so localStorage/the 'storage' event can't be shared with this tab — postMessage
+// is the only thing that works cross-origin between the two window.open() handles.
+window.addEventListener('message', function(e){
+  if(!e.data || e.data.source !== 'pb-bookmarklet' || !e.data.params) return;
+  window.focus();
+  const p = new URLSearchParams(e.data.params);
+  openTicketFromParams(p);
 });
 
-// Board receives ticket data via URL params (bm=1) when bookmarklet opens/reuses this tab
+// Board receives ticket data via URL params (bm=1) the first time the bookmarklet opens this tab
 
 // jiraUrl set after loadData()
 function buildBookmarklet(){
   const boardUrl = window.location.href.split('?')[0];
+  const boardOrigin = window.location.origin;
   // Shared helper: walk DOM looking for a label whose text matches, then grab adjacent value text
   const helperFn = `
   function _fieldByLabel(names){
@@ -1904,16 +1904,27 @@ function buildBookmarklet(){
     if(!reporter){var repRaw=_fieldByLabel(['Reporter']);if(repRaw) reporter=repRaw;}
     if(!key){alert('No Jira ticket key found. Make sure you have a ticket open (the URL should contain /browse/KEY-123).');return;}
     var params='key='+encodeURIComponent(key)+'&title='+encodeURIComponent(title)+'&status='+encodeURIComponent(status)+'&priority='+encodeURIComponent(priority)+'&points='+encodeURIComponent(points)+'&epic='+encodeURIComponent(epic)+'&labels='+encodeURIComponent(labels)+'&sprint='+encodeURIComponent(sprint)+'&reporter='+encodeURIComponent(reporter);
-    // Write data to localStorage so any open board tab picks it up instantly
+    var boardOrigin='` + boardOrigin + `';
+    // Re-using a window.open() call with the same target name re-focuses an already-open
+    // tab without reloading it (as long as we don't pass it a new URL). We only pass the
+    // full URL the very first time, when the tab doesn't exist yet; after that we just
+    // grab the handle and postMessage the ticket data into the already-loaded page —
+    // this is what stops every "Send to Board" click from opening a fresh instance.
+    var existing=window.open('','planning-board-tab');
+    var isFresh;
     try{
-      localStorage.setItem('pb_incoming', JSON.stringify({ts:Date.now(),params:params}));
-    }catch(e){}
-    // Always open/focus the board tab — use params in URL as fallback if localStorage fails
-    var opened=window.open('','planning-board-tab');
-    if(!opened || !opened.document || !opened.document.body || !opened.document.body.innerHTML){
+      // Same-origin blank tab (just created) reads as about:blank with no error.
+      // An existing board tab is cross-origin, so reading .location.href throws —
+      // that throw is how we detect "the tab is already there and loaded".
+      isFresh = !existing || existing.location.href==='about:blank';
+    }catch(e){
+      isFresh = false;
+    }
+    if(isFresh){
       window.open('` + boardUrl + `?bm=1&'+params,'planning-board-tab');
     } else {
-      try{ opened.focus(); }catch(e){}
+      try{ existing.postMessage({source:'pb-bookmarklet', params:params}, boardOrigin); }catch(e){}
+      try{ existing.focus(); }catch(e){}
     }
   }catch(e){alert('Bookmarklet error: '+e.message);}
 })();`;
