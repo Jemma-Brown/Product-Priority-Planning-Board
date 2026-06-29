@@ -126,8 +126,14 @@
 <div class="modal-overlay" id="archive-modal" onclick="if(event.target===this)closeArchiveModal()">
   <div class="modal" style="max-width:540px">
     <h2><span><i class="ti ti-archive" style="font-size:18px;margin-right:6px"></i>Past sprints</span><button class="icon-btn" onclick="closeArchiveModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2>
-    <div style="font-size:13px;color:var(--text3);margin-bottom:14px">Sprints whose end date has passed. You can remove them and optionally delete their data.</div>
+    <div style="font-size:13px;color:var(--text3);margin-bottom:10px">Sprints whose end date has passed. Hide a sprint to tidy up the view while keeping its data, or delete it permanently.</div>
+    <button class="btn sm" id="hide-all-past-btn" onclick="hideAllPastSprints()" style="margin-bottom:10px"><i class="ti ti-eye-off" style="font-size:13px"></i> Hide all past sprints</button>
     <div id="archive-list"></div>
+    <div id="hidden-sprints-section" style="display:none;margin-top:18px;padding-top:14px;border-top:1px solid var(--border)">
+      <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;display:flex;align-items:center;gap:6px"><i class="ti ti-eye-off" style="font-size:14px"></i> Hidden sprints</div>
+      <div style="font-size:12px;color:var(--text3);margin-bottom:10px">Hidden from the grid, but their data is intact. Unhide to bring a sprint back into view.</div>
+      <div id="hidden-sprints-list"></div>
+    </div>
     <div class="modal-footer"><button class="btn" onclick="closeArchiveModal()">Close</button></div>
   </div>
 </div>
@@ -178,6 +184,7 @@ let goalsData = {}; // { sprintId: [{id, text}] }
 let deadlines = []; // [{id, title, date, sprintId, color}]
 let holidays = []; // [{id, ownerId, startDate, endDate, label}]
 let sprintOverrides = {}; // { sprintId: {start, end, label} } — persisted date edits layered onto the hardcoded sprint grid
+let hiddenSprints = []; // [sprintId, ...] — sprints hidden from the grid/nav but whose data is kept intact
 
 
 let holCollapsed = { plan: true, nfy: true, planner: true };
@@ -272,14 +279,16 @@ async function loadData() {
     const newDeadlines = JSON.parse(metaRows.find(r=>r.key==='deadlines')?.value || '[]');
     const newHolidays  = JSON.parse(metaRows.find(r=>r.key==='holidays')?.value  || '[]');
     const newSprintOverrides = JSON.parse(metaRows.find(r=>r.key==='sprintDates')?.value || '{}');
+    const newHiddenSprints = JSON.parse(metaRows.find(r=>r.key==='hiddenSprints')?.value || '[]');
     const newJira  = metaRows.find(r=>r.key==='jira')?.value || 'https://dlapiperuk.atlassian.net';
     const lastUpdatedRaw = metaRows.find(r=>r.key==='last_updated')?.value;
     if(lastUpdatedRaw){ try{ const lu=JSON.parse(lastUpdatedRaw); updateLastUpdatedHeader(lu.by,lu.ts); }catch(e){} }
-    const hash = JSON.stringify([newThemes, newTickets, newCap, newGoals, newJira, newSprintOverrides]);
+    const hash = JSON.stringify([newThemes, newTickets, newCap, newGoals, newJira, newSprintOverrides, newHiddenSprints]);
     if (hash !== _lastHash) {
       _lastHash = hash;
       themes = newThemes; tickets = newTickets; capData = newCap; goalsData = newGoals; deadlines = newDeadlines; holidays = newHolidays; jiraUrl = newJira;
       sprintOverrides = newSprintOverrides;
+      hiddenSprints = newHiddenSprints;
       applySprintOverrides();
       const ju = document.getElementById('jira-url');
       if (ju) ju.value = jiraUrl;
@@ -332,32 +341,98 @@ function pastSprints() {
   const today = new Date(); today.setHours(0,0,0,0);
   return allSprints.filter(s => new Date(s.end) < today);
 }
+// Filters a sprint array down to the ones not in hiddenSprints. Used only at the points
+// where sprints become grid/nav columns — dropdowns elsewhere (theme/ticket sprint pickers,
+// the sprint-date modal, etc.) deliberately keep showing every sprint, hidden or not, so
+// existing themes/tickets on a hidden sprint stay fully editable, just out of the main view.
+function visibleSprints(allSprints) {
+  if(!hiddenSprints || !hiddenSprints.length) return allSprints;
+  const hidden = new Set(hiddenSprints);
+  return allSprints.filter(s => !hidden.has(s.id));
+}
 
 /* ── ARCHIVE MODAL ── */
 function openArchiveModal() {
   const past = pastSprints();
+  const hiddenSet = new Set(hiddenSprints || []);
   const modal = document.getElementById('archive-modal');
   const list  = document.getElementById('archive-list');
-  if(!past.length) {
+  const activePast = past.filter(s => !hiddenSet.has(s.id));
+  if(!activePast.length) {
     list.innerHTML = '<div style="color:var(--text3);font-size:13px;padding:8px 0">No past sprints found.</div>';
   } else {
-    list.innerHTML = past.map(s => {
+    list.innerHTML = activePast.map(s => {
       const themeCount  = themes.filter(t => t.startSprint===s.id||t.endSprint===s.id).length;
       const ticketCount = tickets.filter(t => t.sprint===s.id).length;
       const hasData = themeCount + ticketCount > 0;
-      return `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)">
+      const dataLabel = hasData
+        ? `<span style="font-size:11px;color:var(--text3);margin-left:6px">${themeCount} theme${themeCount!==1?'s':''}, ${ticketCount} ticket${ticketCount!==1?'s':''}</span>`
+        : '<span style="font-size:11px;color:#1d9e75;margin-left:6px">empty</span>';
+      const hideBtn = hasData
+        ? `<button class="btn sm" onclick="hideSprint('${s.id}')" title="Remove from the grid, keep all data — can be unhidden later"><i class="ti ti-eye-off" style="font-size:13px"></i> Hide</button>`
+        : '';
+      const removeBtn = `<button class="btn sm" style="${hasData?'color:#e24b4a;border-color:#e24b4a;':'color:var(--text3);'}" onclick="archiveSprint('${s.id}',${hasData})">${hasData?'Delete data &amp; remove':'Remove'}</button>`;
+      return `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);gap:8px">
         <div>
           <span style="font-size:13px;font-weight:600;color:var(--text)">Sprint ${s.num}</span>
           <span style="font-size:12px;color:var(--text3);margin-left:6px">${esc(s.label)}</span>
-          ${hasData ? `<span style="font-size:11px;color:var(--text3);margin-left:6px">${themeCount} theme${themeCount!==1?'s':''}, ${ticketCount} ticket${ticketCount!==1?'s':''}</span>` : '<span style="font-size:11px;color:#1d9e75;margin-left:6px">empty</span>'}
+          ${dataLabel}
         </div>
-        <button class="btn sm" style="${hasData?'color:#e24b4a;border-color:#e24b4a;':'color:var(--text3);'}" onclick="archiveSprint('${s.id}',${hasData})">${hasData?'Delete data &amp; remove':'Remove'}</button>
+        <div style="display:flex;gap:6px;flex-shrink:0">${hideBtn}${removeBtn}</div>
+      </div>`;
+    }).join('');
+  }
+  // Hidden sprints section — shows every sprint currently in hiddenSprints (even if, in an
+  // edge case, its end date is no longer in the past — e.g. dates were edited afterwards)
+  const hiddenSection = document.getElementById('hidden-sprints-section');
+  const hiddenList = document.getElementById('hidden-sprints-list');
+  const allSprintsFlat = allSprintsDeduped();
+  const hiddenSprintObjs = allSprintsFlat.filter(s => hiddenSet.has(s.id));
+  if(!hiddenSprintObjs.length) {
+    hiddenSection.style.display = 'none';
+  } else {
+    hiddenSection.style.display = '';
+    hiddenList.innerHTML = hiddenSprintObjs.map(s => {
+      const themeCount  = themes.filter(t => t.startSprint===s.id||t.endSprint===s.id).length;
+      const ticketCount = tickets.filter(t => t.sprint===s.id).length;
+      return `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);gap:8px">
+        <div>
+          <span style="font-size:13px;font-weight:600;color:var(--text)">Sprint ${s.num}</span>
+          <span style="font-size:12px;color:var(--text3);margin-left:6px">${esc(s.label)}</span>
+          <span style="font-size:11px;color:var(--text3);margin-left:6px">${themeCount} theme${themeCount!==1?'s':''}, ${ticketCount} ticket${ticketCount!==1?'s':''}</span>
+        </div>
+        <button class="btn sm primary" onclick="unhideSprint('${s.id}')"><i class="ti ti-eye" style="font-size:13px"></i> Unhide</button>
       </div>`;
     }).join('');
   }
   modal.classList.add('open');
+  const hideAllBtn = document.getElementById('hide-all-past-btn');
+  if(hideAllBtn) hideAllBtn.disabled = !activePast.length;
 }
 function closeArchiveModal() { document.getElementById('archive-modal').classList.remove('open'); }
+async function hideAllPastSprints() {
+  const past = pastSprints();
+  const hiddenSet = new Set(hiddenSprints || []);
+  const toHide = past.filter(s => !hiddenSet.has(s.id)).map(s => s.id);
+  if(!toHide.length) return;
+  hiddenSprints = [...hiddenSprints, ...toHide];
+  await saveHiddenSprints();
+  render();
+  openArchiveModal(); // refresh list
+}
+async function hideSprint(sid) {
+  if(hiddenSprints.includes(sid)) return;
+  hiddenSprints = [...hiddenSprints, sid];
+  await saveHiddenSprints();
+  render();
+  openArchiveModal(); // refresh list
+}
+async function unhideSprint(sid) {
+  hiddenSprints = hiddenSprints.filter(id => id !== sid);
+  await saveHiddenSprints();
+  render();
+  openArchiveModal(); // refresh list
+}
 async function archiveSprint(sid, hasData) {
   if(hasData && !confirm(`Delete all themes and tickets for this sprint? This cannot be undone.`)) return;
   // Delete associated tickets
@@ -500,6 +575,14 @@ async function saveJiraUrlShared(url) {
   try {
     await sbUpsert('pb_meta', {key:'jira', value: url});
   } catch(e) { console.error('Save jira failed', e); }
+}
+
+async function saveHiddenSprints() {
+  try {
+    await sbUpsert('pb_meta', {key:'hiddenSprints', value: JSON.stringify(hiddenSprints)});
+    setSyncBadge(true);
+    saveLastUpdated();
+  } catch(e) { console.error('Save hidden sprints failed', e); setSyncBadge(false); }
 }
 
 const SPRINT_COL_MIN = 130; // px per sprint column
@@ -835,6 +918,17 @@ const SUBCATS = [
 const TIMELINE_OWNERS = OWNERS.filter(o => o.id !== 'lorna' && o.id !== 'bank');
 // save() defined above as async
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+// Initials shown on holiday bars. Hardcoded per-person (first+last initial) rather than
+// derived from OWNERS.label, since OWNERS only stores first names — there's no surname
+// field to derive "JB"/"SF"/etc from automatically.
+const HOLIDAY_INITIALS = { george:'GH', jemma:'JB', sam:'SF', chris:'CN', claire:'CW', bank:'BH' };
+function holidayInitials(ownerId){ return HOLIDAY_INITIALS[ownerId] || (ownerId||'').slice(0,2).toUpperCase(); }
+// Shared dd/mm/yy date formatter for holiday tooltips. Input is an ISO 'YYYY-MM-DD' string.
+function fmtDateShort(iso){
+  const p = String(iso).split('-');
+  if(p.length !== 3) return String(iso);
+  return p[2] + '/' + p[1] + '/' + p[0].slice(2);
+}
 function isDark(){
   const t = document.documentElement.getAttribute('data-theme');
   if(t==='dark') return true;
@@ -878,7 +972,7 @@ function updateCounts(){
   document.getElementById('tc-progress').textContent = themes.filter(t=>t.startSprint==='progress').length;
 }
 function navSprints(tabKey, dir){
-  const all = tabKey==='plan' ? PLAN_SPRINTS : NFY_SPRINTS;
+  const all = visibleSprints(tabKey==='plan' ? PLAN_SPRINTS : NFY_SPRINTS);
   const SW = getSprintWindow(tabKey); sprintOffset[tabKey] = Math.max(0, Math.min(all.length - SW, sprintOffset[tabKey] + dir));
   render();
 }
@@ -1080,8 +1174,9 @@ function renderTimeline(gridId, allSprints, tabKey){
         const barBg   = owner ? owner.barBg   : '#888';
         const barText = owner ? owner.barText : '#fff';
         const label = h.label || (owner ? owner.label : '');
-        const dateRange = fmtDate(h.startDate) + '–' + fmtDate(h.endDate);
-        const tooltip = `${esc(label)} ${h.startDate}–${h.endDate}`;
+        const initials = holidayInitials(h.ownerId);
+        const dateRange = fmtDateShort(h.startDate) + '\u2013' + fmtDateShort(h.endDate);
+        const tooltip = `${esc(label)} ${dateRange}`;
         let textShown = false;
         for(let si = visStart; si <= visEnd; si++) {
           const s = sprints[si];
@@ -1103,8 +1198,9 @@ function renderTimeline(gridId, allSprints, tabKey){
           const startsAtEdge = leftPct < 1;
           const canShowText = !textShown && (isContinuation || startsAtEdge || (isFirst && isLast));
           if(canShowText) textShown = true;
+          const initialsHtml = canShowText ? `<span style="font-size:9px;font-weight:700;line-height:1;padding-left:4px;white-space:nowrap;overflow:hidden">${esc(initials)}</span>` : '';
           html += `<div style="grid-row:${rowNum};grid-column:${col};z-index:3;pointer-events:none;align-self:start;padding-top:${HOL_ROW_PAD}px;">
-            <div onclick="event.stopPropagation();openHolidayModal('${h.id}')" title="${tooltip}" style="pointer-events:all;cursor:pointer;height:${HOL_BAR_H}px;margin-left:${leftPct.toFixed(1)}%;margin-right:${rightPct.toFixed(1)}%;background:${barBg};color:${barText};border-radius:${rLeft} ${rRight} ${rRight} ${rLeft};box-sizing:border-box;">
+            <div onclick="event.stopPropagation();openHolidayModal('${h.id}')" title="${tooltip}" style="pointer-events:all;cursor:pointer;height:${HOL_BAR_H}px;margin-left:${leftPct.toFixed(1)}%;margin-right:${rightPct.toFixed(1)}%;background:${barBg};color:${barText};border-radius:${rLeft} ${rRight} ${rRight} ${rLeft};box-sizing:border-box;display:flex;align-items:center;overflow:hidden;">${initialsHtml}
             </div>
           </div>`;
         }
@@ -1365,6 +1461,31 @@ function renderDetail(containerId, sprints, tabKey){
     <div class="detail-title"><i class="ti ti-subtask" style="font-size:19px"></i> Sprint ${sprint.num} tickets <span style="font-size:19px;color:var(--text3);font-weight:400">${esc(sprint.label)}</span></div>
     <button class="btn sm primary" onclick="openTicketModal(null,'${sid}')"><i class="ti ti-plus"></i> Add ticket</button>
   </div>`;
+
+  // ── GOAL PROGRESS BANNER (top of sprint section) ──
+  // Completion, not composition: of the points sitting on tickets flagged 🎯 Goal,
+  // how many of those points are on tickets also marked done (tk.done, toggled via the
+  // ✓ button on each ticket card). This is "progress against the goals", scoped to the
+  // goal tickets themselves — not against the sprint's total points.
+  const goalTicketsAll = sprintTickets.filter(t=>t.goal);
+  const goalTotalPts = goalTicketsAll.reduce((sum,t)=>sum+(parseFloat(t.points)||0),0);
+  const goalDoneTickets = goalTicketsAll.filter(t=>t.done);
+  const goalDonePts = goalDoneTickets.reduce((sum,t)=>sum+(parseFloat(t.points)||0),0);
+  const goalDonePct = goalTotalPts > 0 ? Math.round(goalDonePts/goalTotalPts*100) : 0;
+  if(goalTicketsAll.length){
+    html += `<div style="padding:10px 16px;background:var(--claire-bg);border-bottom:1px solid var(--border-strong);display:flex;align-items:center;gap:12px">
+      <span style="font-size:18px;flex-shrink:0">🎯</span>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:4px">
+          <span style="font-size:13px;font-weight:600;color:var(--claire-text)">Goal progress</span>
+          <span style="font-size:13px;font-weight:700;color:var(--claire-text)">${goalDonePts} of ${goalTotalPts} pts done<span style="font-weight:500;opacity:.75"> (${goalDonePct}%)</span></span>
+        </div>
+        <div style="height:6px;border-radius:3px;background:rgba(0,0,0,0.08);overflow:hidden">
+          <div style="height:100%;width:${goalDonePct}%;background:#1d9e75;border-radius:3px;transition:width .2s"></div>
+        </div>
+      </div>
+    </div>`;
+  }
 
   // ── CATEGORY SPLIT STRIP ──
   const totalAllPts = sprintTickets.reduce((sum,t)=>sum+(parseFloat(t.points)||0),0);
@@ -1655,10 +1776,10 @@ function render(){
     chipName.textContent = o ? o.label : 'Not set';
     chipDot.style.background = o ? o.barBg : 'var(--text3)';
   }
-  renderTimeline('tl-plan',PLAN_SPRINTS,'plan');
-  renderTimeline('tl-nfy',NFY_SPRINTS,'nfy');
-  renderDetail('detail-plan',PLAN_SPRINTS,'plan');
-  renderDetail('detail-nfy',NFY_SPRINTS,'nfy');
+  renderTimeline('tl-plan',visibleSprints(PLAN_SPRINTS),'plan');
+  renderTimeline('tl-nfy',visibleSprints(NFY_SPRINTS),'nfy');
+  renderDetail('detail-plan',visibleSprints(PLAN_SPRINTS),'plan');
+  renderDetail('detail-nfy',visibleSprints(NFY_SPRINTS),'nfy');
   renderProgress();
   if(activeTab==='planner') renderPlanner();
   updateCounts();
@@ -2830,7 +2951,6 @@ function renderPlanner(){
     </th>`;
   });
   // Holidays rows in planner — lane-packed, minimum rows
-  const _fmtD = d => { const p = d.split('-'); return p[2]+'/'+p[1]; };
 
   // Map each holiday to its sprint index range (across allSprints)
   const allHols2 = [...holidays, ...[
@@ -2885,7 +3005,8 @@ function renderPlanner(){
         const barBg   = owner ? owner.barBg   : '#888';
         const barText = owner ? owner.barText : '#fff';
         const label = slot.h.label || (owner ? owner.label : '');
-        const dateRange = _fmtD(slot.h.startDate) + '–' + _fmtD(slot.h.endDate);
+        const initials = holidayInitials(slot.h.ownerId);
+        const dateRange = fmtDateShort(slot.h.startDate) + '\u2013' + fmtDateShort(slot.h.endDate);
         const sprint = allSprints[si];
         const sprintStart = new Date(sprint.start).getTime();
         const sprintEnd   = new Date(sprint.end).getTime();
@@ -2910,7 +3031,8 @@ function renderPlanner(){
         const rL = isFirst && holStart >= sprintStart ? '4px' : '0';
         const rR = isLast  && holEnd   <= sprintEnd   ? '4px' : '0';
         const tooltip = esc(label) + ' ' + esc(dateRange);
-        const bar = '<div onclick="event.stopPropagation();openHolidayModal(\'' + slot.h.id + '\')" title="' + tooltip + '" style="height:22px;margin-left:' + leftPct.toFixed(1) + '%;margin-right:' + rightPct.toFixed(1) + '%;background:' + barBg + ';border-radius:' + rL + ' ' + rR + ' ' + rR + ' ' + rL + ';cursor:pointer;box-sizing:border-box"></div>';
+        const initialsHtml = canShowText ? '<span style="font-size:9px;font-weight:700;line-height:1;padding-left:4px;white-space:nowrap;overflow:hidden;color:' + barText + '">' + esc(initials) + '</span>' : '';
+        const bar = '<div onclick="event.stopPropagation();openHolidayModal(\'' + slot.h.id + '\')" title="' + tooltip + '" style="height:22px;margin-left:' + leftPct.toFixed(1) + '%;margin-right:' + rightPct.toFixed(1) + '%;background:' + barBg + ';border-radius:' + rL + ' ' + rR + ' ' + rR + ' ' + rL + ';cursor:pointer;box-sizing:border-box;display:flex;align-items:center;overflow:hidden">' + initialsHtml + '</div>';
         cells.push('<td style="padding:2px 0;background:var(--surface2);border-right:1px solid var(--border-strong);border-top:none;height:26px;">' + bar + '</td>');
         si++;
       } else {
