@@ -2296,28 +2296,23 @@ function openTicketFromParams(p) {
       'story':'enhancement','task':'enhancement','enhancement':'enhancement','improvement':'enhancement','new feature':'enhancement','feature':'enhancement',
       'spike':'spike','research':'spike','spike (research)':'spike',
     };
-    // Primary signal: the "Key Details" field text on the Jira ticket.
-    //  - an ISDF-#### reference  -> Defect
-    //  - a Product Goal / Feature reference -> Enhancement
-    //  - neither present -> Spike (default)
-    const keyDetailsRaw = (p.get('keydetails') || '') + ' ' + (p.get('title') || '');
+    // Primary signal: the issue type ICON next to the ticket's own key (lightbulb/bug/bookmark),
+    // scraped as the Jira Issue Type field — this is Jira's actual built-in type, so it's the
+    // most reliable signal available.
     let detectedType = null;
-    if(keyDetailsRaw.trim()){
-      const hasIsdfField = /\bHAS_ISDF_FIELD\b/.test(keyDetailsRaw);
-      const hasGoalField = /\bHAS_GOAL_FIELD\b/.test(keyDetailsRaw);
-      const hasIsdfRef = hasIsdfField || /\bISDF[-\s]?\d+/i.test(keyDetailsRaw);
-      const hasGoalRef = hasGoalField || /product\s*goal|feature\s*reference|goal\s*\/?\s*feature\s*reference/i.test(keyDetailsRaw);
-      if(hasIsdfRef) detectedType = 'defect';
-      else if(hasGoalRef) detectedType = 'enhancement';
-      else detectedType = 'spike';
-    }
-    // Fall back to the Jira Issue Type field only if no Key Details text could be scraped at all
-    if(!detectedType && issueTypeRaw){
+    if(issueTypeRaw){
       if(TYPE_MAP[issueTypeRaw]) detectedType = TYPE_MAP[issueTypeRaw];
       else { const found = Object.keys(TYPE_MAP).find(k => issueTypeRaw.includes(k)); if(found) detectedType = TYPE_MAP[found]; }
     }
-    // Per the classification rule, absence of a Defect or Enhancement signal always means Spike —
-    // this also covers older cached bookmarklets that don't yet send Key Details/Issue Type data.
+    // Secondary signal: the Key Details field label, matched exactly by the bookmarklet
+    // (sent as e.g. "KD_TYPE:defect") — used only if the icon couldn't be resolved.
+    if(!detectedType){
+      const keyDetailsRaw = p.get('keydetails') || '';
+      const kdMatch = keyDetailsRaw.match(/^KD_TYPE:(defect|enhancement|spike)$/);
+      if(kdMatch) detectedType = kdMatch[1];
+    }
+    // Per the classification rule, absence of any Defect or Enhancement signal always means Spike —
+    // this also covers older cached bookmarklets that don't yet send this data.
     if(!detectedType) detectedType = 'spike';
     if(detectedType) document.getElementById('tk-type').value = detectedType;
 
@@ -2410,13 +2405,33 @@ function buildBookmarklet(){
            document.querySelector('#type-val');
     if(it) issuetype=(it.alt||it.innerText||'').trim();
     if(!issuetype){var itRaw=_fieldByLabel(['Issue Type','Type','Work Type']);if(itRaw) issuetype=itRaw;}
-    // "Key Details" section drives ticket type classification (Defect/Enhancement/Spike).
-    // Jira templates this section differently per ticket type:
-    //   Defect tickets show a "ISDF Number" sub-field
-    //   Enhancement tickets show a "Product Goal/Feature reference" sub-field
-    //   Spike tickets show neither
-    // Classification is based on whether the sub-field LABEL is present at all, not on whether
-    // it has a value filled in (it can legitimately show as empty / "Add text").
+    // Most reliable signal: the issue type ICON sitting right next to the ticket's own key at the
+    // top of the page (breadcrumb / header) — e.g. a lightbulb for Spike, a bookmark/tag for
+    // Story/Enhancement, a bug for Defect. Jira renders this as an <img alt="..."> or an
+    // svg/[role=img] with an aria-label matching the issue type name. Find the icon whose nearby
+    // container also displays the current ticket's own key text (not a parent/linked epic's icon).
+    if(key){
+      var icons=document.querySelectorAll('img[alt],svg[aria-label],[role="img"][aria-label]');
+      for(var ii=0;ii<icons.length;ii++){
+        var icon=icons[ii];
+        var label=(icon.getAttribute('alt')||icon.getAttribute('aria-label')||'').trim();
+        if(!label) continue;
+        var container=icon.closest('a,div,span')||icon.parentElement;
+        var found=false;
+        for(var kk=0;kk<3 && container;kk++){
+          var ctxt=(container.innerText||'').replace(/\s+/g,' ').trim();
+          if(ctxt.indexOf(key)!==-1 && ctxt.length<key.length+60){ found=true; break; }
+          container=container.parentElement;
+        }
+        if(found){ issuetype=label; break; }
+      }
+    }
+    // The Key Details section is a secondary signal for ticket type classification.
+    // It's the same underlying Jira field, just templated with a different label per ticket type:
+    //   Defect       -> "ISDF Number"
+    //   Enhancement  -> "Product Goal/Feature reference"
+    //   Spike        -> "Product Goal/Feature/ISDF reference" (merged label — checked FIRST since
+    //                    it's a superset of the other two and would otherwise false-match them)
     function _hasFieldLabel(names){
       var els=document.querySelectorAll('span,label,div,p,th,dt,strong,h3,h4,a');
       for(var i=0;i<els.length;i++){
@@ -2425,10 +2440,11 @@ function buildBookmarklet(){
       }
       return false;
     }
-    var hasIsdfField = _hasFieldLabel(['ISDF Number','ISDF #']);
-    var hasGoalField = _hasFieldLabel(['Product Goal/Feature reference','Product Goal / Feature reference','Product Goal/Feature Reference']);
-    var isdfVal=_fieldByLabel(['ISDF Number','ISDF number','ISDF #','ISDF']);
-    keydetails = (hasIsdfField?'HAS_ISDF_FIELD ':'') + (hasGoalField?'HAS_GOAL_FIELD ':'') + (isdfVal?isdfVal+' ':'') + (document.body.innerText || '').slice(0,6000);
+    var hasSpikeField = _hasFieldLabel(['Product Goal/Feature/ISDF reference','Product Goal / Feature / ISDF reference','Product Goal/Feature/ISDF Reference']);
+    var hasIsdfField = !hasSpikeField && _hasFieldLabel(['ISDF Number','ISDF #']);
+    var hasGoalField = !hasSpikeField && _hasFieldLabel(['Product Goal/Feature reference','Product Goal / Feature reference','Product Goal/Feature Reference']);
+    var keydetailsType = hasIsdfField ? 'defect' : hasGoalField ? 'enhancement' : hasSpikeField ? 'spike' : '';
+    keydetails = keydetailsType ? ('KD_TYPE:'+keydetailsType) : '';
     var t=document.querySelector('[data-testid="issue.views.issue-base.foundation.summary.heading"]')||
           document.querySelector('[data-testid*="summary"] h1')||
           document.querySelector('h1[class*="summary"]')||
@@ -2506,6 +2522,27 @@ function buildBookmarklet(){
     out+=(spEl?spEl.innerText.trim():'NOT FOUND')+'\\n';
     out+='Sprint (label scan): '+_fieldByLabel(['Sprint'])+'\\n';
     out+='Issue Type (label scan): '+_fieldByLabel(['Issue Type','Type','Work Type'])+'\\n';
+    var dbgKey='';
+    var dbgKm=location.pathname.match(/\\/browse\\/([A-Z]+-\\d+)/);
+    if(dbgKm) dbgKey=dbgKm[1];
+    var dbgIconType='NOT FOUND';
+    if(dbgKey){
+      var dbgIcons=document.querySelectorAll('img[alt],svg[aria-label],[role="img"][aria-label]');
+      for(var di=0;di<dbgIcons.length;di++){
+        var dIcon=dbgIcons[di];
+        var dLabel=(dIcon.getAttribute('alt')||dIcon.getAttribute('aria-label')||'').trim();
+        if(!dLabel) continue;
+        var dContainer=dIcon.closest('a,div,span')||dIcon.parentElement;
+        var dFound=false;
+        for(var dk=0;dk<3 && dContainer;dk++){
+          var dCtxt=(dContainer.innerText||'').replace(/\\s+/g,' ').trim();
+          if(dCtxt.indexOf(dbgKey)!==-1 && dCtxt.length<dbgKey.length+60){ dFound=true; break; }
+          dContainer=dContainer.parentElement;
+        }
+        if(dFound){ dbgIconType=dLabel; break; }
+      }
+    }
+    out+='Issue type ICON next to own key "'+dbgKey+'": '+dbgIconType+'\\n';
     function _hasFieldLabelDbg(names){
       var els=document.querySelectorAll('span,label,div,p,th,dt,strong,h3,h4,a');
       for(var i=0;i<els.length;i++){
@@ -2514,9 +2551,10 @@ function buildBookmarklet(){
       }
       return false;
     }
-    out+='Has "ISDF Number" field (-> Defect): '+(_hasFieldLabelDbg(['ISDF Number','ISDF #'])?'YES':'no')+'\\n';
-    out+='Has "Product Goal/Feature reference" field (-> Enhancement): '+(_hasFieldLabelDbg(['Product Goal/Feature reference','Product Goal / Feature reference','Product Goal/Feature Reference'])?'YES':'no')+'\\n';
-    out+='ISDF Number (label scan): '+_fieldByLabel(['ISDF Number','ISDF number','ISDF #','ISDF'])+'\\n';
+    var dbgHasSpike = _hasFieldLabelDbg(['Product Goal/Feature/ISDF reference','Product Goal / Feature / ISDF reference','Product Goal/Feature/ISDF Reference']);
+    var dbgHasIsdf  = !dbgHasSpike && _hasFieldLabelDbg(['ISDF Number','ISDF #']);
+    var dbgHasGoal  = !dbgHasSpike && _hasFieldLabelDbg(['Product Goal/Feature reference','Product Goal / Feature reference','Product Goal/Feature Reference']);
+    out+='Key Details field found (secondary signal): '+(dbgHasIsdf?'ISDF Number (-> Defect)':dbgHasGoal?'Product Goal/Feature reference (-> Enhancement)':dbgHasSpike?'Product Goal/Feature/ISDF reference (-> Spike)':'NONE')+'\\n';
     alert(out);
   }catch(e){alert('Debug error: '+e.message);}
 })();`;
