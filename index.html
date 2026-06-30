@@ -1865,6 +1865,9 @@ function ticketCard(tk){
   const cardBorder = isSpikeReady ? SPIKE_TEAL.border : colourLabel ? LABEL_BG[colourLabel].border  : 'var(--border)';
   const cardText   = isSpikeReady ? SPIKE_TEAL.text   : colourLabel ? LABEL_BG[colourLabel].text    : 'var(--text)';
   const TYPE_LABEL = {defect:'Defect',enhancement:'Enhancement',spike:'Spike'};
+  const TYPE_ICON = {defect:{cls:'ti-bug',color:'#e24b4a'},enhancement:{cls:'ti-sparkles',color:'#534ab7'},spike:{cls:'ti-bulb',color:'#0e8a7d'}};
+  const typeIconDef = TYPE_ICON[tk.type];
+  const typeIcon = typeIconDef ? `<i class="ti ${typeIconDef.cls}" style="font-size:11px;color:${typeIconDef.color}" title="${TYPE_LABEL[tk.type]}"></i>` : '';
   const refinementBadge = refinementLabel
     ? `<span style="font-size:9px;font-weight:600;color:var(--text2)">${esc(refinementLabel)}</span>`
     : '';
@@ -1894,6 +1897,7 @@ function ticketCard(tk){
       ${epicBadge}${commentsBadge}
       <div class="ticket-footer" style="margin-top:1px">
         <div style="display:flex;align-items:center;gap:3px;flex-wrap:wrap">
+          ${typeIcon}
           <span class="priority-dot priority-${tk.priority}" title="${priorityLabel}"></span>
           <span style="font-size:9px;color:${doneCardText};opacity:.7">${priorityLabel}</span>
           ${refinementBadge || labelBadge}
@@ -2407,23 +2411,30 @@ function buildBookmarklet(){
     if(!issuetype){var itRaw=_fieldByLabel(['Issue Type','Type','Work Type']);if(itRaw) issuetype=itRaw;}
     // Most reliable signal: the issue type ICON sitting right next to the ticket's own key at the
     // top of the page (breadcrumb / header) — e.g. a lightbulb for Spike, a bookmark/tag for
-    // Story/Enhancement, a bug for Defect. Jira renders this as an <img alt="..."> or an
-    // svg/[role=img] with an aria-label matching the issue type name. Find the icon whose nearby
-    // container also displays the current ticket's own key text (not a parent/linked epic's icon).
+    // Story/Enhancement, a bug for Defect. Strategy: find the leaf element whose text is exactly
+    // the ticket's own key, then look at its near ancestors for an icon (img/svg/[role=img]),
+    // reading alt, aria-label, title, or a nested SVG <title> element as the label.
+    function _iconLabel(el){
+      if(!el) return '';
+      return (el.getAttribute && (el.getAttribute('alt')||el.getAttribute('aria-label')||el.getAttribute('title'))) ||
+             (el.querySelector && el.querySelector('title') ? el.querySelector('title').textContent : '') || '';
+    }
     if(key){
-      var icons=document.querySelectorAll('img[alt],svg[aria-label],[role="img"][aria-label]');
-      for(var ii=0;ii<icons.length;ii++){
-        var icon=icons[ii];
-        var label=(icon.getAttribute('alt')||icon.getAttribute('aria-label')||'').trim();
-        if(!label) continue;
-        var container=icon.closest('a,div,span')||icon.parentElement;
-        var found=false;
-        for(var kk=0;kk<3 && container;kk++){
-          var ctxt=(container.innerText||'').replace(/\s+/g,' ').trim();
-          if(ctxt.indexOf(key)!==-1 && ctxt.length<key.length+60){ found=true; break; }
-          container=container.parentElement;
+      var keyLeafs=document.querySelectorAll('a,span,div,li,h1,p');
+      for(var ki=0;ki<keyLeafs.length && !issuetype;ki++){
+        var kEl=keyLeafs[ki];
+        if(kEl.childElementCount>0) continue;
+        var kTxt=(kEl.innerText||kEl.textContent||'').trim();
+        if(kTxt!==key) continue;
+        var anc=kEl.parentElement;
+        for(var lvl=0;lvl<5 && anc && !issuetype;lvl++){
+          var iconEl=anc.querySelector('img[alt],svg,[role="img"]');
+          if(iconEl){
+            var lbl=_iconLabel(iconEl).trim();
+            if(lbl) issuetype=lbl;
+          }
+          anc=anc.parentElement;
         }
-        if(found){ issuetype=label; break; }
       }
     }
     // The Key Details section is a secondary signal for ticket type classification.
@@ -2525,24 +2536,44 @@ function buildBookmarklet(){
     var dbgKey='';
     var dbgKm=location.pathname.match(/\\/browse\\/([A-Z]+-\\d+)/);
     if(dbgKm) dbgKey=dbgKm[1];
+    function _dbgIconLabel(el){
+      if(!el) return '';
+      return (el.getAttribute && (el.getAttribute('alt')||el.getAttribute('aria-label')||el.getAttribute('title'))) ||
+             (el.querySelector && el.querySelector('title') ? el.querySelector('title').textContent : '') || '';
+    }
     var dbgIconType='NOT FOUND';
     if(dbgKey){
-      var dbgIcons=document.querySelectorAll('img[alt],svg[aria-label],[role="img"][aria-label]');
-      for(var di=0;di<dbgIcons.length;di++){
-        var dIcon=dbgIcons[di];
-        var dLabel=(dIcon.getAttribute('alt')||dIcon.getAttribute('aria-label')||'').trim();
-        if(!dLabel) continue;
-        var dContainer=dIcon.closest('a,div,span')||dIcon.parentElement;
-        var dFound=false;
-        for(var dk=0;dk<3 && dContainer;dk++){
-          var dCtxt=(dContainer.innerText||'').replace(/\\s+/g,' ').trim();
-          if(dCtxt.indexOf(dbgKey)!==-1 && dCtxt.length<dbgKey.length+60){ dFound=true; break; }
-          dContainer=dContainer.parentElement;
+      var dbgKeyLeafs=document.querySelectorAll('a,span,div,li,h1,p');
+      for(var dki=0;dki<dbgKeyLeafs.length && dbgIconType==='NOT FOUND';dki++){
+        var dkEl=dbgKeyLeafs[dki];
+        if(dkEl.childElementCount>0) continue;
+        var dkTxt=(dkEl.innerText||dkEl.textContent||'').trim();
+        if(dkTxt!==dbgKey) continue;
+        var dAnc=dkEl.parentElement;
+        for(var dlvl=0;dlvl<5 && dAnc && dbgIconType==='NOT FOUND';dlvl++){
+          var dIconEl=dAnc.querySelector('img[alt],svg,[role="img"]');
+          if(dIconEl){
+            var dLbl=_dbgIconLabel(dIconEl).trim();
+            if(dLbl) dbgIconType=dLbl;
+          }
+          dAnc=dAnc.parentElement;
         }
-        if(dFound){ dbgIconType=dLabel; break; }
       }
     }
     out+='Issue type ICON next to own key "'+dbgKey+'": '+dbgIconType+'\\n';
+    // Raw diagnostic dump: every icon-like element with a readable label found in the first
+    // part of the page (helps pinpoint the right one if the above didn't resolve correctly)
+    out+='--- Raw icons found near top of page ---\\n';
+    var dbgAllIcons=document.querySelectorAll('img[alt],svg,[role="img"]');
+    var dbgIconCount=0;
+    for(var dai=0;dai<dbgAllIcons.length && dbgIconCount<25;dai++){
+      var dEl=dbgAllIcons[dai];
+      var dLbl2=_dbgIconLabel(dEl).trim();
+      if(!dLbl2) continue;
+      var dParentTxt=(dEl.parentElement&&dEl.parentElement.innerText||'').replace(/\\s+/g,' ').trim().slice(0,40);
+      out+=dLbl2+'  (near text: "'+dParentTxt+'")\\n';
+      dbgIconCount++;
+    }
     function _hasFieldLabelDbg(names){
       var els=document.querySelectorAll('span,label,div,p,th,dt,strong,h3,h4,a');
       for(var i=0;i<els.length;i++){
@@ -3475,6 +3506,9 @@ function renderPlanner(){
             const cardBorder = isDone ? '#1d9e75' : (isSpikeReady ? PLANNER_SPIKE_TEAL.border : colourLabel ? PLANNER_LABEL_BG[colourLabel].border : 'var(--border)');
             const cardText = isDone ? (colourLabel ? PLANNER_LABEL_BG[colourLabel].text : '#1d9e75') : (isSpikeReady ? PLANNER_SPIKE_TEAL.text : colourLabel ? PLANNER_LABEL_BG[colourLabel].text : 'var(--text)');
             const PLANNER_TYPE_LABEL = {defect:'Defect',enhancement:'Enhancement',spike:'Spike'};
+            const PLANNER_TYPE_ICON = {defect:{cls:'ti-bug',color:'#e24b4a'},enhancement:{cls:'ti-sparkles',color:'#534ab7'},spike:{cls:'ti-bulb',color:'#0e8a7d'}};
+            const plannerTypeIconDef = PLANNER_TYPE_ICON[tk.type];
+            const plannerTypeIcon = plannerTypeIconDef ? `<i class="ti ${plannerTypeIconDef.cls}" style="font-size:10px;color:${plannerTypeIconDef.color};flex-shrink:0" title="${PLANNER_TYPE_LABEL[tk.type]}"></i>` : '';
             const pts = `<span style="font-size:11px;font-weight:700;color:#534ab7;border:1px solid #534ab7;border-radius:50%;width:18px;height:18px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0">${tk.points||''}</span>`;
             const jiraBase = jiraUrl || 'https://dlapiperuk.atlassian.net';
             const jira = tk.jira ? `<a href="${jiraBase}/browse/${tk.jira}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-size:10px;font-weight:600;color:#534ab7;text-decoration:none;white-space:nowrap;padding:1px 3px;background:var(--cat-dash-bg);border-radius:3px">${esc(tk.jira)}</a>` : '';
@@ -3488,7 +3522,7 @@ function renderPlanner(){
               ondragleave="if(_plannerOverId==='${tk.id}'){_plannerOverId=null;}this.style.borderTop=''"
               onclick="editTicket('${tk.id}')" style="background:${cardBg};border:0.5px solid ${cardBorder};border-radius:4px;padding:3px 5px;margin-bottom:3px;cursor:grab;display:flex;align-items:flex-start;gap:3px;justify-content:space-between;${isDone?'opacity:0.7;':''}" title="${esc(tk.title)}">
               <span style="font-size:12px;font-weight:500;flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;color:${cardText};${isDone?'text-decoration:line-through;':''}">${esc(tk.title)}</span>
-              <div style="display:flex;align-items:center;gap:2px;flex-shrink:0">${catBadge}${jira}${pts}</div>
+              <div style="display:flex;align-items:flex-start;gap:2px;flex-shrink:0">${catBadge}${jira}<div style="display:flex;flex-direction:column;align-items:center;gap:1px">${pts}${plannerTypeIcon}</div></div>
             </div>`;
           });
         }
