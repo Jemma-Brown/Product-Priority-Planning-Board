@@ -54,7 +54,7 @@
       <div id="viewer-badge" style="display:none;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--text2);background:var(--surface2);border:0.5px solid var(--border-strong);padding:4px 10px;border-radius:20px">
         👁 Viewing
         <button onclick="switchUser()" style="background:none;border:none;cursor:pointer;font-size:11px;color:#534ab7;padding:0;font-weight:600">Switch</button>
-      </div><div id="header-user-chip" style="display:flex;align-items:center;gap:6px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2);cursor:pointer" onclick="switchUser()" title="Switch user"><span id="header-user-dot" style="width:8px;height:8px;border-radius:50%;background:var(--text3);display:inline-block;flex-shrink:0"></span><span style="font-size:12px;font-weight:600;color:var(--text2)" id="header-user-name">—</span></div><div id="online-presence" style="display:flex;align-items:center;gap:4px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Who's online now"></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Last saved"><span id="last-updated-label" style="color:var(--text3)">—</span></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Changes are shared with your team in real time"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);display:inline-block;transition:background .3s"></span><span id="sync-label">Live</span></div><button class="btn sm" id="dark-toggle" onclick="toggleDarkMode()" title="Switch to dark mode"><i class="ti ti-moon"></i></button><div class="settings-wrap"><button class="btn sm" onclick="toggleSettings()"><i class="ti ti-settings" aria-hidden="true"></i> Jira</button><div class="settings-pop" id="settings-pop"><div style="font-size:18px;font-weight:600;margin-bottom:10px;color:var(--text)">Jira settings</div><div class="form-group" style="margin-bottom:10px"><label>Base URL</label><input type="text" id="jira-url" placeholder="https://dlapiperuk.atlassian.net" style="font-size:18px;padding:5px 7px" /></div><button class="btn sm primary" onclick="saveJiraSettings()">Save</button><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Signed in as</div><div style="display:flex;align-items:center;justify-content:space-between"><span id="current-user-label" style="font-size:13px;color:var(--text2)"></span><button class="btn sm" onclick="switchUser()" style="font-size:12px;padding:3px 8px">Switch</button></div></div><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px">Bookmarklet</div><div style="font-size:18px;color:var(--text3);margin-bottom:8px">Drag this to your bookmarks bar. Click it on any Jira ticket to push it straight into this board.</div><a id="bookmarklet-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:var(--cat-dash-bg);color:#26215c;border:1px solid #534ab7;border-radius:5px;font-size:19px;font-weight:600;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bookmark" style="font-size:19px"></i> Send to Board </a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the code</button> and create a bookmark manually.</div><div id="bookmarklet-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div><div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.1)"><div style="font-size:18px;color:var(--text3);margin-bottom:6px">Not picking up all fields? Drag this debug bookmarklet to your bookmarks bar and click it on a Jira ticket to see exactly what the scraper finds:</div><a id="bookmarklet-debug-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:var(--surface2);color:var(--text2);border:1px solid var(--border-strong);border-radius:5px;font-size:19px;font-weight:500;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bug" style="font-size:19px"></i> Debug Jira Fields</a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyDebugBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the debug code</button> and save it as a bookmark manually.</div><div id="bookmarklet-debug-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div></div></div></div></div><button class="btn sm" id="btn-undo" onclick="undo()" title="Undo last change (Ctrl+Z)" disabled style="opacity:0.4"><i class="ti ti-arrow-back-up" aria-hidden="true"></i> Undo</button><button class="btn sm" onclick="openArchiveModal()" title="Manage past sprints"><i class="ti ti-archive" aria-hidden="true"></i> Archive</button><button class="btn sm" onclick="openSprintDateModal()" title="Adjust sprint dates"><i class="ti ti-calendar-cog" aria-hidden="true"></i> Sprint dates</button><button class="btn primary" id="btn-add-theme" onclick="openThemeModal()"><i class="ti ti-plus" aria-hidden="true"></i> Add theme</button><button class="btn primary" id="btn-add-ticket" onclick="openTicketModal()" style="display:none"><i class="ti ti-plus" aria-hidden="true"></i> Add ticket</button></div></header><nav class="tabs"><button class="tab-btn active" id="tab-plan" onclick="switchTab('plan')"><i class="ti ti-layout-grid" aria-hidden="true"></i> CY 2026 <span class="tab-count" id="tc-plan">0</span></button><button class="tab-btn" id="tab-progress" onclick="switchTab('progress')"><i class="ti ti-loader" aria-hidden="true"></i> Progress <span class="tab-count" id="tc-progress">0</span></button><button class="tab-btn" id="tab-nfy" onclick="switchTab('nfy')"><i class="ti ti-calendar-stats" aria-hidden="true"></i> CY 2027 <span class="tab-count" id="tc-nfy">0</span></button><button class="tab-btn" id="tab-planner" onclick="switchTab('planner')"><i class="ti ti-filter" aria-hidden="true"></i> Planner</button></nav><div class="panel active" id="panel-plan"><div class="sprint-nav" id="nav-plan"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-plan"><div class="timeline-grid" id="tl-plan"></div></div><div class="grid-resizer" id="resizer-plan" style="display:none" onmousedown="startResize(event,'plan')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-plan" class="side-detail"></div></div></div><div class="panel" id="panel-nfy"><div class="sprint-nav" id="nav-nfy"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-nfy"><div class="timeline-grid" id="tl-nfy"></div></div><div class="grid-resizer" id="resizer-nfy" style="display:none" onmousedown="startResize(event,'nfy')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-nfy" class="side-detail"></div></div></div><div class="panel" id="panel-progress"><div class="progress-wrap"><div class="progress-board" id="progress-board"></div></div></div><div class="panel" id="panel-planner"><div style="padding:16px;height:100%;box-sizing:border-box;overflow-y:auto;display:flex;flex-direction:column"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px"><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Theme</label><div style="position:relative;min-width:180px"><input type="text" id="planner-theme-input" placeholder="All themes…" autocomplete="off" oninput="filterPlannerThemeDropdown()" onfocus="openPlannerThemeDropdown()" onblur="setTimeout(closePlannerThemeDropdown,180)" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);width:100%;outline:none" /><div id="planner-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:280px;overflow-y:auto"></div><input type="hidden" id="planner-theme" /></div></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Person</label><select id="planner-owner" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All people</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Status Label</label><select id="planner-label" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All statuses</option><option value="Ticket Creation">Ticket Creation</option><option value="Ready To Refine">Ready To Refine</option><option value="Ready for Sprint">Ready for Sprint</option><option value="Ready to Test">Ready to Test</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Refinement</label><select id="planner-refinement" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All sessions</option><option value="Refinement Session 1">Session 1</option><option value="Refinement Session 2">Session 2</option><option value="Refinement Session 3">Session 3</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Category</label><select id="planner-cat" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All</option><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap"><input type="checkbox" id="planner-deadlines-only" onchange="renderPlanner()" style="width:auto;cursor:pointer" /> Deadlines only</label><button class="btn sm" onclick="openDeadlineModal(null)" style="white-space:nowrap"><i class="ti ti-calendar-plus"></i> Add Deadline</button><button class="btn sm" onclick="openHolidayModal()" style="white-space:nowrap"><i class="ti ti-beach"></i> Add Holiday</button></div><div style="margin-bottom:16px;position:relative;max-width:440px"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;color:var(--text2)"><i class="ti ti-search" style="font-size:12px;margin-right:4px"></i>Find ticket by name or Jira key</label><input type="text" id="ticket-search-input-planner" placeholder="e.g. ISB-1234 or migrate pipeline..." autocomplete="off" oninput="renderTicketSearch('planner')" onfocus="renderTicketSearch('planner')" style="width:100%;font-size:13px;padding:6px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none" /><div id="ticket-search-results-planner" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.12);max-height:340px;overflow-y:auto;margin-top:2px"></div></div><div id="planner-nav" style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-shrink:0"></div><div id="planner-body" style="overflow:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0;"></div></div></div><div class="modal-overlay" id="sprint-date-modal" onclick="if(event.target===this)closeSprintDateModal()"><div class="modal" style="max-width:560px">
+      </div><div id="header-user-chip" style="display:flex;align-items:center;gap:6px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2);cursor:pointer" onclick="switchUser()" title="Switch user"><span id="header-user-dot" style="width:8px;height:8px;border-radius:50%;background:var(--text3);display:inline-block;flex-shrink:0"></span><span style="font-size:12px;font-weight:600;color:var(--text2)" id="header-user-name">—</span></div><div id="online-presence" style="display:flex;align-items:center;gap:4px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Who's online now"></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Last saved"><span id="last-updated-label" style="color:var(--text3)">—</span></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Changes are shared with your team in real time"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);display:inline-block;transition:background .3s"></span><span id="sync-label">Live</span></div><button class="btn sm" id="dark-toggle" onclick="toggleDarkMode()" title="Switch to dark mode"><i class="ti ti-moon"></i></button><div class="settings-wrap"><button class="btn sm" onclick="toggleSettings()"><i class="ti ti-settings" aria-hidden="true"></i> Jira</button><div class="settings-pop" id="settings-pop"><div style="font-size:18px;font-weight:600;margin-bottom:10px;color:var(--text)">Jira settings</div><div class="form-group" style="margin-bottom:10px"><label>Base URL</label><input type="text" id="jira-url" placeholder="https://dlapiperuk.atlassian.net" style="font-size:18px;padding:5px 7px" /></div><button class="btn sm primary" onclick="saveJiraSettings()">Save</button><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Signed in as</div><div style="display:flex;align-items:center;justify-content:space-between"><span id="current-user-label" style="font-size:13px;color:var(--text2)"></span><button class="btn sm" onclick="switchUser()" style="font-size:12px;padding:3px 8px">Switch</button></div></div><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px">Bookmarklet</div><div style="font-size:18px;color:var(--text3);margin-bottom:8px">Drag this to your bookmarks bar. Click it on any Jira ticket to push it straight into this board.</div><a id="bookmarklet-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:var(--cat-dash-bg);color:#26215c;border:1px solid #534ab7;border-radius:5px;font-size:19px;font-weight:600;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bookmark" style="font-size:19px"></i> Send to Board </a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the code</button> and create a bookmark manually.</div><div id="bookmarklet-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div><div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.1)"><div style="font-size:18px;color:var(--text3);margin-bottom:6px">Not picking up all fields? Drag this debug bookmarklet to your bookmarks bar and click it on a Jira ticket to see exactly what the scraper finds:</div><a id="bookmarklet-debug-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:var(--surface2);color:var(--text2);border:1px solid var(--border-strong);border-radius:5px;font-size:19px;font-weight:500;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bug" style="font-size:19px"></i> Debug Jira Fields</a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyDebugBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the debug code</button> and save it as a bookmark manually.</div><div id="bookmarklet-debug-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div></div></div></div></div><button class="btn sm" id="btn-undo" onclick="undo()" title="Undo last change (Ctrl+Z)" disabled style="opacity:0.4"><i class="ti ti-arrow-back-up" aria-hidden="true"></i> Undo</button><button class="btn sm" onclick="openArchiveModal()" title="Manage past sprints"><i class="ti ti-archive" aria-hidden="true"></i> Archive</button><button class="btn sm" onclick="openSprintDateModal()" title="Adjust sprint dates"><i class="ti ti-calendar-cog" aria-hidden="true"></i> Sprint dates</button><button class="btn primary" id="btn-add-theme" onclick="openThemeModal()"><i class="ti ti-plus" aria-hidden="true"></i> Add theme</button><button class="btn primary" id="btn-add-ticket" onclick="openTicketModal()" style="display:none"><i class="ti ti-plus" aria-hidden="true"></i> Add ticket</button></div></header><nav class="tabs"><button class="tab-btn active" id="tab-plan" onclick="switchTab('plan')"><i class="ti ti-layout-grid" aria-hidden="true"></i> CY 2026 <span class="tab-count" id="tc-plan">0</span></button><button class="tab-btn" id="tab-progress" onclick="switchTab('progress')"><i class="ti ti-loader" aria-hidden="true"></i> Progress <span class="tab-count" id="tc-progress">0</span></button><button class="tab-btn" id="tab-nfy" onclick="switchTab('nfy')"><i class="ti ti-calendar-stats" aria-hidden="true"></i> CY 2027 <span class="tab-count" id="tc-nfy">0</span></button><button class="tab-btn" id="tab-planner" onclick="switchTab('planner')"><i class="ti ti-filter" aria-hidden="true"></i> Planner</button><button class="tab-btn" id="tab-workboard" onclick="switchTab('workboard')"><i class="ti ti-clipboard-list" aria-hidden="true"></i> Product Board <span class="tab-count" id="tc-workboard">0</span></button></nav><div class="panel active" id="panel-plan"><div class="sprint-nav" id="nav-plan"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-plan"><div class="timeline-grid" id="tl-plan"></div></div><div class="grid-resizer" id="resizer-plan" style="display:none" onmousedown="startResize(event,'plan')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-plan" class="side-detail"></div></div></div><div class="panel" id="panel-nfy"><div class="sprint-nav" id="nav-nfy"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-nfy"><div class="timeline-grid" id="tl-nfy"></div></div><div class="grid-resizer" id="resizer-nfy" style="display:none" onmousedown="startResize(event,'nfy')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-nfy" class="side-detail"></div></div></div><div class="panel" id="panel-progress"><div class="progress-wrap"><div class="progress-board" id="progress-board"></div></div></div><div class="panel" id="panel-planner"><div style="padding:16px;height:100%;box-sizing:border-box;overflow-y:auto;display:flex;flex-direction:column"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px"><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Theme</label><div style="position:relative;min-width:180px"><input type="text" id="planner-theme-input" placeholder="All themes…" autocomplete="off" oninput="filterPlannerThemeDropdown()" onfocus="openPlannerThemeDropdown()" onblur="setTimeout(closePlannerThemeDropdown,180)" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);width:100%;outline:none" /><div id="planner-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:280px;overflow-y:auto"></div><input type="hidden" id="planner-theme" /></div></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Person</label><select id="planner-owner" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All people</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Status Label</label><select id="planner-label" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All statuses</option><option value="Ticket Creation">Ticket Creation</option><option value="Ready To Refine">Ready To Refine</option><option value="Ready for Sprint">Ready for Sprint</option><option value="Ready to Test">Ready to Test</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Refinement</label><select id="planner-refinement" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All sessions</option><option value="Refinement Session 1">Session 1</option><option value="Refinement Session 2">Session 2</option><option value="Refinement Session 3">Session 3</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Category</label><select id="planner-cat" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All</option><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap"><input type="checkbox" id="planner-deadlines-only" onchange="renderPlanner()" style="width:auto;cursor:pointer" /> Deadlines only</label><button class="btn sm" onclick="openDeadlineModal(null)" style="white-space:nowrap"><i class="ti ti-calendar-plus"></i> Add Deadline</button><button class="btn sm" onclick="openHolidayModal()" style="white-space:nowrap"><i class="ti ti-beach"></i> Add Holiday</button></div><div style="margin-bottom:16px;position:relative;max-width:440px"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;color:var(--text2)"><i class="ti ti-search" style="font-size:12px;margin-right:4px"></i>Find ticket by name or Jira key</label><input type="text" id="ticket-search-input-planner" placeholder="e.g. ISB-1234 or migrate pipeline..." autocomplete="off" oninput="renderTicketSearch('planner')" onfocus="renderTicketSearch('planner')" style="width:100%;font-size:13px;padding:6px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none" /><div id="ticket-search-results-planner" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.12);max-height:340px;overflow-y:auto;margin-top:2px"></div></div><div id="planner-nav" style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-shrink:0"></div><div id="planner-body" style="overflow:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0;"></div></div></div><div class="panel" id="panel-workboard"><div style="padding:16px;height:100%;box-sizing:border-box;overflow-y:auto;display:flex;flex-direction:column"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px"><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Owner</label><select id="wb-filter-owner" onchange="renderWorkBoard()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All owners</option></select></div><button class="btn primary" onclick="openWorkItemModal()" style="white-space:nowrap;margin-left:auto"><i class="ti ti-plus"></i> Log work item</button></div><div id="workboard-body" style="flex:1;min-height:0;overflow:auto"></div></div></div><div class="modal-overlay" id="sprint-date-modal" onclick="if(event.target===this)closeSprintDateModal()"><div class="modal" style="max-width:560px">
 <h2><span>Edit sprint dates</span><button class="icon-btn" onclick="closeSprintDateModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2>
 <div class="form-group">
   <label>Sprint to change</label>
@@ -123,6 +123,26 @@
     </div>
   </div>
 </div>
+<div class="modal-overlay" id="workitem-modal" onclick="if(event.target===this)closeWorkItemModal()">
+  <div class="modal" style="max-width:600px">
+    <h2><span id="workitem-modal-title">Log work item</span><button class="icon-btn" onclick="closeWorkItemModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2>
+    <div class="form-row">
+      <div class="form-group"><label>Owner</label><select id="wi-owner" style="width:100%;padding:9px 11px;border:.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:14px;font-family:inherit;outline:none"></select></div>
+      <div class="form-group"><label>Date</label><input type="date" id="wi-date" /></div>
+    </div>
+    <div class="form-row">
+      <div class="form-group"><label>Time taken</label><input type="text" id="wi-time" placeholder="e.g. 30 mins, 2 hrs" /></div>
+      <div class="form-group"><label>Requestor</label><input type="text" id="wi-requestor" placeholder="Who asked for this?" /></div>
+    </div>
+    <div class="form-group"><label>Detail</label><textarea id="wi-detail" placeholder="What was the task?" style="min-height:90px"></textarea></div>
+    <div class="form-group"><label>Link to file <span style="font-size:11px;font-weight:400;color:var(--text3)">— optional</span></label><input type="text" id="wi-link" placeholder="https://..." /></div>
+    <div class="modal-footer">
+      <button class="btn" id="wi-delete-btn" style="margin-right:auto;color:#e24b4a;border-color:#e24b4a;display:none" onclick="deleteWorkItem()"><i class="ti ti-trash"></i> Delete</button>
+      <button class="btn" onclick="closeWorkItemModal()">Cancel</button>
+      <button class="btn primary" onclick="saveWorkItemModal()">Save</button>
+    </div>
+  </div>
+</div>
 <div class="modal-overlay" id="archive-modal" onclick="if(event.target===this)closeArchiveModal()">
   <div class="modal" style="max-width:540px">
     <h2><span><i class="ti ti-archive" style="font-size:18px;margin-right:6px"></i>Past sprints</span><button class="icon-btn" onclick="closeArchiveModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2>
@@ -185,6 +205,7 @@ let deadlines = []; // [{id, title, date, sprintId, color}]
 let holidays = []; // [{id, ownerId, startDate, endDate, label}]
 let sprintOverrides = {}; // { sprintId: {start, end, label} } — persisted date edits layered onto the hardcoded sprint grid
 let hiddenSprints = []; // [sprintId, ...] — sprints hidden from the grid/nav but whose data is kept intact
+let workItems = []; // [{id, ownerId, date, timeTaken, requestor, detail, link}] — Product Board: out-of-sprint work log
 
 
 let holCollapsed = { plan: true, nfy: true, planner: true };
@@ -280,15 +301,17 @@ async function loadData() {
     const newHolidays  = JSON.parse(metaRows.find(r=>r.key==='holidays')?.value  || '[]');
     const newSprintOverrides = JSON.parse(metaRows.find(r=>r.key==='sprintDates')?.value || '{}');
     const newHiddenSprints = JSON.parse(metaRows.find(r=>r.key==='hiddenSprints')?.value || '[]');
+    const newWorkItems = JSON.parse(metaRows.find(r=>r.key==='workitems')?.value || '[]');
     const newJira  = metaRows.find(r=>r.key==='jira')?.value || 'https://dlapiperuk.atlassian.net';
     const lastUpdatedRaw = metaRows.find(r=>r.key==='last_updated')?.value;
     if(lastUpdatedRaw){ try{ const lu=JSON.parse(lastUpdatedRaw); updateLastUpdatedHeader(lu.by,lu.ts); }catch(e){} }
-    const hash = JSON.stringify([newThemes, newTickets, newCap, newGoals, newJira, newSprintOverrides, newHiddenSprints]);
+    const hash = JSON.stringify([newThemes, newTickets, newCap, newGoals, newJira, newSprintOverrides, newHiddenSprints, newWorkItems]);
     if (hash !== _lastHash) {
       _lastHash = hash;
       themes = newThemes; tickets = newTickets; capData = newCap; goalsData = newGoals; deadlines = newDeadlines; holidays = newHolidays; jiraUrl = newJira;
       sprintOverrides = newSprintOverrides;
       hiddenSprints = newHiddenSprints;
+      workItems = newWorkItems;
       applySprintOverrides();
       const ju = document.getElementById('jira-url');
       if (ju) ju.value = jiraUrl;
@@ -583,6 +606,14 @@ async function saveHiddenSprints() {
     setSyncBadge(true);
     saveLastUpdated();
   } catch(e) { console.error('Save hidden sprints failed', e); setSyncBadge(false); }
+}
+
+async function saveWorkItems() {
+  try {
+    await sbUpsert('pb_meta', {key:'workitems', value: JSON.stringify(workItems)});
+    setSyncBadge(true);
+    saveLastUpdated();
+  } catch(e) { console.error('Save work items failed', e); setSyncBadge(false); }
 }
 
 const SPRINT_COL_MIN = 130; // px per sprint column
@@ -961,15 +992,18 @@ function switchTab(tab){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-'+tab).classList.add('active');
   document.getElementById('panel-'+tab).classList.add('active');
-  document.getElementById('btn-add-theme').style.display = (tab==='progress'||tab==='planner')?'none':'';
-  document.getElementById('btn-add-ticket').style.display = (tab!=='progress'&&tab!=='planner'&&selectedSprint[tab])?'':'none';
+  document.getElementById('btn-add-theme').style.display = (tab==='progress'||tab==='planner'||tab==='workboard')?'none':'';
+  document.getElementById('btn-add-ticket').style.display = (tab!=='progress'&&tab!=='planner'&&tab!=='workboard'&&selectedSprint[tab])?'':'none';
   if(tab==='planner') renderPlanner();
+  if(tab==='workboard') renderWorkBoard();
 }
 function updateCounts(){
   const planIds=new Set(PLAN_SPRINTS.map(s=>s.id)), nfyIds=new Set(NFY_SPRINTS.map(s=>s.id));
   document.getElementById('tc-plan').textContent = themes.filter(t=>planIds.has(t.startSprint)||planIds.has(t.endSprint)).length + tickets.filter(t=>planIds.has(t.sprint)).length;
   document.getElementById('tc-nfy').textContent  = themes.filter(t=>nfyIds.has(t.startSprint)||nfyIds.has(t.endSprint)).length + tickets.filter(t=>nfyIds.has(t.sprint)).length;
   document.getElementById('tc-progress').textContent = themes.filter(t=>t.startSprint==='progress').length;
+  const tcwb = document.getElementById('tc-workboard');
+  if(tcwb) tcwb.textContent = workItems.length;
 }
 function navSprints(tabKey, dir){
   const all = visibleSprints(tabKey==='plan' ? PLAN_SPRINTS : NFY_SPRINTS);
@@ -1782,6 +1816,7 @@ function render(){
   renderDetail('detail-nfy',visibleSprints(NFY_SPRINTS),'nfy');
   renderProgress();
   if(activeTab==='planner') renderPlanner();
+  if(activeTab==='workboard') renderWorkBoard();
   updateCounts();
   updateResizer('plan');
   updateResizer('nfy');
@@ -2688,6 +2723,92 @@ function deleteHoliday(){
   saveHolidays();
   closeHolidayModal();
   render();
+}
+
+/* ── PRODUCT BOARD (out-of-sprint work log) ── */
+let _editingWorkItemId = null;
+function openWorkItemModal(id) {
+  _editingWorkItemId = id || null;
+  const wi = id ? workItems.find(w=>w.id===id) : null;
+  document.getElementById('workitem-modal-title').textContent = wi ? 'Edit work item' : 'Log work item';
+  document.getElementById('wi-delete-btn').style.display = wi ? '' : 'none';
+  const sel = document.getElementById('wi-owner');
+  sel.innerHTML = TIMELINE_OWNERS.map(o=>`<option value="${o.id}">${esc(o.label)}</option>`).join('');
+  sel.value = wi ? wi.ownerId : (currentUser || TIMELINE_OWNERS[0].id);
+  document.getElementById('wi-date').value = wi ? (wi.date||'') : new Date().toISOString().slice(0,10);
+  document.getElementById('wi-time').value = wi ? (wi.timeTaken||'') : '';
+  document.getElementById('wi-requestor').value = wi ? (wi.requestor||'') : '';
+  document.getElementById('wi-detail').value = wi ? (wi.detail||'') : '';
+  document.getElementById('wi-link').value = wi ? (wi.link||'') : '';
+  document.getElementById('workitem-modal').classList.add('open');
+}
+function closeWorkItemModal(){ document.getElementById('workitem-modal').classList.remove('open'); }
+function saveWorkItemModal(){
+  const ownerId    = document.getElementById('wi-owner').value;
+  const date       = document.getElementById('wi-date').value;
+  const timeTaken  = document.getElementById('wi-time').value.trim();
+  const requestor  = document.getElementById('wi-requestor').value.trim();
+  const detail     = document.getElementById('wi-detail').value.trim();
+  const link       = document.getElementById('wi-link').value.trim();
+  if(!date){ alert('Please set a date.'); return; }
+  if(!detail){ alert('Please add some detail about the task.'); return; }
+  if(_editingWorkItemId){
+    const w = workItems.find(w=>w.id===_editingWorkItemId);
+    if(w){ w.ownerId=ownerId; w.date=date; w.timeTaken=timeTaken; w.requestor=requestor; w.detail=detail; w.link=link; }
+  } else {
+    workItems.push({id:'wi_'+Date.now(), ownerId, date, timeTaken, requestor, detail, link});
+  }
+  saveWorkItems();
+  closeWorkItemModal();
+  renderWorkBoard();
+  updateCounts();
+}
+function deleteWorkItem(){
+  if(!_editingWorkItemId) return;
+  workItems = workItems.filter(w=>w.id!==_editingWorkItemId);
+  saveWorkItems();
+  closeWorkItemModal();
+  renderWorkBoard();
+  updateCounts();
+}
+function renderWorkBoard(){
+  const body = document.getElementById('workboard-body');
+  if(!body) return;
+  // Populate owner filter once
+  const filterSel = document.getElementById('wb-filter-owner');
+  if(filterSel && filterSel.options.length <= 1){
+    filterSel.innerHTML = '<option value="">All owners</option>' + TIMELINE_OWNERS.map(o=>`<option value="${o.id}">${esc(o.label)}</option>`).join('');
+  }
+  const filterOwner = filterSel ? filterSel.value : '';
+  let items = workItems.slice().sort((a,b)=> (b.date||'').localeCompare(a.date||''));
+  if(filterOwner) items = items.filter(w=>w.ownerId===filterOwner);
+  if(!items.length){
+    body.innerHTML = '<div class="empty-state" style="margin:20px 0" onclick="openWorkItemModal()">No work items logged yet. Click to log one.</div>';
+    return;
+  }
+  const ownerOf = id => OWNERS.find(o=>o.id===id);
+  let html = '<table style="width:100%;border-collapse:collapse;font-size:13px">';
+  html += '<thead><tr style="background:var(--surface2)">';
+  ['Owner','Date','Time taken','Requestor','Detail','File'].forEach(h=>{
+    html += `<th style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border-strong);font-weight:600;color:var(--text2);white-space:nowrap">${h}</th>`;
+  });
+  html += '<th style="border-bottom:1px solid var(--border-strong)"></th></tr></thead><tbody>';
+  items.forEach(w=>{
+    const o = ownerOf(w.ownerId);
+    const ownerChip = o ? `<span style="display:inline-flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:50%;background:${o.barBg};display:inline-block;flex-shrink:0"></span>${esc(o.label)}</span>` : esc(w.ownerId||'');
+    const linkHtml = w.link ? `<a href="${esc(w.link)}" target="_blank" rel="noopener" style="color:#534ab7;text-decoration:none" onclick="event.stopPropagation()"><i class="ti ti-link"></i> Open</a>` : '<span style="color:var(--text3)">—</span>';
+    html += `<tr style="cursor:pointer" onclick="openWorkItemModal('${w.id}')">
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;white-space:nowrap">${ownerChip}</td>
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;white-space:nowrap">${esc(w.date||'')}</td>
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;white-space:nowrap">${esc(w.timeTaken||'')}</td>
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;white-space:nowrap">${esc(w.requestor||'')}</td>
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;max-width:360px;white-space:pre-wrap">${esc(w.detail||'')}</td>
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;white-space:nowrap">${linkHtml}</td>
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;text-align:right"><button class="icon-btn delete" onclick="event.stopPropagation();_editingWorkItemId='${w.id}';deleteWorkItem()" title="Delete"><i class="ti ti-trash"></i></button></td>
+    </tr>`;
+  });
+  html += '</tbody></table>';
+  body.innerHTML = html;
 }
 
 let _plannerDragId = null;
