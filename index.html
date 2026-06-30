@@ -2300,11 +2300,13 @@ function openTicketFromParams(p) {
     //  - an ISDF-#### reference  -> Defect
     //  - a Product Goal / Feature reference -> Enhancement
     //  - neither present -> Spike (default)
-    const keyDetailsRaw = p.get('keydetails') || '';
+    const keyDetailsRaw = (p.get('keydetails') || '') + ' ' + (p.get('title') || '');
     let detectedType = null;
-    if(keyDetailsRaw){
-      const hasIsdfRef = /\bISDF[-\s]?\d+/i.test(keyDetailsRaw);
-      const hasGoalRef = /product\s*goal|feature\s*reference|goal\s*\/?\s*feature\s*reference/i.test(keyDetailsRaw);
+    if(keyDetailsRaw.trim()){
+      const hasIsdfField = /\bHAS_ISDF_FIELD\b/.test(keyDetailsRaw);
+      const hasGoalField = /\bHAS_GOAL_FIELD\b/.test(keyDetailsRaw);
+      const hasIsdfRef = hasIsdfField || /\bISDF[-\s]?\d+/i.test(keyDetailsRaw);
+      const hasGoalRef = hasGoalField || /product\s*goal|feature\s*reference|goal\s*\/?\s*feature\s*reference/i.test(keyDetailsRaw);
       if(hasIsdfRef) detectedType = 'defect';
       else if(hasGoalRef) detectedType = 'enhancement';
       else detectedType = 'spike';
@@ -2314,6 +2316,9 @@ function openTicketFromParams(p) {
       if(TYPE_MAP[issueTypeRaw]) detectedType = TYPE_MAP[issueTypeRaw];
       else { const found = Object.keys(TYPE_MAP).find(k => issueTypeRaw.includes(k)); if(found) detectedType = TYPE_MAP[found]; }
     }
+    // Per the classification rule, absence of a Defect or Enhancement signal always means Spike —
+    // this also covers older cached bookmarklets that don't yet send Key Details/Issue Type data.
+    if(!detectedType) detectedType = 'spike';
     if(detectedType) document.getElementById('tk-type').value = detectedType;
 
     // Try to match the scraped sprint name against known sprints
@@ -2405,10 +2410,25 @@ function buildBookmarklet(){
            document.querySelector('#type-val');
     if(it) issuetype=(it.alt||it.innerText||'').trim();
     if(!issuetype){var itRaw=_fieldByLabel(['Issue Type','Type','Work Type']);if(itRaw) issuetype=itRaw;}
-    // "Key Details" custom field drives ticket type classification (Defect/Enhancement/Spike) —
-    // fall back to scanning the whole page if there's no field explicitly labelled this way.
-    var kdRaw=_fieldByLabel(['Key Details','Key Detail','Key Information','Key details']);
-    keydetails = kdRaw || (document.body.innerText || '').slice(0,4000);
+    // "Key Details" section drives ticket type classification (Defect/Enhancement/Spike).
+    // Jira templates this section differently per ticket type:
+    //   Defect tickets show a "ISDF Number" sub-field
+    //   Enhancement tickets show a "Product Goal/Feature reference" sub-field
+    //   Spike tickets show neither
+    // Classification is based on whether the sub-field LABEL is present at all, not on whether
+    // it has a value filled in (it can legitimately show as empty / "Add text").
+    function _hasFieldLabel(names){
+      var els=document.querySelectorAll('span,label,div,p,th,dt,strong,h3,h4,a');
+      for(var i=0;i<els.length;i++){
+        var txt=(els[i].childElementCount===0?els[i].innerText||'':'').trim().toLowerCase();
+        for(var n=0;n<names.length;n++){ if(txt===names[n].toLowerCase()) return true; }
+      }
+      return false;
+    }
+    var hasIsdfField = _hasFieldLabel(['ISDF Number','ISDF #']);
+    var hasGoalField = _hasFieldLabel(['Product Goal/Feature reference','Product Goal / Feature reference','Product Goal/Feature Reference']);
+    var isdfVal=_fieldByLabel(['ISDF Number','ISDF number','ISDF #','ISDF']);
+    keydetails = (hasIsdfField?'HAS_ISDF_FIELD ':'') + (hasGoalField?'HAS_GOAL_FIELD ':'') + (isdfVal?isdfVal+' ':'') + (document.body.innerText || '').slice(0,6000);
     var t=document.querySelector('[data-testid="issue.views.issue-base.foundation.summary.heading"]')||
           document.querySelector('[data-testid*="summary"] h1')||
           document.querySelector('h1[class*="summary"]')||
@@ -2486,6 +2506,17 @@ function buildBookmarklet(){
     out+=(spEl?spEl.innerText.trim():'NOT FOUND')+'\\n';
     out+='Sprint (label scan): '+_fieldByLabel(['Sprint'])+'\\n';
     out+='Issue Type (label scan): '+_fieldByLabel(['Issue Type','Type','Work Type'])+'\\n';
+    function _hasFieldLabelDbg(names){
+      var els=document.querySelectorAll('span,label,div,p,th,dt,strong,h3,h4,a');
+      for(var i=0;i<els.length;i++){
+        var txt=(els[i].childElementCount===0?els[i].innerText||'':'').trim().toLowerCase();
+        for(var n=0;n<names.length;n++){ if(txt===names[n].toLowerCase()) return true; }
+      }
+      return false;
+    }
+    out+='Has "ISDF Number" field (-> Defect): '+(_hasFieldLabelDbg(['ISDF Number','ISDF #'])?'YES':'no')+'\\n';
+    out+='Has "Product Goal/Feature reference" field (-> Enhancement): '+(_hasFieldLabelDbg(['Product Goal/Feature reference','Product Goal / Feature reference','Product Goal/Feature Reference'])?'YES':'no')+'\\n';
+    out+='ISDF Number (label scan): '+_fieldByLabel(['ISDF Number','ISDF number','ISDF #','ISDF'])+'\\n';
     alert(out);
   }catch(e){alert('Debug error: '+e.message);}
 })();`;
