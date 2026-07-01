@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Product Priority Planning Board</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0} :root{ color-scheme:light; --bg:#f7f6f3;--surface:#fff;--surface2:#f1f0ec; --border:rgba(0,0,0,0.12);--border-strong:rgba(0,0,0,0.22); --text:#1a1a18;--text2:#5f5e5a;--text3:#888780; --radius:8px;--radius-sm:5px;--owner-w:100px; --george-color:#B3D4FF;--george-bg:#eef5ff;--george-bg2:#eef5ff;--george-text:#172b4d;--george-head:#B3D4FF;--george-bar-text:#172b4d; --jemma-color:#998DD9;--jemma-bg:#f0eefb;--jemma-bg2:#f0eefb;--jemma-text:#172b4d;--jemma-head:#998DD9;--jemma-bar-text:#172b4d; --sam-color:#79F2C0;--sam-bg:#eafbf4;--sam-bg2:#eafbf4;--sam-text:#172b4d;--sam-head:#79F2C0;--sam-bar-text:#172b4d; --chris-color:#7DD3F0;--chris-bg:#e8f6fc;--chris-bg2:#e8f6fc;--chris-text:#172b4d;--chris-head:#227D9B;--chris-bar-text:#ffffff; --claire-color:#FFE380;--claire-bg:#fffbe6;--claire-bg2:#fffbe6;--claire-text:#172b4d;--claire-head:#FFE380;--claire-bar-text:#172b4d; --lorna-color:#F9A8D4;--lorna-bg:#fdf2f8;--lorna-bg2:#fdf2f8;--lorna-text:#172b4d;--lorna-head:#F9A8D4;--lorna-bar-text:#172b4d; --cat-data:#854f0b;--cat-data-bg:#faeeda;--cat-data-bg2:#f5e4c5; --cat-webi:#185fa5;--cat-webi-bg:#e6f1fb;--cat-webi-bg2:#d4e6f7; --cat-dash:#534ab7;--cat-dash-bg:#eeedfe;--cat-dash-bg2:#e0dffb; } @media(prefers-color-scheme:dark){:root{ color-scheme:dark; --bg:#1c1c1a;--surface:#252523;--surface2:#2e2e2b; --border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.22); --text:#f1efe8;--text2:#b4b2a9;--text3:#888780; --george-bg:#0c3a5e;--george-bg2:#0e4670;--george-text:#e6f1fb;--george-head:#0c447c;--george-bar-text:#e6f1fb; --jemma-bg:#2d2868;--jemma-bg2:#362f7a;--jemma-text:#eeedfe;--jemma-head:#3c3489;--jemma-bar-text:#eeedfe; --sam-bg:#073d2e;--sam-bg2:#094a37;--sam-text:#e1f5ee;--sam-head:#085041;--sam-bar-text:#e1f5ee; --chris-bg:#0e3d4f;--chris-bg2:#154d61;--chris-text:#e0f4fb;--chris-head:#1a6585;--chris-bar-text:#e0f4fb; --claire-bg:#5a2c08;--claire-bg2:#6e3a0c;--claire-text:#fef0e3;--claire-head:#8c4e18;--claire-bar-text:#fef0e3; --lorna-bg:#5b1a3a;--lorna-bg2:#6e2048;--lorna-text:#fce7f3;--lorna-head:#8c2d5e;--lorna-bar-text:#fce7f3; --cat-data-bg:#412402;--cat-data-bg2:#523005;--cat-data:#e8a855; --cat-webi-bg:#042c53;--cat-webi-bg2:#0a3a68;--cat-webi:#7bb8f0; --cat-dash-bg:#26215c;--cat-dash-bg2:#332d75;--cat-dash:#afa9ec; }}html[data-theme="dark"]{ color-scheme:dark; --bg:#1c1c1a;--surface:#252523;--surface2:#2e2e2b; --border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.22); --text:#f1efe8;--text2:#b4b2a9;--text3:#888780; --george-bg:#0c3a5e;--george-bg2:#0e4670;--george-text:#e6f1fb;--george-head:#0c447c;--george-bar-text:#e6f1fb; --jemma-bg:#2d2868;--jemma-bg2:#362f7a;--jemma-text:#eeedfe;--jemma-head:#3c3489;--jemma-bar-text:#eeedfe; --sam-bg:#073d2e;--sam-bg2:#094a37;--sam-text:#e1f5ee;--sam-head:#085041;--sam-bar-text:#e1f5ee; --chris-bg:#0e3d4f;--chris-bg2:#154d61;--chris-text:#e0f4fb;--chris-head:#1a6585;--chris-bar-text:#e0f4fb; --claire-bg:#5a2c08;--claire-bg2:#6e3a0c;--claire-text:#fef0e3;--claire-head:#8c4e18;--claire-bar-text:#fef0e3; --lorna-bg:#5b1a3a;--lorna-bg2:#6e2048;--lorna-text:#fce7f3;--lorna-head:#8c2d5e;--lorna-bar-text:#fce7f3; --cat-data-bg:#412402;--cat-data-bg2:#523005;--cat-data:#e8a855; --cat-webi-bg:#042c53;--cat-webi-bg2:#0a3a68;--cat-webi:#7bb8f0; --cat-dash-bg:#26215c;--cat-dash-bg2:#332d75;--cat-dash:#afa9ec; }[data-theme="dark"]{ --bg:#1c1c1a;--surface:#252523;--surface2:#2e2e2b; --border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.22); --text:#f1efe8;--text2:#b4b2a9;--text3:#888780; --george-bg:#0c3a5e;--george-bg2:#0e4670;--george-text:#e6f1fb;--george-head:#0c447c;--george-bar-text:#e6f1fb; --jemma-bg:#2d2868;--jemma-bg2:#362f7a;--jemma-text:#eeedfe;--jemma-head:#3c3489;--jemma-bar-text:#eeedfe; --sam-bg:#073d2e;--sam-bg2:#094a37;--sam-text:#e1f5ee;--sam-head:#085041;--sam-bar-text:#e1f5ee; --chris-bg:#0e3d4f;--chris-bg2:#154d61;--chris-text:#e0f4fb;--chris-head:#1a6585;--chris-bar-text:#e0f4fb; --claire-bg:#5a2c08;--claire-bg2:#6e3a0c;--claire-text:#fef0e3;--claire-head:#8c4e18;--claire-bar-text:#fef0e3; --lorna-bg:#5b1a3a;--lorna-bg2:#6e2048;--lorna-text:#fce7f3;--lorna-head:#8c2d5e;--lorna-bar-text:#fce7f3; --cat-data-bg:#412402;--cat-data-bg2:#523005;--cat-data:#e8a855; --cat-webi-bg:#042c53;--cat-webi-bg2:#0a3a68;--cat-webi:#7bb8f0; --cat-dash-bg:#26215c;--cat-dash-bg2:#332d75;--cat-dash:#afa9ec; } html[data-theme="light"]{color-scheme:light}body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;font-size:18px} header{background:var(--surface);border-bottom:1px solid var(--border-strong);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100} header h1{font-size:20px;font-weight:500;display:flex;align-items:center;gap:8px} .header-actions{display:flex;gap:8px;align-items:center} .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--radius-sm);border:0.5px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:18px;font-weight:500;cursor:pointer;transition:background .15s} .btn:hover{background:var(--surface2)} .btn:disabled{opacity:.4;cursor:default;pointer-events:none} .btn.primary{background:#2c2c2a;color:#f1efe8;border-color:transparent} .btn.primary:hover{background:#444441} @media(prefers-color-scheme:dark){.btn.primary{background:#f1efe8;color:#1c1c1a}.btn.primary:hover{background:#d3d1c7}}[data-theme="dark"] .btn.primary{background:#f1efe8;color:#1c1c1a}[data-theme="dark"] .btn.primary:hover{background:#d3d1c7} .btn.sm{padding:4px 8px;font-size:19px} .tabs{display:flex;align-items:center;background:var(--surface);border-bottom:1px solid var(--border-strong);padding:0 20px;position:sticky;top:57px;z-index:99} .tab-btn{padding:10px 16px;font-size:18px;font-weight:500;color:var(--text3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;display:flex;align-items:center;gap:6px;margin-bottom:-1px;transition:color .15s} .tab-btn:hover{color:var(--text2)} .tab-btn.active{color:var(--text);border-bottom-color:#534ab7} .tab-count{font-size:18px;font-weight:500;color:var(--text3);background:var(--surface2);border:0.5px solid var(--border-strong);padding:1px 5px;border-radius:10px} .tab-btn.active .tab-count{background:var(--cat-dash-bg);color:#26215c;border-color:#534ab7} @media(prefers-color-scheme:dark){.tab-btn.active .tab-count{background:#3c3489;color:#eeedfe;border-color:#afa9ec}}[data-theme="dark"] .tab-btn.active .tab-count{background:#3c3489;color:#eeedfe;border-color:#afa9ec} .panel{display:none}.panel.active{display:block;height:calc(100vh - 114px);overflow:hidden} .grid-wrap{padding:20px;overflow-x:auto} .timeline-grid{display:grid;min-width:max-content;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;align-items:start} .tl-corner{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:8px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;align-self:stretch} .tl-sprint-head{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:6px 8px 18px;text-align:center;cursor:pointer;transition:background .12s;user-select:none;position:relative} .tl-sprint-head:last-child{border-right:none} .tl-sprint-head:hover{background:var(--surface)} .tl-sprint-head.selected{background:var(--cat-dash-bg);box-shadow:inset 0 -3px 0 #534ab7} @media(prefers-color-scheme:dark){.tl-sprint-head.selected{background:#3c3489}}[data-theme="dark"] .tl-sprint-head.selected{background:#3c3489} .tl-sprint-num{font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text)} .tl-sprint-dates{font-size:19px;color:var(--text3);margin-top:1px} .tl-row-head{border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:4px} .tl-row-head:last-of-type{border-bottom:none} .owner-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600} .owner-name{font-size:19px;font-weight:600;text-align:center} .tl-cell{border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);min-height:50px;padding:3px;position:relative;display:flex;flex-direction:column;gap:2px} .theme-bar-span{display:block;margin-left:2px;margin-right:2px;} .tl-add-btn{pointer-events:all;cursor:pointer;} .tl-cell:last-child{border-right:none} .theme-bar{border-radius:4px;padding:3px 7px;font-size:18px;font-weight:500;line-height:1.3;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px;transition:filter .1s;min-height:22px} .theme-bar:hover{filter:brightness(0.95)} .theme-bar .priority-dot{flex-shrink:0} .theme-bar.start{border-top-left-radius:4px;border-bottom-left-radius:4px;border-top-right-radius:0;border-bottom-right-radius:0} .theme-bar.middle{border-radius:0} .theme-bar.end{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:4px;border-bottom-right-radius:4px} .theme-bar.single{border-radius:4px} .theme-bar .bar-actions{display:none;gap:1px;margin-left:auto} .theme-bar:hover .bar-actions{display:flex} .detail-panel{margin:0 16px 16px;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;overflow-x:auto} .detail-header{background:var(--surface2);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-strong)} .detail-title{font-size:19px;font-weight:600;display:flex;align-items:center;gap:8px} .ticket{background:var(--surface);border-radius:5px;border:0.5px solid var(--border);padding:6px 8px;cursor:grab;transition:border-color .15s,opacity .15s;user-select:none;display:flex;flex-direction:column;height:90px;overflow:hidden;width:calc(50% - 2px);flex-shrink:0} .ticket:hover{border-color:var(--border-strong)} .ticket.dragging{opacity:.3} .ticket-top{display:flex;align-items:flex-start;justify-content:space-between;gap:4px;margin-bottom:3px;overflow:hidden;min-height:0} .ticket-title{font-size:11px;font-weight:500;line-height:1.25;flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical} .ticket-jira{font-size:9px;font-weight:600;color:#534ab7;text-decoration:none;padding:1px 3px;border-radius:3px;background:var(--cat-dash-bg);white-space:nowrap;transition:background .1s} .ticket-jira:hover{background:var(--cat-dash-bg2)} .ticket-footer{display:flex;align-items:center;justify-content:space-between;gap:2px;margin-top:auto;padding-top:3px} .ticket-actions{display:flex;gap:1px;opacity:0;transition:opacity .15s} .ticket:hover .ticket-actions{opacity:1} .priority-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0} .priority-high{background:#e24b4a}.priority-medium{background:#ef9f27}.priority-low{background:#1d9e75} .priority-must-do{background:#7c0a02}.priority-bau{background:#888780} .goal-flag{font-size:9px;background:var(--claire-bg);border:0.5px solid #f0c030;color:var(--claire-text);padding:1px 3px;border-radius:3px;white-space:nowrap} .multi-select{position:relative} .ms-trigger{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);cursor:pointer;min-height:38px;transition:border-color .15s} .ms-trigger:hover{border-color:#534ab7} .ms-display{font-size:13px;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap} .ms-display.placeholder{color:var(--text3)} .ms-dropdown{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);overflow:hidden} .ms-dropdown.open{display:block} .ms-option{display:flex;align-items:center;gap:9px;padding:8px 12px;font-size:13px;cursor:pointer;transition:background .1s;color:var(--text)} .ms-option:hover{background:var(--surface2)} .ms-option input[type=checkbox]{width:14px;height:14px;accent-color:#534ab7;cursor:pointer;flex-shrink:0} .icon-btn{background:none;border:none;cursor:pointer;color:var(--text3);padding:2px;border-radius:3px;display:flex;align-items:center;font-size:18px;transition:color .1s,background .1s} .icon-btn:hover{color:var(--text);background:rgba(0,0,0,0.06)} .icon-btn.delete:hover{color:#e24b4a} .empty-state{color:var(--text3);font-size:18px;text-align:center;padding:12px 6px;border:1px dashed var(--border);border-radius:4px;cursor:pointer} .empty-state:hover{border-color:var(--text3);color:var(--text2)} .progress-wrap{padding:20px;height:100%;overflow-y:auto} .progress-board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px} .progress-col{border-radius:var(--radius);border:1px solid var(--border-strong);overflow:hidden;display:flex;flex-direction:column} .progress-col-head{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-strong)} .progress-col-title{font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:8px} .progress-col-body{padding:10px;display:flex;flex-direction:column;gap:8px;min-height:100px;flex:1;transition:box-shadow .12s} .progress-col-body.drag-over{box-shadow:inset 0 0 0 2px #534ab7} .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:200;align-items:center;justify-content:center;padding:20px} .modal-overlay.open{display:flex} .modal{background:var(--surface);border-radius:var(--radius);border:.5px solid var(--border-strong);padding:22px;width:100%;max-width:900px;max-height:90vh;overflow-y:auto} .modal h2{font-size:19px;font-weight:500;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between} .form-group{margin-bottom:12px} .form-group label{display:block;font-size:19px;font-weight:500;color:var(--text2);margin-bottom:4px;text-transform:none;letter-spacing:0} .form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 11px;border:.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:19px;font-family:inherit;outline:none} .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#534ab7} .form-group textarea{resize:vertical;min-height:50px} .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px} .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px} .modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:16px} .hint{font-size:18px;color:var(--text3);margin-top:3px} .detail-table{display:grid;grid-template-columns:max-content repeat(3,1fr);border-top:1px solid var(--border-strong);width:100%} .dt-row-label{padding:7px 12px;font-size:17px;font-weight:700;text-transform:none;letter-spacing:0;color:var(--text3);display:flex;align-items:flex-start;border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap;} .dt-col-head{padding:7px 12px;font-size:18px;font-weight:700;text-transform:none;letter-spacing:0;border-bottom:1px solid var(--border-strong);display:flex;align-items:center;justify-content:space-between;background:var(--surface2);color:var(--text2);border-right:1px solid var(--border)} .dt-col-head:last-child{border-right:none} .dt-col-head .col-count{font-size:19px;font-weight:500;padding:1px 5px;border-radius:10px;background:rgba(0,0,0,0.06)} @media(prefers-color-scheme:dark){.dt-col-head .col-count{background:rgba(255,255,255,0.1)}}[data-theme="dark"] .dt-col-head .col-count{background:rgba(255,255,255,0.1)} .dt-body-cell{padding:5px;display:flex;flex-wrap:wrap;gap:4px;align-content:start;background:var(--surface);border-right:1px solid var(--border);border-bottom:1px solid var(--border)} .dt-body-cell:last-of-type{border-right:none} .df-label{padding:7px 12px;font-size:17px;font-weight:700;text-transform:none;letter-spacing:0;color:var(--text3);display:flex;align-items:center;border-right:1px solid var(--border-strong);border-top:1px solid var(--border);background:var(--surface2);white-space:nowrap;} .df-cell{padding:6px 8px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:18px;font-weight:600;color:var(--text2);border-right:1px solid var(--border);border-top:1px solid var(--border);background:var(--surface)} .df-cell:last-child{border-right:none} .df-cell.over-cap{color:#e24b4a;background:var(--surface2)} .df-cell.at-cap{color:#1d9e75;background:var(--sam-bg)} .df-cell.under-cap{color:#185fa5;background:var(--cat-webi-bg)} .df-cell.df-muted{color:var(--text3);font-weight:400} @media(prefers-color-scheme:dark){ .df-cell.over-cap{background:#3d1212} .df-cell.at-cap{background:#0d2e1e} }[data-theme="dark"] .df-cell.over-cap{background:#3d1212}[data-theme="dark"] .df-cell.at-cap{background:#0d2e1e} .cap-input{width:52px;text-align:center;padding:3px 0;border:.5px solid var(--border-strong);border-radius:4px;background:var(--surface);color:var(--text);font-size:18px;font-weight:600;font-family:inherit;outline:none;-moz-appearance:textfield;} .cap-input::-webkit-outer-spin-button,.cap-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0} .cap-input:focus{border-color:#534ab7} .settings-pop{display:none;position:absolute;top:100%;right:0;margin-top:6px;background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--radius);padding:14px;width:300px;z-index:150;box-shadow:0 4px 16px rgba(0,0,0,0.12)} .settings-pop.open{display:block} .settings-wrap{position:relative}.sprint-nav{display:flex;align-items:center;gap:10px;padding:12px 20px 0;position:relative;z-index:1;} .panel-body-row{display:flex;align-items:flex-start;overflow-x:auto;overflow-y:auto;height:calc(100vh - 159px);} .panel-body-row .grid-wrap{flex-shrink:0;overflow-x:auto;padding:20px;min-width:0;} .side-detail{flex:1 1 0;min-width:280px;padding:12px 16px 16px;border-left:1px solid var(--border-strong);overflow-y:auto;overflow-x:auto;min-width:0;} .side-detail .detail-panel{margin:0;width:100%;} .grid-resizer{flex-shrink:0;width:28px;cursor:col-resize;background:var(--surface2);border-left:1px solid var(--border-strong);border-right:1px solid var(--border-strong);transition:background .15s,border-color .15s;display:flex;align-items:center;justify-content:center;user-select:none;} .grid-resizer:hover,.grid-resizer.dragging{background:var(--cat-dash-bg);border-color:#534ab7;} .resizer-icon{display:flex;align-items:center;gap:1px;background:var(--surface);border:1px solid var(--border-strong);border-radius:4px;padding:5px 3px;box-shadow:0 1px 3px rgba(0,0,0,0.1);pointer-events:none;} .resizer-icon span{font-size:12px;font-weight:700;line-height:1;color:var(--text3);} .resizer-icon .resizer-pipe{color:var(--border-strong);margin:0 1px;} .grid-resizer:hover .resizer-icon,.grid-resizer.dragging .resizer-icon{border-color:#534ab7;} .grid-resizer:hover .resizer-icon span,.grid-resizer.dragging .resizer-icon span{color:#534ab7;} .grid-resizer:hover .resizer-pipe,.grid-resizer.dragging .resizer-pipe{color:#534ab7;} .sprint-nav-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:6px;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:20px;cursor:pointer;transition:background .15s;font-weight:500;line-height:1;flex-shrink:0;} .sprint-nav-btn:hover{background:var(--surface2)} .sprint-nav-btn:disabled{opacity:.3;cursor:default} .sprint-nav-label{font-size:14px;font-weight:500;color:var(--text2);white-space:nowrap} .sprint-nav-range{font-size:14px;color:var(--text3);white-space:nowrap}
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0} :root{ color-scheme:light; --bg:#f7f6f3;--surface:#fff;--surface2:#f1f0ec; --border:rgba(0,0,0,0.12);--border-strong:rgba(0,0,0,0.22); --text:#1a1a18;--text2:#5f5e5a;--text3:#888780; --radius:8px;--radius-sm:5px;--owner-w:100px; --george-color:#B3D4FF;--george-bg:#eef5ff;--george-bg2:#eef5ff;--george-text:#172b4d;--george-head:#B3D4FF;--george-bar-text:#172b4d; --jemma-color:#998DD9;--jemma-bg:#f0eefb;--jemma-bg2:#f0eefb;--jemma-text:#172b4d;--jemma-head:#998DD9;--jemma-bar-text:#172b4d; --sam-color:#79F2C0;--sam-bg:#eafbf4;--sam-bg2:#eafbf4;--sam-text:#172b4d;--sam-head:#79F2C0;--sam-bar-text:#172b4d; --chris-color:#5EEAD4;--chris-bg:#ecfdfa;--chris-bg2:#d8f7f0;--chris-text:#172b4d;--chris-head:#0d9488;--chris-bar-text:#ffffff; --claire-color:#FFE380;--claire-bg:#fffbe6;--claire-bg2:#fffbe6;--claire-text:#172b4d;--claire-head:#FFE380;--claire-bar-text:#172b4d; --lorna-color:#F9A8D4;--lorna-bg:#fdf2f8;--lorna-bg2:#fdf2f8;--lorna-text:#172b4d;--lorna-head:#F9A8D4;--lorna-bar-text:#172b4d; --cat-data:#854f0b;--cat-data-bg:#faeeda;--cat-data-bg2:#f5e4c5; --cat-webi:#185fa5;--cat-webi-bg:#e6f1fb;--cat-webi-bg2:#d4e6f7; --cat-dash:#534ab7;--cat-dash-bg:#eeedfe;--cat-dash-bg2:#e0dffb; } @media(prefers-color-scheme:dark){:root{ color-scheme:dark; --bg:#1c1c1a;--surface:#252523;--surface2:#2e2e2b; --border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.22); --text:#f1efe8;--text2:#b4b2a9;--text3:#888780; --george-bg:#0c3a5e;--george-bg2:#0e4670;--george-text:#e6f1fb;--george-head:#0c447c;--george-bar-text:#e6f1fb; --jemma-bg:#2d2868;--jemma-bg2:#362f7a;--jemma-text:#eeedfe;--jemma-head:#3c3489;--jemma-bar-text:#eeedfe; --sam-bg:#073d2e;--sam-bg2:#094a37;--sam-text:#e1f5ee;--sam-head:#085041;--sam-bar-text:#e1f5ee; --chris-bg:#063a35;--chris-bg2:#0a4a43;--chris-text:#d1faf3;--chris-head:#14b8a6;--chris-bar-text:#d1faf3; --claire-bg:#5a2c08;--claire-bg2:#6e3a0c;--claire-text:#fef0e3;--claire-head:#8c4e18;--claire-bar-text:#fef0e3; --lorna-bg:#5b1a3a;--lorna-bg2:#6e2048;--lorna-text:#fce7f3;--lorna-head:#8c2d5e;--lorna-bar-text:#fce7f3; --cat-data-bg:#412402;--cat-data-bg2:#523005;--cat-data:#e8a855; --cat-webi-bg:#042c53;--cat-webi-bg2:#0a3a68;--cat-webi:#7bb8f0; --cat-dash-bg:#26215c;--cat-dash-bg2:#332d75;--cat-dash:#afa9ec; }}html[data-theme="dark"]{ color-scheme:dark; --bg:#1c1c1a;--surface:#252523;--surface2:#2e2e2b; --border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.22); --text:#f1efe8;--text2:#b4b2a9;--text3:#888780; --george-bg:#0c3a5e;--george-bg2:#0e4670;--george-text:#e6f1fb;--george-head:#0c447c;--george-bar-text:#e6f1fb; --jemma-bg:#2d2868;--jemma-bg2:#362f7a;--jemma-text:#eeedfe;--jemma-head:#3c3489;--jemma-bar-text:#eeedfe; --sam-bg:#073d2e;--sam-bg2:#094a37;--sam-text:#e1f5ee;--sam-head:#085041;--sam-bar-text:#e1f5ee; --chris-bg:#063a35;--chris-bg2:#0a4a43;--chris-text:#d1faf3;--chris-head:#14b8a6;--chris-bar-text:#d1faf3; --claire-bg:#5a2c08;--claire-bg2:#6e3a0c;--claire-text:#fef0e3;--claire-head:#8c4e18;--claire-bar-text:#fef0e3; --lorna-bg:#5b1a3a;--lorna-bg2:#6e2048;--lorna-text:#fce7f3;--lorna-head:#8c2d5e;--lorna-bar-text:#fce7f3; --cat-data-bg:#412402;--cat-data-bg2:#523005;--cat-data:#e8a855; --cat-webi-bg:#042c53;--cat-webi-bg2:#0a3a68;--cat-webi:#7bb8f0; --cat-dash-bg:#26215c;--cat-dash-bg2:#332d75;--cat-dash:#afa9ec; }[data-theme="dark"]{ --bg:#1c1c1a;--surface:#252523;--surface2:#2e2e2b; --border:rgba(255,255,255,0.1);--border-strong:rgba(255,255,255,0.22); --text:#f1efe8;--text2:#b4b2a9;--text3:#888780; --george-bg:#0c3a5e;--george-bg2:#0e4670;--george-text:#e6f1fb;--george-head:#0c447c;--george-bar-text:#e6f1fb; --jemma-bg:#2d2868;--jemma-bg2:#362f7a;--jemma-text:#eeedfe;--jemma-head:#3c3489;--jemma-bar-text:#eeedfe; --sam-bg:#073d2e;--sam-bg2:#094a37;--sam-text:#e1f5ee;--sam-head:#085041;--sam-bar-text:#e1f5ee; --chris-bg:#063a35;--chris-bg2:#0a4a43;--chris-text:#d1faf3;--chris-head:#14b8a6;--chris-bar-text:#d1faf3; --claire-bg:#5a2c08;--claire-bg2:#6e3a0c;--claire-text:#fef0e3;--claire-head:#8c4e18;--claire-bar-text:#fef0e3; --lorna-bg:#5b1a3a;--lorna-bg2:#6e2048;--lorna-text:#fce7f3;--lorna-head:#8c2d5e;--lorna-bar-text:#fce7f3; --cat-data-bg:#412402;--cat-data-bg2:#523005;--cat-data:#e8a855; --cat-webi-bg:#042c53;--cat-webi-bg2:#0a3a68;--cat-webi:#7bb8f0; --cat-dash-bg:#26215c;--cat-dash-bg2:#332d75;--cat-dash:#afa9ec; } html[data-theme="light"]{color-scheme:light}body{font-family:system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;font-size:18px} header{background:var(--surface);border-bottom:1px solid var(--border-strong);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100} header h1{font-size:20px;font-weight:500;display:flex;align-items:center;gap:8px} .header-actions{display:flex;gap:8px;align-items:center} .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--radius-sm);border:0.5px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:18px;font-weight:500;cursor:pointer;transition:background .15s} .btn:hover{background:var(--surface2)} .btn:disabled{opacity:.4;cursor:default;pointer-events:none} .btn.primary{background:#2c2c2a;color:#f1efe8;border-color:transparent} .btn.primary:hover{background:#444441} @media(prefers-color-scheme:dark){.btn.primary{background:#f1efe8;color:#1c1c1a}.btn.primary:hover{background:#d3d1c7}}[data-theme="dark"] .btn.primary{background:#f1efe8;color:#1c1c1a}[data-theme="dark"] .btn.primary:hover{background:#d3d1c7} .btn.sm{padding:4px 8px;font-size:19px} .tabs{display:flex;align-items:center;background:var(--surface);border-bottom:1px solid var(--border-strong);padding:0 20px;position:sticky;top:57px;z-index:99} .tab-btn{padding:10px 16px;font-size:18px;font-weight:500;color:var(--text3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;display:flex;align-items:center;gap:6px;margin-bottom:-1px;transition:color .15s} .tab-btn:hover{color:var(--text2)} .tab-btn.active{color:var(--text);border-bottom-color:#534ab7} .tab-count{font-size:18px;font-weight:500;color:var(--text3);background:var(--surface2);border:0.5px solid var(--border-strong);padding:1px 5px;border-radius:10px} .tab-btn.active .tab-count{background:var(--cat-dash-bg);color:#26215c;border-color:#534ab7} @media(prefers-color-scheme:dark){.tab-btn.active .tab-count{background:#3c3489;color:#eeedfe;border-color:#afa9ec}}[data-theme="dark"] .tab-btn.active .tab-count{background:#3c3489;color:#eeedfe;border-color:#afa9ec} .panel{display:none}.panel.active{display:block;height:calc(100vh - 114px);overflow:hidden} .grid-wrap{padding:20px;overflow-x:auto} .timeline-grid{display:grid;min-width:max-content;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;align-items:start} .tl-corner{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:8px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;align-self:stretch} .tl-sprint-head{background:var(--surface2);border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:6px 8px 18px;text-align:center;cursor:pointer;transition:background .12s;user-select:none;position:relative} .tl-sprint-head:last-child{border-right:none} .tl-sprint-head:hover{background:var(--surface)} .tl-sprint-head.selected{background:var(--cat-dash-bg);box-shadow:inset 0 -3px 0 #534ab7} @media(prefers-color-scheme:dark){.tl-sprint-head.selected{background:#3c3489}}[data-theme="dark"] .tl-sprint-head.selected{background:#3c3489} .tl-sprint-num{font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text)} .tl-sprint-dates{font-size:19px;color:var(--text3);margin-top:1px} .tl-row-head{border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);padding:8px 6px;display:flex;flex-direction:column;align-items:center;gap:4px} .tl-row-head:last-of-type{border-bottom:none} .owner-avatar{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600} .owner-name{font-size:19px;font-weight:600;text-align:center} .tl-cell{border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border-strong);min-height:50px;padding:3px;position:relative;display:flex;flex-direction:column;gap:2px} .theme-bar-span{display:block;margin-left:2px;margin-right:2px;} .tl-add-btn{pointer-events:all;cursor:pointer;} .tl-cell:last-child{border-right:none} .theme-bar{border-radius:4px;padding:3px 7px;font-size:18px;font-weight:500;line-height:1.3;margin-bottom:2px;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;gap:4px;transition:filter .1s;min-height:22px} .theme-bar:hover{filter:brightness(0.95)} .theme-bar .priority-dot{flex-shrink:0} .theme-bar.start{border-top-left-radius:4px;border-bottom-left-radius:4px;border-top-right-radius:0;border-bottom-right-radius:0} .theme-bar.middle{border-radius:0} .theme-bar.end{border-top-left-radius:0;border-bottom-left-radius:0;border-top-right-radius:4px;border-bottom-right-radius:4px} .theme-bar.single{border-radius:4px} .theme-bar .bar-actions{display:none;gap:1px;margin-left:auto} .theme-bar:hover .bar-actions{display:flex} .detail-panel{margin:0 16px 16px;border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;overflow-x:auto} .detail-header{background:var(--surface2);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-strong)} .detail-title{font-size:19px;font-weight:600;display:flex;align-items:center;gap:8px} .ticket{background:var(--surface);border-radius:5px;border:0.5px solid var(--border);padding:6px 8px;cursor:grab;transition:border-color .15s,opacity .15s;user-select:none;display:flex;flex-direction:column;height:90px;overflow:hidden;width:calc(50% - 2px);flex-shrink:0} .ticket:hover{border-color:var(--border-strong)} .ticket.dragging{opacity:.3} .ticket-top{display:flex;align-items:flex-start;justify-content:space-between;gap:4px;margin-bottom:3px;overflow:hidden;min-height:0} .ticket-title{font-size:11px;font-weight:500;line-height:1.25;flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical} .ticket-jira{font-size:9px;font-weight:600;color:#534ab7;text-decoration:none;padding:1px 3px;border-radius:3px;background:var(--cat-dash-bg);white-space:nowrap;transition:background .1s} .ticket-jira:hover{background:var(--cat-dash-bg2)} .ticket-footer{display:flex;align-items:center;justify-content:space-between;gap:2px;margin-top:auto;padding-top:3px} .ticket-actions{display:flex;gap:1px;opacity:0;transition:opacity .15s} .ticket:hover .ticket-actions{opacity:1} .priority-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0} .priority-high{background:#e24b4a}.priority-medium{background:#ef9f27}.priority-low{background:#1d9e75} .priority-must-do{background:#7c0a02}.priority-bau{background:#888780} .goal-flag{font-size:9px;background:var(--claire-bg);border:0.5px solid #f0c030;color:var(--claire-text);padding:1px 3px;border-radius:3px;white-space:nowrap} .multi-select{position:relative} .ms-trigger{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);cursor:pointer;min-height:38px;transition:border-color .15s} .ms-trigger:hover{border-color:#534ab7} .ms-display{font-size:13px;color:var(--text);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap} .ms-display.placeholder{color:var(--text3)} .ms-dropdown{display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);overflow:hidden} .ms-dropdown.open{display:block} .ms-option{display:flex;align-items:center;gap:9px;padding:8px 12px;font-size:13px;cursor:pointer;transition:background .1s;color:var(--text)} .ms-option:hover{background:var(--surface2)} .ms-option input[type=checkbox]{width:14px;height:14px;accent-color:#534ab7;cursor:pointer;flex-shrink:0} .icon-btn{background:none;border:none;cursor:pointer;color:var(--text3);padding:2px;border-radius:3px;display:flex;align-items:center;font-size:18px;transition:color .1s,background .1s} .icon-btn:hover{color:var(--text);background:rgba(0,0,0,0.06)} .icon-btn.delete:hover{color:#e24b4a} .empty-state{color:var(--text3);font-size:18px;text-align:center;padding:12px 6px;border:1px dashed var(--border);border-radius:4px;cursor:pointer} .empty-state:hover{border-color:var(--text3);color:var(--text2)} .progress-wrap{padding:20px;height:100%;overflow-y:auto} .progress-board{display:grid;grid-template-columns:repeat(3,1fr);gap:14px} .progress-col{border-radius:var(--radius);border:1px solid var(--border-strong);overflow:hidden;display:flex;flex-direction:column} .progress-col-head{padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border-strong)} .progress-col-title{font-size:18px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:8px} .progress-col-body{padding:10px;display:flex;flex-direction:column;gap:8px;min-height:100px;flex:1;transition:box-shadow .12s} .progress-col-body.drag-over{box-shadow:inset 0 0 0 2px #534ab7} .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:200;align-items:center;justify-content:center;padding:20px} .modal-overlay.open{display:flex} .modal{background:var(--surface);border-radius:var(--radius);border:.5px solid var(--border-strong);padding:22px;width:100%;max-width:900px;max-height:90vh;overflow-y:auto} .modal h2{font-size:19px;font-weight:500;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between} .form-group{margin-bottom:12px} .form-group label{display:block;font-size:19px;font-weight:500;color:var(--text2);margin-bottom:4px;text-transform:none;letter-spacing:0} .form-group input,.form-group select,.form-group textarea{width:100%;padding:9px 11px;border:.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);font-size:19px;font-family:inherit;outline:none} .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#534ab7} .form-group textarea{resize:vertical;min-height:50px} .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px} .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px} .modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:16px} .hint{font-size:18px;color:var(--text3);margin-top:3px} .detail-table{display:grid;grid-template-columns:max-content repeat(3,1fr);border-top:1px solid var(--border-strong);width:100%} .dt-row-label{padding:7px 12px;font-size:17px;font-weight:700;text-transform:none;letter-spacing:0;color:var(--text3);display:flex;align-items:flex-start;border-right:1px solid var(--border-strong);border-bottom:1px solid var(--border);background:var(--surface2);white-space:nowrap;} .dt-col-head{padding:7px 12px;font-size:18px;font-weight:700;text-transform:none;letter-spacing:0;border-bottom:1px solid var(--border-strong);display:flex;align-items:center;justify-content:space-between;background:var(--surface2);color:var(--text2);border-right:1px solid var(--border)} .dt-col-head:last-child{border-right:none} .dt-col-head .col-count{font-size:19px;font-weight:500;padding:1px 5px;border-radius:10px;background:rgba(0,0,0,0.06)} @media(prefers-color-scheme:dark){.dt-col-head .col-count{background:rgba(255,255,255,0.1)}}[data-theme="dark"] .dt-col-head .col-count{background:rgba(255,255,255,0.1)} .dt-body-cell{padding:5px;display:flex;flex-wrap:wrap;gap:4px;align-content:start;background:var(--surface);border-right:1px solid var(--border);border-bottom:1px solid var(--border)} .dt-body-cell:last-of-type{border-right:none} .df-label{padding:7px 12px;font-size:17px;font-weight:700;text-transform:none;letter-spacing:0;color:var(--text3);display:flex;align-items:center;border-right:1px solid var(--border-strong);border-top:1px solid var(--border);background:var(--surface2);white-space:nowrap;} .df-cell{padding:6px 8px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:18px;font-weight:600;color:var(--text2);border-right:1px solid var(--border);border-top:1px solid var(--border);background:var(--surface)} .df-cell:last-child{border-right:none} .df-cell.over-cap{color:#e24b4a;background:var(--surface2)} .df-cell.at-cap{color:#1d9e75;background:var(--sam-bg)} .df-cell.under-cap{color:#185fa5;background:var(--cat-webi-bg)} .df-cell.df-muted{color:var(--text3);font-weight:400} @media(prefers-color-scheme:dark){ .df-cell.over-cap{background:#3d1212} .df-cell.at-cap{background:#0d2e1e} }[data-theme="dark"] .df-cell.over-cap{background:#3d1212}[data-theme="dark"] .df-cell.at-cap{background:#0d2e1e} .cap-input{width:52px;text-align:center;padding:3px 0;border:.5px solid var(--border-strong);border-radius:4px;background:var(--surface);color:var(--text);font-size:18px;font-weight:600;font-family:inherit;outline:none;-moz-appearance:textfield;} .cap-input::-webkit-outer-spin-button,.cap-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0} .cap-input:focus{border-color:#534ab7} .settings-pop{display:none;position:absolute;top:100%;right:0;margin-top:6px;background:var(--surface);border:1px solid var(--border-strong);border-radius:var(--radius);padding:14px;width:300px;z-index:150;box-shadow:0 4px 16px rgba(0,0,0,0.12)} .settings-pop.open{display:block} .settings-wrap{position:relative}.sprint-nav{display:flex;align-items:center;gap:10px;padding:12px 20px 0;position:relative;z-index:1;} .panel-body-row{display:flex;align-items:flex-start;overflow-x:auto;overflow-y:auto;height:calc(100vh - 159px);} .panel-body-row .grid-wrap{flex-shrink:0;overflow-x:auto;padding:20px;min-width:0;} .side-detail{flex:1 1 0;min-width:280px;padding:12px 16px 16px;border-left:1px solid var(--border-strong);overflow-y:auto;overflow-x:auto;min-width:0;} .side-detail .detail-panel{margin:0;width:100%;} .grid-resizer{flex-shrink:0;width:28px;cursor:col-resize;background:var(--surface2);border-left:1px solid var(--border-strong);border-right:1px solid var(--border-strong);transition:background .15s,border-color .15s;display:flex;align-items:center;justify-content:center;user-select:none;} .grid-resizer:hover,.grid-resizer.dragging{background:var(--cat-dash-bg);border-color:#534ab7;} .resizer-icon{display:flex;align-items:center;gap:1px;background:var(--surface);border:1px solid var(--border-strong);border-radius:4px;padding:5px 3px;box-shadow:0 1px 3px rgba(0,0,0,0.1);pointer-events:none;} .resizer-icon span{font-size:12px;font-weight:700;line-height:1;color:var(--text3);} .resizer-icon .resizer-pipe{color:var(--border-strong);margin:0 1px;} .grid-resizer:hover .resizer-icon,.grid-resizer.dragging .resizer-icon{border-color:#534ab7;} .grid-resizer:hover .resizer-icon span,.grid-resizer.dragging .resizer-icon span{color:#534ab7;} .grid-resizer:hover .resizer-pipe,.grid-resizer.dragging .resizer-pipe{color:#534ab7;} .sprint-nav-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:6px;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);font-size:20px;cursor:pointer;transition:background .15s;font-weight:500;line-height:1;flex-shrink:0;} .sprint-nav-btn:hover{background:var(--surface2)} .sprint-nav-btn:disabled{opacity:.3;cursor:default} .sprint-nav-label{font-size:14px;font-weight:500;color:var(--text2);white-space:nowrap} .sprint-nav-range{font-size:14px;color:var(--text3);white-space:nowrap}
 .goals-section{border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden;margin-bottom:12px}
 .tl-row-head.tl-goals-label{justify-content:center;background:var(--surface2);min-height:unset;padding:6px 4px;border-bottom:1px solid var(--border-strong)}
 .tl-goals-label-cell{background:var(--surface2);border-right:1px solid var(--border-strong);padding:5px 8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3);text-align:center;line-height:1.3}
@@ -49,12 +49,61 @@
 .goal-dragging{opacity:.4}
 .goal-drag-over{background:var(--cat-dash-bg) !important;box-shadow:inset 0 2px 0 #534ab7}
 @media(prefers-color-scheme:dark){.goal-drag-over{background:#3c3489 !important}}[data-theme="dark"] .goal-drag-over{background:#3c3489 !important} </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body><header><h1><i class="ti ti-table" aria-hidden="true" style="font-size:19px"></i> Product Priority Planning Board</h1><div class="header-actions">
       <div id="viewer-badge" style="display:none;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--text2);background:var(--surface2);border:0.5px solid var(--border-strong);padding:4px 10px;border-radius:20px">
         👁 Viewing
         <button onclick="switchUser()" style="background:none;border:none;cursor:pointer;font-size:11px;color:#534ab7;padding:0;font-weight:600">Switch</button>
-      </div><div id="header-user-chip" style="display:flex;align-items:center;gap:6px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2);cursor:pointer" onclick="switchUser()" title="Switch user"><span id="header-user-dot" style="width:8px;height:8px;border-radius:50%;background:var(--text3);display:inline-block;flex-shrink:0"></span><span style="font-size:12px;font-weight:600;color:var(--text2)" id="header-user-name">—</span></div><div id="online-presence" style="display:flex;align-items:center;gap:4px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Who's online now"></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Last saved"><span id="last-updated-label" style="color:var(--text3)">—</span></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Changes are shared with your team in real time"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);display:inline-block;transition:background .3s"></span><span id="sync-label">Live</span></div><button class="btn sm" id="dark-toggle" onclick="toggleDarkMode()" title="Switch to dark mode"><i class="ti ti-moon"></i></button><div class="settings-wrap"><button class="btn sm" onclick="toggleSettings()"><i class="ti ti-settings" aria-hidden="true"></i> Jira</button><div class="settings-pop" id="settings-pop"><div style="font-size:18px;font-weight:600;margin-bottom:10px;color:var(--text)">Jira settings</div><div class="form-group" style="margin-bottom:10px"><label>Base URL</label><input type="text" id="jira-url" placeholder="https://dlapiperuk.atlassian.net" style="font-size:18px;padding:5px 7px" /></div><button class="btn sm primary" onclick="saveJiraSettings()">Save</button><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Signed in as</div><div style="display:flex;align-items:center;justify-content:space-between"><span id="current-user-label" style="font-size:13px;color:var(--text2)"></span><button class="btn sm" onclick="switchUser()" style="font-size:12px;padding:3px 8px">Switch</button></div></div><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px">Bookmarklet</div><div style="font-size:18px;color:var(--text3);margin-bottom:8px">Drag this to your bookmarks bar. Click it on any Jira ticket to push it straight into this board.</div><a id="bookmarklet-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:var(--cat-dash-bg);color:#26215c;border:1px solid #534ab7;border-radius:5px;font-size:19px;font-weight:600;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bookmark" style="font-size:19px"></i> Send to Board </a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the code</button> and create a bookmark manually.</div><div id="bookmarklet-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div><div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.1)"><div style="font-size:18px;color:var(--text3);margin-bottom:6px">Not picking up all fields? Drag this debug bookmarklet to your bookmarks bar and click it on a Jira ticket to see exactly what the scraper finds:</div><a id="bookmarklet-debug-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:var(--surface2);color:var(--text2);border:1px solid var(--border-strong);border-radius:5px;font-size:19px;font-weight:500;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bug" style="font-size:19px"></i> Debug Jira Fields</a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyDebugBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the debug code</button> and save it as a bookmark manually.</div><div id="bookmarklet-debug-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div></div></div></div></div><button class="btn sm" id="btn-undo" onclick="undo()" title="Undo last change (Ctrl+Z)" disabled style="opacity:0.4"><i class="ti ti-arrow-back-up" aria-hidden="true"></i> Undo</button><button class="btn sm" onclick="openArchiveModal()" title="Manage past sprints"><i class="ti ti-archive" aria-hidden="true"></i> Archive</button><button class="btn sm" onclick="openSprintDateModal()" title="Adjust sprint dates"><i class="ti ti-calendar-cog" aria-hidden="true"></i> Sprint dates</button><button class="btn primary" id="btn-add-theme" onclick="openThemeModal()"><i class="ti ti-plus" aria-hidden="true"></i> Add theme</button><button class="btn primary" id="btn-add-ticket" onclick="openTicketModal()" style="display:none"><i class="ti ti-plus" aria-hidden="true"></i> Add ticket</button></div></header><nav class="tabs"><button class="tab-btn active" id="tab-plan" onclick="switchTab('plan')"><i class="ti ti-layout-grid" aria-hidden="true"></i> CY 2026 <span class="tab-count" id="tc-plan">0</span></button><button class="tab-btn" id="tab-progress" onclick="switchTab('progress')"><i class="ti ti-loader" aria-hidden="true"></i> Progress <span class="tab-count" id="tc-progress">0</span></button><button class="tab-btn" id="tab-nfy" onclick="switchTab('nfy')"><i class="ti ti-calendar-stats" aria-hidden="true"></i> CY 2027 <span class="tab-count" id="tc-nfy">0</span></button><button class="tab-btn" id="tab-planner" onclick="switchTab('planner')"><i class="ti ti-filter" aria-hidden="true"></i> Planner</button><button class="tab-btn" id="tab-workboard" onclick="switchTab('workboard')"><i class="ti ti-clipboard-list" aria-hidden="true"></i> Ad-Hoc Work <span class="tab-count" id="tc-workboard">0</span></button></nav><div class="panel active" id="panel-plan"><div class="sprint-nav" id="nav-plan"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-plan"><div class="timeline-grid" id="tl-plan"></div></div><div class="grid-resizer" id="resizer-plan" style="display:none" onmousedown="startResize(event,'plan')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-plan" class="side-detail"></div></div></div><div class="panel" id="panel-nfy"><div class="sprint-nav" id="nav-nfy"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-nfy"><div class="timeline-grid" id="tl-nfy"></div></div><div class="grid-resizer" id="resizer-nfy" style="display:none" onmousedown="startResize(event,'nfy')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-nfy" class="side-detail"></div></div></div><div class="panel" id="panel-progress"><div class="progress-wrap"><div class="progress-board" id="progress-board"></div></div></div><div class="panel" id="panel-planner"><div style="padding:16px;height:100%;box-sizing:border-box;overflow-y:auto;display:flex;flex-direction:column"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px"><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Theme</label><div style="position:relative;min-width:180px"><input type="text" id="planner-theme-input" placeholder="All themes…" autocomplete="off" oninput="filterPlannerThemeDropdown()" onfocus="openPlannerThemeDropdown()" onblur="setTimeout(closePlannerThemeDropdown,180)" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);width:100%;outline:none" /><div id="planner-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:280px;overflow-y:auto"></div><input type="hidden" id="planner-theme" /></div></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Person</label><select id="planner-owner" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All people</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Status Label</label><select id="planner-label" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All statuses</option><option value="Ticket Creation">Ticket Creation</option><option value="Ready To Refine">Ready To Refine</option><option value="Ready for Sprint">Ready for Sprint</option><option value="Ready to Test">Ready to Test</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Refinement</label><select id="planner-refinement" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All sessions</option><option value="Refinement Session 1">Session 1</option><option value="Refinement Session 2">Session 2</option><option value="Refinement Session 3">Session 3</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Category</label><select id="planner-cat" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All</option><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Ticket Type</label><select id="planner-type" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All types</option><option value="defect">Defect</option><option value="enhancement">Enhancement</option><option value="spike">Spike</option></select></div><label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap"><input type="checkbox" id="planner-deadlines-only" onchange="renderPlanner()" style="width:auto;cursor:pointer" /> Deadlines only</label><button class="btn sm" onclick="openDeadlineModal(null)" style="white-space:nowrap"><i class="ti ti-calendar-plus"></i> Add Deadline</button><button class="btn sm" onclick="openHolidayModal()" style="white-space:nowrap"><i class="ti ti-beach"></i> Add Holiday</button></div><div style="margin-bottom:16px;position:relative;max-width:440px"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;color:var(--text2)"><i class="ti ti-search" style="font-size:12px;margin-right:4px"></i>Find ticket by name or Jira key</label><input type="text" id="ticket-search-input-planner" placeholder="e.g. ISB-1234 or migrate pipeline..." autocomplete="off" oninput="renderTicketSearch('planner')" onfocus="renderTicketSearch('planner')" style="width:100%;font-size:13px;padding:6px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none" /><div id="ticket-search-results-planner" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.12);max-height:340px;overflow-y:auto;margin-top:2px"></div></div><div id="planner-nav" style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-shrink:0"></div><div id="planner-body" style="overflow:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0;"></div></div></div><div class="panel" id="panel-workboard"><div style="padding:16px;height:100%;box-sizing:border-box;overflow-y:auto;display:flex;flex-direction:column"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px"><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Owner</label><select id="wb-filter-owner" onchange="renderWorkBoard()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All owners</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap"><i class="ti ti-search" style="font-size:12px;margin-right:2px"></i>Search</label><input type="text" id="wb-search" placeholder="Search detail, requestor…" autocomplete="off" oninput="renderWorkBoard()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none;width:220px" /></div><button class="btn primary" onclick="openWorkItemModal()" style="white-space:nowrap;margin-left:auto"><i class="ti ti-plus"></i> Log work item</button></div><div id="workboard-body" style="flex:1;min-height:0;overflow:auto"></div></div></div><div class="modal-overlay" id="sprint-date-modal" onclick="if(event.target===this)closeSprintDateModal()"><div class="modal" style="max-width:560px">
+      </div><div id="header-user-chip" style="display:flex;align-items:center;gap:6px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2);cursor:pointer" onclick="switchUser()" title="Switch user"><span id="header-user-dot" style="width:8px;height:8px;border-radius:50%;background:var(--text3);display:inline-block;flex-shrink:0"></span><span style="font-size:12px;font-weight:600;color:var(--text2)" id="header-user-name">—</span></div><div id="online-presence" style="display:flex;align-items:center;gap:4px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Who's online now"></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Last saved"><span id="last-updated-label" style="color:var(--text3)">—</span></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Changes are shared with your team in real time"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);display:inline-block;transition:background .3s"></span><span id="sync-label">Live</span></div><button class="btn sm" id="dark-toggle" onclick="toggleDarkMode()" title="Switch to dark mode"><i class="ti ti-moon"></i></button><div class="settings-wrap"><button class="btn sm" onclick="toggleSettings()"><i class="ti ti-settings" aria-hidden="true"></i> Jira</button><div class="settings-pop" id="settings-pop"><div style="font-size:18px;font-weight:600;margin-bottom:10px;color:var(--text)">Jira settings</div><div class="form-group" style="margin-bottom:10px"><label>Base URL</label><input type="text" id="jira-url" placeholder="https://dlapiperuk.atlassian.net" style="font-size:18px;padding:5px 7px" /></div><button class="btn sm primary" onclick="saveJiraSettings()">Save</button><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Signed in as</div><div style="display:flex;align-items:center;justify-content:space-between"><span id="current-user-label" style="font-size:13px;color:var(--text2)"></span><button class="btn sm" onclick="switchUser()" style="font-size:12px;padding:3px 8px">Switch</button></div></div><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px">Bookmarklet</div><div style="font-size:18px;color:var(--text3);margin-bottom:8px">Drag this to your bookmarks bar. Click it on any Jira ticket to push it straight into this board.</div><a id="bookmarklet-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:var(--cat-dash-bg);color:#26215c;border:1px solid #534ab7;border-radius:5px;font-size:19px;font-weight:600;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bookmark" style="font-size:19px"></i> Send to Board </a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the code</button> and create a bookmark manually.</div><div id="bookmarklet-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div><div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.1)"><div style="font-size:18px;color:var(--text3);margin-bottom:6px">Not picking up all fields? Drag this debug bookmarklet to your bookmarks bar and click it on a Jira ticket to see exactly what the scraper finds:</div><a id="bookmarklet-debug-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:var(--surface2);color:var(--text2);border:1px solid var(--border-strong);border-radius:5px;font-size:19px;font-weight:500;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bug" style="font-size:19px"></i> Debug Jira Fields</a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyDebugBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the debug code</button> and save it as a bookmark manually.</div><div id="bookmarklet-debug-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div></div></div></div></div><button class="btn sm" id="btn-undo" onclick="undo()" title="Undo last change (Ctrl+Z)" disabled style="opacity:0.4"><i class="ti ti-arrow-back-up" aria-hidden="true"></i> Undo</button><button class="btn sm" onclick="openArchiveModal()" title="Manage past sprints"><i class="ti ti-archive" aria-hidden="true"></i> Archive</button><button class="btn sm" onclick="openSprintDateModal()" title="Adjust sprint dates"><i class="ti ti-calendar-cog" aria-hidden="true"></i> Sprint dates</button><button class="btn primary" id="btn-add-theme" onclick="openThemeModal()"><i class="ti ti-plus" aria-hidden="true"></i> Add theme</button><button class="btn primary" id="btn-add-ticket" onclick="openTicketModal()" style="display:none"><i class="ti ti-plus" aria-hidden="true"></i> Add ticket</button></div></header><nav class="tabs"><button class="tab-btn active" id="tab-plan" onclick="switchTab('plan')"><i class="ti ti-layout-grid" aria-hidden="true"></i> CY 2026 <span class="tab-count" id="tc-plan">0</span></button><button class="tab-btn" id="tab-progress" onclick="switchTab('progress')"><i class="ti ti-loader" aria-hidden="true"></i> Progress <span class="tab-count" id="tc-progress">0</span></button><button class="tab-btn" id="tab-nfy" onclick="switchTab('nfy')"><i class="ti ti-calendar-stats" aria-hidden="true"></i> CY 2027 <span class="tab-count" id="tc-nfy">0</span></button><button class="tab-btn" id="tab-planner" onclick="switchTab('planner')"><i class="ti ti-filter" aria-hidden="true"></i> Planner</button><button class="tab-btn" id="tab-workboard" onclick="switchTab('workboard')"><i class="ti ti-clipboard-list" aria-hidden="true"></i> Ad-Hoc Work <span class="tab-count" id="tc-workboard">0</span></button><button class="tab-btn" id="tab-released" onclick="switchTab('released')"><i class="ti ti-rocket" aria-hidden="true"></i> Released</button></nav><div class="panel active" id="panel-plan"><div class="sprint-nav" id="nav-plan"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-plan"><div class="timeline-grid" id="tl-plan"></div></div><div class="grid-resizer" id="resizer-plan" style="display:none" onmousedown="startResize(event,'plan')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-plan" class="side-detail"></div></div></div><div class="panel" id="panel-nfy"><div class="sprint-nav" id="nav-nfy"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-nfy"><div class="timeline-grid" id="tl-nfy"></div></div><div class="grid-resizer" id="resizer-nfy" style="display:none" onmousedown="startResize(event,'nfy')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-nfy" class="side-detail"></div></div></div><div class="panel" id="panel-progress"><div class="progress-wrap"><div class="progress-board" id="progress-board"></div></div></div><div class="panel" id="panel-planner"><div style="padding:16px;height:100%;box-sizing:border-box;overflow-y:auto;display:flex;flex-direction:column"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px"><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Theme</label><div style="position:relative;min-width:180px"><input type="text" id="planner-theme-input" placeholder="All themes…" autocomplete="off" oninput="filterPlannerThemeDropdown()" onfocus="openPlannerThemeDropdown()" onblur="setTimeout(closePlannerThemeDropdown,180)" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);width:100%;outline:none" /><div id="planner-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:280px;overflow-y:auto"></div><input type="hidden" id="planner-theme" /></div></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Person</label><select id="planner-owner" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All people</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Status Label</label><select id="planner-label" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All statuses</option><option value="Ticket Creation">Ticket Creation</option><option value="Ready To Refine">Ready To Refine</option><option value="Ready for Sprint">Ready for Sprint</option><option value="Ready to Test">Ready to Test</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Refinement</label><select id="planner-refinement" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All sessions</option><option value="Refinement Session 1">Session 1</option><option value="Refinement Session 2">Session 2</option><option value="Refinement Session 3">Session 3</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Category</label><select id="planner-cat" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All</option><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Ticket Type</label><select id="planner-type" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All types</option><option value="defect">Defect</option><option value="enhancement">Enhancement</option><option value="spike">Spike</option></select></div><label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap"><input type="checkbox" id="planner-deadlines-only" onchange="renderPlanner()" style="width:auto;cursor:pointer" /> Deadlines only</label><button class="btn sm" onclick="openDeadlineModal(null)" style="white-space:nowrap"><i class="ti ti-calendar-plus"></i> Add Deadline</button><button class="btn sm" onclick="openHolidayModal()" style="white-space:nowrap"><i class="ti ti-beach"></i> Add Holiday</button></div><div style="margin-bottom:16px;position:relative;max-width:440px"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;color:var(--text2)"><i class="ti ti-search" style="font-size:12px;margin-right:4px"></i>Find ticket by name or Jira key</label><input type="text" id="ticket-search-input-planner" placeholder="e.g. ISB-1234 or migrate pipeline..." autocomplete="off" oninput="renderTicketSearch('planner')" onfocus="renderTicketSearch('planner')" style="width:100%;font-size:13px;padding:6px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none" /><div id="ticket-search-results-planner" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.12);max-height:340px;overflow-y:auto;margin-top:2px"></div></div><div id="planner-nav" style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-shrink:0"></div><div id="planner-body" style="overflow:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0;"></div></div></div><div class="panel" id="panel-workboard"><div style="padding:16px;height:100%;box-sizing:border-box;overflow-y:auto;display:flex;flex-direction:column"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px"><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Owner</label><select id="wb-filter-owner" onchange="renderWorkBoard()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All owners</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap"><i class="ti ti-search" style="font-size:12px;margin-right:2px"></i>Search</label><input type="text" id="wb-search" placeholder="Search detail, requestor…" autocomplete="off" oninput="renderWorkBoard()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none;width:220px" /></div><button class="btn primary" onclick="openWorkItemModal()" style="white-space:nowrap;margin-left:auto"><i class="ti ti-plus"></i> Log work item</button></div><div id="workboard-body" style="flex:1;min-height:0;overflow:auto"></div></div></div><div class="panel" id="panel-released"><div style="padding:20px;height:100%;box-sizing:border-box;overflow-y:auto">
+<div style="border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);margin-bottom:18px;overflow:hidden">
+
+  <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border)">
+    <select id="rel-mode" onchange="onRelModeChange()" style="font-size:13px;font-weight:600;padding:6px 26px 6px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="sprint">📅 By sprint</option><option value="date">🚀 By released date</option></select>
+
+    <div style="width:1px;height:22px;background:var(--border-strong);flex-shrink:0"></div>
+
+    <div id="rel-sprint-controls" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+      <select id="rel-from" onchange="renderReleased()" style="font-size:13px;padding:6px 9px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);min-width:190px"></select>
+      <span style="color:var(--text3);font-size:13px">→</span>
+      <select id="rel-to" onchange="renderReleased()" style="font-size:13px;padding:6px 9px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);min-width:190px"></select>
+    </div>
+
+    <div id="rel-date-controls" style="display:none;align-items:center;gap:8px;flex-wrap:wrap">
+      <input type="date" id="rel-date-from" onchange="renderReleased()" style="font-size:13px;padding:6px 9px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)" />
+      <span style="color:var(--text3);font-size:13px">→</span>
+      <input type="date" id="rel-date-to" onchange="renderReleased()" style="font-size:13px;padding:6px 9px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)" />
+    </div>
+
+    <span id="rel-range-label" style="font-size:12px;font-weight:600;color:#534ab7;background:var(--cat-dash-bg);border:0.5px solid #534ab7;border-radius:12px;padding:3px 10px;white-space:nowrap"></span>
+
+    <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
+      <button class="btn sm" onclick="exportReleasedXlsx()" style="white-space:nowrap"><i class="ti ti-file-spreadsheet"></i> Download Excel</button>
+      <div id="rel-bulk-actions" style="display:flex;align-items:center;gap:8px">
+        <button class="btn sm" onclick="openMarkReleasedModal()" style="white-space:nowrap"><i class="ti ti-rocket"></i> Mark all Released</button>
+        <button class="btn sm" onclick="markRangeReleased(false)" style="white-space:nowrap"><i class="ti ti-x"></i> Unmark all</button>
+      </div>
+      <button class="btn sm" onclick="exportReleasedToExcel()" style="white-space:nowrap"><i class="ti ti-file-spreadsheet"></i> Export to Excel</button>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:10px 16px">
+    <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text3)">Filter</span>
+    <select id="rel-filter-owner" onchange="renderReleased()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text)"><option value="">All owners</option></select>
+    <select id="rel-filter-released" onchange="renderReleased()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text)"><option value="yes">Released</option><option value="no">Not released</option><option value="done_not_released" selected>Done & not released</option><option value="">All</option></select>
+    <select id="rel-filter-theme" onchange="renderReleased()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);max-width:220px"><option value="">All themes</option></select>
+  </div>
+
+</div>
+<div id="rel-goals" style="margin-bottom:18px"></div>
+<div id="rel-summary" style="margin-bottom:18px"></div>
+<div id="rel-body"></div>
+</div></div><div class="modal-overlay" id="mark-released-modal" onclick="if(event.target===this)closeMarkReleasedModal()"><div class="modal" style="max-width:420px">
+<h2><span>Mark tickets as Released</span><button class="icon-btn" onclick="closeMarkReleasedModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2>
+<div id="mark-released-summary" style="font-size:18px;color:var(--text2);margin-bottom:14px"></div>
+<div class="form-group"><label>Release date</label><input type="date" id="mark-released-date" /></div>
+<div class="modal-footer"><button class="btn" onclick="closeMarkReleasedModal()">Cancel</button><button class="btn primary" onclick="confirmMarkReleased()"><i class="ti ti-rocket"></i> Mark as Released</button></div>
+</div></div><div class="modal-overlay" id="sprint-date-modal" onclick="if(event.target===this)closeSprintDateModal()"><div class="modal" style="max-width:560px">
 <h2><span>Edit sprint dates</span><button class="icon-btn" onclick="closeSprintDateModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2>
 <div class="form-group">
   <label>Sprint to change</label>
@@ -186,7 +235,7 @@
 <label class="ms-option" id="ref-opt-1"><input type="checkbox" value="Refinement Session 1" onchange="onRefinementLabelChange(this)" disabled> Refinement Session 1</label>
 <label class="ms-option" id="ref-opt-2"><input type="checkbox" value="Refinement Session 2" onchange="onRefinementLabelChange(this)" disabled> Refinement Session 2</label>
 <label class="ms-option" id="ref-opt-3"><input type="checkbox" value="Refinement Session 3" onchange="onRefinementLabelChange(this)" disabled> Refinement Session 3</label>
-</div></div><input type="hidden" id="tk-labels" /></div></div><div><div class="form-row"><div class="form-group"><label>Category</label><select id="tk-cat"><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><div class="form-group"><label>Owner</label><select id="tk-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option></select></div></div><div class="form-group"><label>Sprint</label><select id="tk-sprint"></select></div><div class="form-group"><label>Theme (optional)</label><div class="theme-search-wrap" id="tk-theme-wrap" style="position:relative"><input type="text" id="tk-theme-input" placeholder="Search themes…" autocomplete="off" oninput="filterThemeDropdown()" onfocus="openThemeDropdown()" style="width:100%" /><div id="tk-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:400px;overflow-y:auto"></div><input type="hidden" id="tk-theme" /></div></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-goal" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🎯 This is a goal ticket</span></label></div><div class="form-group"><label>Comments</label><textarea id="tk-comments" placeholder="Add notes or comments…" style="min-height:100px"></textarea></div></div></div><div class="modal-footer"><button class="btn delete" id="tk-delete-btn" onclick="deleteTicketFromModal()" style="margin-right:auto;color:#e24b4a;border-color:#e24b4a;display:none"><i class="ti ti-trash"></i> Delete ticket</button><button class="btn" onclick="closeTicketModal()">Cancel</button><button class="btn primary" onclick="saveTicket()">Save ticket</button></div></div></div><script>
+</div></div><input type="hidden" id="tk-labels" /></div></div><div><div class="form-row"><div class="form-group"><label>Category</label><select id="tk-cat"><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><div class="form-group"><label>Owner</label><select id="tk-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option></select></div></div><div class="form-group"><label>Sprint</label><select id="tk-sprint"></select></div><div class="form-group"><label>Theme (optional)</label><div class="theme-search-wrap" id="tk-theme-wrap" style="position:relative"><input type="text" id="tk-theme-input" placeholder="Search themes…" autocomplete="off" oninput="filterThemeDropdown()" onfocus="openThemeDropdown()" style="width:100%" /><div id="tk-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:400px;overflow-y:auto"></div><input type="hidden" id="tk-theme" /></div></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-goal" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🎯 This is a goal ticket</span></label></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-done" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>✅ Done</span></label></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-released" onchange="onTkReleasedToggle()" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🚀 Released</span></label><input type="date" id="tk-released-date" style="margin-top:6px;font-size:16px;padding:5px 7px;display:none" /></div><div class="form-group"><label>Comments</label><textarea id="tk-comments" placeholder="Add notes or comments…" style="min-height:100px"></textarea></div></div></div><div class="modal-footer"><button class="btn delete" id="tk-delete-btn" onclick="deleteTicketFromModal()" style="margin-right:auto;color:#e24b4a;border-color:#e24b4a;display:none"><i class="ti ti-trash"></i> Delete ticket</button><button class="btn" onclick="closeTicketModal()">Cancel</button><button class="btn primary" onclick="saveTicket()">Save ticket</button></div></div></div><script>
 // ── SUPABASE COLLABORATIVE STORAGE ──
 const SB_URL = 'https://osrlxmkpljcfobunulot.supabase.co';
 const SB_KEY = 'sb_publishable_3jXCj52EKTGKhbQbgYeS4A_JkkSNtUX';
@@ -259,6 +308,7 @@ async function undo() {
 document.addEventListener('keydown', e => { if ((e.ctrlKey||e.metaKey) && e.key==='z' && !e.shiftKey) { e.preventDefault(); undo(); } });
 let selectedSprint = { plan: null, nfy: null };
 let activeTab = 'plan';
+let relExportRows = []; // populated by renderReleased() each render, consumed by exportReleasedToExcel()
 let sprintOffset = { plan: 0, nfy: 0 };
 let _lastHash = '';
 
@@ -992,10 +1042,11 @@ function switchTab(tab){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-'+tab).classList.add('active');
   document.getElementById('panel-'+tab).classList.add('active');
-  document.getElementById('btn-add-theme').style.display = (tab==='progress'||tab==='planner'||tab==='workboard')?'none':'';
-  document.getElementById('btn-add-ticket').style.display = (tab!=='progress'&&tab!=='planner'&&tab!=='workboard'&&selectedSprint[tab])?'':'none';
+  document.getElementById('btn-add-theme').style.display = (tab==='progress'||tab==='planner'||tab==='workboard'||tab==='released')?'none':'';
+  document.getElementById('btn-add-ticket').style.display = (tab!=='progress'&&tab!=='planner'&&tab!=='workboard'&&tab!=='released'&&selectedSprint[tab])?'':'none';
   if(tab==='planner') renderPlanner();
   if(tab==='workboard') renderWorkBoard();
+  if(tab==='released') renderReleased();
 }
 function updateCounts(){
   const planIds=new Set(PLAN_SPRINTS.map(s=>s.id)), nfyIds=new Set(NFY_SPRINTS.map(s=>s.id));
@@ -1112,7 +1163,7 @@ function renderTimeline(gridId, allSprints, tabKey){
     const isLastCol = si === n - 1;
     const sprintGoals = (goalsData[s.id] || []);
     const goalsHtml = sprintGoals.length
-      ? sprintGoals.map((g, idx) => `<div class="tl-goal-pill"><span class="tl-goal-num">${idx+1}.</span><span class="tl-goal-text">${esc(g.text)}</span></div>`).join('')
+      ? sprintGoals.map((g, idx) => `<div class="tl-goal-pill" style="${g.achieved?'text-decoration:line-through;opacity:.6':''}"><span class="tl-goal-num">${idx+1}.</span><span class="tl-goal-text">${g.achieved?'✅ ':''}${esc(g.text)}</span></div>`).join('')
       : '';
     const addBtn = `<div class="tl-goal-add" onclick="tlAddGoal(event,'${tabKey}','${s.id}')">+ add goal</div>`;
     html += `<div class="tl-goals-cell" style="grid-row:${GOALS_ROW};grid-column:${col};height:${GOALS_ROW_H}px;box-sizing:border-box;border-bottom:none;${isLastCol?'border-right:none;':''}">${goalsHtml}${addBtn}</div>`;
@@ -1565,8 +1616,10 @@ function renderDetail(containerId, sprints, tabKey){
         ondragend="goalDragEnd(event)">
         <div class="goal-drag-handle"><i class="ti ti-grip-vertical"></i></div>
         <div class="goal-order">${idx + 1}</div>
+        <input type="checkbox" ${g.achieved?'checked':''} onclick="event.stopPropagation();toggleGoalAchieved('${sid}','${g.id}')" title="${g.achieved?'Mark as not achieved':'Mark as achieved'}" style="width:auto;cursor:pointer;flex-shrink:0" />
         <div class="goal-text" id="goal-text-${g.id}"
           contenteditable="true"
+          style="${g.achieved?'text-decoration:line-through;opacity:.65':''}"
           onfocus="this.closest('.goal-item').classList.add('goal-editing')"
           onblur="this.closest('.goal-item').classList.remove('goal-editing');saveGoalText('${sid}','${g.id}',this.innerText)"
           onkeydown="if(event.key==='Enter'){event.preventDefault();this.blur();}if(event.key==='Escape'){event.preventDefault();this.innerText=${JSON.stringify(g.text)};this.blur();}"
@@ -1743,6 +1796,15 @@ function saveGoalText(sid, goalId, text){
   g.text = trimmed;
   saveGoalsData();
   render();
+}
+function toggleGoalAchieved(sid, goalId){
+  if(!goalsData[sid]) return;
+  const g = goalsData[sid].find(g=>g.id===goalId);
+  if(!g) return;
+  g.achieved = !g.achieved;
+  saveGoalsData();
+  render();
+  renderReleased();
 }
 function deleteGoal(sid, goalId){
   if(!goalsData[sid]) return;
@@ -2036,6 +2098,10 @@ function openTicketModal(owner,sprint,cat){
   setMultiSelectValues('tk-labels-wrap','tk-labels','tk-labels-display','');
   document.getElementById('tk-comments').value='';
   document.getElementById('tk-goal').checked=false;
+  document.getElementById('tk-done').checked=false;
+  document.getElementById('tk-released').checked=false;
+  document.getElementById('tk-released-date').value='';
+  document.getElementById('tk-released-date').style.display='none';
   document.getElementById('jira-fetch-status').textContent='';
   document.getElementById('tk-cat').value=cat||'data';
   document.getElementById('tk-owner').value=owner||(currentUser||'george');
@@ -2058,6 +2124,10 @@ function editTicket(id){
   setMultiSelectValues('tk-labels-wrap','tk-labels','tk-labels-display',t.labels||'');
   document.getElementById('tk-comments').value=t.comments||'';
   document.getElementById('tk-goal').checked=!!t.goal;
+  document.getElementById('tk-done').checked=!!t.done;
+  document.getElementById('tk-released').checked=!!t.released;
+  document.getElementById('tk-released-date').value = t.releasedDate || '';
+  document.getElementById('tk-released-date').style.display = t.released ? '' : 'none';
   document.getElementById('jira-fetch-status').textContent='';
   document.getElementById('tk-cat').value=t.cat;
   document.getElementById('tk-owner').value=t.owner;
@@ -2161,6 +2231,16 @@ document.addEventListener('click', e => {
 function deleteTicket(id){const tk=tickets.find(t=>t.id===id);pushUndo(`Delete ticket "${tk?.title||id}"`);tickets=tickets.filter(t=>t.id!==id);deleteOne('ticket',id);render()}
 function deleteTicketFromModal(){if(!editingTicketId)return;const id=editingTicketId;closeTicketModal();deleteTicket(id);}
 function closeTicketModal(){document.getElementById('ticket-modal').classList.remove('open')}
+function todayISO(){
+  const d = new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function onTkReleasedToggle(){
+  const cb = document.getElementById('tk-released');
+  const dateInput = document.getElementById('tk-released-date');
+  dateInput.style.display = cb.checked ? '' : 'none';
+  if(cb.checked && !dateInput.value) dateInput.value = todayISO();
+}
 function toggleTicketDone(id){
   const tk = tickets.find(t=>t.id===id);
   if(!tk) return;
@@ -2169,6 +2249,105 @@ function toggleTicketDone(id){
   tickets = tickets.map(t=>t.id===id ? updated : t);
   saveOne('ticket', updated);
   render();
+}
+function toggleTicketReleased(id){
+  const tk = tickets.find(t=>t.id===id);
+  if(!tk) return;
+  const newVal = !tk.released;
+  pushUndo(`${tk.released?'Unmark':'Mark'} "${tk.title}" as released`);
+  const updated = {...tk, released: newVal, releasedDate: newVal ? (tk.releasedDate || todayISO()) : null};
+  tickets = tickets.map(t=>t.id===id ? updated : t);
+  saveOne('ticket', updated);
+  render();
+  renderReleased();
+}
+function exportReleasedToExcel(){
+  if(typeof XLSX === 'undefined'){ alert('Excel export library failed to load — check your internet connection and try again.'); return; }
+  if(!relExportRows.length){ alert('No tickets to export for the current filters.'); return; }
+
+  const headers = ['Sprint #','Sprint','Owner','Category','Theme','Jira','Title','Type','Released','Released Date'];
+  const rows = relExportRows.map(r => [
+    r.sprintNum, r.sprintLabel, r.owner, r.category, r.theme, r.jira, r.title,
+    r.type ? r.type.charAt(0).toUpperCase()+r.type.slice(1) : '', r.released, r.releasedDate
+  ]);
+
+  const aoa = [headers, ...rows];
+  const ws = XLSX.utils.aoa_to_sheet(aoa);
+
+  // Column widths sized to content (capped so long titles don't blow out the sheet)
+  ws['!cols'] = headers.map((h,i) => {
+    const maxLen = Math.max(h.length, ...rows.map(r => String(r[i]||'').length));
+    return { wch: Math.min(Math.max(maxLen + 2, 10), 60) };
+  });
+
+  // Bold header row + freeze it
+  const range = XLSX.utils.decode_range(ws['!ref']);
+  for(let c = range.s.c; c <= range.e.c; c++){
+    const cell = ws[XLSX.utils.encode_cell({r:0, c})];
+    if(cell) cell.s = { font: { bold: true }, fill: { fgColor: { rgb: 'F1F0EC' } } };
+  }
+  ws['!freeze'] = { xSplit: 0, ySplit: 1 };
+  ws['!autofilter'] = { ref: ws['!ref'] };
+
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Released');
+
+  const rangeLabel = (document.getElementById('rel-range-label')?.textContent || 'export').replace(/[^a-z0-9]+/gi,'_').replace(/^_+|_+$/g,'');
+  XLSX.writeFile(wb, `Released_${rangeLabel || todayISO()}.xlsx`);
+}
+function getRelRangeTickets(){
+  const fromSel = document.getElementById('rel-from');
+  const toSel = document.getElementById('rel-to');
+  if(!fromSel || !toSel) return {rangeTicketsAll: [], label: ''};
+  const all = releasedSprintOptions();
+  let fromIdx = all.findIndex(s=>s.id===fromSel.value);
+  let toIdx = all.findIndex(s=>s.id===toSel.value);
+  if(fromIdx === -1) fromIdx = 0;
+  if(toIdx === -1) toIdx = all.length-1;
+  if(fromIdx > toIdx){ [fromIdx,toIdx] = [toIdx,fromIdx]; }
+  const rangeSprints = all.slice(fromIdx, toIdx+1);
+  const rangeIds = new Set(rangeSprints.map(s=>s.id));
+  const rangeTicketsAll = tickets.filter(t => rangeIds.has(t.sprint));
+  const label = rangeSprints.length===1 ? rangeSprints[0].label : (rangeSprints.length ? `${rangeSprints[0].label} → ${rangeSprints[rangeSprints.length-1].label}` : '');
+  return {rangeTicketsAll, label};
+}
+function openMarkReleasedModal(){
+  const {rangeTicketsAll, label} = getRelRangeTickets();
+  if(!rangeTicketsAll.length){ alert('No tickets found in this sprint range.'); return; }
+  document.getElementById('mark-released-summary').textContent =
+    `This will mark all ${rangeTicketsAll.length} ticket${rangeTicketsAll.length===1?'':'s'} in ${label} as Released. You can uncheck individual tickets afterwards.`;
+  document.getElementById('mark-released-date').value = todayISO();
+  document.getElementById('mark-released-modal').classList.add('open');
+}
+function closeMarkReleasedModal(){
+  document.getElementById('mark-released-modal').classList.remove('open');
+}
+function confirmMarkReleased(){
+  const releaseDate = document.getElementById('mark-released-date').value || todayISO();
+  const {rangeTicketsAll, label} = getRelRangeTickets();
+  if(!rangeTicketsAll.length){ closeMarkReleasedModal(); return; }
+  pushUndo(`Mark all tickets in ${label} as released`);
+  rangeTicketsAll.forEach(t=>{
+    const updated = {...t, released: true, releasedDate: releaseDate};
+    tickets = tickets.map(x=>x.id===t.id ? updated : x);
+    saveOne('ticket', updated);
+  });
+  closeMarkReleasedModal();
+  render();
+  renderReleased();
+}
+function markRangeReleased(value){
+  const {rangeTicketsAll, label} = getRelRangeTickets();
+  if(!rangeTicketsAll.length) return;
+  if(!confirm(`Mark all ${rangeTicketsAll.length} ticket${rangeTicketsAll.length===1?'':'s'} in ${label} as not Released?`)) return;
+  pushUndo(`Mark all tickets in ${label} as not released`);
+  rangeTicketsAll.forEach(t=>{
+    const updated = {...t, released: value, releasedDate: null};
+    tickets = tickets.map(x=>x.id===t.id ? updated : x);
+    saveOne('ticket', updated);
+  });
+  render();
+  renderReleased();
 }
 /* ── MULTI-SELECT ── */
 function toggleMultiSelect(wrapId){
@@ -2225,6 +2404,11 @@ function saveTicket(){
     labels:   document.getElementById('tk-labels').value.trim(),
     comments: document.getElementById('tk-comments').value.trim(),
     goal:     document.getElementById('tk-goal').checked,
+    done:     document.getElementById('tk-done').checked,
+    released: document.getElementById('tk-released').checked,
+    releasedDate: document.getElementById('tk-released').checked
+      ? (document.getElementById('tk-released-date').value || todayISO())
+      : null,
     cat:      document.getElementById('tk-cat').value,
     owner:    document.getElementById('tk-owner').value,
     sprint:   document.getElementById('tk-sprint').value,
@@ -2964,6 +3148,318 @@ function fmtWorkItemTime(w){
   }
   return esc(w.timeTaken||'');
 }
+/* ── RELEASED TAB ── summarises completed sprint work between two sprints, by person ── */
+function exportReleasedXlsx(){
+  const modeSel = document.getElementById('rel-mode');
+  const mode = modeSel ? modeSel.value : 'sprint';
+  const isDateMode = mode === 'date';
+  const all = releasedSprintOptions();
+  let rangeTicketsAll = [];
+  if(isDateMode){
+    const fromDate = (document.getElementById('rel-date-from')||{}).value||'';
+    const toDate   = (document.getElementById('rel-date-to')||{}).value||'';
+    rangeTicketsAll = tickets.filter(t => t.released && t.releasedDate && (!fromDate||t.releasedDate>=fromDate) && (!toDate||t.releasedDate<=toDate));
+  } else {
+    const fromSel = document.getElementById('rel-from');
+    const toSel   = document.getElementById('rel-to');
+    if(!fromSel||!toSel) return;
+    let fi = all.findIndex(s=>s.id===fromSel.value); if(fi===-1) fi=0;
+    let ti = all.findIndex(s=>s.id===toSel.value);   if(ti===-1) ti=all.length-1;
+    if(fi>ti){const tmp=fi;fi=ti;ti=tmp;}
+    const rIds = new Set(all.slice(fi,ti+1).map(s=>s.id));
+    rangeTicketsAll = tickets.filter(t=>rIds.has(t.sprint));
+  }
+  const fRel = isDateMode ? 'yes' : ((document.getElementById('rel-filter-released')||{}).value||'yes');
+  const fOwner  = (document.getElementById('rel-filter-owner')||{}).value||'';
+  const fThemeId= (document.getElementById('rel-filter-theme')||{}).value||'';
+  const base = fRel==='yes'               ? rangeTicketsAll.filter(t=>t.released)
+             : fRel==='no'                ? rangeTicketsAll.filter(t=>!t.released)
+             : fRel==='done_not_released' ? rangeTicketsAll.filter(t=>t.done && !t.released)
+             : rangeTicketsAll;
+  const filtered = base.filter(t=>{
+    if(fOwner && t.owner!==fOwner) return false;
+    if(fThemeId && (canonicalTheme(t.themeId)?.id)!==fThemeId) return false;
+    return true;
+  });
+  if(!filtered.length){ alert('No tickets to export for the current filters.'); return; }
+  const snById = {};
+  all.forEach(s=>{ snById[s.id]=s.num; });
+  const HEADERS = ['Group','Theme','Sprint','Jira','Title','Owner','Type','Points','Done','Released','Released Date'];
+  const rows = filtered.map(t=>{
+    const owner = OWNERS.find(o=>o.id===t.owner);
+    const theme = canonicalTheme(t.themeId);
+    return [
+      t.goal?'Goal':'Other',
+      theme?theme.title:'',
+      snById[t.sprint]?'Sprint '+snById[t.sprint]:(t.sprint||''),
+      t.jira||'',
+      t.title||'',
+      owner?owner.label:(t.owner||''),
+      t.type||'',
+      t.points!=null?(Number(t.points)||''):'',
+      t.done?'Yes':'No',
+      t.released?'Yes':'No',
+      t.releasedDate||''
+    ];
+  });
+  rows.sort((a,b)=>{
+    if(a[0]!==b[0]) return a[0]==='Goal'?-1:1;
+    if(a[1]!==b[1]) return a[1].localeCompare(b[1]);
+    return (a[2]||'').localeCompare(b[2]||'');
+  });
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet([HEADERS,...rows]);
+  ws['!cols']=[{wch:8},{wch:30},{wch:10},{wch:12},{wch:50},{wch:12},{wch:14},{wch:7},{wch:6},{wch:9},{wch:14}];
+  const hFill={patternType:'solid',fgColor:{rgb:'534AB7'}};
+  const hFont={bold:true,color:{rgb:'FFFFFF'},name:'Arial',sz:11};
+  const bFont={name:'Arial',sz:10};
+  const range=XLSX.utils.decode_range(ws['!ref']);
+  for(let C=range.s.c;C<=range.e.c;C++){
+    const cell=ws[XLSX.utils.encode_cell({r:0,c:C})];
+    if(cell) cell.s={fill:hFill,font:hFont,alignment:{horizontal:'center'}};
+  }
+  for(let R=1;R<=range.e.r;R++){
+    const bg=rows[R-1]?.[0]==='Goal'?'EEF5FF':'FFFFFF';
+    for(let C=0;C<=range.e.c;C++){
+      const addr=XLSX.utils.encode_cell({r:R,c:C});
+      if(!ws[addr]) ws[addr]={t:'z',v:''};
+      ws[addr].s={font:bFont,fill:{patternType:'solid',fgColor:{rgb:bg}},alignment:{horizontal:C===4?'left':'center'}};
+    }
+  }
+  ws['!freeze']={xSplit:0,ySplit:1};
+  XLSX.utils.book_append_sheet(wb,ws,'Released');
+  XLSX.writeFile(wb,'released.xlsx');
+}
+function releasedSprintOptions(){
+  return allSprintsDeduped().slice().sort((a,b)=> a.start.localeCompare(b.start));
+}
+function onRelModeChange(){
+  const mode = document.getElementById('rel-mode').value;
+  document.getElementById('rel-sprint-controls').style.display = mode==='sprint' ? 'flex' : 'none';
+  document.getElementById('rel-date-controls').style.display = mode==='date' ? 'flex' : 'none';
+  document.getElementById('rel-bulk-actions').style.display = mode==='sprint' ? 'flex' : 'none';
+  const releasedSel = document.getElementById('rel-filter-released');
+  if(releasedSel){
+    releasedSel.disabled = (mode==='date');
+    if(mode==='date') releasedSel.value = 'yes';
+  }
+  renderReleased();
+}
+function renderReleased(){
+  const modeSel = document.getElementById('rel-mode');
+  const mode = modeSel ? modeSel.value : 'sprint';
+  const isDateMode = mode === 'date';
+  const fromSel = document.getElementById('rel-from');
+  const toSel = document.getElementById('rel-to');
+  if(!fromSel || !toSel) return;
+  const all = releasedSprintOptions();
+  if(!all.length && !isDateMode){
+    document.getElementById('rel-body').innerHTML = '<div class="empty-state">No sprints configured yet.</div>';
+    return;
+  }
+  // Populate sprint dropdowns once (or if sprint list length changed e.g. after an archive/date edit)
+  if(all.length && fromSel.options.length !== all.length){
+    const optHtml = all.map(s=>`<option value="${s.id}">Sprint ${s.num} (${s.label})</option>`).join('');
+    fromSel.innerHTML = optHtml;
+    toSel.innerHTML = optHtml;
+    // Default: current sprint (first sprint whose end >= today); fall back to last sprint
+    const today = new Date(); today.setHours(0,0,0,0);
+    let currentIdx = all.findIndex(s => new Date(s.end) >= today);
+    if(currentIdx === -1) currentIdx = all.length - 1;
+    fromSel.value = all[currentIdx].id;
+    toSel.value = all[currentIdx].id;
+    // If today is the last day of the current sprint, default filter to Released; otherwise Done & not released
+    const currentSprintEnd = new Date(all[currentIdx].end); currentSprintEnd.setHours(0,0,0,0);
+    const relFilterSel = document.getElementById('rel-filter-released');
+    if(relFilterSel) relFilterSel.value = (today.getTime() === currentSprintEnd.getTime()) ? 'yes' : 'done_not_released';
+  }
+  // Default date-range inputs once (last 30 days, inclusive of today)
+  const dateFromEl = document.getElementById('rel-date-from');
+  const dateToEl = document.getElementById('rel-date-to');
+  if(dateFromEl && dateToEl && !dateFromEl.value && !dateToEl.value){
+    const t = new Date();
+    const from = new Date(); from.setDate(t.getDate()-30);
+    dateToEl.value = todayISO();
+    dateFromEl.value = from.getFullYear()+'-'+String(from.getMonth()+1).padStart(2,'0')+'-'+String(from.getDate()).padStart(2,'0');
+  }
+  // Populate person filter once
+  const ownerSel = document.getElementById('rel-filter-owner');
+  if(ownerSel && ownerSel.options.length <= 1){
+    ownerSel.innerHTML = '<option value="">All owners</option>' + TIMELINE_OWNERS.map(o=>`<option value="${o.id}">${esc(o.label)}</option>`).join('');
+  }
+  // Populate theme filter — rebuilt each render (in case themes were added/renamed), preserving selection
+  const themeSel = document.getElementById('rel-filter-theme');
+  if(themeSel){
+    const prevThemeVal = themeSel.value;
+    const themeMap = new Map(); // canonical id -> title
+    themes.forEach(t=>{
+      const c = canonicalTheme(t.id);
+      if(c && !themeMap.has(c.id)) themeMap.set(c.id, c.title);
+    });
+    const themeOpts = [...themeMap.entries()].sort((a,b)=>a[1].localeCompare(b[1]));
+    themeSel.innerHTML = '<option value="">All themes</option>' + themeOpts.map(([id,title])=>`<option value="${id}">${esc(title)}</option>`).join('');
+    if([...themeSel.options].some(o=>o.value===prevThemeVal)) themeSel.value = prevThemeVal;
+  }
+
+  let rangeTicketsAll, sprintGoalsAvailable = [];
+  if(isDateMode){
+    const fromDate = dateFromEl ? dateFromEl.value : '';
+    const toDate = dateToEl ? dateToEl.value : '';
+    rangeTicketsAll = tickets.filter(t => t.released && t.releasedDate && (!fromDate || t.releasedDate >= fromDate) && (!toDate || t.releasedDate <= toDate));
+    document.getElementById('rel-range-label').textContent =
+      (fromDate && toDate) ? `${fromDate} → ${toDate} (released date)` : 'Pick a released date range';
+  } else {
+    let fromIdx = all.findIndex(s=>s.id===fromSel.value);
+    let toIdx = all.findIndex(s=>s.id===toSel.value);
+    if(fromIdx === -1) fromIdx = 0;
+    if(toIdx === -1) toIdx = all.length-1;
+    if(fromIdx > toIdx){ [fromIdx,toIdx] = [toIdx,fromIdx]; }
+    const rangeSprints = all.slice(fromIdx, toIdx+1);
+    const rangeIds = new Set(rangeSprints.map(s=>s.id));
+    document.getElementById('rel-range-label').textContent =
+      rangeSprints.length ? `${rangeSprints[0].label} → ${rangeSprints[rangeSprints.length-1].label} (${rangeSprints.length} sprint${rangeSprints.length===1?'':'s'})` : '';
+    rangeTicketsAll = tickets.filter(t => rangeIds.has(t.sprint));
+    sprintGoalsAvailable = rangeSprints;
+  }
+
+  const releasedCount = rangeTicketsAll.filter(t=>t.released).length;
+  const notReleasedCount = rangeTicketsAll.length - releasedCount;
+  const fReleased = isDateMode ? 'yes' : document.getElementById('rel-filter-released').value; // 'yes' | 'no' | 'done_not_released' | ''
+  const baseTickets = fReleased==='yes'              ? rangeTicketsAll.filter(t=>t.released)
+                    : fReleased==='no'               ? rangeTicketsAll.filter(t=>!t.released)
+                    : fReleased==='done_not_released' ? rangeTicketsAll.filter(t=>t.done && !t.released)
+                    : rangeTicketsAll;
+
+  const fOwner = ownerSel ? ownerSel.value : '';
+  const fTheme = themeSel ? themeSel.value : '';
+  const rangeTickets = baseTickets.filter(t=>{
+    if(fOwner && t.owner !== fOwner) return false;
+    if(fTheme && (canonicalTheme(t.themeId)?.id) !== fTheme) return false;
+    return true;
+  });
+
+  const activeOwners = TIMELINE_OWNERS.filter(o => {
+    if(fOwner && o.id !== fOwner) return false;
+    return rangeTickets.some(t=>t.owner===o.id);
+  });
+
+  // Build the export dataset for the Excel download — mirrors whatever's currently filtered/visible
+  const sprintLookup = {};
+  all.forEach(s=>{ sprintLookup[s.id] = s; });
+  relExportRows = rangeTickets.map(t=>{
+    const sp = sprintLookup[t.sprint];
+    const owner = TIMELINE_OWNERS.find(o=>o.id===t.owner);
+    const c = canonicalTheme(t.themeId);
+    return {
+      sprintNum: sp ? sp.num : '',
+      sprintLabel: sp ? sp.label : '',
+      owner: owner ? owner.label : (t.owner||''),
+      category: t.goal ? 'Goal' : 'Other',
+      theme: c ? c.title : '',
+      jira: t.jira || '',
+      title: t.title || '',
+      type: t.type || '',
+      released: t.released ? 'Yes' : 'No',
+      releasedDate: t.releasedDate || ''
+    };
+  }).sort((a,b)=> (a.sprintNum - b.sprintNum) || a.category.localeCompare(b.category) || a.theme.localeCompare(b.theme));
+
+  // Sprint goals logged on the goals board for the sprints in range — only meaningful in Sprint
+  // mode (a date range of released tickets has no associated sprint goals). Shown regardless of
+  // the type/person/released ticket filters, since these goals aren't typed tickets owned by a
+  // person — only whether they've been ticked as achieved matters.
+  const noFiltersActive = !isDateMode;
+  const allGoalsInRange = [];
+  if(noFiltersActive){
+    sprintGoalsAvailable.forEach(s=>{
+      (goalsData[s.id]||[]).forEach(g=> allGoalsInRange.push({sprint:s, goal:g}));
+    });
+  }
+  const sprintGoalsInRange = allGoalsInRange.filter(({goal})=>goal.achieved);
+
+  // Sprint goals section — shown at the top of the panel, above the summary cards. Lists every
+  // goal in the range (not just achieved ones) with a checkbox so they can be ticked off here.
+  const goalsEl = document.getElementById('rel-goals');
+  if(goalsEl){
+    if(allGoalsInRange.length){
+      let gHtml = '<div style="border:1px solid var(--border-strong);border-radius:var(--radius);overflow:hidden">';
+      gHtml += '<div style="padding:8px 12px;font-size:13px;font-weight:600;color:var(--text2);border-bottom:1px solid var(--border-strong)">Sprint goals</div>';
+      gHtml += '<div style="background:var(--surface)">';
+      allGoalsInRange.forEach(({sprint,goal})=>{
+        gHtml += `<label style="display:flex;align-items:center;gap:8px;padding:7px 12px;border-bottom:1px solid var(--border);font-size:13px;cursor:pointer"><input type="checkbox" ${goal.achieved?'checked':''} onclick="event.stopPropagation();toggleGoalAchieved('${sprint.id}','${goal.id}')" style="width:auto;cursor:pointer;flex-shrink:0" /><span style="color:var(--text3);white-space:nowrap">Sprint ${sprint.num}</span><span style="${goal.achieved?'text-decoration:line-through;opacity:.65':''}">${esc(goal.text||'')}</span></label>`;
+      });
+      gHtml += '</div></div>';
+      goalsEl.innerHTML = gHtml;
+    } else {
+      goalsEl.innerHTML = '';
+    }
+  }
+
+  // Top summary strip
+  const totalReleased = rangeTickets.filter(t=>t.released).length;
+  const totalDefects = rangeTickets.filter(t=>t.type==='defect').length;
+  const totalEnh = rangeTickets.filter(t=>t.type==='enhancement').length;
+  const totalSpikes = rangeTickets.filter(t=>t.type==='spike').length;
+  const totalGoalsTickets = rangeTickets.filter(t=>t.goal).length;
+  const statCard = (label, val, color) => `<div style="flex:1;min-width:110px;border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;background:var(--surface)"><div style="font-size:21px;font-weight:700;color:${color||'var(--text)'}">${val}</div><div style="font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;margin-top:1px">${label}</div></div>`;
+  document.getElementById('rel-summary').innerHTML =
+    `<div style="display:flex;gap:12px;flex-wrap:wrap">` +
+    statCard('Tickets released', totalReleased) +
+    statCard('Defects fixed', totalDefects, '#e24b4a') +
+    statCard('Enhancements', totalEnh, '#1d9e75') +
+    statCard('Spikes', totalSpikes, '#185fa5') +
+    statCard('Goal tickets', totalGoalsTickets, '#534ab7') +
+    statCard('Sprint goals achieved', sprintGoalsInRange.length, '#1d9e75') +
+    `</div>` +
+    (!isDateMode && fReleased==='yes' && notReleasedCount ? `<div style="font-size:12px;color:var(--text3);margin-top:8px">${notReleasedCount} ticket${notReleasedCount===1?'':'s'} in this sprint range ${notReleasedCount===1?'is':'are'} not marked Released and ${notReleasedCount===1?'is':'are'} excluded from these totals.</div>` : '');
+
+  if(!activeOwners.length){
+    document.getElementById('rel-body').innerHTML = `<div class="empty-state">No tickets found for this ${isDateMode?'released date range':'sprint range'}${(!isDateMode && fReleased==='yes' && notReleasedCount)?` (${notReleasedCount} ticket${notReleasedCount===1?'':'s'} here aren't marked Released yet)`:''}.</div>`;
+    return;
+  }
+
+  const ticketChip = (t) => {
+    const label = (t.jira ? t.jira+' — ' : '') + esc(t.title);
+    return `<div style="display:flex;align-items:center;gap:6px;font-size:15px;padding:3px 0;color:var(--text)"><input type="checkbox" ${t.released?'checked':''} onclick="event.stopPropagation();toggleTicketReleased('${t.id}')" title="${t.released?'Untick if not actually released':'Tick to mark as released'}" style="width:auto;cursor:pointer;flex-shrink:0" /><span onclick="editTicket('${t.id}')" style="cursor:pointer" title="Open ticket">${label}</span></div>`;
+  };
+
+  // Group tickets by theme (canonical, so duplicate per-sprint theme entries collapse together)
+  const groupByTheme = (list) => {
+    const themeGroups = new Map(); // key -> {title, tickets}
+    list.forEach(t=>{
+      const c = canonicalTheme(t.themeId);
+      const key = c ? c.id : '__none__';
+      const title = c ? c.title : 'No theme';
+      if(!themeGroups.has(key)) themeGroups.set(key, {title, tickets:[]});
+      themeGroups.get(key).tickets.push(t);
+    });
+    return [...themeGroups.values()].sort((a,b)=>{
+      if(a.title==='No theme') return 1;
+      if(b.title==='No theme') return -1;
+      return a.title.localeCompare(b.title);
+    });
+  };
+
+  const renderTopSection = (title, list) => {
+    if(!list.length) return '';
+    let s = `<div style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px">`;
+    s += `<div style="padding:8px 12px;border-bottom:1px solid var(--border);font-weight:700;color:var(--text);font-size:14px;background:var(--surface)">${esc(title)} <span style="color:var(--text3);font-weight:400">(${list.length})</span></div>`;
+    groupByTheme(list).forEach((g,i,arr)=>{
+      s += `<div style="padding:6px 12px 4px;font-size:12px;font-weight:600;color:var(--text3);background:var(--surface)">${esc(g.title)} <span style="font-weight:400">(${g.tickets.length})</span></div>`;
+      s += `<div style="padding:0 12px 8px;background:var(--surface)${i<arr.length-1?';border-bottom:1px solid var(--border)':''}">${g.tickets.map(t=>ticketChip(t)).join('')}</div>`;
+    });
+    s += '</div>';
+    return s;
+  };
+
+  const goalTickets = rangeTickets.filter(t=>t.goal);
+  const otherTickets = rangeTickets.filter(t=>!t.goal);
+  let html = renderTopSection('🎯 Goal tickets', goalTickets) + renderTopSection('Other tickets', otherTickets);
+  if(!html) html = '<div class="empty-state">No tickets found.</div>';
+
+  document.getElementById('rel-body').innerHTML = html;
+}
+
 function renderWorkBoard(){
   const body = document.getElementById('workboard-body');
   if(!body) return;
