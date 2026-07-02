@@ -185,6 +185,7 @@
     </div>
     <div class="form-group"><label>Detail</label><textarea id="wi-detail" placeholder="What was the task?" style="min-height:90px"></textarea></div>
     <div class="form-group"><label>Link to file <span style="font-size:11px;font-weight:400;color:var(--text3)">— optional</span></label><input type="text" id="wi-link" placeholder="https://..." /></div>
+    <div class="form-group"><label><i class="ti ti-brand-github" style="font-size:13px;margin-right:3px"></i>GitHub SQL link <span style="font-size:11px;font-weight:400;color:var(--text3)">— optional, link to the SQL used for this work</span></label><input type="text" id="wi-sql-link" placeholder="https://github.com/org/repo/blob/main/query.sql" /></div>
     <div class="modal-footer">
       <button class="btn" id="wi-delete-btn" style="margin-right:auto;color:#e24b4a;border-color:#e24b4a;display:none" onclick="deleteWorkItem()"><i class="ti ti-trash"></i> Delete</button>
       <button class="btn" onclick="closeWorkItemModal()">Cancel</button>
@@ -254,7 +255,7 @@ let deadlines = []; // [{id, title, date, sprintId, color}]
 let holidays = []; // [{id, ownerId, startDate, endDate, label}]
 let sprintOverrides = {}; // { sprintId: {start, end, label} } — persisted date edits layered onto the hardcoded sprint grid
 let hiddenSprints = []; // [sprintId, ...] — sprints hidden from the grid/nav but whose data is kept intact
-let workItems = []; // [{id, ownerId, date, timeTaken, requestor, detail, link}] — Ad-Hoc Work: out-of-sprint work log
+let workItems = []; // [{id, ownerId, date, timeTaken, requestor, detail, link, sqlLink}] — Ad-Hoc Work: out-of-sprint work log; sqlLink is a GitHub link to any SQL used
 
 
 let holCollapsed = { plan: true, nfy: true, planner: true };
@@ -3094,6 +3095,7 @@ function openWorkItemModal(id) {
   document.getElementById('wi-requestor').value = wi ? (wi.requestor||'') : '';
   document.getElementById('wi-detail').value = wi ? (wi.detail||'') : '';
   document.getElementById('wi-link').value = wi ? (wi.link||'') : '';
+  document.getElementById('wi-sql-link').value = wi ? (wi.sqlLink||'') : '';
   document.getElementById('workitem-modal').classList.add('open');
 }
 function closeWorkItemModal(){ document.getElementById('workitem-modal').classList.remove('open'); }
@@ -3105,14 +3107,15 @@ function saveWorkItemModal(){
   const requestor  = document.getElementById('wi-requestor').value.trim();
   const detail     = document.getElementById('wi-detail').value.trim();
   const link       = document.getElementById('wi-link').value.trim();
+  const sqlLink    = document.getElementById('wi-sql-link').value.trim();
   if(!date){ alert('Please set a date.'); return; }
   if(!detail){ alert('Please add some detail about the task.'); return; }
   if(isNaN(timeValue) || timeValue < 0){ alert('Please enter the amount of time taken.'); return; }
   if(_editingWorkItemId){
     const w = workItems.find(w=>w.id===_editingWorkItemId);
-    if(w){ w.ownerId=ownerId; w.date=date; w.timeValue=timeValue; w.timeUnit=timeUnit; w.requestor=requestor; w.detail=detail; w.link=link; delete w.timeTaken; }
+    if(w){ w.ownerId=ownerId; w.date=date; w.timeValue=timeValue; w.timeUnit=timeUnit; w.requestor=requestor; w.detail=detail; w.link=link; w.sqlLink=sqlLink; delete w.timeTaken; }
   } else {
-    workItems.push({id:'wi_'+Date.now(), ownerId, date, timeValue, timeUnit, requestor, detail, link});
+    workItems.push({id:'wi_'+Date.now(), ownerId, date, timeValue, timeUnit, requestor, detail, link, sqlLink});
   }
   saveWorkItems();
   closeWorkItemModal();
@@ -3522,7 +3525,7 @@ function renderWorkBoard(){
   let html = summaryHtml;
   html += '<table style="width:100%;border-collapse:collapse;font-size:13px">';
   html += '<thead><tr style="background:var(--surface2)">';
-  ['Owner','Date','Time taken','Requestor','Detail','File'].forEach(h=>{
+  ['Owner','Date','Time taken','Requestor','Detail','File','SQL'].forEach(h=>{
     html += `<th style="text-align:left;padding:8px 10px;border-bottom:1px solid var(--border-strong);font-weight:600;color:var(--text2);white-space:nowrap">${h}</th>`;
   });
   html += '<th style="border-bottom:1px solid var(--border-strong)"></th></tr></thead><tbody>';
@@ -3531,6 +3534,7 @@ function renderWorkBoard(){
     const rowBg = o ? o.bg : 'transparent';
     const ownerChip = o ? `<span style="display:inline-flex;align-items:center;gap:6px;font-weight:600;color:${o.textColor||'inherit'}"><span style="width:8px;height:8px;border-radius:50%;background:${o.barBg};display:inline-block;flex-shrink:0"></span>${esc(o.label)}</span>` : esc(w.ownerId||'');
     const linkHtml = w.link ? `<a href="${esc(w.link)}" target="_blank" rel="noopener" style="color:#534ab7;text-decoration:none" onclick="event.stopPropagation()"><i class="ti ti-link"></i> Open</a>` : '<span style="color:var(--text3)">—</span>';
+    const sqlLinkHtml = w.sqlLink ? `<a href="${esc(w.sqlLink)}" target="_blank" rel="noopener" style="color:#534ab7;text-decoration:none" onclick="event.stopPropagation()"><i class="ti ti-brand-github"></i> SQL</a>` : '<span style="color:var(--text3)">—</span>';
     html += `<tr style="cursor:pointer;background:${rowBg}" onclick="openWorkItemModal('${w.id}')">
       <td style="padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;white-space:nowrap">${ownerChip}</td>
       <td style="padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;white-space:nowrap">${esc(w.date||'')}</td>
@@ -3538,6 +3542,7 @@ function renderWorkBoard(){
       <td style="padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;white-space:nowrap">${esc(w.requestor||'')}</td>
       <td style="padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;max-width:360px;white-space:pre-wrap">${esc(w.detail||'')}</td>
       <td style="padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;white-space:nowrap">${linkHtml}</td>
+      <td style="padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;white-space:nowrap">${sqlLinkHtml}</td>
       <td style="padding:8px 10px;border-bottom:1px solid var(--border);vertical-align:top;text-align:right"><button class="icon-btn delete" onclick="event.stopPropagation();_editingWorkItemId='${w.id}';deleteWorkItem()" title="Delete"><i class="ti ti-trash"></i></button></td>
     </tr>`;
   });
