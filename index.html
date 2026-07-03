@@ -46,6 +46,9 @@
 .goal-confirm:hover{background:rgba(29,158,117,0.1) !important}
 .goal-item.goal-editing .goal-confirm{opacity:1}
 .goal-item.goal-editing .goal-delete{opacity:1}
+.theme-no-ticket-flag{pointer-events:all;display:flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:#e24b4a;color:#fff;font-size:10px;font-weight:800;line-height:1;box-shadow:0 0 0 1.5px rgba(255,255,255,0.85);cursor:pointer;flex-shrink:0}
+@media(prefers-color-scheme:dark){.theme-no-ticket-flag{box-shadow:0 0 0 1.5px rgba(28,28,26,0.9)}}[data-theme="dark"] .theme-no-ticket-flag{box-shadow:0 0 0 1.5px rgba(28,28,26,0.9)}
+.theme-bar.has-empty-sprint{box-shadow:inset 0 0 0 1.5px #e24b4a}
 .goal-dragging{opacity:.4}
 .goal-drag-over{background:var(--cat-dash-bg) !important;box-shadow:inset 0 2px 0 #534ab7}
 @media(prefers-color-scheme:dark){.goal-drag-over{background:#3c3489 !important}}[data-theme="dark"] .goal-drag-over{background:#3c3489 !important} </style>
@@ -1000,6 +1003,44 @@ const SUBCATS = [
 const TIMELINE_OWNERS = OWNERS.filter(o => o.id !== 'lorna' && o.id !== 'bank');
 // save() defined above as async
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+// Returns a Set of sprint ids covering "3 sprints in advance": the current sprint (the
+// first whose end date hasn't passed) plus the following two. Flags for sprints outside
+// this window are suppressed to keep the view focused on the near-term planning horizon.
+function nearTermSprintIds() {
+  const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+  const today = new Date(); today.setHours(0,0,0,0);
+  let currentIdx = allSprints.findIndex(x => new Date(x.end) >= today);
+  if (currentIdx === -1) currentIdx = allSprints.length - 1;
+  return new Set(allSprints.slice(currentIdx, currentIdx + 3).map(s => s.id));
+}
+// Returns true if theme `themeId` has at least one ticket assigned to it in sprint `sprintId`.
+function themeSprintHasTickets(themeId, sprintId) {
+  return tickets.some(tk => tk.themeId === themeId && tk.sprint === sprintId);
+}
+// Builds overlay markup flagging, for each visible sprint column a theme bar spans, whether
+// that specific sprint has zero tickets assigned to the theme. One small badge per empty
+// sprint column, layered above the theme bar (higher z-index) so it reads per-sprint even
+// though the bar itself is one continuous element spanning multiple grid columns.
+// Skips themes whose title mentions "Planning", and only checks the next 3 sprints
+// (current sprint + the following two) so older/far-future sprints aren't flagged.
+function renderThemeNoTicketFlags(rowNum, th, visStart, visEnd, sprints, topOffset, LANE_H) {
+  if (/planning/i.test(th.title||'')) return '';
+  const nearTerm = nearTermSprintIds();
+  let out = '';
+  for (let ci = visStart; ci <= visEnd; ci++) {
+    const sp = sprints[ci];
+    if (!sp) continue;
+    if (!nearTerm.has(sp.id)) continue;
+    if (themeSprintHasTickets(th.id, sp.id)) continue;
+    const col = 2 + ci;
+    out += `<div style="grid-row:${rowNum};grid-column:${col};z-index:4;pointer-events:none;align-self:start;padding-top:${topOffset}px;">
+      <div style="height:${LANE_H}px;display:flex;align-items:center;justify-content:flex-end;padding-right:3px;">
+        <span class="theme-no-ticket-flag" title="Sprint ${sp.num}: no tickets assigned to &quot;${esc(th.title)}&quot; yet" onclick="event.stopPropagation();editTheme('${th.id}')">!</span>
+      </div>
+    </div>`;
+  }
+  return out;
+}
 // Initials shown on holiday bars. Hardcoded per-person (first+last initial) rather than
 // derived from OWNERS.label, since OWNERS only stores first names — there's no surname
 // field to derive "JB"/"SF"/etc from automatically.
@@ -1402,6 +1443,7 @@ function renderTimeline(gridId, allSprints, tabKey){
             </span>
           </div>
         </div>`;
+        html += renderThemeNoTicketFlags(rowNum, th, visStart, visEnd, sprints, topOffset, LANE_H);
       });
     });
 
@@ -1516,6 +1558,7 @@ function renderTimeline(gridId, allSprints, tabKey){
             </span>
           </div>
         </div>`;
+        html += renderThemeNoTicketFlags(unknownRowNum, th, visStart, visEnd, sprints, topOffset, LANE_H);
       });
     });
   }
