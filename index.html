@@ -1017,29 +1017,24 @@ function nearTermSprintIds() {
 function themeSprintHasTickets(themeId, sprintId) {
   return tickets.some(tk => tk.themeId === themeId && tk.sprint === sprintId);
 }
-// Builds overlay markup flagging, for each visible sprint column a theme bar spans, whether
-// that specific sprint has zero tickets assigned to the theme. One small badge per empty
-// sprint column, layered above the theme bar (higher z-index) so it reads per-sprint even
-// though the bar itself is one continuous element spanning multiple grid columns.
+// Builds an inline "!" badge to sit right next to a theme's title text, flagging whether
+// any near-term visible sprint that the bar spans has zero tickets assigned to the theme.
 // Skips themes whose title mentions "Planning", and only checks the next 3 sprints
 // (current sprint + the following two) so older/far-future sprints aren't flagged.
-function renderThemeNoTicketFlags(rowNum, th, visStart, visEnd, sprints, topOffset, LANE_H) {
+function themeNoTicketInlineFlag(th, visStart, visEnd, sprints) {
   if (/planning/i.test(th.title||'')) return '';
   const nearTerm = nearTermSprintIds();
-  let out = '';
+  const missing = [];
   for (let ci = visStart; ci <= visEnd; ci++) {
     const sp = sprints[ci];
     if (!sp) continue;
     if (!nearTerm.has(sp.id)) continue;
     if (themeSprintHasTickets(th.id, sp.id)) continue;
-    const col = 2 + ci;
-    out += `<div style="grid-row:${rowNum};grid-column:${col};z-index:4;pointer-events:none;align-self:start;padding-top:${topOffset}px;">
-      <div style="height:${LANE_H}px;display:flex;align-items:center;justify-content:flex-end;padding-right:3px;">
-        <span class="theme-no-ticket-flag" title="Sprint ${sp.num}: no tickets assigned to &quot;${esc(th.title)}&quot; yet" onclick="event.stopPropagation();editTheme('${th.id}')">!</span>
-      </div>
-    </div>`;
+    missing.push(sp.num);
   }
-  return out;
+  if (!missing.length) return '';
+  const label = missing.length === 1 ? `Sprint ${missing[0]}` : `Sprints ${missing.join(', ')}`;
+  return `<span class="theme-no-ticket-flag" style="flex-shrink:0;" title="${label}: no tickets assigned to &quot;${esc(th.title)}&quot; yet" onclick="event.stopPropagation();editTheme('${th.id}')">!</span>`;
 }
 // Initials shown on holiday bars. Hardcoded per-person (first+last initial) rather than
 // derived from OWNERS.label, since OWNERS only stores first names — there's no surname
@@ -1434,6 +1429,7 @@ function renderTimeline(gridId, allSprints, tabKey){
           " title="${esc(th.title)}" onclick="editTheme('${th.id}')">
             ${truncLeft ? `<span style="opacity:.6;font-size:10px;flex-shrink:0">◀</span>` : ''}
             <span style="overflow:hidden;text-overflow:ellipsis;min-width:0;font-size:12px;font-weight:500">${esc(th.title)}</span>
+            ${themeNoTicketInlineFlag(th, visStart, visEnd, sprints)}
             ${th.color ? `<span style="font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px;background:rgba(0,0,0,0.14);flex-shrink:0;white-space:nowrap;margin-left:2px">${esc(THEME_COLORS[th.color]?.label||th.color)}</span>` : ''}
             <span style="flex:1;min-width:4px"></span>
             ${truncRight ? `<span style="opacity:.6;font-size:10px;flex-shrink:0">▶</span>` : ''}
@@ -1443,7 +1439,6 @@ function renderTimeline(gridId, allSprints, tabKey){
             </span>
           </div>
         </div>`;
-        html += renderThemeNoTicketFlags(rowNum, th, visStart, visEnd, sprints, topOffset, LANE_H);
       });
     });
 
@@ -1549,6 +1544,7 @@ function renderTimeline(gridId, allSprints, tabKey){
             title="${esc(th.title)}" onclick="editTheme('${th.id}')">
             ${truncLeft ? `<span style="opacity:.6;font-size:10px;flex-shrink:0">◀</span>` : ''}
             <span style="overflow:hidden;text-overflow:ellipsis;min-width:0;font-size:12px;font-weight:500">${esc(th.title)}</span>
+            ${themeNoTicketInlineFlag(th, visStart, visEnd, sprints)}
             ${th.color ? `<span style="font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px;background:rgba(0,0,0,0.14);flex-shrink:0;white-space:nowrap;margin-left:2px">${esc(THEME_COLORS[th.color]?.label||th.color)}</span>` : ''}
             <span style="flex:1;min-width:4px"></span>
             ${truncRight ? `<span style="opacity:.6;font-size:10px;flex-shrink:0">▶</span>` : ''}
@@ -1558,7 +1554,6 @@ function renderTimeline(gridId, allSprints, tabKey){
             </span>
           </div>
         </div>`;
-        html += renderThemeNoTicketFlags(unknownRowNum, th, visStart, visEnd, sprints, topOffset, LANE_H);
       });
     });
   }
