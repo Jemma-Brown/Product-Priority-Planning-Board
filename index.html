@@ -52,7 +52,7 @@
 .goal-confirm:hover{background:rgba(29,158,117,0.1) !important}
 .goal-item.goal-editing .goal-confirm{opacity:1}
 .goal-item.goal-editing .goal-delete{opacity:1}
-.theme-no-ticket-flag{pointer-events:all;display:flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:#e24b4a;color:#fff;font-size:10px;font-weight:800;line-height:1;box-shadow:0 0 0 1.5px rgba(255,255,255,0.85);cursor:pointer;flex-shrink:0}
+.theme-no-ticket-flag{position:absolute;pointer-events:all;display:flex;align-items:center;justify-content:center;width:15px;height:15px;border-radius:50%;background:#e24b4a;color:#fff;font-size:10px;font-weight:800;line-height:1;box-shadow:0 0 0 1.5px rgba(255,255,255,0.85);cursor:pointer;flex-shrink:0;z-index:5}
 @media(prefers-color-scheme:dark){.theme-no-ticket-flag{box-shadow:0 0 0 1.5px rgba(28,28,26,0.9)}}[data-theme="dark"] .theme-no-ticket-flag{box-shadow:0 0 0 1.5px rgba(28,28,26,0.9)}
 .theme-bar.has-empty-sprint{box-shadow:inset 0 0 0 1.5px #e24b4a}
 .goal-dragging{opacity:.4}
@@ -1028,24 +1028,37 @@ function nearTermSprintIds() {
 function themeSprintHasTickets(themeId, sprintId) {
   return tickets.some(tk => tk.themeId === themeId && tk.sprint === sprintId);
 }
-// Builds an inline "!" badge to sit right next to a theme's title text, flagging whether
-// any near-term visible sprint that the bar spans has zero tickets assigned to the theme.
-// Skips themes whose title mentions "Planning", and only checks the next 3 sprints
-// (current sprint + the following two) so older/far-future sprints aren't flagged.
-function themeNoTicketInlineFlag(th, visStart, visEnd, sprints) {
+// Builds one "!" badge per near-term sprint segment (within the bar's visible span) that
+// has zero tickets assigned to the theme — each badge sits over its own sprint's column
+// rather than one combined badge next to the title. Skips themes whose title mentions
+// "Planning", and only checks the next 3 sprints (current sprint + the following two) so
+// older/far-future sprints aren't flagged.
+// Requires the caller's wrapper element (the one spanning grid-column colStart/colEnd) to
+// be position:relative, since each badge is positioned absolutely within it.
+function themeNoTicketFlags(th, visStart, visEnd, sprints, topOffset, laneH) {
   if (/planning/i.test(th.title||'')) return '';
   const nearTerm = nearTermSprintIds();
-  const missing = [];
+  const total = visEnd - visStart + 1;
+  if (total <= 0) return '';
+  const midY = topOffset + laneH / 2;
+  let out = '';
   for (let ci = visStart; ci <= visEnd; ci++) {
     const sp = sprints[ci];
     if (!sp) continue;
     if (!nearTerm.has(sp.id)) continue;
     if (themeSprintHasTickets(th.id, sp.id)) continue;
-    missing.push(sp.num);
+    const relIdx = ci - visStart;
+    const segRightPct = (relIdx + 1) / total * 100;
+    // Segments are equal-width fractions of the bar's span (grid columns are 1fr each),
+    // so "distance from the bar's right edge" is just 100% minus the segment's right edge.
+    // Same fixed gap on every segment so the badge sits at a consistent indent from the
+    // right edge of its sprint column — it's just that on the bar's last segment, this
+    // also happens to clear the delete (trash) icon that appears in that corner on hover.
+    const rightGapPx = 50;
+    const rightCss = `calc(${(100 - segRightPct).toFixed(4)}% + ${rightGapPx}px)`;
+    out += `<span class="theme-no-ticket-flag" style="right:${rightCss};top:${midY}px;transform:translateY(-50%);" title="Sprint ${esc(String(sp.num))}: no tickets assigned to &quot;${esc(th.title)}&quot; yet" onclick="event.stopPropagation();editTheme('${th.id}')">!</span>`;
   }
-  if (!missing.length) return '';
-  const label = missing.length === 1 ? `Sprint ${missing[0]}` : `Sprints ${missing.join(', ')}`;
-  return `<span class="theme-no-ticket-flag" style="flex-shrink:0;" title="${label}: no tickets assigned to &quot;${esc(th.title)}&quot; yet" onclick="event.stopPropagation();editTheme('${th.id}')">!</span>`;
+  return out;
 }
 // Initials shown on holiday bars. Hardcoded per-person (first+last initial) rather than
 // derived from OWNERS.label, since OWNERS only stores first names — there's no surname
@@ -1426,6 +1439,7 @@ function renderTimeline(gridId, allSprints, tabKey){
           padding-top:${topOffset}px;
           padding-left:2px;
           padding-right:2px;
+          position:relative;
         "><div class="theme-bar single" style="
             background:${bg};
             color:${txt};
@@ -1440,7 +1454,6 @@ function renderTimeline(gridId, allSprints, tabKey){
           " data-theme-id="${th.id}" onclick="editTheme('${th.id}')">
             ${truncLeft ? `<span style="opacity:.6;font-size:10px;flex-shrink:0">◀</span>` : ''}
             <span style="overflow:hidden;text-overflow:ellipsis;min-width:0;font-size:12px;font-weight:500">${esc(th.title)}</span>
-            ${themeNoTicketInlineFlag(th, visStart, visEnd, sprints)}
             ${th.color ? `<span style="font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px;background:rgba(0,0,0,0.14);flex-shrink:0;white-space:nowrap;margin-left:2px">${esc(THEME_COLORS[th.color]?.label||th.color)}</span>` : ''}
             <span style="flex:1;min-width:4px"></span>
             ${truncRight ? `<span style="opacity:.6;font-size:10px;flex-shrink:0">▶</span>` : ''}
@@ -1449,6 +1462,7 @@ function renderTimeline(gridId, allSprints, tabKey){
               <button class="icon-btn delete" onclick="event.stopPropagation();deleteTheme('${th.id}')" aria-label="Delete"><i class="ti ti-trash"></i></button>
             </span>
           </div>
+          ${themeNoTicketFlags(th, visStart, visEnd, sprints, topOffset, LANE_H)}
         </div>`;
       });
     });
@@ -1550,12 +1564,11 @@ function renderTimeline(gridId, allSprints, tabKey){
         const rLeft  = truncLeft  ? '0' : '4px';
         const rRight = truncRight ? '0' : '4px';
         const topOffset = PAD + slot.laneIdx * (LANE_H + LANE_GAP);
-        html += `<div style="grid-row:${unknownRowNum};grid-column:${colStart}/${colEnd};z-index:3;pointer-events:none;align-self:start;padding-top:${topOffset}px;padding-left:2px;padding-right:2px;">
+        html += `<div style="grid-row:${unknownRowNum};grid-column:${colStart}/${colEnd};z-index:3;pointer-events:none;align-self:start;padding-top:${topOffset}px;padding-left:2px;padding-right:2px;position:relative;">
           <div class="theme-bar single" style="background:${bg};color:${txt};border-radius:${rLeft} ${rRight} ${rRight} ${rLeft};pointer-events:all;height:${LANE_H}px;display:flex;align-items:center;gap:4px;padding:0 7px;overflow:hidden;cursor:pointer;white-space:nowrap;"
             data-theme-id="${th.id}" onclick="editTheme('${th.id}')">
             ${truncLeft ? `<span style="opacity:.6;font-size:10px;flex-shrink:0">◀</span>` : ''}
             <span style="overflow:hidden;text-overflow:ellipsis;min-width:0;font-size:12px;font-weight:500">${esc(th.title)}</span>
-            ${themeNoTicketInlineFlag(th, visStart, visEnd, sprints)}
             ${th.color ? `<span style="font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px;background:rgba(0,0,0,0.14);flex-shrink:0;white-space:nowrap;margin-left:2px">${esc(THEME_COLORS[th.color]?.label||th.color)}</span>` : ''}
             <span style="flex:1;min-width:4px"></span>
             ${truncRight ? `<span style="opacity:.6;font-size:10px;flex-shrink:0">▶</span>` : ''}
@@ -1564,6 +1577,7 @@ function renderTimeline(gridId, allSprints, tabKey){
               <button class="icon-btn delete" onclick="event.stopPropagation();deleteTheme('${th.id}')" aria-label="Delete"><i class="ti ti-trash"></i></button>
             </span>
           </div>
+          ${themeNoTicketFlags(th, visStart, visEnd, sprints, topOffset, LANE_H)}
         </div>`;
       });
     });
