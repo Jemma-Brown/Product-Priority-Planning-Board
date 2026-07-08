@@ -245,7 +245,7 @@
 <label class="ms-option" id="ref-opt-1"><input type="checkbox" value="Refinement Session 1" onchange="onRefinementLabelChange(this)" disabled> Refinement Session 1</label>
 <label class="ms-option" id="ref-opt-2"><input type="checkbox" value="Refinement Session 2" onchange="onRefinementLabelChange(this)" disabled> Refinement Session 2</label>
 <label class="ms-option" id="ref-opt-3"><input type="checkbox" value="Refinement Session 3" onchange="onRefinementLabelChange(this)" disabled> Refinement Session 3</label>
-</div></div><input type="hidden" id="tk-labels" /></div></div><div><div class="form-row"><div class="form-group"><label>Category</label><select id="tk-cat"><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><div class="form-group"><label>Owner</label><select id="tk-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option></select></div></div><div class="form-group"><label>Sprint</label><select id="tk-sprint"></select></div><div class="form-group"><label>Theme (optional)</label><div class="theme-search-wrap" id="tk-theme-wrap" style="position:relative"><input type="text" id="tk-theme-input" placeholder="Search themes…" autocomplete="off" oninput="filterThemeDropdown()" onfocus="openThemeDropdown()" style="width:100%" /><div id="tk-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:400px;overflow-y:auto"></div><input type="hidden" id="tk-theme" /></div></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-goal" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🎯 This is a goal ticket</span></label></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-done" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>✅ Done</span></label></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-released" onchange="onTkReleasedToggle()" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🚀 Released</span></label><input type="date" id="tk-released-date" style="margin-top:6px;font-size:16px;padding:5px 7px;display:none" /></div><div class="form-group"><label>Comments</label><textarea id="tk-comments" placeholder="Add notes or comments…" style="min-height:100px"></textarea></div></div></div><div class="modal-footer"><button class="btn delete" id="tk-delete-btn" onclick="deleteTicketFromModal()" style="margin-right:auto;color:#e24b4a;border-color:#e24b4a;display:none"><i class="ti ti-trash"></i> Delete ticket</button><button class="btn" onclick="closeTicketModal()">Cancel</button><button class="btn primary" onclick="saveTicket()">Save ticket</button></div></div></div><script>
+</div></div><input type="hidden" id="tk-labels" /></div></div><div><div class="form-row"><div class="form-group"><label>Category</label><select id="tk-cat"><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><div class="form-group"><label>Owner</label><select id="tk-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option></select></div></div><div class="form-group"><label>Sprint</label><select id="tk-sprint"></select><div id="tk-rollover-info" style="margin-top:6px"></div></div><div class="form-group"><label>Theme (optional)</label><div class="theme-search-wrap" id="tk-theme-wrap" style="position:relative"><input type="text" id="tk-theme-input" placeholder="Search themes…" autocomplete="off" oninput="filterThemeDropdown()" onfocus="openThemeDropdown()" style="width:100%" /><div id="tk-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:400px;overflow-y:auto"></div><input type="hidden" id="tk-theme" /></div></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-goal" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🎯 This is a goal ticket</span></label></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-done" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>✅ Done</span></label></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-released" onchange="onTkReleasedToggle()" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🚀 Released</span></label><input type="date" id="tk-released-date" style="margin-top:6px;font-size:16px;padding:5px 7px;display:none" /></div><div class="form-group"><label>Comments</label><textarea id="tk-comments" placeholder="Add notes or comments…" style="min-height:100px"></textarea></div></div></div><div class="modal-footer"><button class="btn delete" id="tk-delete-btn" onclick="deleteTicketFromModal()" style="margin-right:auto;color:#e24b4a;border-color:#e24b4a;display:none"><i class="ti ti-trash"></i> Delete ticket</button><button class="btn" onclick="closeTicketModal()">Cancel</button><button class="btn primary" onclick="saveTicket()">Save ticket</button></div></div></div><script>
 // ── SUPABASE COLLABORATIVE STORAGE ──
 const SB_URL = 'https://osrlxmkpljcfobunulot.supabase.co';
 const SB_KEY = 'sb_publishable_3jXCj52EKTGKhbQbgYeS4A_JkkSNtUX';
@@ -276,6 +276,54 @@ let viewerName = localStorage.getItem('pb_viewer') || null; // non-owner viewer
 function isViewer(){ return !currentUser && !!viewerName; }
 function canEdit(){ return !!currentUser; }
 let editingThemeId = null, editingTicketId = null;
+
+/* ── SPRINT ROLLOVER ──
+   A ticket has one "home" sprint (tk.sprint) — the sprint it is currently committed
+   to — plus an optional tk.rolloverSprints array recording every earlier sprint it
+   was carried forward from. A ticket renders (with its full points) in its home
+   sprint AND in every sprint listed in rolloverSprints, so historical sprint totals
+   never change just because work continued into a later sprint. */
+function ticketInSprint(tk, sprintId){
+  if(!tk || !sprintId) return false;
+  if(tk.sprint === sprintId) return true;
+  return Array.isArray(tk.rolloverSprints) && tk.rolloverSprints.includes(sprintId);
+}
+function ticketSprintIds(tk){
+  const ids = [tk.sprint, ...((tk && tk.rolloverSprints) || [])].filter(Boolean);
+  return [...new Set(ids)];
+}
+function nextSprintId(sprintId){
+  const all = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+  const idx = all.findIndex(s=>s.id===sprintId);
+  if(idx===-1 || idx===all.length-1) return null;
+  return all[idx+1].id;
+}
+// Roll a ticket into targetSprintId (defaults to the next sprint after its current
+// home), leaving it visible — with full points — in the sprint it's rolling out of.
+function rollTicketForward(id, targetSprintId){
+  const tk = tickets.find(t=>t.id===id);
+  if(!tk) return;
+  const target = targetSprintId || nextSprintId(tk.sprint);
+  if(!target || target === tk.sprint) return;
+  pushUndo(`Roll "${tk.title}" into next sprint`);
+  const rollover = Array.isArray(tk.rolloverSprints) ? [...tk.rolloverSprints] : [];
+  if(!rollover.includes(tk.sprint)) rollover.push(tk.sprint);
+  const updated = {...tk, sprint: target, rolloverSprints: rollover};
+  tickets = tickets.map(t=>t.id===id ? updated : t);
+  saveOne('ticket', updated);
+  render();
+}
+// Remove a single past-sprint "echo" from a ticket (e.g. it was dragged by mistake).
+// Does not touch tk.sprint — only stops it showing in that one earlier sprint.
+function removeRolloverLink(id, sprintId){
+  const tk = tickets.find(t=>t.id===id);
+  if(!tk || !Array.isArray(tk.rolloverSprints)) return;
+  pushUndo(`Unlink rollover for "${tk.title}"`);
+  const updated = {...tk, rolloverSprints: tk.rolloverSprints.filter(s=>s!==sprintId)};
+  tickets = tickets.map(t=>t.id===id ? updated : t);
+  saveOne('ticket', updated);
+  render();
+}
 
 /* ── UNDO STACK ── */
 const UNDO_MAX = 30;
@@ -522,6 +570,13 @@ async function archiveSprint(sid, hasData) {
   const toDeleteTickets = tickets.filter(t => t.sprint===sid);
   for(const t of toDeleteTickets) await deleteOne('ticket', t.id);
   tickets = tickets.filter(t => t.sprint!==sid);
+  // Any surviving ticket that had rolled over FROM this sprint loses that echo link
+  const toCleanRollover = tickets.filter(t => Array.isArray(t.rolloverSprints) && t.rolloverSprints.includes(sid));
+  for(const t of toCleanRollover){
+    const updated = {...t, rolloverSprints: t.rolloverSprints.filter(s=>s!==sid)};
+    tickets = tickets.map(x=>x.id===t.id ? updated : x);
+    await saveOne('ticket', updated);
+  }
   // Remove sprint from themes (if it's the only sprint, delete theme; else clamp)
   const toDeleteThemes = themes.filter(t => t.startSprint===sid && t.endSprint===sid);
   for(const t of toDeleteThemes) await deleteOne('theme', t.id);
@@ -1026,7 +1081,7 @@ function nearTermSprintIds() {
 }
 // Returns true if theme `themeId` has at least one ticket assigned to it in sprint `sprintId`.
 function themeSprintHasTickets(themeId, sprintId) {
-  return tickets.some(tk => tk.themeId === themeId && tk.sprint === sprintId);
+  return tickets.some(tk => tk.themeId === themeId && ticketInSprint(tk, sprintId));
 }
 // Builds one "!" badge per near-term sprint segment (within the bar's visible span) that
 // has zero tickets assigned to the theme — each badge sits over its own sprint's column
@@ -1601,7 +1656,7 @@ function renderDetail(containerId, sprints, tabKey){
   if(!sid){container.innerHTML='';return;}
   const sprint = sprints.find(s=>s.id===sid);
   if(!sprint){container.innerHTML='';return;}
-  const sprintTickets = tickets.filter(t=>t.sprint===sid);
+  const sprintTickets = tickets.filter(t=>ticketInSprint(t,sid));
   // capData loaded from shared storage
   const capKey = sid;
   const totalCapacity = capData[capKey] !== undefined ? Number(capData[capKey]) : null;
@@ -1746,7 +1801,7 @@ function renderDetail(containerId, sprints, tabKey){
             } else {
               html += `<div style="width:100%;font-size:9px;font-weight:600;color:var(--text);padding:4px 2px 1px;font-style:italic">No Theme Identified</div>`;
             }
-            groupTks.forEach(tk => { html += ticketCard(tk); });
+            groupTks.forEach(tk => { html += ticketCard(tk, sid); });
           });
           html += `<div class="empty-state" style="width:100%;padding:3px;font-size:13px" onclick="openTicketModal('${o.id}','${sid}','${sc.id}')">+ add</div>`;
         }
@@ -1976,8 +2031,25 @@ function render(){
 }
 /* ── SETTINGS ── */
 function toggleSettings(){document.getElementById('settings-pop').classList.toggle('open')}
-function ticketCard(tk){
+function ticketCard(tk, ctxSprintId){
   const jLink = jiraLink(tk);
+  // Rollover context: is this occurrence of the card a historical "echo" (the ticket has
+  // since moved on to a later sprint), or is it the current home showing it was rolled
+  // forward from somewhere earlier?
+  const isRollEcho = !!ctxSprintId && ctxSprintId !== tk.sprint && Array.isArray(tk.rolloverSprints) && tk.rolloverSprints.includes(ctxSprintId);
+  const hasRollHistory = !ctxSprintId || ctxSprintId === tk.sprint
+    ? (Array.isArray(tk.rolloverSprints) && tk.rolloverSprints.length > 0)
+    : false;
+  const canRollForward = !isRollEcho && !!nextSprintId(tk.sprint);
+  const rolloverBadge = isRollEcho
+    ? `<span class="goal-flag" style="background:var(--cat-webi-bg);border-color:var(--cat-webi);color:var(--cat-webi)" title="This ticket rolled forward into a later sprint — shown here so this sprint's points stay accurate">↪ Rolled fwd</span>`
+    : (hasRollHistory ? `<span class="goal-flag" style="background:var(--cat-data-bg);border-color:var(--cat-data);color:var(--cat-data)" title="Rolled over from an earlier sprint — still shown there too">↩ Rolled over</span>` : '');
+  const rollBtn = canRollForward
+    ? `<button onclick="event.stopPropagation();rollTicketForward('${tk.id}')" title="Roll into next sprint (stays here too)" style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border-strong);background:transparent;color:var(--text3);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;padding:0;flex-shrink:0"><i class="ti ti-arrow-forward-up" style="font-size:11px"></i></button>`
+    : '';
+  const unlinkBtn = isRollEcho && ctxSprintId
+    ? `<button onclick="event.stopPropagation();removeRolloverLink('${tk.id}','${ctxSprintId}')" title="Remove this rollover link (doesn't delete the ticket)" style="width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border-strong);background:transparent;color:var(--text3);display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;padding:0;flex-shrink:0">✕</button>`
+    : '';
   const priorityLabel = {
     'must-do':'Must Do','high':'High','medium':'Medium','low':'Low','bau':'BAU'
   }[tk.priority] || '';
@@ -2023,7 +2095,7 @@ function ticketCard(tk){
     style="background:${doneCardBg};border-color:${doneCardBorder};cursor:pointer;${doneOverlay}">
     <div class="ticket-top" style="flex:1;overflow:hidden">
       <div class="ticket-title" style="color:${doneCardText};${isDone?'text-decoration:line-through;opacity:.7;':''}">${esc(tk.title)}</div>
-      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0">${jLink}${goalBadge}</div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0">${jLink}${goalBadge}${rolloverBadge}</div>
     </div>
     <div style="flex-shrink:0;display:flex;flex-direction:column;gap:1px">
       ${epicBadge}
@@ -2037,6 +2109,7 @@ function ticketCard(tk){
         <div style="display:flex;align-items:center;gap:5px;flex-shrink:0">
           ${commentIcon}
           <span style="font-size:11px;font-weight:700;color:#534ab7;width:20px;height:20px;border-radius:50%;border:1.5px solid #534ab7;display:inline-flex;align-items:center;justify-content:center">${tk.points||''}</span>
+          ${rollBtn}${unlinkBtn}
           <button onclick="event.stopPropagation();toggleTicketDone('${tk.id}')" title="${isDone?'Mark as not done':'Mark as done'}"
             style="width:20px;height:20px;border-radius:50%;border:1.5px solid ${isDone?'#1d9e75':'var(--border-strong)'};background:${isDone?'#1d9e75':'transparent'};color:${isDone?'#fff':'var(--text3)'};display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:11px;padding:0;flex-shrink:0;transition:all .15s">✓</button>
         </div>
@@ -2178,6 +2251,7 @@ function openTicketModal(owner,sprint,cat){
   document.getElementById('tk-owner').value=owner||(currentUser||'george');
   const defSprint = sprint || selectedSprint[activeTab] || (activeTab==='nfy'?'s119':'s105');
   popSprintOpts('tk-sprint',defSprint,true);
+  document.getElementById('tk-rollover-info').innerHTML='';
   populateThemeSelect();
   document.getElementById('ticket-modal').classList.add('open');
   setTimeout(()=>document.getElementById('tk-jira').focus(),50);
@@ -2203,8 +2277,33 @@ function editTicket(id){
   document.getElementById('tk-cat').value=t.cat;
   document.getElementById('tk-owner').value=t.owner;
   popSprintOpts('tk-sprint',t.sprint,true);
+  renderTicketRolloverInfo(t);
   populateThemeSelect(t.themeId);
   document.getElementById('ticket-modal').classList.add('open');
+}
+// Shows this ticket's rollover history in the modal (which past sprints it's also
+// showing in) plus a quick "roll into next sprint" action.
+function renderTicketRolloverInfo(t){
+  const el = document.getElementById('tk-rollover-info');
+  if(!el) return;
+  const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+  const sprintLabel = id => { const s = allSprints.find(x=>x.id===id); return s ? `Sprint ${s.num} (${s.label})` : id; };
+  const rollover = Array.isArray(t.rolloverSprints) ? t.rolloverSprints : [];
+  let html = '';
+  if(rollover.length){
+    html += `<div style="font-size:17px;color:var(--text3);margin-bottom:4px">↩ Also shown in, with full points:</div>`;
+    rollover.forEach(sid => {
+      html += `<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:18px;background:var(--surface2);border-radius:4px;padding:3px 8px;margin-bottom:3px">
+        <span>${esc(sprintLabel(sid))}</span>
+        <button type="button" class="icon-btn delete" title="Remove this rollover link" onclick="removeRolloverLink('${t.id}','${sid}');editTicket('${t.id}')"><i class="ti ti-x" style="font-size:13px"></i></button>
+      </div>`;
+    });
+  }
+  const next = nextSprintId(t.sprint);
+  if(next){
+    html += `<button type="button" class="btn sm" onclick="rollTicketForward('${t.id}');editTicket('${t.id}')" style="margin-top:2px"><i class="ti ti-arrow-forward-up"></i> Roll into ${esc(sprintLabel(next))} (keep here too)</button>`;
+  }
+  el.innerHTML = html;
 }
 // Deduplicate themes for dropdowns:
 // - themes sharing a groupId+owner collapse to the earliest segment
@@ -2466,7 +2565,9 @@ function saveTicket(){
     }
   }
   document.getElementById('tk-jira').style.borderColor='';
+  const existingTk = editingTicketId ? tickets.find(t=>t.id===editingTicketId) : null;
   const obj={
+    ...(existingTk||{}),
     id:       editingTicketId||Date.now().toString(),
     title,
     jira:     document.getElementById('tk-jira').value.trim(),
@@ -3637,13 +3738,19 @@ function plannerDropTicket(e, newSprintId, el){
   if(!tk) return;
 
   if(tk.sprint !== newSprintId){
-    // Moving between sprints
-    pushUndo(`Move "${tk.title}" to sprint`);
-    const updated = {...tk, sprint: newSprintId};
+    // Moving between sprints — treated as a rollover: the ticket's new sprint becomes
+    // its home (drives its "current" totals/capacity), but it keeps showing — at full
+    // points — in the sprint it's being dragged out of, so that sprint's history and
+    // points aren't disturbed. Use the ✕ on the dashed "echo" card, or the ticket modal,
+    // to remove a rollover link made by mistake.
+    pushUndo(`Roll "${tk.title}" to sprint`);
+    const rollover = Array.isArray(tk.rolloverSprints) ? [...tk.rolloverSprints] : [];
+    if(!rollover.includes(tk.sprint)) rollover.push(tk.sprint);
+    const updated = {...tk, sprint: newSprintId, rolloverSprints: rollover};
     tickets = tickets.map(t=>t.id===tkId ? updated : t);
     saveOne('ticket', updated);
     if(plannerOrder[tk.sprint]) plannerOrder[tk.sprint] = plannerOrder[tk.sprint].filter(id=>id!==tkId);
-    if(!plannerOrder[newSprintId]) plannerOrder[newSprintId] = tickets.filter(t=>t.sprint===newSprintId).map(t=>t.id);
+    if(!plannerOrder[newSprintId]) plannerOrder[newSprintId] = tickets.filter(t=>ticketInSprint(t,newSprintId)).map(t=>t.id);
     plannerOrder[newSprintId] = plannerOrder[newSprintId].filter(id=>id!==tkId);
     if(overTkId && overTkId !== tkId){
       const idx = plannerOrder[newSprintId].indexOf(overTkId);
@@ -3654,7 +3761,7 @@ function plannerDropTicket(e, newSprintId, el){
   } else if(overTkId && overTkId !== tkId){
     // Reordering within same sprint
     if(!plannerOrder[newSprintId]){
-      plannerOrder[newSprintId] = tickets.filter(t=>t.sprint===newSprintId).map(t=>t.id);
+      plannerOrder[newSprintId] = tickets.filter(t=>ticketInSprint(t,newSprintId)).map(t=>t.id);
     }
     const order = plannerOrder[newSprintId].filter(id=>id!==tkId);
     const insertIdx = order.indexOf(overTkId);
@@ -3875,7 +3982,7 @@ function renderPlanner(){
       <th style="padding:6px 10px;background:var(--surface2);border:1px solid var(--border-strong);font-size:13px;font-weight:700;text-align:left;white-space:nowrap;position:sticky;left:0;z-index:3;width:200px;min-width:200px">Person / Theme</th>`;
 
   allSprints.forEach(s => {
-    const sprintPts = filtered.filter(tk=>tk.sprint===s.id).reduce((sum,tk)=>sum+(parseFloat(tk.points)||0),0);
+    const sprintPts = filtered.filter(tk=>ticketInSprint(tk,s.id)).reduce((sum,tk)=>sum+(parseFloat(tk.points)||0),0);
     const sprintYear = (s.end && !s.label.includes(s.end.substring(0,4))) ? s.end.substring(0,4) : '';
     html += `<th style="padding:6px 8px;background:var(--surface2);border:1px solid var(--border-strong);font-size:11px;font-weight:700;text-align:center;width:320px;min-width:320px">
       <div style="font-size:13px">Sprint ${s.num}</div>
@@ -4045,7 +4152,7 @@ function renderPlanner(){
         </td>`;
 
       allSprints.forEach(s => {
-        const cellTks = themeFiltered.filter(tk=>tk.sprint===s.id);
+        const cellTks = themeFiltered.filter(tk=>ticketInSprint(tk,s.id));
         const cellDls = ownerDeadlines.filter(d=>d.themeId===tkId && d.sprintId===s.id);
         html += `<td style="padding:5px;background:${o.bg};border:1px solid var(--border-strong);vertical-align:top;min-height:40px"
           ondragover="event.preventDefault();this.style.outline='2px solid #534ab7'"
@@ -4086,14 +4193,25 @@ function renderPlanner(){
             const CAT_STYLES = {data:{bg:'var(--cat-data-bg)',text:'var(--cat-data)',label:'Data'},webi:{bg:'var(--cat-webi-bg)',text:'var(--cat-webi)',label:'Webi'},dashboard:{bg:'var(--cat-dash-bg)',text:'var(--cat-dash)',label:'Dash'}};
             const catStyle = CAT_STYLES[tk.cat];
             const catBadge = catStyle ? `<span style="font-size:9px;font-weight:600;padding:1px 4px;border-radius:3px;background:${catStyle.bg};color:${catStyle.text};white-space:nowrap">${catStyle.label}</span>` : '';
+            const isRollEcho = s.id !== tk.sprint && Array.isArray(tk.rolloverSprints) && tk.rolloverSprints.includes(s.id);
+            const hasRollHistory = s.id === tk.sprint && Array.isArray(tk.rolloverSprints) && tk.rolloverSprints.length > 0;
+            const rollIcon = isRollEcho
+              ? `<i class="ti ti-corner-down-right" title="Rolled forward into a later sprint — kept here so this sprint's points stay accurate" style="font-size:11px;color:var(--cat-webi);flex-shrink:0"></i>`
+              : (hasRollHistory ? `<i class="ti ti-corner-up-left" title="Rolled over from an earlier sprint" style="font-size:11px;color:var(--cat-data);flex-shrink:0"></i>` : '');
+            const plannerRollBtn = (!isRollEcho && nextSprintId(tk.sprint))
+              ? `<button onclick="event.stopPropagation();rollTicketForward('${tk.id}')" title="Roll into next sprint (stays here too)" style="border:none;background:none;color:var(--text3);cursor:pointer;padding:0;font-size:11px;flex-shrink:0;display:inline-flex"><i class="ti ti-arrow-forward-up"></i></button>`
+              : '';
+            const plannerUnlinkBtn = isRollEcho
+              ? `<button onclick="event.stopPropagation();removeRolloverLink('${tk.id}','${s.id}')" title="Remove this rollover link (doesn't delete the ticket)" style="border:none;background:none;color:var(--text3);cursor:pointer;padding:0;font-size:11px;flex-shrink:0">✕</button>`
+              : '';
             html += `<div draggable="true"
               ondragstart="event.dataTransfer.setData('text','${tk.id}');_plannerDragId='${tk.id}';this.style.opacity='0.4'"
               ondragend="this.style.opacity='';this.style.borderTop=''"
               ondragover="event.preventDefault();event.stopPropagation();_plannerOverId='${tk.id}';this.style.borderTop='2px solid #534ab7'"
               ondragleave="if(_plannerOverId==='${tk.id}'){_plannerOverId=null;}this.style.borderTop=''"
-              onclick="editTicket('${tk.id}')" style="background:${cardBg};border:0.5px solid ${cardBorder};border-radius:4px;padding:3px 5px;margin-bottom:3px;cursor:grab;display:flex;align-items:flex-start;gap:3px;justify-content:space-between;${isDone?'opacity:0.7;':''}" title="${esc(tk.title)}">
+              onclick="editTicket('${tk.id}')" style="background:${cardBg};border:0.5px ${isRollEcho?'dashed':'solid'} ${cardBorder};border-radius:4px;padding:3px 5px;margin-bottom:3px;cursor:grab;display:flex;align-items:flex-start;gap:3px;justify-content:space-between;${isDone?'opacity:0.7;':''}" title="${esc(tk.title)}">
               <span style="font-size:12px;font-weight:500;flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;color:${cardText};${isDone?'text-decoration:line-through;':''}">${esc(tk.title)}</span>
-              <div style="display:flex;align-items:flex-start;gap:2px;flex-shrink:0">${catBadge}${jira}<div style="display:flex;flex-direction:column;align-items:center;gap:1px">${pts}${plannerTypeIcon}</div></div>
+              <div style="display:flex;align-items:flex-start;gap:2px;flex-shrink:0">${rollIcon}${catBadge}${jira}${plannerRollBtn}${plannerUnlinkBtn}<div style="display:flex;flex-direction:column;align-items:center;gap:1px">${pts}${plannerTypeIcon}</div></div>
             </div>`;
           });
         }
