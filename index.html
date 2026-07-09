@@ -602,6 +602,38 @@ function visibleSprints(allSprints) {
   return allSprints.filter(s => !hidden.has(s.id));
 }
 
+// A single ticket "counts" as relevant (for Planner visibility purposes) if it's not
+// already done, AND it sits in the current sprint or later, OR in a past sprint that
+// hasn't been archived away (hiddenSprints) — checked across its home sprint plus any
+// rollover echoes.
+function ticketIsRelevant(tk){
+  if(tk.done) return false;
+  const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+  const currentIdx = allSprints.findIndex(s => sprintStatus(s) === 'current');
+  const hiddenSet = new Set(hiddenSprints || []);
+  const sprintIdx = id => allSprints.findIndex(s => s.id === id);
+  return ticketSprintIds(tk).some(sid => {
+    const idx = sprintIdx(sid);
+    if(idx === -1) return true; // not a recognised plan/nfy sprint (e.g. 'progress') — keep it
+    if(currentIdx === -1) return true; // no current sprint found — don't hide anything
+    if(idx >= currentIdx) return true; // current sprint or later
+    return !hiddenSet.has(sid); // past sprint that's still visible/unhidden
+  });
+}
+// Used by the Planner's theme filter to hide themes that have no upcoming work: a theme
+// only "counts" if it has at least one ticket in the current sprint or later, OR in a past
+// sprint that hasn't been archived away (hiddenSprints) — so unhiding an old sprint from
+// the Archive modal brings its themes back into the Planner filter too, if they have a
+// ticket there.
+function themeHasRelevantTickets(themeId){
+  if(!themeId) return false;
+  return tickets.some(tk => {
+    const cid = canonicalTheme(tk.themeId)?.id || tk.themeId;
+    if(cid !== themeId) return false;
+    return ticketIsRelevant(tk);
+  });
+}
+
 /* ── ARCHIVE MODAL ── */
 function openArchiveModal() {
   const past = pastSprints();
@@ -3329,6 +3361,35 @@ function applyViewerMode(){
   if(viewerName) setTimeout(applyViewerMode, 500);
 })();
 try{ const _existingBackup = JSON.parse(localStorage.getItem(BACKUP_LATEST_KEY)||'null'); if(_existingBackup && _existingBackup.exportedAt) updateBackupStatusLabel(_existingBackup.exportedAt); }catch(e){}
+// ── DEBUG HELPER (run from the browser console) ──
+// debugThemeVisibility("part of a theme's title") — prints every matching theme's
+// id/owner/group, every ticket the app considers linked to it, and whether the
+// Planner's "has relevant tickets" check thinks it should be visible.
+window.debugThemeVisibility = function(titleQuery){
+  const q = (titleQuery||'').trim().toLowerCase();
+  const matches = themes.filter(t => t.title.trim().toLowerCase().includes(q));
+  if(!matches.length){ console.log('No theme found matching:', titleQuery); return; }
+  matches.forEach(t => {
+    const linked = tickets.filter(tk => (canonicalTheme(tk.themeId)?.id || tk.themeId) === t.id);
+    console.log('── Theme ──', {
+      id: t.id,
+      title: t.title,
+      owner: t.owner,
+      groupId: t.groupId || null,
+      startSprint: t.startSprint,
+      endSprint: t.endSprint,
+      canonicalIdForThisEntry: canonicalTheme(t.id)?.id,
+      isThisEntryTheCanonicalOne: canonicalTheme(t.id)?.id === t.id,
+      themeHasRelevantTickets: themeHasRelevantTickets(t.id),
+      linkedTicketCount: linked.length,
+      linkedTickets: linked.map(tk => ({
+        id: tk.id, title: tk.title, owner: tk.owner, sprint: tk.sprint,
+        rolloverSprints: tk.rolloverSprints || [], done: !!tk.done,
+        storedThemeId: tk.themeId
+      }))
+    });
+  });
+};
 initDarkMode();loadData();
 setInterval(loadData, 5000);
 setInterval(() => {
@@ -4090,7 +4151,9 @@ function renderPlannerThemeDropdown(query){
   const dd = document.getElementById('planner-theme-dropdown');
   if(!dd) return;
   const q = (query||'').toLowerCase();
-  const filtered = dedupedThemes().filter(t=>!q||t.title.toLowerCase().includes(q));
+  const filtered = dedupedThemes()
+    .filter(t=>!q||t.title.toLowerCase().includes(q))
+    .filter(t=>themeHasRelevantTickets(t.id));
   filtered.sort((a,b)=>a.title.localeCompare(b.title));
   let html = `<div onclick="selectPlannerTheme('','')" style="padding:8px 12px;font-size:13px;cursor:pointer;color:var(--text3)" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background=''">All themes</div>`;
   filtered.forEach(t=>{
@@ -4148,6 +4211,12 @@ function renderPlanner(){
     if(selRefinement && !(tk.labels && tk.labels.split(',').map(l=>l.trim()).includes(selRefinement))) return false;
     if(selCat && tk.cat !== selCat) return false;
     if(selType && tk.type !== selType) return false;
+    if(tk.themeId){
+      const cid = canonicalTheme(tk.themeId)?.id || tk.themeId;
+      if(!themeHasRelevantTickets(cid)) return false;
+    } else {
+      if(!ticketIsRelevant(tk)) return false;
+    }
     return true;
   });
 
