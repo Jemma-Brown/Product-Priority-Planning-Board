@@ -132,7 +132,6 @@ body.mobile-mode .cap-input{width:44px}
     <span id="rel-range-label" style="font-size:12px;font-weight:600;color:#534ab7;background:var(--cat-dash-bg);border:0.5px solid #534ab7;border-radius:12px;padding:3px 10px;white-space:nowrap"></span>
 
     <div style="display:flex;align-items:center;gap:8px;margin-left:auto">
-      <button class="btn sm" onclick="exportReleasedXlsx()" style="white-space:nowrap"><i class="ti ti-file-spreadsheet"></i> Download Excel</button>
       <div id="rel-bulk-actions" style="display:flex;align-items:center;gap:8px">
         <button class="btn sm" onclick="openMarkReleasedModal()" style="white-space:nowrap"><i class="ti ti-rocket"></i> Mark all Released</button>
         <button class="btn sm" onclick="markRangeReleased(false)" style="white-space:nowrap"><i class="ti ti-x"></i> Unmark all</button>
@@ -146,6 +145,7 @@ body.mobile-mode .cap-input{width:44px}
     <select id="rel-filter-owner" onchange="renderReleased()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text)"><option value="">All owners</option></select>
     <select id="rel-filter-released" onchange="renderReleased()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text)"><option value="yes">Released</option><option value="no">Not released</option><option value="done_not_released" selected>Done & not released</option><option value="">All</option></select>
     <select id="rel-filter-theme" onchange="renderReleased()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);max-width:220px"><option value="">All themes</option></select>
+    <select id="rel-filter-type" onchange="renderReleased()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border);border-radius:var(--radius-sm);background:var(--surface);color:var(--text)"><option value="">All types</option><option value="defect">Defect</option><option value="enhancement">Enhancement</option><option value="spike">Spike</option></select>
   </div>
 
 </div>
@@ -2870,10 +2870,10 @@ function exportReleasedToExcel(){
   if(typeof XLSX === 'undefined'){ alert('Excel export library failed to load — check your internet connection and try again.'); return; }
   if(!relExportRows.length){ alert('No tickets to export for the current filters.'); return; }
 
-  const headers = ['Sprint #','Sprint','Owner','Category','Theme','Jira','Title','Type','Released','Released Date'];
+  const headers = ['Sprint #','Sprint','Owner','Group','Theme','Jira','Title','Type','Points','Released','Released Date'];
   const rows = relExportRows.map(r => [
-    r.sprintNum, r.sprintLabel, r.owner, r.category, r.theme, r.jira, r.title,
-    r.type ? r.type.charAt(0).toUpperCase()+r.type.slice(1) : '', r.released, r.releasedDate
+    r.sprintNum, r.sprintLabel, r.owner, r.group, r.theme, r.jira, r.title,
+    r.type ? r.type.charAt(0).toUpperCase()+r.type.slice(1) : '', r.points, r.released, r.releasedDate
   ]);
 
   const aoa = [headers, ...rows];
@@ -2885,11 +2885,21 @@ function exportReleasedToExcel(){
     return { wch: Math.min(Math.max(maxLen + 2, 10), 60) };
   });
 
-  // Bold header row + freeze it
+  // Bold header row + freeze it, and shade Goal rows so they stand out from Other
   const range = XLSX.utils.decode_range(ws['!ref']);
   for(let c = range.s.c; c <= range.e.c; c++){
     const cell = ws[XLSX.utils.encode_cell({r:0, c})];
     if(cell) cell.s = { font: { bold: true }, fill: { fgColor: { rgb: 'F1F0EC' } } };
+  }
+  const groupColIdx = headers.indexOf('Group');
+  for(let r = 0; r < rows.length; r++){
+    if(rows[r][groupColIdx] === 'Goal'){
+      for(let c = range.s.c; c <= range.e.c; c++){
+        const addr = XLSX.utils.encode_cell({r:r+1, c});
+        if(!ws[addr]) ws[addr] = { t:'z', v:'' };
+        ws[addr].s = { ...(ws[addr].s||{}), fill: { fgColor: { rgb: 'EEF5FF' } } };
+      }
+    }
   }
   ws['!freeze'] = { xSplit: 0, ySplit: 1 };
   ws['!autofilter'] = { ref: ws['!ref'] };
@@ -3788,87 +3798,7 @@ function fmtWorkItemTime(w){
   return esc(w.timeTaken||'');
 }
 /* ── RELEASED TAB ── summarises completed sprint work between two sprints, by person ── */
-function exportReleasedXlsx(){
-  const modeSel = document.getElementById('rel-mode');
-  const mode = modeSel ? modeSel.value : 'sprint';
-  const isDateMode = mode === 'date';
-  const all = releasedSprintOptions();
-  let rangeTicketsAll = [];
-  if(isDateMode){
-    const fromDate = (document.getElementById('rel-date-from')||{}).value||'';
-    const toDate   = (document.getElementById('rel-date-to')||{}).value||'';
-    rangeTicketsAll = tickets.filter(t => t.released && t.releasedDate && (!fromDate||t.releasedDate>=fromDate) && (!toDate||t.releasedDate<=toDate));
-  } else {
-    const fromSel = document.getElementById('rel-from');
-    const toSel   = document.getElementById('rel-to');
-    if(!fromSel||!toSel) return;
-    let fi = all.findIndex(s=>s.id===fromSel.value); if(fi===-1) fi=0;
-    let ti = all.findIndex(s=>s.id===toSel.value);   if(ti===-1) ti=all.length-1;
-    if(fi>ti){const tmp=fi;fi=ti;ti=tmp;}
-    const rIds = new Set(all.slice(fi,ti+1).map(s=>s.id));
-    rangeTicketsAll = tickets.filter(t=>rIds.has(t.sprint));
-  }
-  const fRel = isDateMode ? 'yes' : ((document.getElementById('rel-filter-released')||{}).value||'yes');
-  const fOwner  = (document.getElementById('rel-filter-owner')||{}).value||'';
-  const fThemeId= (document.getElementById('rel-filter-theme')||{}).value||'';
-  const base = fRel==='yes'               ? rangeTicketsAll.filter(t=>t.released)
-             : fRel==='no'                ? rangeTicketsAll.filter(t=>!t.released)
-             : fRel==='done_not_released' ? rangeTicketsAll.filter(t=>t.done && !t.released)
-             : rangeTicketsAll;
-  const filtered = base.filter(t=>{
-    if(fOwner && t.owner!==fOwner) return false;
-    if(fThemeId && (canonicalTheme(t.themeId)?.id)!==fThemeId) return false;
-    return true;
-  });
-  if(!filtered.length){ alert('No tickets to export for the current filters.'); return; }
-  const snById = {};
-  all.forEach(s=>{ snById[s.id]=s.num; });
-  const HEADERS = ['Group','Theme','Sprint','Jira','Title','Owner','Type','Points','Done','Released','Released Date'];
-  const rows = filtered.map(t=>{
-    const owner = OWNERS.find(o=>o.id===t.owner);
-    const theme = canonicalTheme(t.themeId);
-    return [
-      t.goal?'Goal':'Other',
-      theme?theme.title:'',
-      snById[t.sprint]?'Sprint '+snById[t.sprint]:(t.sprint||''),
-      t.jira||'',
-      t.title||'',
-      owner?owner.label:(t.owner||''),
-      t.type||'',
-      t.points!=null?(Number(t.points)||''):'',
-      t.done?'Yes':'No',
-      t.released?'Yes':'No',
-      t.releasedDate||''
-    ];
-  });
-  rows.sort((a,b)=>{
-    if(a[0]!==b[0]) return a[0]==='Goal'?-1:1;
-    if(a[1]!==b[1]) return a[1].localeCompare(b[1]);
-    return (a[2]||'').localeCompare(b[2]||'');
-  });
-  const wb = XLSX.utils.book_new();
-  const ws = XLSX.utils.aoa_to_sheet([HEADERS,...rows]);
-  ws['!cols']=[{wch:8},{wch:30},{wch:10},{wch:12},{wch:50},{wch:12},{wch:14},{wch:7},{wch:6},{wch:9},{wch:14}];
-  const hFill={patternType:'solid',fgColor:{rgb:'534AB7'}};
-  const hFont={bold:true,color:{rgb:'FFFFFF'},name:'Arial',sz:11};
-  const bFont={name:'Arial',sz:10};
-  const range=XLSX.utils.decode_range(ws['!ref']);
-  for(let C=range.s.c;C<=range.e.c;C++){
-    const cell=ws[XLSX.utils.encode_cell({r:0,c:C})];
-    if(cell) cell.s={fill:hFill,font:hFont,alignment:{horizontal:'center'}};
-  }
-  for(let R=1;R<=range.e.r;R++){
-    const bg=rows[R-1]?.[0]==='Goal'?'EEF5FF':'FFFFFF';
-    for(let C=0;C<=range.e.c;C++){
-      const addr=XLSX.utils.encode_cell({r:R,c:C});
-      if(!ws[addr]) ws[addr]={t:'z',v:''};
-      ws[addr].s={font:bFont,fill:{patternType:'solid',fgColor:{rgb:bg}},alignment:{horizontal:C===4?'left':'center'}};
-    }
-  }
-  ws['!freeze']={xSplit:0,ySplit:1};
-  XLSX.utils.book_append_sheet(wb,ws,'Released');
-  XLSX.writeFile(wb,'released.xlsx');
-}
+
 function releasedSprintOptions(){
   return allSprintsDeduped().slice().sort((a,b)=> a.start.localeCompare(b.start));
 }
@@ -3971,9 +3901,12 @@ function renderReleased(){
 
   const fOwner = ownerSel ? ownerSel.value : '';
   const fTheme = themeSel ? themeSel.value : '';
+  const typeSel = document.getElementById('rel-filter-type');
+  const fType = typeSel ? typeSel.value : '';
   const rangeTickets = baseTickets.filter(t=>{
     if(fOwner && t.owner !== fOwner) return false;
     if(fTheme && (canonicalTheme(t.themeId)?.id) !== fTheme) return false;
+    if(fType && t.type !== fType) return false;
     return true;
   });
 
@@ -3993,15 +3926,16 @@ function renderReleased(){
       sprintNum: sp ? sp.num : '',
       sprintLabel: sp ? sp.label : '',
       owner: owner ? owner.label : (t.owner||''),
-      category: t.goal ? 'Goal' : 'Other',
+      group: t.goal ? 'Goal' : 'Other',
       theme: c ? c.title : '',
       jira: t.jira || '',
       title: t.title || '',
       type: t.type || '',
+      points: t.points!=null ? (Number(t.points)||'') : '',
       released: t.released ? 'Yes' : 'No',
       releasedDate: t.releasedDate || ''
     };
-  }).sort((a,b)=> (a.sprintNum - b.sprintNum) || a.category.localeCompare(b.category) || a.theme.localeCompare(b.theme));
+  }).sort((a,b)=> (a.sprintNum - b.sprintNum) || a.group.localeCompare(b.group) || a.theme.localeCompare(b.theme));
 
   // Sprint goals logged on the goals board for the sprints in range — only meaningful in Sprint
   // mode (a date range of released tickets has no associated sprint goals). Shown regardless of
