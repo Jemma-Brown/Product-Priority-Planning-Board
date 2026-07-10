@@ -59,6 +59,12 @@
 .goal-drag-over{background:var(--cat-dash-bg) !important;box-shadow:inset 0 2px 0 #534ab7}
 @media(prefers-color-scheme:dark){.goal-drag-over{background:#3c3489 !important}}[data-theme="dark"] .goal-drag-over{background:#3c3489 !important}
 /* ══════════════ MOBILE MODE ══════════════ */
+.theme-section-header[draggable="true"]{cursor:grab}
+.theme-section-header[draggable="true"]:active{cursor:grabbing}
+.theme-section-header.section-over{box-shadow:inset 0 0 0 2px #1d9e75;border-radius:3px}
+.ticket-reorder-wrap{width:calc(50% - 2px);flex-shrink:0}
+.ticket-reorder-wrap .ticket{width:100% !important}
+.ticket-reorder-wrap.reorder-over{box-shadow:inset 0 0 0 2px #534ab7;border-radius:5px}
 .mobile-toggle-btn{position:relative}
 body.mobile-mode{font-size:15px}
 body.mobile-mode header{flex-wrap:wrap;padding:8px 10px;gap:6px;row-gap:6px}
@@ -84,6 +90,7 @@ body.mobile-mode .grid-resizer{display:none !important}
 body.mobile-mode .sprint-nav{padding:10px 10px 0;flex-wrap:wrap}
 body.mobile-mode .sprint-nav-btn{width:44px;height:44px;font-size:22px}
 body.mobile-mode .ticket{width:100% !important;height:auto;min-height:64px;cursor:pointer}
+body.mobile-mode .ticket-reorder-wrap{width:100% !important}
 body.mobile-mode .ticket-actions{opacity:1}
 body.mobile-mode .ticket-title{font-size:13px}
 body.mobile-mode .theme-bar{font-size:13px;padding:7px 8px;min-height:34px}
@@ -1896,6 +1903,28 @@ function renderDetail(containerId, sprints, tabKey){
     <button class="btn sm primary" onclick="openTicketModal(null,'${sid}')"><i class="ti ti-plus"></i> Add ticket</button>
   </div>`;
 
+  // ── OVERALL SPRINT PROGRESS BANNER ──
+  // Same "done points / total points" idea as the goal banner below, but across every
+  // ticket in the sprint, not just ones flagged 🎯 Goal.
+  const overallTotalPts = sprintTickets.reduce((sum,t)=>sum+(parseFloat(t.points)||0),0);
+  const overallDoneTickets = sprintTickets.filter(t=>t.done);
+  const overallDonePts = overallDoneTickets.reduce((sum,t)=>sum+(parseFloat(t.points)||0),0);
+  const overallDonePct = overallTotalPts > 0 ? Math.round(overallDonePts/overallTotalPts*100) : 0;
+  if(sprintTickets.length){
+    html += `<div style="padding:10px 16px;background:var(--surface2);border-bottom:1px solid var(--border-strong);display:flex;align-items:center;gap:12px">
+      <span style="font-size:18px;flex-shrink:0">📊</span>
+      <div style="flex:1;min-width:0">
+        <div style="display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:4px">
+          <span style="font-size:13px;font-weight:600;color:var(--text)">Overall sprint progress</span>
+          <span style="font-size:13px;font-weight:700;color:var(--text)">${overallDonePts} of ${overallTotalPts} pts done<span style="font-weight:500;opacity:.75"> (${overallDonePct}%)</span> · ${overallDoneTickets.length}/${sprintTickets.length} tickets</span>
+        </div>
+        <div style="height:6px;border-radius:3px;background:rgba(0,0,0,0.08);overflow:hidden">
+          <div style="height:100%;width:${overallDonePct}%;background:#534ab7;border-radius:3px;transition:width .2s"></div>
+        </div>
+      </div>
+    </div>`;
+  }
+
   // ── GOAL PROGRESS BANNER (top of sprint section) ──
   // Completion, not composition: of the points sitting on tickets flagged 🎯 Goal,
   // how many of those points are on tickets also marked done (tk.done, toggled via the
@@ -2016,22 +2045,29 @@ function renderDetail(containerId, sprints, tabKey){
         if(cellTk.length === 0){
           html += `<div class="empty-state" style="width:100%;padding:3px;font-size:13px" onclick="openTicketModal('${o.id}','${sid}','${sc.id}')">+ add</div>`;
         } else {
-          // Group tickets by theme
-          const grouped = [];
-          const seen = new Set();
-          cellTk.forEach(tk => {
-            const key = tk.themeId || '__none__';
-            if(!seen.has(key)){ seen.add(key); grouped.push(key); }
-          });
+          const grouped = getSortedCellThemeKeys(o.id, sid, sc.id);
           grouped.forEach(themeKey => {
-            const groupTks = cellTk.filter(tk => (tk.themeId||'__none__') === themeKey);
+            const groupTks = cellTk.filter(tk => (tk.themeId||'__none__') === themeKey)
+              .slice()
+              .sort((a,b) => (a.priorityOrder ?? 0) - (b.priorityOrder ?? 0));
             const theme = themeKey !== '__none__' ? themes.find(t=>t.id===themeKey) : null;
-            if(theme){
-              html += `<div style="width:100%;font-size:9px;font-weight:600;color:var(--text);padding:4px 2px 1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(theme.title)}">${esc(theme.title)}</div>`;
-            } else {
-              html += `<div style="width:100%;font-size:9px;font-weight:600;color:var(--text);padding:4px 2px 1px;font-style:italic">No Theme Identified</div>`;
-            }
-            groupTks.forEach(tk => { html += ticketCard(tk, sid); });
+            const sectionLabel = theme ? esc(theme.title) : 'No Theme Identified';
+            const draggableAttr = theme ? 'draggable="true"' : '';
+            const dragStartAttr = theme ? `ondragstart="event.stopPropagation();event.dataTransfer.setData('application/x-section','${themeKey}')"` : '';
+            const headTitle = theme ? 'Drag to reorder this section, or drop a ticket here to move it into this theme' : 'Tickets with no theme assigned';
+            html += `<div class="theme-section-header" ${draggableAttr} ${dragStartAttr}
+              ondragover="event.preventDefault();event.stopPropagation();this.classList.add('section-over')"
+              ondragleave="this.classList.remove('section-over')"
+              ondrop="event.preventDefault();event.stopPropagation();this.classList.remove('section-over');handleSectionDrop(event,'${themeKey}','${o.id}','${sid}','${sc.id}')"
+              style="width:100%;font-size:9px;font-weight:600;color:var(--text);padding:4px 2px 1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;${theme?'':'font-style:italic'}"
+              title="${headTitle}">${sectionLabel}</div>`;
+            groupTks.forEach(tk => {
+              html += `<div class="ticket-reorder-wrap"
+                ondragover="event.preventDefault();event.stopPropagation();this.classList.add('reorder-over')"
+                ondragleave="this.classList.remove('reorder-over')"
+                ondrop="event.preventDefault();event.stopPropagation();this.classList.remove('reorder-over');reorderTicketInGroup(event,'${tk.id}','${o.id}','${sid}','${sc.id}','${themeKey}')"
+                title="Drag another ticket from this theme onto this card to reprioritise">${ticketCard(tk, sid)}</div>`;
+            });
           });
           html += `<div class="empty-state" style="width:100%;padding:3px;font-size:13px" onclick="openTicketModal('${o.id}','${sid}','${sc.id}')">+ add</div>`;
         }
@@ -2198,6 +2234,94 @@ function dropTicket(e, newCat, sprintId, el){
   tickets = updated;
   const moved = tickets.find(t=>t.id===tkId);
   if(moved) saveOne('ticket', moved);
+  render();
+}
+// Drag a ticket onto another ticket within the same owner/sprint/category/theme group to
+// reprioritise — sets a per-group priorityOrder used to sort tickets in that theme's
+// section of the sprint. Dropping across groups (different owner/cat/theme) is ignored
+// here; that's handled by the cell-level dropTicket instead.
+function reorderTicketInGroup(e, targetTkId, ownerId, sprintId, catId, themeKey){
+  const draggedId = e.dataTransfer.getData('text');
+  if(!draggedId || draggedId === targetTkId) return;
+  const dragged = tickets.find(t=>t.id===draggedId);
+  if(!dragged) return;
+  const draggedKey = dragged.themeId || '__none__';
+  if(dragged.owner !== ownerId || dragged.sprint !== sprintId || dragged.cat !== catId || draggedKey !== themeKey) return;
+  const group = tickets
+    .filter(t => t.owner===ownerId && t.sprint===sprintId && t.cat===catId && (t.themeId||'__none__')===themeKey)
+    .sort((a,b) => (a.priorityOrder ?? 0) - (b.priorityOrder ?? 0));
+  const fromIdx = group.findIndex(t=>t.id===draggedId);
+  const toIdx = group.findIndex(t=>t.id===targetTkId);
+  if(fromIdx === -1 || toIdx === -1) return;
+  const reordered = group.slice();
+  const [moved] = reordered.splice(fromIdx, 1);
+  reordered.splice(toIdx, 0, moved);
+  const themeTitle = themeKey === '__none__' ? 'No Theme' : (themes.find(t=>t.id===themeKey)?.title || 'theme');
+  pushUndo(`Reorder tickets in "${themeTitle}"`);
+  reordered.forEach((t, i) => { t.priorityOrder = i; });
+  Promise.all(reordered.map(t => saveOne('ticket', t))).catch(err => console.error('Reorder save failed', err));
+  render();
+}
+// Returns the theme keys (theme id, or '__none__') present in one owner/sprint/category
+// cell, sorted by each theme's persisted sectionOrder ('__none__' always sorts last since
+// there's no theme record to persist an order on for it).
+function getSortedCellThemeKeys(ownerId, sprintId, catId){
+  const cellTk = tickets.filter(t => t.owner===ownerId && t.cat===catId && ticketInSprint(t, sprintId));
+  const keys = [];
+  const seen = new Set();
+  cellTk.forEach(tk => { const k = tk.themeId || '__none__'; if(!seen.has(k)){ seen.add(k); keys.push(k); } });
+  keys.sort((a,b) => {
+    if(a==='__none__') return 1;
+    if(b==='__none__') return -1;
+    const ta = themes.find(t=>t.id===a), tb = themes.find(t=>t.id===b);
+    return (ta?.sectionOrder ?? 0) - (tb?.sectionOrder ?? 0);
+  });
+  return keys;
+}
+// A drop on a theme's section header is either another section being dragged (reorder) or
+// a ticket being dragged (move it into this theme) — disambiguated by the dataTransfer type
+// used at dragstart.
+function handleSectionDrop(e, targetThemeKey, ownerId, sprintId, catId){
+  if(e.dataTransfer.types.includes('application/x-section')){
+    reorderThemeSection(e, targetThemeKey, ownerId, sprintId, catId);
+  } else {
+    moveTicketIntoTheme(e, targetThemeKey);
+  }
+}
+function reorderThemeSection(e, targetThemeKey, ownerId, sprintId, catId){
+  const draggedKey = e.dataTransfer.getData('application/x-section');
+  if(!draggedKey || draggedKey === targetThemeKey || draggedKey === '__none__') return;
+  const keys = getSortedCellThemeKeys(ownerId, sprintId, catId);
+  const fromIdx = keys.indexOf(draggedKey);
+  const toIdx = keys.indexOf(targetThemeKey);
+  if(fromIdx === -1 || toIdx === -1) return;
+  const reordered = keys.slice();
+  const [moved] = reordered.splice(fromIdx, 1);
+  reordered.splice(toIdx, 0, moved);
+  pushUndo('Reorder theme sections');
+  let i = 0;
+  reordered.forEach(k => {
+    if(k === '__none__') return;
+    const th = themes.find(t=>t.id===k);
+    if(th){ th.sectionOrder = i; i++; saveOne('theme', th); }
+  });
+  render();
+}
+// Dragging a ticket onto a different theme's section header reassigns that ticket to the
+// new theme — its badges, epic/link info, and grouping elsewhere all follow from tk.themeId,
+// so this is all that's needed to "move" it into the new theme.
+function moveTicketIntoTheme(e, targetThemeKey){
+  const tkId = e.dataTransfer.getData('text');
+  if(!tkId) return;
+  const tk = tickets.find(t=>t.id===tkId);
+  if(!tk) return;
+  const curKey = tk.themeId || '__none__';
+  if(curKey === targetThemeKey) return;
+  const newThemeId = targetThemeKey === '__none__' ? null : targetThemeKey;
+  const themeTitle = targetThemeKey === '__none__' ? 'No Theme' : (themes.find(t=>t.id===targetThemeKey)?.title || 'theme');
+  pushUndo(`Move ticket "${tk.title}" into "${themeTitle}"`);
+  tk.themeId = newThemeId;
+  saveOne('ticket', tk);
   render();
 }
 /* ── PROGRESS ── */
