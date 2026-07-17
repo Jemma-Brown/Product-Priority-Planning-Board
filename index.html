@@ -111,7 +111,7 @@ body.mobile-mode .cap-input{width:44px}
       <div id="viewer-badge" style="display:none;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--text2);background:var(--surface2);border:0.5px solid var(--border-strong);padding:4px 10px;border-radius:20px">
         👁 Viewing
         <button onclick="switchUser()" style="background:none;border:none;cursor:pointer;font-size:11px;color:#534ab7;padding:0;font-weight:600">Switch</button>
-      </div><div id="header-user-chip" style="display:flex;align-items:center;gap:6px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2);cursor:pointer" onclick="switchUser()" title="Switch user"><span id="header-user-dot" style="width:8px;height:8px;border-radius:50%;background:var(--text3);display:inline-block;flex-shrink:0"></span><span style="font-size:12px;font-weight:600;color:var(--text2)" id="header-user-name">—</span></div><div id="online-presence" style="display:flex;align-items:center;gap:4px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Who's online now"></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Last saved"><span id="last-updated-label" style="color:var(--text3)">—</span></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Changes are shared with your team in real time"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);display:inline-block;transition:background .3s"></span><span id="sync-label">Live</span></div><button class="btn sm" id="dark-toggle" onclick="toggleDarkMode()" title="Switch to dark mode"><i class="ti ti-moon"></i></button><button class="btn sm mobile-toggle-btn" id="mobile-toggle" onclick="cycleViewMode()" title="Toggle mobile view"><i class="ti ti-device-mobile" aria-hidden="true"></i> <span id="mobile-toggle-label">Auto</span></button><div class="settings-wrap" id="jira-settings-wrap"><button class="btn sm" onclick="toggleSettings()"><i class="ti ti-settings" aria-hidden="true"></i> Jira</button><div class="settings-pop" id="settings-pop"><div style="font-size:18px;font-weight:600;margin-bottom:10px;color:var(--text)">Jira settings</div><div class="form-group" style="margin-bottom:10px"><label>Base URL</label><input type="text" id="jira-url" placeholder="https://dlapiperuk.atlassian.net" style="font-size:18px;padding:5px 7px" /></div><button class="btn sm primary" onclick="saveJiraSettings()">Save</button><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Signed in as</div><div style="display:flex;align-items:center;justify-content:space-between"><span id="current-user-label" style="font-size:13px;color:var(--text2)"></span><button class="btn sm" onclick="switchUser()" style="font-size:12px;padding:3px 8px">Switch</button></div></div><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px">Backup &amp; restore</div><div style="font-size:18px;color:var(--text3);margin-bottom:8px">This browser silently mirrors the board's data every few seconds, but that copy only lives on this device. Download a backup file now and then and keep it somewhere safe (email, Drive, etc.) so the board can always be rebuilt if anything ever happens to Supabase.</div><div id="backup-status-label" style="font-size:18px;color:var(--text3);margin-bottom:8px">Last local backup: —</div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn sm" onclick="downloadBackupNow()"><i class="ti ti-download"></i> Download backup</button><button class="btn sm" onclick="triggerRestoreFilePicker()"><i class="ti ti-upload"></i> Restore from file</button></div><input type="file" id="backup-restore-input" accept="application/json,.json" style="display:none" onchange="restoreBackupFile(this)" /></div><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px">Bookmarklet</div><div style="font-size:18px;color:var(--text3);margin-bottom:8px">Drag this to your bookmarks bar. Click it on any Jira ticket to push it straight into this board.</div><a id="bookmarklet-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:var(--cat-dash-bg);color:#26215c;border:1px solid #534ab7;border-radius:5px;font-size:19px;font-weight:600;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bookmark" style="font-size:19px"></i> Send to Board </a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the code</button> and create a bookmark manually.</div><div id="bookmarklet-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div><div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.1)"><div style="font-size:18px;color:var(--text3);margin-bottom:6px">Not picking up all fields? Drag this debug bookmarklet to your bookmarks bar and click it on a Jira ticket to see exactly what the scraper finds:</div><a id="bookmarklet-debug-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:var(--surface2);color:var(--text2);border:1px solid var(--border-strong);border-radius:5px;font-size:19px;font-weight:500;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bug" style="font-size:19px"></i> Debug Jira Fields</a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyDebugBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the debug code</button> and save it as a bookmark manually.</div><div id="bookmarklet-debug-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div></div></div></div></div><button class="btn sm" id="btn-undo" onclick="undo()" title="Undo last change (Ctrl+Z)" disabled style="opacity:0.4"><i class="ti ti-arrow-back-up" aria-hidden="true"></i> Undo</button><button class="btn sm" onclick="openArchiveModal()" title="Manage past sprints"><i class="ti ti-archive" aria-hidden="true"></i> Archive</button><button class="btn sm" onclick="openSprintDateModal()" title="Adjust sprint dates"><i class="ti ti-calendar-cog" aria-hidden="true"></i> Sprint dates</button><div class="settings-wrap" id="export-wrap"><button class="btn sm" onclick="toggleExportMenu()" title="Export the board"><i class="ti ti-download" aria-hidden="true"></i> Export <i class="ti ti-chevron-down" aria-hidden="true" style="font-size:12px"></i></button><div class="settings-pop export-pop" id="export-pop"><button class="export-menu-item" id="btn-download-pptx" onclick="downloadThemePptx();toggleExportMenu()" title="Download a PowerPoint slide showing all themes — theme names and bars are separate, editable shapes"><i class="ti ti-file-type-ppt" aria-hidden="true"></i> Download Slide (PPTX)</button><button class="export-menu-item" id="btn-download-xlsx" onclick="downloadFullExcel();toggleExportMenu()" title="Download every item from CY 2026, CY 2027 and Progress as one Excel list"><i class="ti ti-file-type-xls" aria-hidden="true"></i> Download Excel</button></div></div><button class="btn primary" id="btn-add-theme" onclick="openThemeModal()"><i class="ti ti-plus" aria-hidden="true"></i> Add theme</button><button class="btn primary" id="btn-add-ticket" onclick="openTicketModal()" style="display:none"><i class="ti ti-plus" aria-hidden="true"></i> Add ticket</button></div></header><nav class="tabs"><button class="tab-btn active" id="tab-plan" onclick="switchTab('plan')"><i class="ti ti-layout-grid" aria-hidden="true"></i> CY 2026 <span class="tab-count" id="tc-plan">0</span></button><button class="tab-btn" id="tab-progress" onclick="switchTab('progress')"><i class="ti ti-loader" aria-hidden="true"></i> Progress <span class="tab-count" id="tc-progress">0</span></button><button class="tab-btn" id="tab-nfy" onclick="switchTab('nfy')"><i class="ti ti-calendar-stats" aria-hidden="true"></i> CY 2027 <span class="tab-count" id="tc-nfy">0</span></button><button class="tab-btn" id="tab-planner" onclick="switchTab('planner')"><i class="ti ti-filter" aria-hidden="true"></i> Planner</button><button class="tab-btn" id="tab-workboard" onclick="switchTab('workboard')"><i class="ti ti-clipboard-list" aria-hidden="true"></i> Ad-Hoc Work <span class="tab-count" id="tc-workboard">0</span></button><button class="tab-btn" id="tab-released" onclick="switchTab('released')"><i class="ti ti-rocket" aria-hidden="true"></i> Released</button></nav><div class="panel active" id="panel-plan"><div class="sprint-nav" id="nav-plan"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-plan"><div class="timeline-grid" id="tl-plan"></div></div><div class="grid-resizer" id="resizer-plan" style="display:none" onmousedown="startResize(event,'plan')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-plan" class="side-detail"></div></div></div><div class="panel" id="panel-nfy"><div class="sprint-nav" id="nav-nfy"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-nfy"><div class="timeline-grid" id="tl-nfy"></div></div><div class="grid-resizer" id="resizer-nfy" style="display:none" onmousedown="startResize(event,'nfy')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-nfy" class="side-detail"></div></div></div><div class="panel" id="panel-progress"><div class="progress-wrap"><div class="progress-board" id="progress-board"></div></div></div><div class="panel" id="panel-planner"><div style="padding:16px;height:100%;box-sizing:border-box;overflow-y:auto;display:flex;flex-direction:column"><div style="display:flex;align-items:center;gap:8px;flex-wrap:nowrap;overflow-x:auto;margin-bottom:16px"><div class="form-group" style="margin:0;display:flex;align-items:center;gap:6px;flex-shrink:1;min-width:0"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Theme</label><div style="position:relative;min-width:100px;flex:1"><input type="text" id="planner-theme-input" placeholder="All themes…" autocomplete="off" oninput="filterPlannerThemeDropdown()" onfocus="openPlannerThemeDropdown()" onblur="setTimeout(closePlannerThemeDropdown,180)" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);width:100%;outline:none" /><div id="planner-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:280px;overflow-y:auto"></div><input type="hidden" id="planner-theme" /></div></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:6px;flex-shrink:1;min-width:0"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Person</label><select id="planner-owner" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All people</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:6px;flex-shrink:1;min-width:0"><label style="font-size:13px;font-weight:600;white-space:nowrap">Status Label</label><select id="planner-label" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All statuses</option><option value="Ticket Creation">Ticket Creation</option><option value="Ready To Refine">Ready To Refine</option><option value="Ready for Sprint">Ready for Sprint</option><option value="Ready to Test">Ready to Test</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:6px;flex-shrink:1;min-width:0"><label style="font-size:13px;font-weight:600;white-space:nowrap">Refinement</label><select id="planner-refinement" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All sessions</option><option value="Refinement Session 1">Session 1</option><option value="Refinement Session 2">Session 2</option><option value="Refinement Session 3">Session 3</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:6px;flex-shrink:1;min-width:0"><label style="font-size:13px;font-weight:600;white-space:nowrap">Category</label><select id="planner-cat" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All</option><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:6px;flex-shrink:1;min-width:0"><label style="font-size:13px;font-weight:600;white-space:nowrap">Ticket Type</label><select id="planner-type" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All types</option><option value="defect">Defect</option><option value="enhancement">Enhancement</option><option value="spike">Spike</option></select></div><label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0"><input type="checkbox" id="planner-deadlines-only" onchange="renderPlanner()" style="width:auto;cursor:pointer" /> Deadlines only</label><button class="btn sm" onclick="openDeadlineModal(null)" style="white-space:nowrap;flex-shrink:0"><i class="ti ti-calendar-plus"></i> Add Deadline</button><div style="display:flex;gap:8px;flex-wrap:nowrap;flex-shrink:0"><button class="btn sm" onclick="openHolidayModal()" style="white-space:nowrap"><i class="ti ti-beach"></i> Add Holiday</button><button class="btn sm" onclick="copyPlannerTableForTeams()" style="white-space:nowrap"><i class="ti ti-copy"></i> Teams Ticket List</button></div></div><div style="margin-bottom:16px;position:relative;max-width:440px"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;color:var(--text2)"><i class="ti ti-search" style="font-size:12px;margin-right:4px"></i>Find ticket by name or Jira key</label><input type="text" id="ticket-search-input-planner" placeholder="e.g. ISB-1234 or migrate pipeline..." autocomplete="off" oninput="renderTicketSearch('planner')" onfocus="renderTicketSearch('planner')" style="width:100%;font-size:13px;padding:6px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none" /><div id="ticket-search-results-planner" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.12);max-height:340px;overflow-y:auto;margin-top:2px"></div></div><div id="planner-nav" style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-shrink:0"></div><div id="planner-body" style="overflow:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0;"></div></div></div><div class="panel" id="panel-workboard"><div style="padding:16px;height:100%;box-sizing:border-box;overflow-y:auto;display:flex;flex-direction:column"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px"><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Owner</label><select id="wb-filter-owner" onchange="renderWorkBoard()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All owners</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap"><i class="ti ti-search" style="font-size:12px;margin-right:2px"></i>Search</label><input type="text" id="wb-search" placeholder="Search detail, requestor…" autocomplete="off" oninput="renderWorkBoard()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none;width:220px" /></div><button class="btn primary" onclick="openWorkItemModal()" style="white-space:nowrap;margin-left:auto"><i class="ti ti-plus"></i> Log work item</button></div><div id="workboard-body" style="flex:1;min-height:0;overflow:auto"></div></div></div><div class="panel" id="panel-released"><div style="padding:20px;height:100%;box-sizing:border-box;overflow-y:auto">
+      </div><div id="header-user-chip" style="display:flex;align-items:center;gap:6px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2);cursor:pointer" onclick="switchUser()" title="Switch user"><span id="header-user-dot" style="width:8px;height:8px;border-radius:50%;background:var(--text3);display:inline-block;flex-shrink:0"></span><span style="font-size:12px;font-weight:600;color:var(--text2)" id="header-user-name">—</span></div><div id="online-presence" style="display:flex;align-items:center;gap:4px;padding:4px 10px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Who's online now"></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Last saved"><span id="last-updated-label" style="color:var(--text3)">—</span></div><div style="font-size:12px;color:var(--text3);display:flex;align-items:center;gap:5px;padding:4px 8px;border:0.5px solid var(--border);border-radius:5px;background:var(--surface2)" title="Changes are shared with your team in real time"><span id="sync-dot" style="width:7px;height:7px;border-radius:50%;background:var(--text3);display:inline-block;transition:background .3s"></span><span id="sync-label">Live</span></div><button class="btn sm" id="dark-toggle" onclick="toggleDarkMode()" title="Switch to dark mode"><i class="ti ti-moon"></i></button><button class="btn sm mobile-toggle-btn" id="mobile-toggle" onclick="cycleViewMode()" title="Toggle mobile view"><i class="ti ti-device-mobile" aria-hidden="true"></i> <span id="mobile-toggle-label">Auto</span></button><div class="settings-wrap" id="jira-settings-wrap"><button class="btn sm" onclick="toggleSettings()"><i class="ti ti-settings" aria-hidden="true"></i> Jira</button><div class="settings-pop" id="settings-pop"><div style="font-size:18px;font-weight:600;margin-bottom:10px;color:var(--text)">Jira settings</div><div class="form-group" style="margin-bottom:10px"><label>Base URL</label><input type="text" id="jira-url" placeholder="https://dlapiperuk.atlassian.net" style="font-size:18px;padding:5px 7px" /></div><button class="btn sm primary" onclick="saveJiraSettings()">Save</button><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">Signed in as</div><div style="display:flex;align-items:center;justify-content:space-between"><span id="current-user-label" style="font-size:13px;color:var(--text2)"></span><button class="btn sm" onclick="switchUser()" style="font-size:12px;padding:3px 8px">Switch</button></div></div><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px">Backup &amp; restore</div><div style="font-size:18px;color:var(--text3);margin-bottom:8px">This browser silently mirrors the board's data every few seconds, but that copy only lives on this device. Download a backup file now and then and keep it somewhere safe (email, Drive, etc.) so the board can always be rebuilt if anything ever happens to Supabase.</div><div id="backup-status-label" style="font-size:18px;color:var(--text3);margin-bottom:8px">Last local backup: —</div><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn sm" onclick="downloadBackupNow()"><i class="ti ti-download"></i> Download backup</button><button class="btn sm" onclick="triggerRestoreFilePicker()"><i class="ti ti-upload"></i> Restore from file</button></div><input type="file" id="backup-restore-input" accept="application/json,.json" style="display:none" onchange="restoreBackupFile(this)" /></div><div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border)"><div style="font-size:19px;font-weight:600;color:var(--text);margin-bottom:6px">Bookmarklet</div><div style="font-size:18px;color:var(--text3);margin-bottom:8px">Drag this to your bookmarks bar. Click it on any Jira ticket to push it straight into this board.</div><a id="bookmarklet-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;background:var(--cat-dash-bg);color:#26215c;border:1px solid #534ab7;border-radius:5px;font-size:19px;font-weight:600;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bookmark" style="font-size:19px"></i> Send to Board </a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the code</button> and create a bookmark manually.</div><div id="bookmarklet-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div><div style="margin-top:10px;padding-top:10px;border-top:1px solid rgba(0,0,0,0.1)"><div style="font-size:18px;color:var(--text3);margin-bottom:6px">Not picking up all fields? Drag this debug bookmarklet to your bookmarks bar and click it on a Jira ticket to see exactly what the scraper finds:</div><a id="bookmarklet-debug-link" href="#" style="display:inline-flex;align-items:center;gap:5px;padding:4px 9px;background:var(--surface2);color:var(--text2);border:1px solid var(--border-strong);border-radius:5px;font-size:19px;font-weight:500;text-decoration:none;cursor:grab" draggable="true"><i class="ti ti-bug" style="font-size:19px"></i> Debug Jira Fields</a><div style="font-size:18px;color:var(--text3);margin-top:6px">Or <button onclick="copyDebugBookmarklet()" style="background:none;border:none;color:#534ab7;font-size:18px;cursor:pointer;padding:0;font-weight:600">copy the debug code</button> and save it as a bookmark manually.</div><div id="bookmarklet-debug-copied" style="font-size:18px;color:#1d9e75;margin-top:4px;display:none">✓ Copied!</div></div></div></div></div><button class="btn sm" id="btn-undo" onclick="undo()" title="Undo last change (Ctrl+Z)" disabled style="opacity:0.4"><i class="ti ti-arrow-back-up" aria-hidden="true"></i> Undo</button><div class="settings-wrap" id="board-settings-wrap"><button class="btn sm" onclick="toggleBoardSettingsMenu()" title="Sprint & board settings"><i class="ti ti-adjustments-horizontal" aria-hidden="true"></i> Board Settings <i class="ti ti-chevron-down" aria-hidden="true" style="font-size:12px"></i></button><div class="settings-pop export-pop" id="board-settings-pop"><button class="export-menu-item" onclick="openArchiveModal();toggleBoardSettingsMenu()" title="Manage past sprints"><i class="ti ti-archive" aria-hidden="true"></i> Archive past sprints</button><button class="export-menu-item" onclick="openSprintDateModal();toggleBoardSettingsMenu()" title="Adjust sprint dates"><i class="ti ti-calendar-cog" aria-hidden="true"></i> Sprint dates</button><button class="export-menu-item" onclick="openCalendarYearsModal();toggleBoardSettingsMenu()" title="Add or remove Calendar Year tabs"><i class="ti ti-calendar-plus" aria-hidden="true"></i> Calendar Years</button></div></div><div class="settings-wrap" id="export-wrap"><button class="btn sm" onclick="toggleExportMenu()" title="Export the board"><i class="ti ti-download" aria-hidden="true"></i> Export <i class="ti ti-chevron-down" aria-hidden="true" style="font-size:12px"></i></button><div class="settings-pop export-pop" id="export-pop"><button class="export-menu-item" id="btn-download-pptx" onclick="downloadThemePptx();toggleExportMenu()" title="Download a PowerPoint slide showing all themes — theme names and bars are separate, editable shapes"><i class="ti ti-file-type-ppt" aria-hidden="true"></i> Download Slide (PPTX)</button><button class="export-menu-item" id="btn-download-xlsx" onclick="downloadFullExcel();toggleExportMenu()" title="Download every item from every Calendar Year tab and Progress as one Excel list"><i class="ti ti-file-type-xls" aria-hidden="true"></i> Download Excel</button></div></div><button class="btn primary" id="btn-add-theme" onclick="openThemeModal()"><i class="ti ti-plus" aria-hidden="true"></i> Add theme</button><button class="btn primary" id="btn-add-ticket" onclick="openTicketModal()" style="display:none"><i class="ti ti-plus" aria-hidden="true"></i> Add ticket</button></div></header><nav class="tabs"><button class="tab-btn active" id="tab-plan" onclick="switchTab('plan')"><i class="ti ti-layout-grid" aria-hidden="true"></i> CY 2026 <span class="tab-count" id="tc-plan">0</span></button><button class="tab-btn" id="tab-progress" onclick="switchTab('progress')"><i class="ti ti-loader" aria-hidden="true"></i> Progress <span class="tab-count" id="tc-progress">0</span></button><button class="tab-btn" id="tab-nfy" onclick="switchTab('nfy')"><i class="ti ti-calendar-stats" aria-hidden="true"></i> CY 2027 <span class="tab-count" id="tc-nfy">0</span></button><button class="tab-btn" id="tab-planner" onclick="switchTab('planner')"><i class="ti ti-filter" aria-hidden="true"></i> Planner</button><button class="tab-btn" id="tab-workboard" onclick="switchTab('workboard')"><i class="ti ti-clipboard-list" aria-hidden="true"></i> Ad-Hoc Work <span class="tab-count" id="tc-workboard">0</span></button><button class="tab-btn" id="tab-released" onclick="switchTab('released')"><i class="ti ti-rocket" aria-hidden="true"></i> Released</button></nav><div class="panel active" id="panel-plan"><div class="sprint-nav" id="nav-plan"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-plan"><div class="timeline-grid" id="tl-plan"></div></div><div class="grid-resizer" id="resizer-plan" style="display:none" onmousedown="startResize(event,'plan')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-plan" class="side-detail"></div></div></div><div class="panel" id="panel-nfy"><div class="sprint-nav" id="nav-nfy"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-nfy"><div class="timeline-grid" id="tl-nfy"></div></div><div class="grid-resizer" id="resizer-nfy" style="display:none" onmousedown="startResize(event,'nfy')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-nfy" class="side-detail"></div></div></div><div class="panel" id="panel-progress"><div class="progress-wrap"><div class="progress-board" id="progress-board"></div></div></div><div class="panel" id="panel-planner"><div style="padding:16px;height:100%;box-sizing:border-box;overflow-y:auto;display:flex;flex-direction:column"><div style="display:flex;align-items:center;gap:8px;flex-wrap:nowrap;overflow-x:auto;margin-bottom:16px"><div class="form-group" style="margin:0;display:flex;align-items:center;gap:6px;flex-shrink:1;min-width:0"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Theme</label><div style="position:relative;min-width:100px;flex:1"><input type="text" id="planner-theme-input" placeholder="All themes…" autocomplete="off" oninput="filterPlannerThemeDropdown()" onfocus="openPlannerThemeDropdown()" onblur="setTimeout(closePlannerThemeDropdown,180)" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);width:100%;outline:none" /><div id="planner-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:280px;overflow-y:auto"></div><input type="hidden" id="planner-theme" /></div></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:6px;flex-shrink:1;min-width:0"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Person</label><select id="planner-owner" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All people</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:6px;flex-shrink:1;min-width:0"><label style="font-size:13px;font-weight:600;white-space:nowrap">Status Label</label><select id="planner-label" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All statuses</option><option value="Ticket Creation">Ticket Creation</option><option value="Ready To Refine">Ready To Refine</option><option value="Ready for Sprint">Ready for Sprint</option><option value="Ready to Test">Ready to Test</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:6px;flex-shrink:1;min-width:0"><label style="font-size:13px;font-weight:600;white-space:nowrap">Refinement</label><select id="planner-refinement" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All sessions</option><option value="Refinement Session 1">Session 1</option><option value="Refinement Session 2">Session 2</option><option value="Refinement Session 3">Session 3</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:6px;flex-shrink:1;min-width:0"><label style="font-size:13px;font-weight:600;white-space:nowrap">Category</label><select id="planner-cat" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All</option><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:6px;flex-shrink:1;min-width:0"><label style="font-size:13px;font-weight:600;white-space:nowrap">Ticket Type</label><select id="planner-type" onchange="renderPlanner()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All types</option><option value="defect">Defect</option><option value="enhancement">Enhancement</option><option value="spike">Spike</option></select></div><label style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0"><input type="checkbox" id="planner-deadlines-only" onchange="renderPlanner()" style="width:auto;cursor:pointer" /> Deadlines only</label><button class="btn sm" onclick="openDeadlineModal(null)" style="white-space:nowrap;flex-shrink:0"><i class="ti ti-calendar-plus"></i> Add Deadline</button><div style="display:flex;gap:8px;flex-wrap:nowrap;flex-shrink:0"><button class="btn sm" onclick="openHolidayModal()" style="white-space:nowrap"><i class="ti ti-beach"></i> Add Holiday</button><button class="btn sm" onclick="copyPlannerTableForTeams()" style="white-space:nowrap"><i class="ti ti-copy"></i> Teams Ticket List</button></div></div><div style="margin-bottom:16px;position:relative;max-width:440px"><label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px;color:var(--text2)"><i class="ti ti-search" style="font-size:12px;margin-right:4px"></i>Find ticket by name or Jira key</label><input type="text" id="ticket-search-input-planner" placeholder="e.g. ISB-1234 or migrate pipeline..." autocomplete="off" oninput="renderTicketSearch('planner')" onfocus="renderTicketSearch('planner')" style="width:100%;font-size:13px;padding:6px 10px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none" /><div id="ticket-search-results-planner" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 16px rgba(0,0,0,.12);max-height:340px;overflow-y:auto;margin-top:2px"></div></div><div id="planner-nav" style="display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-shrink:0"></div><div id="planner-body" style="overflow:auto;-webkit-overflow-scrolling:touch;flex:1;min-height:0;"></div></div></div><div class="panel" id="panel-workboard"><div style="padding:16px;height:100%;box-sizing:border-box;overflow-y:auto;display:flex;flex-direction:column"><div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px"><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap">Filter by Owner</label><select id="wb-filter-owner" onchange="renderWorkBoard()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text)"><option value="">All owners</option></select></div><div class="form-group" style="margin:0;display:flex;align-items:center;gap:8px"><label style="font-size:13px;font-weight:600;white-space:nowrap"><i class="ti ti-search" style="font-size:12px;margin-right:2px"></i>Search</label><input type="text" id="wb-search" placeholder="Search detail, requestor…" autocomplete="off" oninput="renderWorkBoard()" style="font-size:13px;padding:5px 8px;border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none;width:220px" /></div><button class="btn primary" onclick="openWorkItemModal()" style="white-space:nowrap;margin-left:auto"><i class="ti ti-plus"></i> Log work item</button></div><div id="workboard-body" style="flex:1;min-height:0;overflow:auto"></div></div></div><div class="panel" id="panel-released"><div style="padding:20px;height:100%;box-sizing:border-box;overflow-y:auto">
 <div style="border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);margin-bottom:18px;overflow:hidden">
 
   <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border)">
@@ -263,6 +263,23 @@ body.mobile-mode .cap-input{width:44px}
     <div class="modal-footer"><button class="btn" onclick="closeArchiveModal()">Close</button></div>
   </div>
 </div>
+<!-- Calendar Years Modal -->
+<div class="modal-overlay" id="calendar-years-modal" onclick="if(event.target===this)closeCalendarYearsModal()">
+  <div class="modal" style="max-width:540px">
+    <h2><span><i class="ti ti-calendar-plus" style="font-size:18px;margin-right:6px"></i>Calendar Years</span><button class="icon-btn" onclick="closeCalendarYearsModal()" aria-label="Close"><i class="ti ti-x"></i></button></h2>
+    <div style="font-size:13px;color:var(--text3);margin-bottom:10px">Each Calendar Year is its own tab, made up of 2-week sprints. A new year's sprint list always starts with whichever sprint spans 1 Jan — even if that means the two neighbouring tabs briefly share a sprint, exactly like CY 2026 and CY 2027 already do.</div>
+    <div id="calendar-years-list" style="margin-bottom:14px"></div>
+    <div style="display:flex;align-items:flex-end;gap:8px;padding-top:12px;border-top:1px solid var(--border)">
+      <div class="form-group" style="margin:0;flex:1">
+        <label>Add a Calendar Year</label>
+        <input type="number" id="cy-new-year" placeholder="e.g. 2028" style="font-size:13px" />
+      </div>
+      <button class="btn primary sm" onclick="handleAddCalendarYear()">Add tab</button>
+    </div>
+    <div id="cy-add-warning" style="display:none;font-size:12px;color:#e24b4a;margin-top:8px"></div>
+    <div class="modal-footer"><button class="btn" onclick="closeCalendarYearsModal()">Close</button></div>
+  </div>
+</div>
 <!-- User Picker -->
 <div class="modal-overlay" id="user-picker" style="z-index:300;background:rgba(0,0,0,.55)">
   <div class="modal" style="max-width:420px;text-align:center">
@@ -340,7 +357,7 @@ function ticketSprintIds(tk){
   return [...new Set(ids)];
 }
 function nextSprintId(sprintId){
-  const all = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+  const all = allSprintsRaw();
   const idx = all.findIndex(s=>s.id===sprintId);
   if(idx===-1 || idx===all.length-1) return null;
   return all[idx+1].id;
@@ -457,17 +474,24 @@ async function loadData() {
     const newSprintOverrides = JSON.parse(metaRows.find(r=>r.key==='sprintDates')?.value || '{}');
     const newHiddenSprints = JSON.parse(metaRows.find(r=>r.key==='hiddenSprints')?.value || '[]');
     const newWorkItems = JSON.parse(metaRows.find(r=>r.key==='workitems')?.value || '[]');
+    const newCustomYearDescs = JSON.parse(metaRows.find(r=>r.key==='customYears')?.value || '[]');
     const newJira  = metaRows.find(r=>r.key==='jira')?.value || 'https://dlapiperuk.atlassian.net';
     const lastUpdatedRaw = metaRows.find(r=>r.key==='last_updated')?.value;
     if(lastUpdatedRaw){ try{ const lu=JSON.parse(lastUpdatedRaw); updateLastUpdatedHeader(lu.by,lu.ts); }catch(e){} }
-    const hash = JSON.stringify([newThemes, newTickets, newCap, newGoals, newJira, newSprintOverrides, newHiddenSprints, newWorkItems]);
+    const hash = JSON.stringify([newThemes, newTickets, newCap, newGoals, newJira, newSprintOverrides, newHiddenSprints, newWorkItems, newCustomYearDescs]);
     if (hash !== _lastHash) {
       _lastHash = hash;
       themes = newThemes; tickets = newTickets; capData = newCap; goalsData = newGoals; deadlines = newDeadlines; holidays = newHolidays; jiraUrl = newJira;
       sprintOverrides = newSprintOverrides;
       hiddenSprints = newHiddenSprints;
       workItems = newWorkItems;
+      // Custom Calendar Year tabs: descriptors are persisted, but the sprint list itself
+      // is always regenerated fresh from the year number, so it can never drift out of
+      // sync with the shared grid — then any saved date corrections (sprintOverrides)
+      // get applied on top, same as the built-in years.
+      CUSTOM_YEARS = newCustomYearDescs.map(d => ({ key:d.key, year:d.year, label:d.label, sprints:_generateYearSprints(d.year) }));
       applySprintOverrides();
+      syncCustomYearTabsDOM();
       const ju = document.getElementById('jira-url');
       if (ju) ju.value = jiraUrl;
       // Don't re-render if user is actively editing a goal
@@ -523,7 +547,8 @@ function buildBackupPayload(){
     _backupVersion: 1,
     exportedAt: new Date().toISOString(),
     themes, tickets, capData, goalsData, deadlines, holidays,
-    sprintOverrides, hiddenSprints, workItems, jiraUrl
+    sprintOverrides, hiddenSprints, workItems, jiraUrl,
+    customYears: CUSTOM_YEARS.map(y=>({ key:y.key, year:y.year, label:y.label }))
   };
 }
 function updateBackupStatusLabel(ts){
@@ -595,15 +620,18 @@ async function restoreBackupFile(input){
         sbUpsert('pb_meta', {key:'hiddenSprints', value: JSON.stringify(payload.hiddenSprints||[])}),
         sbUpsert('pb_meta', {key:'workitems', value: JSON.stringify(payload.workItems||[])}),
         sbUpsert('pb_meta', {key:'jira', value: payload.jiraUrl || 'https://dlapiperuk.atlassian.net'}),
+        sbUpsert('pb_meta', {key:'customYears', value: JSON.stringify(payload.customYears||[])}),
       ]);
       themes = payload.themes; tickets = payload.tickets; capData = payload.capData||{};
       goalsData = payload.goalsData||{}; deadlines = payload.deadlines||[]; holidays = payload.holidays||[];
       sprintOverrides = payload.sprintOverrides||{}; hiddenSprints = payload.hiddenSprints||[];
       workItems = payload.workItems||[]; jiraUrl = payload.jiraUrl || jiraUrl;
+      CUSTOM_YEARS = (payload.customYears||[]).map(d => ({ key:d.key, year:d.year, label:d.label, sprints:_generateYearSprints(d.year) }));
       applySprintOverrides();
+      syncCustomYearTabsDOM();
       const ju = document.getElementById('jira-url');
       if (ju) ju.value = jiraUrl;
-      _lastHash = JSON.stringify([themes, tickets, capData, goalsData, jiraUrl, sprintOverrides, hiddenSprints, workItems]);
+      _lastHash = JSON.stringify([themes, tickets, capData, goalsData, jiraUrl, sprintOverrides, hiddenSprints, workItems, payload.customYears||[]]);
       await saveLastUpdated();
       setSyncBadge(true);
       autoBackupSnapshot();
@@ -623,7 +651,7 @@ async function restoreBackupFile(input){
 /* ── SPRINT DATE UTILS ── */
 function sprintStatus(s) {
   // Returns 'current', 'next', 'past', or 'future'
-  const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+  const allSprints = allSprintsRaw();
   const today = new Date(); today.setHours(0,0,0,0);
   const idx = allSprints.findIndex(x => x.id === s.id);
   const endDate = new Date(s.end); endDate.setHours(23,59,59,999);
@@ -635,7 +663,7 @@ function sprintStatus(s) {
   return 'future';
 }
 function pastSprints() {
-  const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+  const allSprints = allSprintsRaw();
   const today = new Date(); today.setHours(0,0,0,0);
   return allSprints.filter(s => new Date(s.end) < today);
 }
@@ -655,7 +683,7 @@ function visibleSprints(allSprints) {
 // rollover echoes.
 function ticketIsRelevant(tk){
   if(tk.done) return false;
-  const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+  const allSprints = allSprintsRaw();
   const currentIdx = allSprints.findIndex(s => sprintStatus(s) === 'current');
   const hiddenSet = new Set(hiddenSprints || []);
   const sprintIdx = id => allSprints.findIndex(s => s.id === id);
@@ -740,6 +768,151 @@ function openArchiveModal() {
   if(hideAllBtn) hideAllBtn.disabled = !activePast.length;
 }
 function closeArchiveModal() { document.getElementById('archive-modal').classList.remove('open'); }
+
+/* ── CALENDAR YEARS (dynamic year tabs) ── */
+function openCalendarYearsModal(){
+  document.getElementById('calendar-years-modal').classList.add('open');
+  document.getElementById('cy-new-year').value = '';
+  document.getElementById('cy-add-warning').style.display = 'none';
+  renderCalendarYearsModal();
+}
+function closeCalendarYearsModal(){ document.getElementById('calendar-years-modal').classList.remove('open'); }
+function renderCalendarYearsModal(){
+  const list = document.getElementById('calendar-years-list');
+  if(!list) return;
+  list.innerHTML = yearTabs().map(t=>{
+    const removeBtn = t.builtin
+      ? `<span style="font-size:11px;color:var(--text3)">Built-in</span>`
+      : `<button class="btn sm" style="color:#e24b4a;border-color:#e24b4a" onclick="handleRemoveCalendarYear('${t.key}')"><i class="ti ti-trash" style="font-size:13px"></i> Remove</button>`;
+    const span = t.sprints.length ? `${t.sprints[0].label} \u2013 ${t.sprints[t.sprints.length-1].label}` : '';
+    return `<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);gap:8px">
+      <div>
+        <span style="font-size:13px;font-weight:600;color:var(--text)">${esc(t.label)}</span>
+        <span style="font-size:12px;color:var(--text3);margin-left:8px">${esc(span)}</span>
+      </div>
+      ${removeBtn}
+    </div>`;
+  }).join('');
+}
+async function handleAddCalendarYear(){
+  const input = document.getElementById('cy-new-year');
+  const warning = document.getElementById('cy-add-warning');
+  const year = parseInt(input.value, 10);
+  warning.style.display = 'none';
+  if(!year || year < 2000 || year > 2100){
+    warning.textContent = 'Enter a valid 4-digit year.';
+    warning.style.display = '';
+    return;
+  }
+  if(yearTabs().some(t=>t.year===year)){
+    warning.textContent = `CY ${year} already has a tab.`;
+    warning.style.display = '';
+    return;
+  }
+  await addCalendarYearTab(year);
+  input.value = '';
+  renderCalendarYearsModal();
+}
+async function handleRemoveCalendarYear(key){
+  const y = CUSTOM_YEARS.find(x=>x.key===key);
+  if(!y) return;
+  const ownIds = new Set(y.sprints.map(s=>s.id));
+  const themeCount = themes.filter(t=>ownIds.has(t.startSprint)||ownIds.has(t.endSprint)).length;
+  const ticketCount = tickets.filter(t=>ownIds.has(t.sprint)).length;
+  const msg = (themeCount + ticketCount > 0)
+    ? `${y.label} still has ${themeCount} theme(s) and ${ticketCount} ticket(s) scheduled in it. Removing the tab won't delete that data — it'll just be hidden until this year is added back. Remove "${y.label}" anyway?`
+    : `Remove the "${y.label}" tab?`;
+  if(!confirm(msg)) return;
+  await removeCalendarYearTab(key);
+  renderCalendarYearsModal();
+}
+// Persists just the { key, year, label } descriptors — sprints are always regenerated
+// fresh from the year number via _generateYearSprints, so there's nothing to drift.
+async function saveCustomYears(){
+  try {
+    const payload = CUSTOM_YEARS.map(y=>({ key:y.key, year:y.year, label:y.label }));
+    await sbUpsert('pb_meta', {key:'customYears', value: JSON.stringify(payload)});
+    setSyncBadge(true);
+    saveLastUpdated();
+  } catch(e) { console.error('Save custom years failed', e); setSyncBadge(false); }
+}
+async function addCalendarYearTab(year){
+  const key = 'cy' + year;
+  const sprints = _generateYearSprints(year);
+  // If the shared boundary sprint (the one containing 1 Jan) already exists elsewhere
+  // with different dates — e.g. CY 2027's last sprint was originally trimmed to end
+  // on 31 Dec rather than running the full 14 days, since CY 2028 didn't exist yet —
+  // correct it there too via the normal sprint-date-override mechanism, so every tab
+  // agrees on that one shared sprint's dates.
+  const first = sprints[0];
+  const existingElsewhere = allSprintsRaw().find(s=>s.id===first.id);
+  if(existingElsewhere && (existingElsewhere.start!==first.start || existingElsewhere.end!==first.end)){
+    sprintOverrides[first.id] = { start:first.start, end:first.end, label:first.label };
+    applySprintOverrides();
+    await saveSprintOverrides();
+  }
+  CUSTOM_YEARS.push({ key, year, label:'CY '+year, sprints });
+  sprintOffset[key] = 0; selectedSprint[key] = null;
+  buildYearTabDOM({ key, label:'CY '+year });
+  await saveCustomYears();
+  render();
+}
+async function removeCalendarYearTab(key){
+  const idx = CUSTOM_YEARS.findIndex(y=>y.key===key);
+  if(idx===-1) return;
+  CUSTOM_YEARS.splice(idx,1);
+  delete sprintOffset[key]; delete selectedSprint[key];
+  removeYearTabDOM(key);
+  await saveCustomYears();
+  render();
+}
+// Creates the tab button + panel DOM for a custom year tab (idempotent — a no-op if
+// it already exists), inserted just before the Planner tab/panel.
+function buildYearTabDOM(tab){
+  if(document.getElementById('tab-'+tab.key)) return;
+  const nav = document.querySelector('nav.tabs');
+  const plannerBtn = document.getElementById('tab-planner');
+  if(nav && plannerBtn){
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn';
+    btn.id = 'tab-'+tab.key;
+    btn.dataset.customYear = tab.key;
+    btn.setAttribute('onclick', `switchTab('${tab.key}')`);
+    btn.innerHTML = `<i class="ti ti-calendar-stats" aria-hidden="true"></i> ${esc(tab.label)} <span class="tab-count" id="tc-${tab.key}">0</span>`;
+    nav.insertBefore(btn, plannerBtn);
+  }
+  const panelNfy = document.getElementById('panel-nfy');
+  if(panelNfy && !document.getElementById('panel-'+tab.key)){
+    const panel = document.createElement('div');
+    panel.className = 'panel';
+    panel.id = 'panel-'+tab.key;
+    panel.innerHTML = `<div class="sprint-nav" id="nav-${tab.key}"></div><div class="panel-body-row"><div class="grid-wrap" id="grid-wrap-${tab.key}"><div class="timeline-grid" id="tl-${tab.key}"></div></div><div class="grid-resizer" id="resizer-${tab.key}" style="display:none" onmousedown="startResize(event,'${tab.key}')"><div class="resizer-icon"><span>&#8249;</span><span class="resizer-pipe">|</span><span>&#8250;</span></div></div><div id="detail-${tab.key}" class="side-detail"></div></div>`;
+    panelNfy.parentNode.insertBefore(panel, panelNfy.nextSibling);
+  }
+}
+function removeYearTabDOM(key){
+  const btn = document.getElementById('tab-'+key);
+  if(btn) btn.remove();
+  const panel = document.getElementById('panel-'+key);
+  if(panel) panel.remove();
+  if(activeTab===key) switchTab('plan');
+}
+// Reconciles the tab/panel DOM with CUSTOM_YEARS — called after loading data from the
+// server, so a browser that didn't itself add/remove a year still stays in sync with
+// whatever the rest of the team has done.
+function syncCustomYearTabsDOM(){
+  const wanted = new Set(CUSTOM_YEARS.map(y=>y.key));
+  document.querySelectorAll('.tab-btn[data-custom-year]').forEach(btn=>{
+    const key = btn.dataset.customYear;
+    if(!wanted.has(key)) removeYearTabDOM(key);
+  });
+  CUSTOM_YEARS.slice().sort((a,b)=>a.year-b.year).forEach(y=>{
+    buildYearTabDOM(y);
+    if(sprintOffset[y.key]===undefined) sprintOffset[y.key]=0;
+    if(selectedSprint[y.key]===undefined) selectedSprint[y.key]=null;
+  });
+}
+
 async function hideAllPastSprints() {
   const past = pastSprints();
   const hiddenSet = new Set(hiddenSprints || []);
@@ -1061,6 +1234,67 @@ function daysBetweenISO(a, b) {
   const [by, bm, bd] = b.split('-').map(Number);
   return Math.round((Date.UTC(by, bm - 1, bd) - Date.UTC(ay, am - 1, ad)) / 86400000);
 }
+/* ── DYNAMIC CALENDAR-YEAR TABS ──
+   Users can add extra "CY XXXX" tabs beyond the built-in CY 2026 (PLAN_SPRINTS) and
+   CY 2027 (NFY_SPRINTS) from Settings → Calendar Years. Each one is generated on the
+   same continuous 14-day sprint grid the hardcoded years already sit on (anchored to
+   PLAN_SPRINTS' first sprint, s104, starting 2026-06-11), so sprint numbers/ids never
+   collide and line up exactly with the existing hardcoded sprints (num = 104 + grid
+   index). A new year's sprint list always starts with whichever sprint on that grid
+   contains 1 Jan of that year — even if that sprint's start date falls in December of
+   the previous year and technically "belongs" to the previous tab too (exactly how
+   PLAN_SPRINTS' last sprint, s118, is also NFY_SPRINTS' first sprint) — and ends with
+   the sprint containing 1 Jan of the following year, ready to be shared in turn.
+   Only { key, year, label } is persisted (in pb_meta under 'customYears'); the actual
+   sprint list is always regenerated fresh from the year number via _generateYearSprints
+   below, so it can never drift out of sync with the grid. */
+let CUSTOM_YEARS = []; // [{ key, year, label, sprints:[...] }]
+const _GRID_ANCHOR_MS = Date.UTC(2026, 5, 11); // s104 start, in UTC
+const _GRID_SPAN_MS = 14 * 24 * 60 * 60 * 1000;
+function _gridIndexForDate(y, m, d) {
+  return Math.floor((Date.UTC(y, m, d) - _GRID_ANCHOR_MS) / _GRID_SPAN_MS);
+}
+function _gridSprintISODates(k) {
+  const startMs = _GRID_ANCHOR_MS + k * _GRID_SPAN_MS;
+  const endMs = startMs + 13 * 24 * 60 * 60 * 1000;
+  return { start: new Date(startMs).toISOString().slice(0, 10), end: new Date(endMs).toISOString().slice(0, 10) };
+}
+// Builds the full sprint list for calendar year `year` on the shared grid: starts with
+// the sprint containing 1 Jan of `year` (however early it began) and ends with the
+// sprint containing 1 Jan of `year + 1`.
+function _generateYearSprints(year) {
+  let k = _gridIndexForDate(year, 0, 1);
+  const sprints = [];
+  while (true) {
+    const { start, end } = _gridSprintISODates(k);
+    const num = 104 + k;
+    sprints.push({ id: 's' + num, num, label: fmtSprintLabel(start, end), start, end });
+    if (Number(end.slice(0, 4)) > year) break; // just added the boundary sprint into next year
+    k++;
+  }
+  return sprints;
+}
+// Every sprint currently known about, across the built-in years and any custom years,
+// in one flat (non-deduped) list — the shared boundary sprint between two adjacent
+// years legitimately appears once per year it belongs to, matching how PLAN_SPRINTS
+// and NFY_SPRINTS already both list s118.
+function allSprintsRaw() {
+  return [...PLAN_SPRINTS, ...NFY_SPRINTS, ...CUSTOM_YEARS.flatMap(y => y.sprints || [])];
+}
+// Ordered list of every calendar-year tab (built-in plus custom), each described the
+// same way, for anywhere that needs to loop over "every year tab" generically.
+function yearTabs() {
+  return [
+    { key: 'plan', year: 2026, label: 'CY 2026', builtin: true, sprints: PLAN_SPRINTS },
+    { key: 'nfy', year: 2027, label: 'CY 2027', builtin: true, sprints: NFY_SPRINTS },
+    ...CUSTOM_YEARS.slice().sort((a, b) => a.year - b.year)
+  ];
+}
+function sprintsForTab(tabKey) {
+  const t = yearTabs().find(t => t.key === tabKey);
+  return t ? t.sprints : [];
+}
+
 // Snapshot the true original dates/labels exactly as hardcoded above, before any override
 // has ever been applied. applySprintOverrides() is only ever called from inside loadData(),
 // which can't run before this synchronous snapshot does — so this is guaranteed to capture
@@ -1071,10 +1305,11 @@ const ORIGINAL_SPRINT_DATES = {};
     ORIGINAL_SPRINT_DATES[s.id] = { start: s.start, end: s.end, label: s.label };
   }
 });
-// Re-applies sprintOverrides on top of the base PLAN_SPRINTS/NFY_SPRINTS arrays in place,
-// so every existing call site that reads PLAN_SPRINTS/NFY_SPRINTS directly keeps working.
+// Re-applies sprintOverrides on top of the base PLAN_SPRINTS/NFY_SPRINTS/CUSTOM_YEARS
+// sprint arrays in place, so every existing call site that reads those arrays directly
+// keeps working.
 function applySprintOverrides() {
-  [...PLAN_SPRINTS, ...NFY_SPRINTS].forEach(s => {
+  allSprintsRaw().forEach(s => {
     const o = sprintOverrides[s.id];
     if (o) { s.start = o.start; s.end = o.end; s.label = o.label; }
   });
@@ -1086,12 +1321,12 @@ async function saveSprintOverrides() {
     saveLastUpdated();
   } catch(e) { console.error('Save sprint dates failed', e); setSyncBadge(false); }
 }
-// PLAN_SPRINTS and NFY_SPRINTS share one boundary sprint (the last of PLAN_SPRINTS is
-// repeated as the first of NFY_SPRINTS) — dedupe by id, or that boundary sprint gets
+// Adjacent calendar-year tabs share one boundary sprint (the last of one year is
+// repeated as the first of the next) — dedupe by id, or that boundary sprint gets
 // processed twice as if it were two separate sprints.
 function allSprintsDeduped() {
   const seen = new Set();
-  return [...PLAN_SPRINTS, ...NFY_SPRINTS].filter(s => {
+  return allSprintsRaw().filter(s => {
     if (seen.has(s.id)) return false;
     seen.add(s.id);
     return true;
@@ -1308,7 +1543,7 @@ function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').repl
 // first whose end date hasn't passed) plus the following two. Flags for sprints outside
 // this window are suppressed to keep the view focused on the near-term planning horizon.
 function nearTermSprintIds() {
-  const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+  const allSprints = allSprintsRaw();
   const today = new Date(); today.setHours(0,0,0,0);
   let currentIdx = allSprints.findIndex(x => new Date(x.end) >= today);
   if (currentIdx === -1) currentIdx = allSprints.length - 1;
@@ -1400,15 +1635,17 @@ function switchTab(tab){
   if(tab==='released') renderReleased();
 }
 function updateCounts(){
-  const planIds=new Set(PLAN_SPRINTS.map(s=>s.id)), nfyIds=new Set(NFY_SPRINTS.map(s=>s.id));
-  document.getElementById('tc-plan').textContent = themes.filter(t=>planIds.has(t.startSprint)||planIds.has(t.endSprint)).length + tickets.filter(t=>planIds.has(t.sprint)).length;
-  document.getElementById('tc-nfy').textContent  = themes.filter(t=>nfyIds.has(t.startSprint)||nfyIds.has(t.endSprint)).length + tickets.filter(t=>nfyIds.has(t.sprint)).length;
+  yearTabs().forEach(t=>{
+    const ids = new Set(t.sprints.map(s=>s.id));
+    const el = document.getElementById('tc-'+t.key);
+    if(el) el.textContent = themes.filter(x=>ids.has(x.startSprint)||ids.has(x.endSprint)).length + tickets.filter(x=>ids.has(x.sprint)).length;
+  });
   document.getElementById('tc-progress').textContent = themes.filter(t=>t.startSprint==='progress').length;
   const tcwb = document.getElementById('tc-workboard');
   if(tcwb) tcwb.textContent = workItems.length;
 }
 function navSprints(tabKey, dir){
-  const all = visibleSprints(tabKey==='plan' ? PLAN_SPRINTS : NFY_SPRINTS);
+  const all = visibleSprints(sprintsForTab(tabKey));
   const SW = getSprintWindow(tabKey); sprintOffset[tabKey] = Math.max(0, Math.min(all.length - SW, sprintOffset[tabKey] + dir));
   render();
 }
@@ -1457,7 +1694,7 @@ function renderTimeline(gridId, allSprints, tabKey){
   }
 
   const sprintIds = sprints.map(s=>s.id);
-  const allTabIds = (tabKey==='plan'?PLAN_SPRINTS:NFY_SPRINTS).map(x=>x.id);
+  const allTabIds = sprintsForTab(tabKey).map(x=>x.id);
   const idxOf = id => sprintIds.indexOf(id);
 
   // Clamp theme start/end to visible window
@@ -1497,7 +1734,7 @@ function renderTimeline(gridId, allSprints, tabKey){
     // previous visible sprint's end. Looks at the actual global sprint list, not just
     // the current window, so the very first visible sprint is still checked correctly.
     const globalIdx = allTabIds.indexOf(s.id);
-    const prevGlobal = globalIdx > 0 ? (tabKey==='plan'?PLAN_SPRINTS:NFY_SPRINTS)[globalIdx-1] : null;
+    const prevGlobal = globalIdx > 0 ? sprintsForTab(tabKey)[globalIdx-1] : null;
     const overlapsPrev = prevGlobal && new Date(s.start) <= new Date(prevGlobal.end);
     const overlapBadge = overlapsPrev
       ? `<div style="font-size:9px;font-weight:700;color:#fff;background:#e24b4a;border-radius:3px;padding:0px 4px;margin-top:2px;white-space:nowrap" title="Starts ${s.start}, but Sprint ${prevGlobal.num} ends ${prevGlobal.end}">⚠ OVERLAP</div>`
@@ -2373,21 +2610,21 @@ function render(){
     chipName.textContent = o ? o.label : 'Not set';
     chipDot.style.background = o ? o.barBg : 'var(--text3)';
   }
-  renderTimeline('tl-plan',visibleSprints(PLAN_SPRINTS),'plan');
-  renderTimeline('tl-nfy',visibleSprints(NFY_SPRINTS),'nfy');
-  renderDetail('detail-plan',visibleSprints(PLAN_SPRINTS),'plan');
-  renderDetail('detail-nfy',visibleSprints(NFY_SPRINTS),'nfy');
+  yearTabs().forEach(t=>{
+    renderTimeline('tl-'+t.key, visibleSprints(t.sprints), t.key);
+    renderDetail('detail-'+t.key, visibleSprints(t.sprints), t.key);
+  });
   renderProgress();
   if(activeTab==='planner') renderPlanner();
   if(activeTab==='workboard') renderWorkBoard();
   updateCounts();
-  updateResizer('plan');
-  updateResizer('nfy');
+  yearTabs().forEach(t=>updateResizer(t.key));
   if(isViewer()) setTimeout(applyViewerMode, 0);
 }
 /* ── SETTINGS ── */
 function toggleSettings(){document.getElementById('settings-pop').classList.toggle('open')}
 function toggleExportMenu(){document.getElementById('export-pop').classList.toggle('open')}
+function toggleBoardSettingsMenu(){document.getElementById('board-settings-pop').classList.toggle('open')}
 function ticketCard(tk, ctxSprintId){
   const jLink = jiraLink(tk);
   // Rollover context: is this occurrence of the card a historical "echo" (the ticket has
@@ -2519,30 +2756,27 @@ function saveJiraSettings(){
 document.addEventListener('click',e=>{
   if(!e.target.closest('#jira-settings-wrap'))document.getElementById('settings-pop').classList.remove('open');
   if(!e.target.closest('#export-wrap'))document.getElementById('export-pop').classList.remove('open');
+  if(!e.target.closest('#board-settings-wrap'))document.getElementById('board-settings-pop').classList.remove('open');
 });
 /* ── POPULATE SPRINT SELECTS ── */
 function popSprintOpts(selId, selected, includeProgress){
   const sel=document.getElementById(selId);
   const keep = s => sprintStatus(s) !== 'past' || s.id === selected;
-  const planVisible = PLAN_SPRINTS.filter(keep);
-  const nfyVisible = NFY_SPRINTS.filter(keep);
   let html=includeProgress?'<option value="progress">In progress</option>':'';
-  if(planVisible.length){
-    html+=`<optgroup label="CY 2026">`;
-    planVisible.forEach(s=>{html+=`<option value="${s.id}"${s.id===selected?' selected':''}>Sprint ${s.num} (${s.label})</option>`});
-    html+=`</optgroup>`;
-  }
-  if(nfyVisible.length){
-    html+=`<optgroup label="CY 2027">`;
-    nfyVisible.forEach(s=>{html+=`<option value="${s.id}"${s.id===selected?' selected':''}>Sprint ${s.num} (${s.label})</option>`});
-    html+=`</optgroup>`;
-  }
+  yearTabs().forEach(t=>{
+    const visible = t.sprints.filter(keep);
+    if(visible.length){
+      html+=`<optgroup label="${esc(t.label)}">`;
+      visible.forEach(s=>{html+=`<option value="${s.id}"${s.id===selected?' selected':''}>Sprint ${s.num} (${esc(s.label)})</option>`});
+      html+=`</optgroup>`;
+    }
+  });
   sel.innerHTML=html;
 }
 // Resolves to the actual current sprint for a tab (or the nearest future one if
 // we're between sprints), instead of a hardcoded id that goes stale over time.
 function currentOrNextSprintId(tabKey){
-  const list = tabKey==='nfy' ? NFY_SPRINTS : PLAN_SPRINTS;
+  const list = sprintsForTab(tabKey);
   const cur = list.find(s => sprintStatus(s) === 'current');
   if(cur) return cur.id;
   const next = list.find(s => sprintStatus(s) !== 'past');
@@ -2727,7 +2961,7 @@ function editTicket(id){
 function renderTicketRolloverInfo(t){
   const el = document.getElementById('tk-rollover-info');
   if(!el) return;
-  const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+  const allSprints = allSprintsRaw();
   const sprintLabel = id => { const s = allSprints.find(x=>x.id===id); return s ? `Sprint ${s.num} (${s.label})` : id; };
   const rollover = Array.isArray(t.rolloverSprints) ? t.rolloverSprints : [];
   let html = '';
@@ -2750,7 +2984,7 @@ function renderTicketRolloverInfo(t){
 // - themes sharing a groupId+owner collapse to the earliest segment
 // - themes with the same title+owner (no groupId) also collapse to the earliest
 function dedupedThemes() {
-  const allTabIds = [...(PLAN_SPRINTS||[]), ...(NFY_SPRINTS||[])].map(s=>s.id);
+  const allTabIds = allSprintsRaw().map(s=>s.id);
   const sprintIdx = id => { const i = allTabIds.indexOf(id); return i < 0 ? 9999 : i; };
   const sorted = [...themes].sort((a,b) => sprintIdx(a.startSprint) - sprintIdx(b.startSprint));
   const seen = {}; // key -> true
@@ -2768,7 +3002,7 @@ function canonicalTheme(themeId) {
   if(!themeId) return null;
   const t = themes.find(x=>x.id===themeId);
   if(!t) return null;
-  const allTabIds = [...(PLAN_SPRINTS||[]), ...(NFY_SPRINTS||[])].map(s=>s.id);
+  const allTabIds = allSprintsRaw().map(s=>s.id);
   const sprintIdx = id => { const i = allTabIds.indexOf(id); return i < 0 ? 9999 : i; };
   const key = t.groupId
     ? t.owner + '::group::' + t.groupId
@@ -3131,7 +3365,7 @@ function openTicketFromParams(p) {
     const sprintRaw = p.get('sprint') || '';
     let sprintMatched = false;
     if(sprintRaw){
-      const allSprints = [...PLAN_SPRINTS, ...NFY_SPRINTS];
+      const allSprints = allSprintsRaw();
       const numMatch = sprintRaw.match(/\b(\d{3,})\b/);
       const matched = numMatch
         ? allSprints.find(s => String(s.num) === numMatch[1])
@@ -3637,7 +3871,7 @@ setInterval(loadPresence, 10000);
 let _editingDeadlineId = null;
 function sprintForDate(dateStr){
   if(!dateStr) return null;
-  const allSprints = [...PLAN_SPRINTS,...NFY_SPRINTS];
+  const allSprints = allSprintsRaw();
   const d = new Date(dateStr);
   // Find the sprint whose end date is >= the deadline date (first sprint that covers it)
   const sprint = allSprints.find(s => new Date(s.end) >= d);
@@ -4230,7 +4464,7 @@ function renderTicketSearch(tab){
   if(!input || !results) return;
   var q = input.value.trim().toLowerCase();
   if(!q){ results.style.display='none'; return; }
-  var allSprints = PLAN_SPRINTS.concat(NFY_SPRINTS);
+  var allSprints = allSprintsRaw();
   var matches = tickets.filter(function(tk){
     return (tk.title && tk.title.toLowerCase().indexOf(q) !== -1) ||
            (tk.jira  && tk.jira.toLowerCase().indexOf(q) !== -1);
@@ -4428,7 +4662,7 @@ function showCopyToast(msg){
   t._hideTimer = setTimeout(()=>{ t.style.opacity='0'; }, 2500);
 }
 function renderPlanner(){
-  const _allPlannerSprints = visibleSprints([...PLAN_SPRINTS, ...NFY_SPRINTS]);
+  const _allPlannerSprints = visibleSprints(allSprintsRaw());
   const PLANNER_WINDOW = 6;
   const _maxOffset = Math.max(0, _allPlannerSprints.length - PLANNER_WINDOW);
   plannerSprintOffset = Math.max(0, Math.min(_maxOffset, plannerSprintOffset));
@@ -4601,7 +4835,7 @@ function renderPlanner(){
   activeOwners.forEach(o => {
     // Get themes this owner has tickets in, ordered by theme endSprint (earliest first)
     const ownerFiltered = filtered.filter(tk=>tk.owner===o.id);
-    const allSprintIds = [...PLAN_SPRINTS,...NFY_SPRINTS].map(s=>s.id);
+    const allSprintIds = allSprintsRaw().map(s=>s.id);
     const ownerThemeKeys = [...new Set(ownerFiltered.map(tk=>tk.themeId||'__none__'))].sort((a,b) => {
       const thA = a !== '__none__' ? themes.find(t=>t.id===a) : null;
       const thB = b !== '__none__' ? themes.find(t=>t.id===b) : null;
@@ -4731,7 +4965,7 @@ function renderPlanner(){
 }
 
 function navPlanner(dir){
-  const total = PLAN_SPRINTS.length + NFY_SPRINTS.length;
+  const total = allSprintsRaw().length;
   const PLANNER_WINDOW = 6;
   plannerSprintOffset = Math.max(0, Math.min(total - PLANNER_WINDOW, plannerSprintOffset + dir));
   renderPlanner();
@@ -4905,6 +5139,16 @@ function _slideMonthsWindow(){
   const months = [];
   const y = now.getFullYear();
   for(let m=now.getMonth(); m<=11; m++){
+    months.push({ y, m, start:new Date(y,m,1), end:new Date(y,m+1,1) });
+  }
+  return months;
+}
+// Full Calendar Year 2027, Jan through Dec, regardless of today's date —
+// used for the standalone "CY 2027" slide so it always shows the whole year.
+function _cy2027MonthsWindow(){
+  const months = [];
+  const y = 2027;
+  for(let m=0; m<=11; m++){
     months.push({ y, m, start:new Date(y,m,1), end:new Date(y,m+1,1) });
   }
   return months;
@@ -5184,7 +5428,9 @@ function _renderThemeRoadmapSlide(pres, { months, mainRows, sections, heading, s
 // PM-work themes under a "Product Only" divider. Everything is scaled to
 // guarantee it stays on one slide, however many themes there are. A second
 // slide, "To Progress", lists everything on the Progress tab (work with no
-// fixed sprint dates) with each bar spanning the full period shown.
+// fixed sprint dates) with each bar spanning the full period shown. A third
+// slide always shows the full Calendar Year 2027 (Jan-Dec), independent of
+// today's date, so the whole of next year's plan is visible in one place.
 function downloadThemePptx(){
   if(typeof PptxGenJS === 'undefined'){
     alert('The PowerPoint export library failed to load — check your internet connection and try again.');
@@ -5236,15 +5482,40 @@ function downloadThemePptx(){
     emptyMsg:'No product work or Progress board items to show'
   });
 
+  // Third slide — the full Calendar Year 2027, Jan through Dec, always shown
+  // in full regardless of what today's date is (unlike the first slide,
+  // which only shows the remainder of the current year).
+  const months2027 = _cy2027MonthsWindow();
+  const firstM27 = months2027[0], lastM27 = months2027[months2027.length-1];
+  const titleRange2027 = `${_SLIDE_MONTH_NAMES[firstM27.m]} ${firstM27.y} \u2013 ${_SLIDE_MONTH_NAMES[lastM27.m]} ${lastM27.y}`;
+
+  const allRows2027 = _buildSlideThemeRows(months2027);
+  const mainRows2027 = _expandRowsByEpic(allRows2027.filter(r=>r.category==='main')
+    .sort((a,b)=> (a.statusRank-b.statusRank) || (a.priorityRank-b.priorityRank) || (a.earliest-b.earliest)));
+  const technicalRows2027 = _expandRowsByEpic(allRows2027.filter(r=>r.category==='technical')
+    .sort((a,b)=> (a.statusRank-b.statusRank) || (a.earliest-b.earliest)));
+  const productRows2027 = _expandRowsByEpic(allRows2027.filter(r=>r.category==='productOnly')
+    .sort((a,b)=> (a.statusRank-b.statusRank) || (a.earliest-b.earliest)));
+  const sections2027 = [
+    { label:'TECHNICAL', rows:technicalRows2027 },
+    { label:'PRODUCT ONLY', rows:productRows2027 },
+  ].filter(s=>s.rows.length>0);
+
+  _renderThemeRoadmapSlide(pres, {
+    months:months2027, mainRows:mainRows2027, sections:sections2027,
+    heading:'Theme Roadmap \u2014 CY 2027', subtitle:titleRange2027,
+    emptyMsg:'No themes scheduled for Calendar Year 2027 yet'
+  });
+
   const stamp = new Date().toISOString().slice(0,10);
   pres.writeFile({ fileName:`theme-roadmap-slide-${stamp}.pptx` });
 }
 
-// ============ Full Excel Export (all 3 tabs) ============
-// Dumps every theme/goal from CY 2026 (PLAN_SPRINTS), CY 2027 (NFY_SPRINTS)
-// and Progress into a single flat sheet — one row per theme, with owner,
-// priority, status, epic references, dates (or "Progress" where there are
-// none) and free-text fields, so it can be filtered/pivoted in Excel.
+// ============ Full Excel Export (all tabs) ============
+// Dumps every theme/goal from every calendar-year tab (built-in and custom) plus
+// Progress into a single flat sheet — one row per theme, with owner, priority,
+// status, epic references, dates (or "Progress" where there are none) and free-text
+// fields, so it can be filtered/pivoted in Excel.
 function downloadFullExcel(){
   if(typeof XLSX === 'undefined'){
     alert('The Excel export library failed to load — check your internet connection and try again.');
@@ -5252,8 +5523,7 @@ function downloadFullExcel(){
   }
   const allSprints = allSprintsDeduped();
   const sprintById = {}; allSprints.forEach(s=>sprintById[s.id]=s);
-  const planIds = new Set(PLAN_SPRINTS.map(s=>s.id));
-  const nfyIds = new Set(NFY_SPRINTS.map(s=>s.id));
+  const tabIdSets = yearTabs().map(t=>({ label:t.label, ids:new Set(t.sprints.map(s=>s.id)) }));
 
   const ownerLabel = id => {
     const o = OWNERS.find(x=>x.id===id) || (id==='general' ? GENERAL_OWNER : null);
@@ -5273,9 +5543,8 @@ function downloadFullExcel(){
   // themes (no fixed sprint) belong to the Progress tab.
   function tabForTheme(t){
     if(t.startSprint==='progress') return 'Progress';
-    if(planIds.has(t.startSprint)) return 'CY 2026';
-    if(nfyIds.has(t.startSprint)) return 'CY 2027';
-    return 'Unknown';
+    const found = tabIdSets.find(ts=>ts.ids.has(t.startSprint));
+    return found ? found.label : 'Unknown';
   }
 
   const rows = themes.map(t=>{
@@ -5305,7 +5574,7 @@ function downloadFullExcel(){
     };
   });
 
-  const tabOrder = { 'CY 2026':0, 'CY 2027':1, 'Progress':2, 'Unknown':3 };
+  const tabOrder = {}; yearTabs().forEach((t,i)=>{ tabOrder[t.label]=i; }); tabOrder['Progress']=yearTabs().length; tabOrder['Unknown']=yearTabs().length+1;
   rows.sort((a,b)=> (tabOrder[a.Tab]-tabOrder[b.Tab]) || a.Theme.localeCompare(b.Theme));
 
   const ws = XLSX.utils.json_to_sheet(rows);
