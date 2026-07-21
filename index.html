@@ -330,7 +330,7 @@ body.mobile-mode .cap-input{width:44px}
 <label class="ms-option" id="ref-opt-1"><input type="checkbox" value="Refinement Session 1" onchange="onRefinementLabelChange(this)" disabled> Refinement Session 1</label>
 <label class="ms-option" id="ref-opt-2"><input type="checkbox" value="Refinement Session 2" onchange="onRefinementLabelChange(this)" disabled> Refinement Session 2</label>
 <label class="ms-option" id="ref-opt-3"><input type="checkbox" value="Refinement Session 3" onchange="onRefinementLabelChange(this)" disabled> Refinement Session 3</label>
-</div></div><input type="hidden" id="tk-labels" /></div></div><div><div class="form-row"><div class="form-group"><label>Category</label><select id="tk-cat"><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><div class="form-group"><label>Owner</label><select id="tk-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option></select></div></div><div class="form-group"><label>Sprint</label><select id="tk-sprint"></select><div id="tk-rollover-info" style="margin-top:6px"></div></div><div class="form-group"><label>Theme (optional)</label><div class="theme-search-wrap" id="tk-theme-wrap" style="position:relative"><input type="text" id="tk-theme-input" placeholder="Search themes…" autocomplete="off" oninput="filterThemeDropdown()" onfocus="openThemeDropdown()" style="width:100%" /><div id="tk-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:400px;overflow-y:auto"></div><input type="hidden" id="tk-theme" /></div></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-goal" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🎯 This is a goal ticket</span></label></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-done" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>✅ Done</span></label></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-released" onchange="onTkReleasedToggle()" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🚀 Released</span></label><input type="date" id="tk-released-date" style="margin-top:6px;font-size:16px;padding:5px 7px;display:none" /></div><div class="form-group"><label>Comments</label><textarea id="tk-comments" placeholder="Add notes or comments…" style="min-height:100px"></textarea></div></div></div><div class="modal-footer"><button class="btn delete" id="tk-delete-btn" onclick="deleteTicketFromModal()" style="margin-right:auto;color:#e24b4a;border-color:#e24b4a;display:none"><i class="ti ti-trash"></i> Delete ticket</button><button class="btn" onclick="closeTicketModal()">Cancel</button><button class="btn primary" onclick="saveTicket()">Save ticket</button></div></div></div><script>
+</div></div><input type="hidden" id="tk-labels" /></div></div><div><div class="form-row-3"><div class="form-group"><label>Category</label><select id="tk-cat"><option value="data">Data</option><option value="webi">Webi</option><option value="dashboard">Dashboard</option></select></div><div class="form-group"><label>Owner</label><select id="tk-owner"><option value="george">George</option><option value="jemma">Jemma</option><option value="sam">Sam</option><option value="chris">Chris</option><option value="claire">Claire</option></select></div><div class="form-group"><label>Co-owner</label><select id="tk-coowner"><option value="">— None</option><option value="aliya">Aliya</option><option value="jack">Jack</option><option value="natasha">Natasha</option></select></div></div><div class="form-group"><label>Sprint</label><select id="tk-sprint"></select><div id="tk-rollover-info" style="margin-top:6px"></div></div><div class="form-group"><label>Theme (optional)</label><div class="theme-search-wrap" id="tk-theme-wrap" style="position:relative"><input type="text" id="tk-theme-input" placeholder="Search themes…" autocomplete="off" oninput="filterThemeDropdown()" onfocus="openThemeDropdown()" style="width:100%" /><div id="tk-theme-dropdown" style="display:none;position:absolute;top:100%;left:0;right:0;background:var(--surface);border:0.5px solid var(--border-strong);border-radius:var(--radius-sm);z-index:50;box-shadow:0 4px 12px rgba(0,0,0,.1);max-height:400px;overflow-y:auto"></div><input type="hidden" id="tk-theme" /></div></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-goal" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🎯 This is a goal ticket</span></label></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-done" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>✅ Done</span></label></div><div class="form-group"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:18px;font-weight:500;letter-spacing:0"><input type="checkbox" id="tk-released" onchange="onTkReleasedToggle()" style="width:auto;padding:0;margin:0;cursor:pointer" /><span>🚀 Released</span></label><input type="date" id="tk-released-date" style="margin-top:6px;font-size:16px;padding:5px 7px;display:none" /></div><div class="form-group"><label>Comments</label><textarea id="tk-comments" placeholder="Add notes or comments…" style="min-height:100px"></textarea></div></div></div><div class="modal-footer"><button class="btn delete" id="tk-delete-btn" onclick="deleteTicketFromModal()" style="margin-right:auto;color:#e24b4a;border-color:#e24b4a;display:none"><i class="ti ti-trash"></i> Delete ticket</button><button class="btn" onclick="closeTicketModal()">Cancel</button><button class="btn primary" onclick="saveTicket()">Save ticket</button></div></div></div><script>
 // ── SUPABASE COLLABORATIVE STORAGE ──
 const SB_URL = 'https://osrlxmkpljcfobunulot.supabase.co';
 const SB_KEY = 'sb_publishable_3jXCj52EKTGKhbQbgYeS4A_JkkSNtUX';
@@ -1353,6 +1353,14 @@ const OWNERS = [
 // general defects/enhancements into it. It intentionally isn't part of OWNERS/TIMELINE_OWNERS
 // so it never appears as an assignable "person" in holidays, deadlines, or the main timeline.
 const GENERAL_OWNER = {id:'general', label:'General', color:'var(--general-color)', bg:'var(--general-bg)', bg2:'var(--general-bg2)', head:'var(--general-head)', textColor:'var(--general-text)', barBg:'var(--general-head)', barText:'var(--general-bar-text)'};
+// Co-owners are a lightweight second person tag on a ticket (not part of OWNERS/TIMELINE_OWNERS,
+// so they don't get their own row/color on the timeline — just an optional label on the ticket itself).
+const COOWNERS = [
+  {id:'aliya',   label:'Aliya'},
+  {id:'jack',    label:'Jack'},
+  {id:'natasha', label:'Natasha'}
+];
+function coOwnerLabel(id){ return (COOWNERS.find(o=>o.id===id)||{}).label || ''; }
 function findOwnerForProgress(id){ return OWNERS.find(x=>x.id===id) || (id==='general' ? GENERAL_OWNER : null); }
 const THEME_COLORS = {
   todo: {bg:null,text:null,dbg:null,dt:null,label:'To do'},
@@ -2872,6 +2880,10 @@ function ticketCard(tk, ctxSprintId){
   const goalBadge     = tk.goal    ? `<span class="goal-flag">🎯 Goal</span>` : '';
   const epicBadge     = tk.epicUrl ? `<a href="${tk.epicUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()" style="font-size:11px;color:${cardText};opacity:.7;display:block;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none" title="${esc(tk.epicUrl)}">⬡ Epic</a>` : '';
   const commentIcon = tk.comments ? `<i class="ti ti-message-circle ticket-comment-icon" style="font-size:13px;color:${cardText};opacity:.65;cursor:help"></i>` : '';
+  const coOwnerName = tk.coOwner ? coOwnerLabel(tk.coOwner) : '';
+  const coOwnerDot = coOwnerName
+    ? `<span title="Co-owner: ${esc(coOwnerName)}" style="width:14px;height:14px;border-radius:50%;background:var(--surface2);border:1px solid var(--border-strong);color:${cardText};opacity:.85;font-size:8px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;cursor:help">${esc(coOwnerName.charAt(0).toUpperCase())}</span>`
+    : '';
   const isDone = !!tk.done;
   const doneCardBg     = isDone ? (colourLabel ? cardBg : '#f0faf5') : cardBg;
   const doneCardBorder = isDone ? '#1d9e75' : cardBorder;
@@ -2897,6 +2909,7 @@ function ticketCard(tk, ctxSprintId){
         </div>
         <div style="display:flex;align-items:center;gap:5px;flex-shrink:0">
           ${commentIcon}
+          ${coOwnerDot}
           <span style="font-size:11px;font-weight:700;color:#534ab7;width:20px;height:20px;border-radius:50%;border:1.5px solid #534ab7;display:inline-flex;align-items:center;justify-content:center">${tk.points||''}</span>
           ${rollBtn}${unlinkBtn}
           <button onclick="event.stopPropagation();toggleTicketDone('${tk.id}')" title="${isDone?'Mark as not done':'Mark as done'}"
@@ -3119,6 +3132,7 @@ function openTicketModal(owner,sprint,cat){
   document.getElementById('jira-fetch-status').textContent='';
   document.getElementById('tk-cat').value=cat||'data';
   document.getElementById('tk-owner').value=owner||(currentUser||'george');
+  document.getElementById('tk-coowner').value='';
   const defSprint = sprint || selectedSprint[activeTab] || currentOrNextSprintId(activeTab);
   popSprintOpts('tk-sprint',defSprint,true);
   document.getElementById('tk-rollover-info').innerHTML='';
@@ -3146,6 +3160,7 @@ function editTicket(id){
   document.getElementById('jira-fetch-status').textContent='';
   document.getElementById('tk-cat').value=t.cat;
   document.getElementById('tk-owner').value=t.owner;
+  document.getElementById('tk-coowner').value=t.coOwner||'';
   popSprintOpts('tk-sprint',t.sprint,true);
   renderTicketRolloverInfo(t);
   populateThemeSelect(t.themeId);
@@ -3463,6 +3478,7 @@ function saveTicket(){
       : null,
     cat:      document.getElementById('tk-cat').value,
     owner:    document.getElementById('tk-owner').value,
+    coOwner:  document.getElementById('tk-coowner').value||null,
     sprint:   document.getElementById('tk-sprint').value,
     themeId:  document.getElementById('tk-theme').value||null
   };
@@ -4829,7 +4845,7 @@ function getPlannerFilteredTickets(){
   const selType = typeSelect?.value || '';
   return tickets.filter(tk => {
     if(selTheme && tk.themeId !== selTheme) return false;
-    if(selOwner && tk.owner !== selOwner) return false;
+    if(selOwner && tk.owner !== selOwner && tk.coOwner !== selOwner) return false;
     if(selLabel && !(tk.labels && tk.labels.split(',').map(l=>l.trim()).includes(selLabel))) return false;
     if(selRefinement && !(tk.labels && tk.labels.split(',').map(l=>l.trim()).includes(selRefinement))) return false;
     if(selCat && tk.cat !== selCat) return false;
@@ -4952,7 +4968,10 @@ function renderPlanner(){
   const selType = typeSelect?.value || '';
 
   ownerSelect.innerHTML = '<option value="">All people</option>' +
-    TIMELINE_OWNERS.map(o=>`<option value="${o.id}"${o.id===selOwner?' selected':''}>${esc(o.label)}</option>`).join('');
+    TIMELINE_OWNERS.map(o=>`<option value="${o.id}"${o.id===selOwner?' selected':''}>${esc(o.label)}</option>`).join('') +
+    '<optgroup label="Co-owners">' +
+    COOWNERS.map(o=>`<option value="${o.id}"${o.id===selOwner?' selected':''}>${esc(o.label)}</option>`).join('') +
+    '</optgroup>';
 
   const filtered = getPlannerFilteredTickets();
 
@@ -5186,6 +5205,10 @@ function renderPlanner(){
             const CAT_STYLES = {data:{bg:'var(--cat-data-bg)',text:'var(--cat-data)',label:'Data'},webi:{bg:'var(--cat-webi-bg)',text:'var(--cat-webi)',label:'Webi'},dashboard:{bg:'var(--cat-dash-bg)',text:'var(--cat-dash)',label:'Dash'}};
             const catStyle = CAT_STYLES[tk.cat];
             const catBadge = catStyle ? `<span style="font-size:9px;font-weight:600;padding:1px 4px;border-radius:3px;background:${catStyle.bg};color:${catStyle.text};white-space:nowrap">${catStyle.label}</span>` : '';
+            const plannerCoOwnerName = tk.coOwner ? coOwnerLabel(tk.coOwner) : '';
+            const plannerCoOwnerDot = plannerCoOwnerName
+              ? `<span title="Co-owner: ${esc(plannerCoOwnerName)}" style="font-size:8px;font-weight:700;width:13px;height:13px;border-radius:50%;background:var(--surface2);border:1px solid var(--border-strong);color:${cardText};opacity:.85;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;cursor:help">${esc(plannerCoOwnerName.charAt(0).toUpperCase())}</span>`
+              : '';
             const isRollEcho = s.id !== tk.sprint && Array.isArray(tk.rolloverSprints) && tk.rolloverSprints.includes(s.id);
             const hasRollHistory = s.id === tk.sprint && Array.isArray(tk.rolloverSprints) && tk.rolloverSprints.length > 0;
             const rollIcon = isRollEcho
@@ -5204,7 +5227,7 @@ function renderPlanner(){
               ondragleave="if(_plannerOverId==='${tk.id}'){_plannerOverId=null;}this.style.borderTop=''"
               onclick="editTicket('${tk.id}')" style="background:${cardBg};border:0.5px ${isRollEcho?'dashed':'solid'} ${cardBorder};border-radius:4px;padding:3px 5px;margin-bottom:3px;cursor:grab;display:flex;align-items:flex-start;gap:3px;justify-content:space-between;${isDone?'opacity:0.7;':''}" title="${esc(tk.title)}">
               <span style="font-size:12px;font-weight:500;flex:1;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;color:${cardText};${isDone?'text-decoration:line-through;':''}">${esc(tk.title)}</span>
-              <div style="display:flex;align-items:flex-start;gap:2px;flex-shrink:0">${rollIcon}${catBadge}${jira}${plannerRollBtn}${plannerUnlinkBtn}<div style="display:flex;flex-direction:column;align-items:center;gap:1px">${pts}${plannerTypeIcon}</div></div>
+              <div style="display:flex;align-items:flex-start;gap:2px;flex-shrink:0">${rollIcon}${catBadge}${jira}${plannerCoOwnerDot}${plannerRollBtn}${plannerUnlinkBtn}<div style="display:flex;flex-direction:column;align-items:center;gap:1px">${pts}${plannerTypeIcon}</div></div>
             </div>`;
           });
         }
@@ -5298,6 +5321,7 @@ function showTicketTitleTooltip(card){
   if(tk.status) meta += `<span>${esc(tk.status)}</span>`;
   if(priorityLabel) meta += `<span>${esc(priorityLabel)}</span>`;
   if(tk.points) meta += `<span>${tk.points} pts</span>`;
+  if(tk.coOwner && coOwnerLabel(tk.coOwner)) meta += `<span>Co-owner: ${esc(coOwnerLabel(tk.coOwner))}</span>`;
   if(meta) html += `<div class="tt-meta">${meta}</div>`;
   tt.innerHTML = html;
   tt.style.display = 'block';
